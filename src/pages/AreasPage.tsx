@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import SEO from '../components/SEO';
 import { MapPin, Navigation, Car, Heart } from 'lucide-react';
 import FinalCTA from '../components/FinalCTA';
 
@@ -45,6 +46,11 @@ export default function AreasPage() {
 
   return (
     <div className="pt-24 min-h-screen bg-bg-page">
+      <SEO 
+        title="Driving Lessons in Manchester | Areas Covered" 
+        description="We offer driving lessons across Greater Manchester, Salford, Stockport, Bolton, Oldham, and Trafford. Check our full list of covered boroughs and postcodes."
+        canonical="https://thepassguys.co.uk/areas"
+      />
       {/* Hero Section */}
       <section className="py-20 overflow-hidden relative bg-white">
         <div className="container mx-auto px-6 text-center">

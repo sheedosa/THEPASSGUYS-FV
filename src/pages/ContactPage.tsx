@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
+import SEO from '../components/SEO';
 import { Phone, Mail, MapPin, Send, MessageSquare } from 'lucide-react';
 import AreasCovered from '../components/AreasCovered';
 import FinalCTA from '../components/FinalCTA';
@@ -35,6 +36,11 @@ export default function ContactPage() {
 
   return (
     <div className="pt-24 min-h-screen">
+      <SEO 
+        title="Contact The Pass Guys | Manchester Support" 
+        description="Get in touch with Manchester's leading driving school. Whether you're a new student or interested in joining our network of instructors, we're here to help."
+        canonical="https://thepassguys.co.uk/contact"
+      />
       {/* Hero Section */}
       <section className="py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 text-center relative z-10">

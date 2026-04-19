@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import SEO from '../components/SEO';
 import { ShieldCheck, Wallet, Sparkles, Clock, CheckCircle2, Info } from 'lucide-react';
 import Pricing from '../components/Pricing';
 import FinalCTA from '../components/FinalCTA';
@@ -53,6 +54,11 @@ export default function PricingPage() {
 
   return (
     <div className="pt-24 min-h-screen bg-bg-page">
+      <SEO 
+        title="Driving Lesson Prices Manchester | Blocks & Intensive" 
+        description="View our transparent driving lesson pricing in Greater Manchester. We offer competitive rates for manual and automatic lessons, block bookings, and fast-track courses."
+        canonical="https://thepassguys.co.uk/pricing"
+      />
       {/* Hero Section */}
       <section className="py-20 overflow-hidden relative bg-white">
         <div className="container mx-auto px-6 text-center">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import SEO from '../components/SEO';
 import { ExternalLink, BookOpen, Lightbulb, ClipboardCheck, ArrowRight, Shield } from 'lucide-react';
 import FinalCTA from '../components/FinalCTA';
 
@@ -53,6 +54,11 @@ const sections = [
 export default function ResourcesPage() {
   return (
     <div className="pt-24 min-h-screen">
+      <SEO 
+        title="Driving Resources & Theory Help | The Pass Guys" 
+        description="Comprehensive resources for learner drivers. Get theory test help, practical driving tips, and direct links to book your official DVSA tests."
+        canonical="https://thepassguys.co.uk/resources"
+      />
       {/* Hero Section */}
       <section className="py-20 relative overflow-hidden bg-white">
         <div className="container mx-auto px-6 text-center relative z-10">

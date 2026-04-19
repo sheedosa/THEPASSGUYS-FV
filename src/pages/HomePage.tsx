@@ -1,3 +1,4 @@
+import SEO from '../components/SEO';
 import Hero from '../components/Hero';
 import TrustBar from '../components/TrustBar';
 import Pricing from '../components/Pricing';
@@ -13,6 +14,7 @@ import FinalCTA from '../components/FinalCTA';
 export default function HomePage() {
   return (
     <>
+        <SEO />
         <Hero id="hero" />
         <TrustBar />
         <Pricing id="services" />

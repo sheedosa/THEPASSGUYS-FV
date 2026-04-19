@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import SEO from '../components/SEO';
 import { UserPlus, Briefcase, Users, ShieldCheck, Clock, MapPin, Car, HelpCircle, ArrowRight } from 'lucide-react';
 import React, { useState } from 'react';
 import FinalCTA from '../components/FinalCTA';
@@ -39,6 +40,11 @@ export default function InstructorsPage() {
 
   return (
     <div className="pt-24 min-h-screen">
+      <SEO 
+        title="Become a Driving Instructor Manchester | Joint the Network" 
+        description="Are you an ADI in Greater Manchester? Join 'The Pass Guys' and benefit from a high-volume student network, professional support, and flexible working."
+        canonical="https://thepassguys.co.uk/instructors"
+      />
       {/* Hero Section */}
       <section className="py-20 overflow-hidden relative bg-white">
         <div className="container mx-auto px-6 text-center">

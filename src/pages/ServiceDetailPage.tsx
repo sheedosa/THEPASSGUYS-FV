@@ -1,5 +1,6 @@
 import { useParams, Navigate } from 'react-router-dom';
 import { motion } from 'motion/react';
+import SEO from '../components/SEO';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { services } from '../data/services';
 import FAQ from '../components/FAQ';
@@ -15,6 +16,12 @@ export default function ServiceDetailPage() {
 
   return (
     <div className="pt-24 min-h-screen">
+      <SEO 
+        title={`${service.title} Manchester | The Pass Guys`} 
+        description={service.description}
+        canonical={`https://thepassguys.co.uk/services/${slug}`}
+        image={service.heroImage}
+      />
       {/* Hero Section */}
       <section className="py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6">

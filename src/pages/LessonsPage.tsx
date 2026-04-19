@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
+import SEO from '../components/SEO';
 import { useRef } from 'react';
 import { Check, ArrowRight, Car, Zap, RefreshCw, Compass, ShieldCheck, ClipboardCheck } from 'lucide-react';
 import Pricing from '../components/Pricing';
@@ -48,6 +49,11 @@ export default function LessonsPage() {
 
   return (
     <div className="pt-24 min-h-screen bg-bg-page">
+      <SEO 
+        title="Driving Lessons Manchester | Manual & Automatic" 
+        description="Explore our range of driving lessons in Manchester. From manual and automatic to intensive courses, we have the perfect tuition for every learner."
+        canonical="https://thepassguys.co.uk/lessons"
+      />
       {/* Hero Section */}
       <section className="py-20 overflow-hidden relative transform-gpu">
         <div className="container mx-auto px-6 text-center">

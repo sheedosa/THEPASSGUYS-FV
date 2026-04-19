@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import SEO from '../components/SEO';
 import FAQ from '../components/FAQ';
 import FinalCTA from '../components/FinalCTA';
 
@@ -41,6 +42,11 @@ export default function FAQPage() {
 
   return (
     <div className="pt-24 min-h-screen">
+      <SEO 
+        title="Driving Lesson FAQs | The Pass Guys" 
+        description="Find answers to common questions about booking driving lessons, pricing, intensive courses, and our instructors in Manchester."
+        canonical="https://thepassguys.co.uk/faq"
+      />
       {/* Hero Section */}
       <section className="py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 text-center relative z-10">
