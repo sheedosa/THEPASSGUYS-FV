@@ -1,76 +1,76 @@
 import { motion } from 'motion/react';
-import { Quote } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 export default function Testimonials({ id }: { id?: string }) {
-  const testimonials = [
+  const reviews = [
     {
-      name: "Sarah Jenkins",
-      role: "Passed in 6 weeks",
-      content: "The best driving school in the area. My instructor was patient and gave me the confidence I lacked first time!",
-      avatar: "https://picsum.photos/seed/sarah/100/100"
+      name: "Placeholder Name",
+      role: "Course Student",
+      content: "We're building something great — be the first to leave us a review and share your success story!"
     },
     {
-      name: "Marcus Thorne",
-      role: "Intensive Course Student",
-      content: "I needed to pass quickly for work. The 5-day course was perfect. Intense but well-structured and successful.",
-      avatar: "https://picsum.photos/seed/marcus/100/100"
+      name: "Placeholder Name",
+      role: "Manual Lessons",
+      content: "We're building something great — be the first to leave us a review and share your success story!"
     },
     {
-      name: "Chloe Smith",
-      role: "Automatic Lessons",
-      content: "Transitioning to automatic was the best choice. The car was brand new and very easy to learn in.",
-      avatar: "https://picsum.photos/seed/chloe/100/100"
+      name: "Placeholder Name",
+      role: "Intensive Graduate",
+      content: "We're building something great — be the first to leave us a review and share your success story!"
     }
   ];
 
   return (
-    <section id={id} className="py-24 bg-secondary text-white overflow-hidden relative transform-gpu">
-      {/* Background Decorative Text */}
-      <div className="absolute top-1/2 left-0 w-full h-full pointer-events-none opacity-[0.03] select-none -translate-y-1/2 transform-gpu">
-        <div className="text-[20vw] font-black text-white whitespace-nowrap -rotate-6 transform -translate-x-1/2">LEGENDS ONLY LEGENDS ONLY</div>
-      </div>
-
+    <section id={id} className="py-24 bg-secondary text-white overflow-hidden relative">
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-20">
-            <motion.span 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4"
-            >
-              Wall of Love
-            </motion.span>
+            <div className="flex items-center justify-center gap-1 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 fill-primary text-primary" />
+              ))}
+              <span className="ml-2 font-black text-xl italic tracking-tight">5.0</span>
+            </div>
             <motion.h2 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ type: "spring" }}
-              className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-8 uppercase tracking-tighter"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 uppercase tracking-tighter"
             >
-                Don't take <br className="hidden md:block" /> our word <span className="text-primary italic">for it.</span>
+                Real lessons. <br /> Real <span className="text-primary italic">Success.</span>
             </motion.h2>
+            <p className="text-white/60 font-medium max-w-xl mx-auto">
+              Our community is growing. We're currently collecting feedback to build our wall of fame.
+            </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
-            {testimonials.map((t, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {reviews.map((r, index) => (
                 <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 50, rotateY: index % 2 === 0 ? 10 : -10 }}
-                    whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
-                    whileHover={{ scale: 1.05, rotateZ: 2 }}
-                    className="vibrant-card !shadow-none !bg-white/5 !border-white/10 p-10 rounded-[40px] relative backdrop-blur-sm group"
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-white/5 border border-white/10 p-10 rounded-[40px] relative backdrop-blur-sm group hover:border-primary/50 transition-all duration-300"
                 >
-                    <Quote className="absolute top-6 right-8 w-12 h-12 text-white/5 group-hover:text-primary/20 transition-colors" />
-                    <div className="flex items-center space-x-4 mb-8">
-                        <img src={t.avatar} alt={t.name} className="w-16 h-16 rounded-2xl border-4 border-primary/20 group-hover:border-primary transition-colors" referrerPolicy="no-referrer" />
+                    <div className="flex gap-1 mb-6">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                      ))}
+                    </div>
+                    
+                    <p className="text-white/80 text-xl leading-relaxed italic font-medium mb-8">
+                        "{r.content}"
+                    </p>
+
+                    <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary font-black">
+                          {r.name.charAt(0)}
+                        </div>
                         <div>
-                            <h4 className="font-black text-xl text-white tracking-tight">{t.name}</h4>
-                            <p className="text-primary text-[10px] font-black uppercase tracking-[0.2em]">{t.role}</p>
+                            <h4 className="font-black text-lg text-white tracking-tight">{r.name}</h4>
+                            <p className="text-primary text-[10px] font-black uppercase tracking-[0.2em]">{r.role}</p>
                         </div>
                     </div>
-                    <p className="text-white/80 text-xl leading-relaxed italic font-medium">
-                        "{t.content}"
-                    </p>
                 </motion.div>
             ))}
         </div>

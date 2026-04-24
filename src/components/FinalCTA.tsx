@@ -1,46 +1,45 @@
-import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 
 export default function FinalCTA() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const xValue = useTransform(scrollYProgress, [0, 1], [-200, 200]);
-
   return (
-    <section ref={containerRef} className="py-24 bg-secondary overflow-hidden relative">
-      {/* Parallax Background Text */}
-      <motion.div 
-        style={{ x: xValue }}
-        className="absolute top-1/2 left-0 w-full opacity-[0.05] pointer-events-none -translate-y-1/2 whitespace-nowrap"
-      >
-        <span className="text-[25vw] font-black text-white uppercase select-none">GET YOUR LICENSE GET YOUR LICENSE</span>
-      </motion.div>
+    <section className="py-24 bg-secondary overflow-hidden relative">
+      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+        <div className="absolute top-10 left-10 w-96 h-96 bg-primary rounded-full blur-[120px]" />
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-primary rounded-full blur-[120px]" />
+      </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center">
-        <div className="vibrant-card bg-primary p-12 md:p-24 border-none shadow-[20px_20px_0_rgba(0,0,0,0.2)]">
-          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-secondary uppercase tracking-tighter leading-[0.8] mb-12">
-            Ready to <br /> start <br /><span className="text-white italic">driving?</span>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-[1] mb-8">
+            Ready to start? <br /> Book your first <span className="text-primary italic">lesson today.</span>
           </h2>
+          <p className="text-white/60 text-lg font-medium mb-12 max-w-xl mx-auto">
+            Take the first step towards independence. Manchester's modern way to learn to drive is just a click away.
+          </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group px-12 py-6 bg-secondary text-white font-black uppercase tracking-[0.2em] rounded-full text-xl flex items-center space-x-3 shadow-2xl"
+            <Link 
+              to="/driving-lessons"
+              className="w-full sm:w-auto px-12 py-6 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-2xl shadow-primary/20"
             >
-              <span>Book Your First Lesson</span>
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-            </motion.button>
+              Book a Lesson
+            </Link>
+            <Link 
+              to="/get-matched"
+              className="w-full sm:w-auto px-12 py-6 bg-white/5 text-white border border-white/20 font-black uppercase tracking-widest rounded-full hover:bg-white/10 transition-all"
+            >
+              Get Matched
+            </Link>
           </div>
 
-          <p className="mt-12 text-secondary/60 font-black uppercase tracking-widest text-xs">
-            No long waiting lists. Instant matching.
-          </p>
+          <div className="mt-16 flex items-center justify-center gap-8 text-white/40 font-black uppercase tracking-widest text-[10px]">
+             <span>No Waiting List</span>
+             <span className="w-1 h-1 bg-primary rounded-full" />
+             <span>Vetted Instructors</span>
+             <span className="w-1 h-1 bg-primary rounded-full" />
+             <span>Modern Fleet</span>
+          </div>
         </div>
       </div>
     </section>

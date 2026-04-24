@@ -1,15 +1,14 @@
 import SEO from '../components/SEO';
 import Hero from '../components/Hero';
 import TrustBar from '../components/TrustBar';
-import Pricing from '../components/Pricing';
+import ServicesOverview from '../components/ServicesOverview';
 import HowItWorks from '../components/HowItWorks';
-import AreasCovered from '../components/AreasCovered';
 import WhyChooseUs from '../components/WhyChooseUs';
-import AboutNetwork from '../components/AboutNetwork';
+import MatchingCallout from '../components/MatchingCallout';
+import AreasCovered from '../components/AreasCovered';
 import Testimonials from '../components/Testimonials';
-import QuickAccess from '../components/QuickAccess';
-import FAQ from '../components/FAQ';
 import FinalCTA from '../components/FinalCTA';
+import FAQ from '../components/FAQ';
 
 export default function HomePage() {
   return (
@@ -17,13 +16,12 @@ export default function HomePage() {
         <SEO />
         <Hero id="hero" />
         <TrustBar />
-        <Pricing id="services" />
+        <ServicesOverview />
         <HowItWorks id="how-it-works" />
-        <AreasCovered id="areas" />
         <WhyChooseUs id="why-choose-us" />
-        <AboutNetwork id="about" />
+        <MatchingCallout />
+        <AreasCovered id="areas" />
         <Testimonials id="testimonials" />
-        <QuickAccess id="resources" />
         <FAQ id="faq" />
         <FinalCTA />
     </>

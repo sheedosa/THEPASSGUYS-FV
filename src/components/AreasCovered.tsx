@@ -1,69 +1,48 @@
 import { motion } from 'motion/react';
-import { Map } from 'lucide-react';
+import { MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function AreasCovered({ id }: { id?: string }) {
   const areas = [
-    "Manchester City Centre", "Salford", "Stockport", "Bolton", 
-    "Oldham", "Rochdale", "Trafford", "Bury", "Wigan", "Tameside"
+    "Salford", "Trafford", "Stockport", "Bolton", 
+    "Bury", "Oldham", "Rochdale", "Wigan", "City Centre"
   ];
 
   return (
-    <section id="areas" className="py-24 overflow-hidden">
+    <section id={id} className="py-24 bg-white">
       <div className="container mx-auto px-6">
-        <div className="vibrant-card !shadow-none bg-white grid lg:grid-cols-2 overflow-hidden">
-          {/* Map Image / Placeholder */}
-          <div className="relative min-h-[400px] bg-secondary flex items-center justify-center p-12 overflow-hidden group">
-            <motion.div 
-               animate={{ scale: [1, 1.05, 1] }}
-               transition={{ repeat: Infinity, duration: 20 }}
-               className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
-            >
-              <img 
-                src="https://lh3.googleusercontent.com/d/1dVcID4aAABluu2o-rSNqO93RivVMloTw" 
-                alt="Greater Manchester Area" 
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
-            </motion.div>
-            <div className="relative z-10 text-center">
-              <div className="w-24 h-24 bg-primary text-secondary rounded-[32px] flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-12 transition-transform shadow-2xl">
-                <Map className="w-12 h-12" />
-              </div>
-              <h3 className="text-4xl font-black text-white uppercase tracking-tighter">Greater Manchester</h3>
-              <p className="text-primary font-bold uppercase tracking-[0.2em] text-xs mt-2">Our Primary Focus</p>
-            </div>
-          </div>
-
-          {/* Area List */}
-          <div className="p-10 md:p-20 flex flex-col justify-center bg-white">
-            <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8 leading-[0.9]">
-              We teach <br /> right across <br /> <span className="text-primary italic">the North West.</span>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl md:text-5xl font-black text-secondary tracking-tighter uppercase leading-[0.9] mb-4">
+              We cover all of <br /> <span className="text-primary italic">Greater Manchester.</span>
             </h2>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {areas.map((area, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="flex items-center space-x-2 text-primary transition-colors cursor-default"
-                >
-                  <div className="w-1.5 h-1.5 bg-secondary rounded-full" />
-                  <span className="font-bold text-sm tracking-tight">{area}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-12 w-full sm:w-max px-10 py-5 bg-primary text-secondary font-black uppercase tracking-widest rounded-2xl shadow-xl"
-            >
-              Check Your Postcode
-            </motion.button>
+            <p className="text-secondary/60 font-medium">
+              Wherever you are in the North West, our network of local experts is ready to help you pass.
+            </p>
           </div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-20">
+          {areas.map((area, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              whileHover={{ y: -5, backgroundColor: '#FFD43B' }}
+              className="bg-slate-50 p-6 rounded-2xl flex items-center justify-between group transition-all cursor-pointer"
+            >
+              <span className="font-black text-secondary uppercase tracking-tighter group-hover:text-secondary">{area}</span>
+              <MapPin className="w-4 h-4 text-primary group-hover:text-secondary transition-colors" />
+            </motion.div>
+          ))}
+          <Link
+            to="/areas"
+            className="p-6 rounded-2xl flex items-center justify-center border-2 border-dashed border-slate-200 hover:border-primary transition-all group"
+          >
+            <span className="font-bold text-secondary/40 group-hover:text-primary transition-colors uppercase tracking-widest text-sm">See all areas →</span>
+          </Link>
         </div>
       </div>
     </section>
