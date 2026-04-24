@@ -15,7 +15,7 @@ export default function MatchingCallout() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 md:p-16 rounded-[3rem] text-center"
+            className="bg-white/5 border border-white/10 p-8 md:p-16 rounded-[3rem] text-center"
           >
             <div className="inline-flex items-center gap-3 px-6 py-2 bg-primary/20 text-primary rounded-full mb-8">
               <Users className="w-5 h-5" />

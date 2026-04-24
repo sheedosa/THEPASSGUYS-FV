@@ -33,6 +33,7 @@ export default function Testimonials({ id }: { id?: string }) {
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 uppercase tracking-tighter"
             >
                 Real lessons. <br /> Real <span className="text-primary italic">Success.</span>
@@ -50,7 +51,8 @@ export default function Testimonials({ id }: { id?: string }) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-white/5 border border-white/10 p-10 rounded-[40px] relative backdrop-blur-sm group hover:border-primary/50 transition-all duration-300"
+                    className="bg-white/5 border border-white/10 p-10 rounded-[40px] relative group hover:border-primary/50 transition-all duration-300 transform"
+                    style={{ willChange: 'transform' }}
                 >
                     <div className="flex gap-1 mb-6">
                       {[...Array(5)].map((_, i) => (
