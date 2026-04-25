@@ -4,20 +4,6 @@ import { Zap } from 'lucide-react';
 export default function Hero({ id }: { id?: string }) {
   return (
     <section id={id} className="relative h-screen min-h-[700px] w-full flex items-center justify-center overflow-hidden bg-secondary">
-      {/* Background Layer with Parallax-like Motion */}
-      <div className="absolute inset-0 z-0">
-        <motion.img 
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 10, ease: "easeOut" }}
-          src="https://lh3.googleusercontent.com/d/15SayWyrpNJrk1Gtc0cQnLV7Dq2i-yaSC" 
-          alt="Cinematic road view" 
-          className="w-full h-full object-cover opacity-50"
-          referrerPolicy="no-referrer"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/20 to-transparent z-10" />
-      </div>
-
       {/* Animated Speed Lines (Visual Wow Factor) */}
       <div className="absolute inset-0 z-10 pointer-events-none opacity-20">
         {[...Array(6)].map((_, i) => (
