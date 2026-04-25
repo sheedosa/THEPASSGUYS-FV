@@ -48,7 +48,7 @@ export default function MatchingCallout() {
 
             <Link
               to="/get-matched"
-              className="inline-flex px-12 py-6 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-2xl shadow-primary/20"
+              className="inline-flex px-8 py-4 sm:px-12 sm:py-6 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-2xl shadow-primary/20"
             >
               Get Matched Now
             </Link>

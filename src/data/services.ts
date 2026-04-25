@@ -26,7 +26,7 @@ export const services: Record<string, ServiceDetail> = {
     slug: 'manual-lessons',
     title: 'Manual Driving Lessons',
     subtitle: 'Master the Art of the Gearbox',
-    description: 'Manual lessons give you full control over your vehicle. Our expert instructors specialize in teaching smooth gear changes and clutch control, preparing you for a lifetime of versatile driving.',
+    description: 'Manual lessons give you full control over your vehicle. Our expert instructors specialise in teaching smooth gear changes and clutch control, preparing you for a lifetime of versatile driving.',
     whoItIsFor: [
       "Beginners wanting full vehicle control",
       "Those looking for the most affordable car options",
@@ -73,7 +73,7 @@ export const services: Record<string, ServiceDetail> = {
         icon: ShieldCheck 
       }
     ],
-    pricingHint: "Starting from £38/hr. Optimized for fast results.",
+    pricingHint: "Starting from £38/hr. Optimised for fast results.",
     heroImage: "https://picsum.photos/seed/auto/1200/800",
     faqs: [
       { q: "Can I drive a manual with an automatic license?", a: "No, you would need to take another test to drive a manual car." },

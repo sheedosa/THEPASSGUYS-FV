@@ -21,13 +21,13 @@ export default function FinalCTA() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link 
               to="/driving-lessons"
-              className="w-full sm:w-auto px-12 py-6 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-2xl shadow-primary/20"
+              className="w-full sm:w-auto px-8 py-4 sm:px-12 sm:py-6 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-2xl shadow-primary/20"
             >
               Book a Lesson
             </Link>
             <Link 
               to="/get-matched"
-              className="w-full sm:w-auto px-12 py-6 bg-white/5 text-white border border-white/20 font-black uppercase tracking-widest rounded-full hover:bg-white/10 transition-all"
+              className="w-full sm:w-auto px-8 py-4 sm:px-12 sm:py-6 bg-white/5 text-white border border-white/20 font-black uppercase tracking-widest rounded-full hover:bg-white/10 transition-all"
             >
               Get Matched
             </Link>

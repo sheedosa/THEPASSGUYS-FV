@@ -19,7 +19,7 @@ export default function FAQPage() {
       items: [
         { q: "How long is each lesson?", a: "Our standard lessons are 2 hours long. We've found this is the most effective duration for retaining new skills and making real progress." },
         { q: "What car will I learn in?", a: "You'll learn in a modern, dual-controlled car. We use premium hatchbacks like Mini Coopers and Audi A1s to give you the best driving experience." },
-        { q: "Do you offer intensive courses?", a: "Yes! We specialize in Fast Track intensive courses ranging from 5 to 14 days, designed to get you test-ready quickly." }
+        { q: "Do you offer intensive courses?", a: "Yes! We specialise in Fast Track intensive courses ranging from 5 to 14 days, designed to get you test-ready quickly." }
       ]
     },
     {
@@ -55,7 +55,7 @@ export default function FAQPage() {
             animate={{ opacity: 1 }}
             className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4"
           >
-            Help Center
+            Help Centre
           </motion.span>
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
