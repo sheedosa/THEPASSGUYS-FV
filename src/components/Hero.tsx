@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function Hero({ id }: { id?: string }) {
   return (
-    <section id={id} className="relative h-screen min-h-[700px] w-full flex items-center justify-center overflow-hidden bg-secondary">
+    <section id={id} className="relative h-screen min-h-[600px] xl:h-[90vh] xl:min-h-[700px] w-full flex items-center justify-center overflow-hidden bg-secondary pt-16 sm:pt-20">
       {/* Animated Speed Lines (Visual Wow Factor) */}
       <div className="absolute inset-0 z-10 pointer-events-none opacity-20">
         {[...Array(6)].map((_, i) => (
@@ -46,7 +46,7 @@ export default function Hero({ id }: { id?: string }) {
               initial={{ opacity: 0, y: "100%" }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-6xl sm:text-8xl md:text-[8rem] lg:text-[9rem] font-black leading-[0.85] tracking-tighter text-white uppercase"
+              className="text-5xl sm:text-7xl md:text-[6rem] lg:text-[7rem] xl:text-[8rem] font-black leading-[0.85] tracking-tighter text-white uppercase"
             >
               Stop searching<br />
               <motion.span 
