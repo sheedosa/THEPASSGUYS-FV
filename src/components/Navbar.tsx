@@ -98,7 +98,7 @@ export default function Navbar() {
             ))}
 
             <Link
-              to="/driving-lessons"
+              to="/get-matched"
               className="px-8 py-3 bg-secondary text-white font-bold rounded-full text-xs uppercase tracking-widest shadow-lg hover:bg-secondary/90 transition-all flex items-center gap-2"
             >
               Book a Lesson <span className="text-lg">→</span>
@@ -166,7 +166,7 @@ export default function Navbar() {
                   ))}
 
                   <Link 
-                    to="/driving-lessons"
+                    to="/get-matched"
                     className="w-full py-4 bg-secondary text-white font-bold rounded-xl text-lg text-center"
                   >
                     Book a Lesson

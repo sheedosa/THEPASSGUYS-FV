@@ -37,7 +37,7 @@ export default function HowItWorksPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8"
           >
-            Getting started is simpler than you think
+            Getting started is <span className="text-primary italic">simpler than you think</span>
           </motion.h1>
           <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto font-medium">
             Whether you book direct or use our matching service, we have made learning to drive straightforward.
@@ -144,7 +144,7 @@ export default function HowItWorksPage() {
         <div className="container mx-auto px-6">
             <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter mb-12">Ready to get started?</h2>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Link to="/driving-lessons" className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-lg">
+                <Link to="/get-matched" className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-lg">
                     Book a Lesson <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link to="/get-matched" className="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-lg">

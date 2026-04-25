@@ -20,7 +20,7 @@ export default function FinalCTA() {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link 
-              to="/driving-lessons"
+              to="/get-matched"
               className="w-full sm:w-auto px-8 py-4 sm:px-12 sm:py-6 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-2xl shadow-primary/20"
             >
               Book a Lesson

@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Hero({ id }: { id?: string }) {
   return (
@@ -65,15 +66,15 @@ export default function Hero({ id }: { id?: string }) {
             transition={{ delay: 0.8 }}
             className="flex flex-wrap items-center justify-center gap-4 sm:gap-6"
           >
-              <button className="group relative px-6 py-3 sm:px-12 sm:py-6 bg-white text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-all duration-300 shadow-[0_20px_50px_rgba(255,255,255,0.1)] text-xs sm:text-base overflow-hidden">
+              <Link to="/get-matched" className="group relative px-6 py-3 sm:px-12 sm:py-6 bg-white text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-all duration-300 shadow-[0_20px_50px_rgba(255,255,255,0.1)] text-xs sm:text-base overflow-hidden">
                   <span className="relative z-10 flex items-center gap-2">
                     Book Your Journey <Zap className="w-4 h-4 fill-secondary" />
                   </span>
                   <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-              </button>
-              <button className="px-6 py-3 sm:px-12 sm:py-6 bg-transparent text-white border border-white/20 font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-secondary transition-all duration-300 text-xs sm:text-base backdrop-blur-sm">
+              </Link>
+              <Link to="/lessons" className="px-6 py-3 sm:px-12 sm:py-6 bg-transparent text-white border border-white/20 font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-secondary transition-all duration-300 text-xs sm:text-base backdrop-blur-sm">
                   View Our Courses
-              </button>
+              </Link>
           </motion.div>
         </div>
       </div>
