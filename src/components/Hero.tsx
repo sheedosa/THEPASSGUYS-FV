@@ -31,9 +31,9 @@ export default function Hero({ id }: { id?: string }) {
               Manchester's Premier Driving School
           </motion.p>
           
-          <h1 className="text-6xl sm:text-8xl md:text-[9rem] font-black leading-[0.8] tracking-tighter text-white mb-10 uppercase">
-              PASS FAST.<br />
-              <span className="italic text-primary">DRIVE SMART.</span>
+          <h1 className="text-6xl sm:text-8xl md:text-[8rem] font-black leading-[0.9] tracking-tighter text-white mb-10 uppercase">
+              Stop searching<br />
+              <span className="italic text-primary">start driving.</span>
           </h1>
 
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
