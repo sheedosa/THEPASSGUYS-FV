@@ -1,0 +1,124 @@
+import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
+import { Target, Users, MapPin, Clock3, Award, CheckCircle, ShieldCheck, Car } from 'lucide-react';
+
+const stats = [
+  { label: 'Licensed Instructors', value: '150+', icon: Award },
+  { label: 'Learners Matched', value: '5,000+', icon: Users },
+  { label: 'Areas Covered', value: '12+', icon: MapPin },
+  { label: 'Years Operating', value: '5+', icon: Clock3 },
+];
+
+export default function AboutPage() {
+  return (
+    <div className="pt-24">
+      {/* Hero Section */}
+      <section className="py-24 bg-secondary text-white">
+        <div className="container mx-auto px-6 text-center">
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8"
+          >
+            We're The Pass Guys, <br /> <span className="text-primary italic">Manchester's Modern Driving School</span>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto font-medium"
+          >
+            We started because learning to drive shouldn't feel like a chore. After seeing too many learners struggle to find reliable, local instructors who actually cared about their progress, we decided to change the game.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Our Story */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto rounded-[2.5rem] bg-bg-page p-12 border border-slate-100 shadow-xl shadow-black/5">
+            <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8">Our Story</h2>
+            <div className="prose prose-lg prose-secondary font-medium text-secondary/70">
+              <p>
+                The traditional driving school model is broken. It’s hard to book, instructors are often fully booked or not nearby, and there’s zero transparency. We built The Pass Guys to fix this.
+              </p>
+              <p>
+                We wanted a solution that felt like 2026, not 1996. Our platform doesn't just list instructors; it intelligently matches learners with vetted, local professionals who have the right availability and teaching style. No more endless phone calls, no more waiting lists, just a streamlined journey to your license.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Mission */}
+      <section className="py-24 bg-primary text-secondary text-center">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-8">Our Mission</h2>
+          <p className="text-2xl md:text-3xl font-bold max-w-3xl mx-auto">
+            "To make learning to drive straightforward, affordable, and actually enjoyable, with an instructor who's right for you."
+          </p>
+        </div>
+      </section>
+
+      {/* Numbers */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, i) => (
+              <motion.div
+                key={i}
+                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white p-10 rounded-[2.5rem] text-center border border-slate-100 shadow-xl shadow-black/5"
+              >
+                <div className="w-16 h-16 bg-secondary text-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <stat.icon className="w-8 h-8" />
+                </div>
+                <div className="text-5xl font-black text-secondary mb-2 tracking-tighter">{stat.value}</div>
+                <div className="text-secondary/60 font-black uppercase tracking-widest text-xs">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Instructors */}
+      <section className="py-24 bg-secondary text-white">
+        <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-black uppercase tracking-tighter mb-16 text-center">Our Vetted Instructors</h2>
+            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto text-lg font-medium">
+                {[
+                    { title: "DVSA Approved", desc: "Every instructor in our network is a fully qualified Approved Driving Instructor (ADI)." },
+                    { title: "DBS Checked", desc: "Clear background checks are mandatory for all our partners." },
+                    { title: "Regular Reviews", desc: "We track learner feedback to ensure standards remain elite." },
+                    { title: "Manual & Auto", desc: "Whether you need to master the gearbox or prefer automatic, we have the right specialist." }
+                ].map((item, i) => (
+                    <div key={i} className="flex gap-4 p-6 bg-white/5 rounded-2xl">
+                        <CheckCircle className="w-8 h-8 text-primary flex-shrink-0" />
+                        <div>
+                            <h4 className="font-black text-xl mb-2">{item.title}</h4>
+                            <p className="text-white/60">{item.desc}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24 bg-bg-page text-center">
+        <div className="container mx-auto px-6">
+            <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter mb-12">Ready to meet your instructor?</h2>
+            <Link 
+              to="/get-matched"
+              className="inline-flex px-8 py-4 sm:px-12 sm:py-6 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-2xl shadow-primary/20"
+            >
+              Get Matched
+            </Link>
+        </div>
+      </section>
+    </div>
+  );
+}

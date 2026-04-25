@@ -23,7 +23,7 @@ export default function MatchingCallout() {
             </div>
 
             <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-8">
-              Not just a driving school — we find the <span className="text-primary italic">right instructor</span> for you.
+              Not just a driving school, we find the <span className="text-primary italic">right instructor</span> for you.
             </h2>
 
             <p className="text-white/70 text-lg md:text-xl font-medium leading-relaxed mb-12 max-w-2xl mx-auto">

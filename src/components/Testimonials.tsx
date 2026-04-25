@@ -6,17 +6,17 @@ export default function Testimonials({ id }: { id?: string }) {
     {
       name: "Placeholder Name",
       role: "Course Student",
-      content: "We're building something great — be the first to leave us a review and share your success story!"
+      content: "We're building something great; be the first to leave us a review and share your success story!"
     },
     {
       name: "Placeholder Name",
       role: "Manual Lessons",
-      content: "We're building something great — be the first to leave us a review and share your success story!"
+      content: "We're building something great; be the first to leave us a review and share your success story!"
     },
     {
       name: "Placeholder Name",
       role: "Intensive Graduate",
-      content: "We're building something great — be the first to leave us a review and share your success story!"
+      content: "We're building something great; be the first to leave us a review and share your success story!"
     }
   ];
 
