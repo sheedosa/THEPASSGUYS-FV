@@ -47,12 +47,11 @@ export default function Testimonials({ id }: { id?: string }) {
             {reviews.map((r, index) => (
                 <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-white/5 border border-white/10 p-10 rounded-[40px] relative group hover:border-primary/50 transition-all duration-300 transform"
-                    style={{ willChange: 'transform' }}
+                    className="bg-white/5 border border-white/10 p-10 rounded-[40px] relative group hover:border-primary/50 transition-all duration-300 transform-gpu"
                 >
                     <div className="flex gap-1 mb-6">
                       {[...Array(5)].map((_, i) => (

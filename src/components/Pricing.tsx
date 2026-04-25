@@ -71,13 +71,12 @@ export default function Pricing({ id }: { id?: string }) {
           {plans.map((plan, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, type: "spring", stiffness: 60 }}
+              transition={{ delay: index * 0.1 }}
               whileHover={{ 
-                scale: plan.recommended ? 1.08 : 1.05,
-                rotateY: index === 0 ? 5 : index === 2 ? -5 : 0
+                scale: 1.02,
               }}
               className={`p-10 flex flex-col relative transition-all duration-500 transform-gpu ${
                 plan.recommended 

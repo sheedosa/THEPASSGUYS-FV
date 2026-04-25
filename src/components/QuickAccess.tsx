@@ -37,12 +37,12 @@ export default function QuickAccess({ id }: { id?: string }) {
           {links.map((link, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className={`p-10 rounded-[40px] border-4 border-secondary flex flex-col justify-between h-full group ${link.color} ${link.text}`}
+              whileHover={{ y: -5 }}
+              className={`p-10 rounded-[40px] border-4 border-secondary flex flex-col justify-between h-full group ${link.color} ${link.text} transform-gpu`}
             >
               <div>
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 border-4 border-secondary shadow-lg transform group-hover:-rotate-6 transition-transform ${link.color === 'bg-white' ? 'bg-primary' : 'bg-white text-secondary'}`}>

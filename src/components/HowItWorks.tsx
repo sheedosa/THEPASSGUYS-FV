@@ -45,11 +45,11 @@ export default function HowItWorks({ id }: { id?: string }) {
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className="relative p-10 bg-slate-50 rounded-3xl group hover:bg-secondary hover:text-white transition-all duration-500 shadow-xl shadow-black/5"
+              className="relative p-10 bg-slate-50 rounded-3xl group hover:bg-secondary hover:text-white transition-all duration-500 shadow-xl shadow-black/5 transform-gpu"
             >
               <div className="absolute top-6 right-8 text-6xl font-black opacity-10 group-hover:opacity-20 transition-opacity">
                 {step.number}

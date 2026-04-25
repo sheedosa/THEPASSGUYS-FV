@@ -26,12 +26,12 @@ export default function AreasCovered({ id }: { id?: string }) {
           {areas.map((area, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
               whileHover={{ y: -5, backgroundColor: '#FFD43B' }}
-              className="bg-slate-50 p-6 rounded-2xl flex items-center justify-between group transition-all cursor-pointer"
+              className="bg-slate-50 p-6 rounded-2xl flex items-center justify-between group transition-all cursor-pointer transform-gpu"
             >
               <span className="font-black text-secondary uppercase tracking-tighter group-hover:text-secondary">{area}</span>
               <MapPin className="w-4 h-4 text-primary group-hover:text-secondary transition-colors" />

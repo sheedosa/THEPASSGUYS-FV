@@ -67,11 +67,11 @@ export default function AboutPage() {
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
-                whileInView={{ opacity: 1, y: 0 }}
-                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-10 rounded-[2.5rem] text-center border border-slate-100 shadow-xl shadow-black/5"
+                className="bg-white p-10 rounded-[2.5rem] text-center border border-slate-100 shadow-xl shadow-black/5 transform-gpu"
               >
                 <div className="w-16 h-16 bg-secondary text-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <stat.icon className="w-8 h-8" />

@@ -36,11 +36,12 @@ export default function WhyChooseUs({ id }: { id?: string }) {
           {points.map((point, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white p-10 rounded-3xl shadow-xl shadow-black/5 hover:-translate-y-2 transition-all duration-300"
+              whileHover={{ y: -5 }}
+              className="bg-white p-10 rounded-3xl shadow-xl shadow-black/5 transition-all duration-300 transform-gpu"
             >
               <div className="w-16 h-16 bg-secondary text-white rounded-2xl flex items-center justify-center mb-8 mx-auto transform hover:rotate-12 transition-transform shadow-lg">
                 {point.icon}

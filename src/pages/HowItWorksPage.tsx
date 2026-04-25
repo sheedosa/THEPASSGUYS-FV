@@ -52,10 +52,10 @@ export default function HowItWorksPage() {
             {paths.map((path, i) => (
               <motion.div 
                 key={i}
-                whileInView={{ opacity: 1, y: 0 }}
-                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
                 viewport={{ once: true }}
-                className="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-black/5 border border-slate-100"
+                className="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-black/5 border border-slate-100 transform-gpu"
               >
                 <h3 className="text-3xl font-black text-secondary uppercase tracking-tighter mb-4">{path.title}</h3>
                 <p className="text-secondary/60 mb-8 font-medium">{path.description}</p>

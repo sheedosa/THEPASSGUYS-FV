@@ -46,11 +46,12 @@ export default function ServicesOverview() {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group relative bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-black/5 hover:border-primary/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+              whileHover={{ y: -5 }}
+              className="group relative bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-black/5 hover:border-primary/30 transition-all duration-500 transform-gpu"
             >
               <div className="w-16 h-16 bg-secondary text-primary rounded-[1.25rem] flex items-center justify-center mb-8 transform group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-black/10">
                 <service.icon className="w-8 h-8 stroke-[2.5px]" />

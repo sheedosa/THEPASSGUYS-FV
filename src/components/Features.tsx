@@ -77,11 +77,11 @@ export default function Features() {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50, rotateX: 20 }}
-              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, type: "spring", stiffness: 80 }}
-              whileHover={{ y: -10, rotateY: 10, rotateX: -5 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
               className="bg-white p-8 md:p-10 rounded-[32px] border-2 border-slate-100 flex flex-col items-start hover:border-secondary transition-all duration-300 group hover:shadow-2xl hover:shadow-primary/5 transform-gpu"
             >
               <div className="w-16 h-16 bg-primary text-secondary rounded-2xl flex items-center justify-center mb-8 transform group-hover:-rotate-12 transition-transform shadow-lg">
