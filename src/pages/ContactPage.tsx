@@ -43,7 +43,7 @@ export default function ContactPage() {
       />
       {/* Hero Section */}
       <section className="py-20 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-6 text-center relative z-10">
+        <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
           <motion.span 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -66,9 +66,9 @@ export default function ContactPage() {
       </section>
 
       {/* Main Contact Section */}
-      <section className="py-24">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid lg:grid-cols-3 gap-8 md:gap-12 lg:gap-8 md:p-16">
             
             {/* Contact Details */}
             <div className="lg:col-span-1 space-y-6 md:space-y-8">
@@ -121,22 +121,22 @@ export default function ContactPage() {
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <label className="text-xs font-black text-secondary uppercase tracking-widest px-2">Your Name</label>
-                        <input required type="text" className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-6 py-4 font-bold text-secondary outline-none transition-all" placeholder="John Doe" />
+                        <input required type="text" className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-4 md:px-6 py-4 font-bold text-secondary outline-none transition-all" placeholder="John Doe" />
                       </div>
                       <div className="space-y-2">
                         <label className="text-xs font-black text-secondary uppercase tracking-widest px-2">Email Address</label>
-                        <input required type="email" className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-6 py-4 font-bold text-secondary outline-none transition-all" placeholder="john@example.com" />
+                        <input required type="email" className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-4 md:px-6 py-4 font-bold text-secondary outline-none transition-all" placeholder="john@example.com" />
                       </div>
                     </div>
                     
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <label className="text-xs font-black text-secondary uppercase tracking-widest px-2">Phone Number</label>
-                        <input type="tel" className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-6 py-4 font-bold text-secondary outline-none transition-all" placeholder="07123 456789" />
+                        <input type="tel" className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-4 md:px-6 py-4 font-bold text-secondary outline-none transition-all" placeholder="07123 456789" />
                       </div>
                       <div className="space-y-2">
                         <label className="text-xs font-black text-secondary uppercase tracking-widest px-2">Inquiry Type</label>
-                        <select className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-6 py-5 font-bold text-secondary outline-none transition-all appearance-none cursor-pointer">
+                        <select className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-4 md:px-6 py-5 font-bold text-secondary outline-none transition-all appearance-none cursor-pointer">
                           <option>General Inquiry</option>
                           <option>Booking Question</option>
                           <option>Intensive Courses</option>
@@ -147,7 +147,7 @@ export default function ContactPage() {
 
                     <div className="space-y-2">
                       <label className="text-xs font-black text-secondary uppercase tracking-widest px-2">Your Message</label>
-                      <textarea required rows={4} className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-3xl px-6 py-4 font-bold text-secondary outline-none transition-all resize-none" placeholder="Hey guys, I want to pass fast..."></textarea>
+                      <textarea required rows={4} className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-3xl px-4 md:px-6 py-4 font-bold text-secondary outline-none transition-all resize-none" placeholder="Hey guys, I want to pass fast..."></textarea>
                     </div>
 
                     <motion.button 

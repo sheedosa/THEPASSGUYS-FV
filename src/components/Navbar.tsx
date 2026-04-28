@@ -77,7 +77,7 @@ export default function Navbar() {
                       <Link
                         key={link.name}
                         to={link.href}
-                        className="block px-6 py-3 text-sm font-bold text-secondary/70 hover:text-primary hover:bg-slate-50 transition-all"
+                        className="block px-4 md:px-6 py-3 text-sm font-bold text-secondary/70 hover:text-primary hover:bg-slate-50 transition-all"
                       >
                         {link.name}
                       </Link>
@@ -121,7 +121,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="lg:hidden bg-white overflow-hidden border-t border-slate-100 mt-4 px-6 rounded-b-2xl shadow-2xl"
+                className="lg:hidden bg-white overflow-hidden border-t border-slate-100 mt-4 px-4 md:px-6 rounded-b-2xl shadow-2xl"
               >
                 <div className="flex flex-col space-y-4 py-8">
                   {/* Driving Lessons */}

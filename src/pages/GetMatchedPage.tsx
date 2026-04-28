@@ -33,8 +33,15 @@ export default function GetMatchedPage() {
     email: '',
   });
 
-  const nextStep = () => setStep((s) => Math.min(s + 1, STEPS_COUNT));
-  const prevStep = () => setStep((s) => Math.max(s - 1, 1));
+  const nextStep = () => {
+    setStep((s) => Math.min(s + 1, STEPS_COUNT));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  
+  const prevStep = () => {
+    setStep((s) => Math.max(s - 1, 1));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleSelect = (field: keyof FormData, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -81,7 +88,7 @@ export default function GetMatchedPage() {
 
   if (isSubmitted) {
     return (
-      <div className="pt-24 sm:pt-32 pb-12 sm:pb-24 px-6 min-h-screen flex items-center justify-center">
+      <div className="pt-24 sm:pt-32 pb-12 sm:pb-24 px-4 md:px-6 min-h-screen flex items-center justify-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -100,7 +107,7 @@ export default function GetMatchedPage() {
   }
 
   return (
-    <div className="pt-24 sm:pt-32 pb-12 sm:pb-24 px-4 sm:px-6 min-h-screen flex items-center justify-center bg-bg-page">
+    <div className="pt-24 sm:pt-32 pb-12 sm:pb-24 px-4 md:px-6 min-h-screen flex items-center justify-center bg-bg-page">
       <div className="max-w-3xl w-full">
         {renderProgress()}
 

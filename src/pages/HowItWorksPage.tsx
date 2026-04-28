@@ -30,8 +30,8 @@ export default function HowItWorksPage() {
   return (
     <div className="pt-24 bg-bg-page">
       {/* Hero */}
-      <section className="py-24 bg-secondary text-white text-center">
-        <div className="container mx-auto px-6">
+      <section className="py-16 md:py-24 bg-secondary text-white text-center">
+        <div className="container mx-auto px-4 md:px-6">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,16 +46,16 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Two Paths */}
-      <section className="py-24">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12">
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {paths.map((path, i) => (
               <motion.div 
                 key={i}
                 whileInView={{ opacity: 1 }}
                 initial={{ opacity: 0 }}
                 viewport={{ once: true }}
-                className="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-black/5 border border-slate-100 transform-gpu"
+                className="bg-white p-6 md:p-10 rounded-[2.5rem] shadow-xl shadow-black/5 border border-slate-100 transform-gpu"
               >
                 <h3 className="text-3xl font-black text-secondary uppercase tracking-tighter mb-4">{path.title}</h3>
                 <p className="text-secondary/60 mb-8 font-medium">{path.description}</p>
@@ -74,9 +74,9 @@ export default function HowItWorksPage() {
       </section>
 
       {/* First Lesson Expectation */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 max-w-4xl">
-            <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-12 text-center">What to Expect on Your First Lesson</h2>
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+            <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8 md:mb-12 text-center">What to Expect on Your First Lesson</h2>
             <div className="grid sm:grid-cols-2 gap-8">
                 {[
                     { icon: UserCheck, title: "Instructor Intro", desc: "Your instructor will introduce themselves and get to know your starting experience." },
@@ -97,9 +97,9 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Matching Process */}
-      <section className="py-24">
-        <div className="container mx-auto px-6 max-w-4xl">
-            <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-12 text-center">The Matching Process Explained</h2>
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+            <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8 md:mb-12 text-center">The Matching Process Explained</h2>
             <div className="space-y-6">
                 {[
                     "You fill in a short form with your requirements and preferences.",
@@ -117,9 +117,9 @@ export default function HowItWorksPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 max-w-3xl">
-          <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-12 text-center">Common Questions</h2>
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6 max-w-3xl">
+          <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8 md:mb-12 text-center">Common Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
               <div key={i} className="border-b border-slate-100">
@@ -140,9 +140,9 @@ export default function HowItWorksPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 text-center">
-        <div className="container mx-auto px-6">
-            <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter mb-12">Ready to get started?</h2>
+      <section className="py-16 md:py-24 text-center">
+        <div className="container mx-auto px-4 md:px-6">
+            <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter mb-8 md:mb-12">Ready to get started?</h2>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link to="/get-matched" className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-lg">
                     Book a Lesson <ArrowRight className="w-4 h-4" />

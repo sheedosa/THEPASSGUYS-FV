@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="py-24 bg-secondary text-white">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+    <footer className="py-16 md:py-24 bg-secondary text-white">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-20">
           <div className="col-span-1">
             <Link to="/" className="text-2xl font-black tracking-tighter mb-6 block">
               THE PASS GUYS

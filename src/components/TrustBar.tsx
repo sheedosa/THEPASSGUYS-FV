@@ -11,8 +11,8 @@ export default function TrustBar() {
 
   return (
     <div className="bg-secondary py-8 overflow-hidden relative border-y-4 border-primary/20">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-16 justify-items-center">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 md:p-16 justify-items-center">
           {items.map((item, index) => (
             <motion.div
               key={index}

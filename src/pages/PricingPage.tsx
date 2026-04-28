@@ -61,7 +61,7 @@ export default function PricingPage() {
       />
       {/* Hero Section */}
       <section className="py-20 overflow-hidden relative bg-white">
-        <div className="container mx-auto px-6 text-center">
+        <div className="container mx-auto px-4 md:px-6 text-center">
           <motion.span 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -87,9 +87,9 @@ export default function PricingPage() {
       <Pricing id="pricing-plans" />
 
       {/* Why Our Prices are Better (Trust Points) */}
-      <section className="py-24 bg-secondary text-white overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-12">
+      <section className="py-16 md:py-24 bg-secondary text-white overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {trustPoints.map((point, index) => (
               <motion.div
                 key={index}
@@ -111,9 +111,9 @@ export default function PricingPage() {
       </section>
 
       {/* What's Included / Features */}
-      <section className="py-24 bg-white overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="vibrant-card !bg-bg-page !border-none grid lg:grid-cols-2 gap-16 items-center p-10 md:p-20">
+      <section className="py-16 md:py-24 bg-white overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="vibrant-card !bg-bg-page !border-none grid lg:grid-cols-2 gap-8 md:p-16 items-center p-6 md:p-10 md:p-20">
             <div>
               <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">Value Pack</span>
               <h2 className="text-4xl md:text-6xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-8">

@@ -2,9 +2,9 @@ import { motion } from 'motion/react';
 
 export default function AboutNetwork({ id }: { id?: string }) {
   return (
-    <section id={id} className="py-24 overflow-hidden relative">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+    <section id={id} className="py-16 md:py-24 overflow-hidden relative">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-8 md:p-16">
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -49,7 +49,7 @@ export default function AboutNetwork({ id }: { id?: string }) {
               </p>
             </div>
             
-            <div className="mt-12 flex flex-wrap items-center gap-8 md:gap-12">
+            <div className="mt-12 flex flex-wrap items-center gap-8 md:gap-8 md:gap-12">
                 <div>
                     <p className="text-3xl md:text-4xl font-black text-secondary tracking-tighter">150+</p>
                     <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Instructors</p>

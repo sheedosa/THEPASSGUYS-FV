@@ -51,7 +51,7 @@ export default function Features() {
   ];
 
   return (
-    <section ref={containerRef} className="py-24 bg-bg-page/50 relative overflow-hidden transform-gpu">
+    <section ref={containerRef} className="py-16 md:py-24 bg-bg-page/50 relative overflow-hidden transform-gpu">
       {/* Background Parallax */}
       <motion.div 
         style={{ x: textX }}
@@ -60,8 +60,8 @@ export default function Features() {
         <span className="text-[15vw] font-black text-outline uppercase">ROAD DOMINATION ROAD DOMINATION</span>
       </motion.div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16 px-4">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center mb-8 md:mb-16 px-4">
           <motion.h2 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -82,7 +82,7 @@ export default function Features() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-white p-8 md:p-10 rounded-[32px] border-2 border-slate-100 flex flex-col items-start hover:border-secondary transition-all duration-300 group hover:shadow-2xl hover:shadow-primary/5 transform-gpu"
+              className="bg-white p-8 md:p-6 md:p-10 rounded-[32px] border-2 border-slate-100 flex flex-col items-start hover:border-secondary transition-all duration-300 group hover:shadow-2xl hover:shadow-primary/5 transform-gpu"
             >
               <div className="w-16 h-16 bg-primary text-secondary rounded-2xl flex items-center justify-center mb-8 transform group-hover:-rotate-12 transition-transform shadow-lg">
                 {feature.icon}

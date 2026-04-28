@@ -9,9 +9,9 @@ export default function AreasCovered({ id }: { id?: string }) {
   ];
 
   return (
-    <section id={id} className="py-24 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+    <section id={id} className="py-16 md:py-24 bg-white">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-8">
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-black text-secondary tracking-tighter uppercase leading-[0.9] mb-4">
               We cover all of <br /> <span className="text-primary italic">Greater Manchester.</span>

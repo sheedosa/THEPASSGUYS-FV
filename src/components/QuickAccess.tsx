@@ -31,8 +31,8 @@ export default function QuickAccess({ id }: { id?: string }) {
   ];
 
   return (
-    <section id={id} className="py-24 relative overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section id={id} className="py-16 md:py-24 relative overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-3 gap-8">
           {links.map((link, index) => (
             <motion.div
@@ -42,7 +42,7 @@ export default function QuickAccess({ id }: { id?: string }) {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className={`p-10 rounded-[40px] border-4 border-secondary flex flex-col justify-between h-full group ${link.color} ${link.text} transform-gpu`}
+              className={`p-6 md:p-10 rounded-[40px] border-4 border-secondary flex flex-col justify-between h-full group ${link.color} ${link.text} transform-gpu`}
             >
               <div>
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 border-4 border-secondary shadow-lg transform group-hover:-rotate-6 transition-transform ${link.color === 'bg-white' ? 'bg-primary' : 'bg-white text-secondary'}`}>

@@ -49,7 +49,7 @@ export default function FAQPage() {
       />
       {/* Hero Section */}
       <section className="py-20 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-6 text-center relative z-10">
+        <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
           <motion.span 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -72,9 +72,9 @@ export default function FAQPage() {
       </section>
 
       {/* Categorized FAQs */}
-      <div className="py-24 space-y-12">
+      <div className="py-16 md:py-24 space-y-12">
         {faqCategories.map((cat, idx) => (
-          <div key={idx} className="container mx-auto px-6">
+          <div key={idx} className="container mx-auto px-4 md:px-6">
             <div className="flex items-center space-x-4 mb-8">
                 <div className="h-1 flex-1 bg-slate-100" />
                 <h2 className="text-2xl font-black text-secondary uppercase tracking-widest">{cat.category}</h2>

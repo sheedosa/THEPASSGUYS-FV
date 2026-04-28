@@ -21,8 +21,8 @@ export default function Testimonials({ id }: { id?: string }) {
   ];
 
   return (
-    <section id={id} className="py-24 bg-secondary text-white overflow-hidden relative">
-      <div className="container mx-auto px-6 relative z-10">
+    <section id={id} className="py-16 md:py-24 bg-secondary text-white overflow-hidden relative">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-20">
             <div className="flex items-center justify-center gap-1 mb-4">
               {[...Array(5)].map((_, i) => (
@@ -51,7 +51,7 @@ export default function Testimonials({ id }: { id?: string }) {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-white/5 border border-white/10 p-10 rounded-[40px] relative group hover:border-primary/50 transition-all duration-300 transform-gpu"
+                    className="bg-white/5 border border-white/10 p-6 md:p-10 rounded-[40px] relative group hover:border-primary/50 transition-all duration-300 transform-gpu"
                 >
                     <div className="flex gap-1 mb-6">
                       {[...Array(5)].map((_, i) => (

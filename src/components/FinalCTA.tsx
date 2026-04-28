@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 
 export default function FinalCTA() {
   return (
-    <section className="py-24 bg-secondary overflow-hidden relative">
+    <section className="py-16 md:py-24 bg-secondary overflow-hidden relative">
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-        <div className="absolute top-10 left-10 w-96 h-96 bg-primary rounded-full blur-[120px]" />
+        <div className="absolute top-6 md:p-10 left-10 w-96 h-96 bg-primary rounded-full blur-[120px]" />
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-primary rounded-full blur-[120px]" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 text-center">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-[1] mb-8">
             Ready to start? <br /> Book your first <span className="text-primary italic">lesson today.</span>
           </h2>
-          <p className="text-white/60 text-lg font-medium mb-12 max-w-xl mx-auto">
+          <p className="text-white/60 text-lg font-medium mb-8 md:mb-12 max-w-xl mx-auto">
             Take the first step towards independence. Manchester's modern way to learn to drive is just a click away.
           </p>
           

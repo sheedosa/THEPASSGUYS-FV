@@ -13,8 +13,8 @@ export default function AboutPage() {
   return (
     <div className="pt-24">
       {/* Hero Section */}
-      <section className="py-24 bg-secondary text-white">
-        <div className="container mx-auto px-6 text-center">
+      <section className="py-16 md:py-24 bg-secondary text-white">
+        <div className="container mx-auto px-4 md:px-6 text-center">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -34,8 +34,8 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto rounded-[2.5rem] bg-bg-page p-12 border border-slate-100 shadow-xl shadow-black/5">
             <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8">Our Story</h2>
             <div className="prose prose-lg prose-secondary font-medium text-secondary/70">
@@ -51,8 +51,8 @@ export default function AboutPage() {
       </section>
 
       {/* Our Mission */}
-      <section className="py-24 bg-primary text-secondary text-center">
-        <div className="container mx-auto px-6">
+      <section className="py-16 md:py-24 bg-primary text-secondary text-center">
+        <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-8">Our Mission</h2>
           <p className="text-2xl md:text-3xl font-bold max-w-3xl mx-auto">
             "To make learning to drive straightforward, affordable, and actually enjoyable, with an instructor who's right for you."
@@ -61,8 +61,8 @@ export default function AboutPage() {
       </section>
 
       {/* Numbers */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
               <motion.div
@@ -71,7 +71,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-10 rounded-[2.5rem] text-center border border-slate-100 shadow-xl shadow-black/5 transform-gpu"
+                className="bg-white p-6 md:p-10 rounded-[2.5rem] text-center border border-slate-100 shadow-xl shadow-black/5 transform-gpu"
               >
                 <div className="w-16 h-16 bg-secondary text-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <stat.icon className="w-8 h-8" />
@@ -85,10 +85,10 @@ export default function AboutPage() {
       </section>
 
       {/* Instructors */}
-      <section className="py-24 bg-secondary text-white">
-        <div className="container mx-auto px-6">
-            <h2 className="text-4xl font-black uppercase tracking-tighter mb-16 text-center">Our Vetted Instructors</h2>
-            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto text-lg font-medium">
+      <section className="py-16 md:py-24 bg-secondary text-white">
+        <div className="container mx-auto px-4 md:px-6">
+            <h2 className="text-4xl font-black uppercase tracking-tighter mb-8 md:mb-16 text-center">Our Vetted Instructors</h2>
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto text-lg font-medium">
                 {[
                     { title: "DVSA Approved", desc: "Every instructor in our network is a fully qualified Approved Driving Instructor (ADI)." },
                     { title: "DBS Checked", desc: "Clear background checks are mandatory for all our partners." },
@@ -108,9 +108,9 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-bg-page text-center">
-        <div className="container mx-auto px-6">
-            <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter mb-12">Ready to meet your instructor?</h2>
+      <section className="py-16 md:py-24 bg-bg-page text-center">
+        <div className="container mx-auto px-4 md:px-6">
+            <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter mb-8 md:mb-12">Ready to meet your instructor?</h2>
             <Link 
               to="/get-matched"
               className="inline-flex px-8 py-4 sm:px-12 sm:py-6 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-2xl shadow-primary/20"

@@ -29,7 +29,7 @@ export default function Hero({ id }: { id?: string }) {
       </div>
 
       {/* Hero Content */}
-      <div className="container mx-auto px-6 relative z-20 text-center">
+      <div className="container mx-auto px-4 md:px-6 relative z-20 text-center">
         <div className="max-w-5xl mx-auto flex flex-col items-center">
           
           <motion.p 
@@ -66,13 +66,13 @@ export default function Hero({ id }: { id?: string }) {
             transition={{ delay: 0.8 }}
             className="flex flex-wrap items-center justify-center gap-4 sm:gap-6"
           >
-              <Link to="/get-matched" className="group relative px-6 py-3 sm:px-12 sm:py-6 bg-white text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-all duration-300 shadow-[0_20px_50px_rgba(255,255,255,0.1)] text-xs sm:text-base overflow-hidden">
+              <Link to="/get-matched" className="group relative px-4 md:px-6 py-3 sm:px-12 sm:py-6 bg-white text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-all duration-300 shadow-[0_20px_50px_rgba(255,255,255,0.1)] text-xs sm:text-base overflow-hidden">
                   <span className="relative z-10 flex items-center gap-2">
                     Book Your Journey <Zap className="w-4 h-4 fill-secondary" />
                   </span>
                   <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </Link>
-              <Link to="/lessons" className="px-6 py-3 sm:px-12 sm:py-6 bg-transparent text-white border border-white/20 font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-secondary transition-all duration-300 text-xs sm:text-base backdrop-blur-sm">
+              <Link to="/lessons" className="px-4 md:px-6 py-3 sm:px-12 sm:py-6 bg-transparent text-white border border-white/20 font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-secondary transition-all duration-300 text-xs sm:text-base backdrop-blur-sm">
                   View Our Courses
               </Link>
           </motion.div>

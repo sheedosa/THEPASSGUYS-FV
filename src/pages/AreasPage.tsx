@@ -53,7 +53,7 @@ export default function AreasPage() {
       />
       {/* Hero Section */}
       <section className="py-20 overflow-hidden relative bg-white">
-        <div className="container mx-auto px-6 text-center">
+        <div className="container mx-auto px-4 md:px-6 text-center">
           <motion.span 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -76,9 +76,9 @@ export default function AreasPage() {
       </section>
 
       {/* Featured Regions */}
-      <section className="py-24 relative z-10 bg-bg-page/50">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <section className="py-16 md:py-24 relative z-10 bg-bg-page/50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:p-10">
             {regions.map((region, index) => (
               <motion.div
                 key={index}
@@ -109,13 +109,13 @@ export default function AreasPage() {
       </section>
 
       {/* Full List */}
-      <section className="py-24 bg-secondary text-white overflow-hidden relative">
+      <section className="py-16 md:py-24 bg-secondary text-white overflow-hidden relative">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none overflow-hidden">
              <div className="text-[30vw] font-black text-outline -rotate-12 translate-y-1/2">AREAS</div>
         </div>
         
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-16">
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center mb-8 md:mb-16">
             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6">
               Complete <span className="text-primary">Postcode</span> Coverage
             </h2>

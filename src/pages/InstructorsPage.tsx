@@ -47,7 +47,7 @@ export default function InstructorsPage() {
       />
       {/* Hero Section */}
       <section className="py-20 overflow-hidden relative bg-white">
-        <div className="container mx-auto px-6 text-center">
+        <div className="container mx-auto px-4 md:px-6 text-center">
           <motion.span 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -70,9 +70,9 @@ export default function InstructorsPage() {
       </section>
 
       {/* About Working With Us */}
-      <section className="py-24 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-16 md:py-24 relative z-10">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid lg:grid-cols-2 gap-8 md:p-16 items-center">
              <motion.div
                initial={{ opacity: 0, x: -30 }}
                whileInView={{ opacity: 1, x: 0 }}
@@ -107,13 +107,13 @@ export default function InstructorsPage() {
       </section>
 
       {/* Benefits Grid */}
-      <section className="py-24 bg-white overflow-hidden">
-        <div className="container mx-auto px-6">
-           <div className="text-center mb-16">
+      <section className="py-16 md:py-24 bg-white overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6">
+           <div className="text-center mb-8 md:mb-16">
               <h2 className="text-4xl md:text-6xl font-black text-secondary uppercase tracking-tighter italic">Why Choose Us?</h2>
            </div>
            
-           <div className="grid md:grid-cols-3 gap-10">
+           <div className="grid md:grid-cols-3 gap-6 md:p-10">
               {benefits.map((benefit, index) => (
                 <motion.div
                   key={index}
@@ -135,19 +135,19 @@ export default function InstructorsPage() {
       </section>
 
       {/* Who You Work With */}
-      <section className="py-24 bg-secondary text-white relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-secondary text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none">
              <div className="text-[40vw] font-black text-outline rotate-12">ADI</div>
         </div>
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="max-w-4xl">
             <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">Our Standards</span>
-            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-12">
+            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-8 md:mb-12">
               Join a Network of <br /> <span className="text-primary italic">Elite Professionals.</span>
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                 <div className="space-y-6">
                     <div className="flex items-start space-x-6">
                         <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-primary shrink-0">
@@ -169,7 +169,7 @@ export default function InstructorsPage() {
                     </div>
                 </div>
                 
-                <div className="bg-white/5 border border-white/10 p-10 rounded-[32px] backdrop-blur-sm">
+                <div className="bg-white/5 border border-white/10 p-6 md:p-10 rounded-[32px] backdrop-blur-sm">
                     <h4 className="text-2xl font-black uppercase mb-6 flex items-center space-x-3">
                         <HelpCircle className="text-primary w-6 h-6" />
                         <span>Other Approved Instructors</span>
@@ -188,10 +188,10 @@ export default function InstructorsPage() {
       </section>
 
       {/* Sign-up Form */}
-      <section id="signup" className="py-24 bg-bg-page overflow-hidden">
-        <div className="container mx-auto px-6">
+      <section id="signup" className="py-16 md:py-24 bg-bg-page overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 md:p-16 items-center">
                 <div>
                     <h2 className="text-4xl md:text-6xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-8">
                       Start your <br /> <span className="text-primary italic">next chapter.</span>
@@ -210,7 +210,7 @@ export default function InstructorsPage() {
                     </div>
                 </div>
 
-                <div className="vibrant-card !bg-white !p-6 sm:!p-10 md:!p-12">
+                <div className="vibrant-card !bg-white !p-6 sm:!p-6 md:p-10 md:!p-12">
                    {!submitted ? (
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
@@ -221,7 +221,7 @@ export default function InstructorsPage() {
                                 placeholder="Your Name"
                                 value={formData.name}
                                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                                className="w-full bg-bg-page rounded-2xl px-6 py-4 font-bold text-secondary focus:outline-none border-2 border-transparent focus:border-primary transition-all"
+                                className="w-full bg-bg-page rounded-2xl px-4 md:px-6 py-4 font-bold text-secondary focus:outline-none border-2 border-transparent focus:border-primary transition-all"
                             />
                         </div>
                         <div>
@@ -232,14 +232,14 @@ export default function InstructorsPage() {
                                 placeholder="e.g. Stockport"
                                 value={formData.location}
                                 onChange={(e) => setFormData({...formData, location: e.target.value})}
-                                className="w-full bg-bg-page rounded-2xl px-6 py-4 font-bold text-secondary focus:outline-none border-2 border-transparent focus:border-primary transition-all"
+                                className="w-full bg-bg-page rounded-2xl px-4 md:px-6 py-4 font-bold text-secondary focus:outline-none border-2 border-transparent focus:border-primary transition-all"
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-xs font-black uppercase tracking-widest text-secondary/50 mb-3 ml-2">Car Type</label>
                                 <select 
-                                    className="w-full bg-bg-page rounded-2xl px-6 py-4 font-bold text-secondary focus:outline-none border-2 border-transparent focus:border-primary transition-all appearance-none"
+                                    className="w-full bg-bg-page rounded-2xl px-4 md:px-6 py-4 font-bold text-secondary focus:outline-none border-2 border-transparent focus:border-primary transition-all appearance-none"
                                     value={formData.carType}
                                     onChange={(e) => setFormData({...formData, carType: e.target.value})}
                                 >
@@ -250,7 +250,7 @@ export default function InstructorsPage() {
                             <div>
                                 <label className="block text-xs font-black uppercase tracking-widest text-secondary/50 mb-3 ml-2">Availability</label>
                                 <select 
-                                    className="w-full bg-bg-page rounded-2xl px-6 py-4 font-bold text-secondary focus:outline-none border-2 border-transparent focus:border-primary transition-all appearance-none"
+                                    className="w-full bg-bg-page rounded-2xl px-4 md:px-6 py-4 font-bold text-secondary focus:outline-none border-2 border-transparent focus:border-primary transition-all appearance-none"
                                     value={formData.availability}
                                     onChange={(e) => setFormData({...formData, availability: e.target.value})}
                                 >

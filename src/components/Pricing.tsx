@@ -43,7 +43,7 @@ export default function Pricing({ id }: { id?: string }) {
   ];
 
   return (
-    <section ref={containerRef} id={id} className="py-24 bg-white overflow-hidden relative transform-gpu">
+    <section ref={containerRef} id={id} className="py-16 md:py-24 bg-white overflow-hidden relative transform-gpu">
       {/* Background Parallax */}
       <motion.div 
         style={{ y: bgTextY }}
@@ -52,8 +52,8 @@ export default function Pricing({ id }: { id?: string }) {
         <span className="text-[30vw] font-black text-outline uppercase leading-none">SERVICES SERVICES SERVICES</span>
       </motion.div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center mb-8 md:mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -67,7 +67,7 @@ export default function Pricing({ id }: { id?: string }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 perspective-1000">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 perspective-1000">
           {plans.map((plan, index) => (
             <motion.div
               key={index}
@@ -78,7 +78,7 @@ export default function Pricing({ id }: { id?: string }) {
               whileHover={{ 
                 scale: 1.02,
               }}
-              className={`p-10 flex flex-col relative transition-all duration-500 transform-gpu ${
+              className={`p-6 md:p-10 flex flex-col relative transition-all duration-500 transform-gpu ${
                 plan.recommended 
                 ? "vibrant-card !bg-secondary !text-white lg:scale-105 z-10" 
                 : "vibrant-card !shadow-none !border-2 !border-slate-100 text-secondary"
@@ -88,7 +88,7 @@ export default function Pricing({ id }: { id?: string }) {
                 <motion.div 
                    animate={{ scale: [1, 1.1, 1] }} 
                    transition={{ repeat: Infinity, duration: 2 }}
-                   className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-secondary px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest shadow-xl border-2 border-secondary"
+                   className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-secondary px-4 md:px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest shadow-xl border-2 border-secondary"
                 >
                   Most Popular
                 </motion.div>

@@ -32,10 +32,10 @@ export default function FAQ({ id, items }: { id?: string; items?: FAQItem[] }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
-    <section id={id} className="py-24 overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section id={id} className="py-16 md:py-24 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-16">
             <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">Support</span>
             <h2 className="text-5xl md:text-7xl font-black text-secondary tracking-tighter uppercase">
               Common <span className="text-primary italic">Questions.</span>

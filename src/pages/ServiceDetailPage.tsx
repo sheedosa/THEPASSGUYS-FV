@@ -24,8 +24,8 @@ export default function ServiceDetailPage() {
       />
       {/* Hero Section */}
       <section className="py-20 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid lg:grid-cols-2 gap-8 md:p-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -41,7 +41,7 @@ export default function ServiceDetailPage() {
                 {service.description}
               </p>
               <div className="flex flex-wrap gap-4">
-                 <div className="px-6 py-3 bg-secondary text-white rounded-full font-black uppercase text-xs tracking-widest">
+                 <div className="px-4 md:px-6 py-3 bg-secondary text-white rounded-full font-black uppercase text-xs tracking-widest">
                     {service.pricingHint}
                  </div>
               </div>
@@ -64,15 +64,15 @@ export default function ServiceDetailPage() {
       </section>
 
       {/* Who it's for & Benefits */}
-      <section className="py-24">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12">
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
             {/* Who it's for */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="vibrant-card !bg-secondary !border-none p-10 md:p-16 text-white"
+              className="vibrant-card !bg-secondary !border-none p-6 md:p-10 md:p-8 md:p-16 text-white"
             >
               <h2 className="text-3xl font-black uppercase tracking-tight mb-8">Who it's for</h2>
               <ul className="space-y-6">
@@ -128,8 +128,8 @@ export default function ServiceDetailPage() {
       </section>
 
       {/* Pricing Hint Section */}
-      <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 text-center max-w-4xl">
+      <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-4 md:px-6 text-center max-w-4xl">
             <h2 className="text-4xl md:text-6xl font-black text-secondary uppercase tracking-tighter mb-8 italic">Pricing Overview</h2>
             <div className="vibrant-card !p-12 bg-bg-page border-dashed">
                 <p className="text-2xl font-black text-secondary mb-4 uppercase">{service.pricingHint}</p>

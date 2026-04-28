@@ -61,7 +61,7 @@ export default function ResourcesPage() {
       />
       {/* Hero Section */}
       <section className="py-20 relative overflow-hidden bg-white">
-        <div className="container mx-auto px-6 text-center relative z-10">
+        <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
           <motion.span 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -84,9 +84,9 @@ export default function ResourcesPage() {
       </section>
 
       {/* Resources Grid */}
-      <section className="py-24">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12">
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {sections.map((section, idx) => (
               <motion.div
                 key={idx}
@@ -96,7 +96,7 @@ export default function ResourcesPage() {
                 transition={{ delay: idx * 0.1 }}
                 className="vibrant-card !p-0 overflow-hidden bg-white group flex flex-col"
               >
-                <div className="p-10 border-b-4 border-secondary/5 group-hover:bg-bg-page transition-colors flex-1">
+                <div className="p-6 md:p-10 border-b-4 border-secondary/5 group-hover:bg-bg-page transition-colors flex-1">
                   <div className="mb-6">{section.icon}</div>
                   <h2 className="text-3xl font-black text-secondary uppercase tracking-tight mb-4">{section.title}</h2>
                   <p className="text-slate-500 font-medium leading-relaxed mb-8">{section.description}</p>
@@ -131,9 +131,9 @@ export default function ResourcesPage() {
       </section>
 
       {/* Featured Blog-style Tips Section */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-6">
                 <div className="max-w-2xl">
                     <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">The Blog</span>
                     <h2 className="text-4xl md:text-6xl font-black text-secondary uppercase tracking-tighter leading-[0.9]">
@@ -146,7 +146,7 @@ export default function ResourcesPage() {
                 </button>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-10">
+            <div className="grid md:grid-cols-3 gap-6 md:p-10">
                 {[
                     { title: "5 Cold Weather Driving Secrets", date: "Jan 12", category: "Safety", img: "https://picsum.photos/seed/winter/600/400" },
                     { title: "How to Master High-Speed Merging", date: "Feb 04", category: "Motorway", img: "https://picsum.photos/seed/merging/600/400" },

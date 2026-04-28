@@ -56,7 +56,7 @@ export default function LessonsPage() {
       />
       {/* Hero Section */}
       <section className="py-20 overflow-hidden relative transform-gpu">
-        <div className="container mx-auto px-6 text-center">
+        <div className="container mx-auto px-4 md:px-6 text-center">
           <motion.span 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -84,9 +84,9 @@ export default function LessonsPage() {
       </div>
 
       {/* Lesson Types Section */}
-      <section className="py-24 bg-bg-page relative overflow-hidden">
-         <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
+      <section className="py-16 md:py-24 bg-bg-page relative overflow-hidden">
+         <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-8 md:mb-16">
                <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">Variety</span>
                <h2 className="text-4xl md:text-6xl font-black text-secondary tracking-tighter uppercase whitespace-pre-line">
                  Lessons for <span className="text-primary italic">Every Need.</span>
@@ -101,7 +101,7 @@ export default function LessonsPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, type: "spring" }}
-                  className="vibrant-card !shadow-none !p-10 border-2 border-slate-100 bg-white group hover:border-secondary transition-all"
+                  className="vibrant-card !shadow-none !p-6 md:p-10 border-2 border-slate-100 bg-white group hover:border-secondary transition-all"
                 >
                   <div className="w-16 h-16 bg-secondary text-white rounded-2xl flex items-center justify-center mb-8 transform group-hover:-rotate-12 transition-transform shadow-lg group-hover:bg-primary group-hover:text-secondary">
                     {type.icon}

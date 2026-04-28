@@ -26,9 +26,9 @@ export default function WhyChooseUs({ id }: { id?: string }) {
   ];
 
   return (
-    <section id={id} className="py-24 bg-slate-50">
-      <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter mb-16">
+    <section id={id} className="py-16 md:py-24 bg-slate-50">
+      <div className="container mx-auto px-4 md:px-6 text-center">
+        <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter mb-8 md:mb-16">
           Why Thousands Choose <span className="text-primary italic">The Pass Guys.</span>
         </h2>
         
@@ -41,7 +41,7 @@ export default function WhyChooseUs({ id }: { id?: string }) {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-white p-10 rounded-3xl shadow-xl shadow-black/5 transition-all duration-300 transform-gpu"
+              className="bg-white p-6 md:p-10 rounded-3xl shadow-xl shadow-black/5 transition-all duration-300 transform-gpu"
             >
               <div className="w-16 h-16 bg-secondary text-white rounded-2xl flex items-center justify-center mb-8 mx-auto transform hover:rotate-12 transition-transform shadow-lg">
                 {point.icon}

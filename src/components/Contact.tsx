@@ -6,12 +6,12 @@ export default function Contact() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
 
   return (
-    <section id="contact" className="py-24 bg-white relative overflow-hidden">
+    <section id="contact" className="py-16 md:py-24 bg-white relative overflow-hidden">
       {/* Background Decorative */}
       <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute top-20 -left-20 w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div 
             initial={{ opacity: 0, scale: 0.9, y: 50 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -67,7 +67,7 @@ export default function Contact() {
                         <label className="text-[10px] font-black uppercase text-secondary/40 tracking-widest">Full Name</label>
                         <input 
                             type="text" 
-                            className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-secondary focus:outline-none focus:border-primary transition-all font-bold placeholder:opacity-30"
+                            className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-4 text-secondary focus:outline-none focus:border-primary transition-all font-bold placeholder:opacity-30"
                             placeholder="John Doe"
                         />
                     </div>
@@ -75,7 +75,7 @@ export default function Contact() {
                         <label className="text-[10px] font-black uppercase text-secondary/40 tracking-widest">Email Address</label>
                         <input 
                             type="email" 
-                            className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-secondary focus:outline-none focus:border-primary transition-all font-bold placeholder:opacity-30"
+                            className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-4 text-secondary focus:outline-none focus:border-primary transition-all font-bold placeholder:opacity-30"
                             placeholder="john@example.com"
                         />
                     </div>
@@ -83,7 +83,7 @@ export default function Contact() {
                         <label className="text-[10px] font-black uppercase text-secondary/40 tracking-widest">Message</label>
                         <textarea 
                             rows={4}
-                            className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-secondary focus:outline-none focus:border-primary transition-all resize-none font-bold placeholder:opacity-30"
+                            className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-4 text-secondary focus:outline-none focus:border-primary transition-all resize-none font-bold placeholder:opacity-30"
                             placeholder="Tell us about your driving goals..."
                         />
                     </div>
