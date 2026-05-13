@@ -4,6 +4,7 @@ import SEO from '../components/SEO';
 import { Phone, Mail, MapPin, Send, MessageSquare } from 'lucide-react';
 import AreasCovered from '../components/AreasCovered';
 import FinalCTA from '../components/FinalCTA';
+import PageHero from '../components/PageHero';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -18,7 +19,7 @@ export default function ContactPage() {
       icon: <Phone className="w-6 h-6" />,
       title: "Call Us",
       value: "0161 123 4567",
-      desc: "Mon-Fri: 8am - 8pm"
+      desc: "Mon to Fri, 8am till 8pm"
     },
     {
       icon: <Mail className="w-6 h-6" />,
@@ -35,35 +36,20 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="pt-24 min-h-screen">
-      <SEO 
-        title="Contact The Pass Guys | Manchester Support" 
-        description="Get in touch with Manchester's leading driving school. Whether you're a new student or interested in joining our network of instructors, we're here to help."
+    <div className="min-h-screen bg-bg-page">
+      <SEO
+        title="Contact The Pass Guys | Manchester Support"
+        description="Get in touch. New learners, current students, instructors looking to join. We answer within a working day."
         canonical="https://thepassguys.co.uk/contact"
       />
-      {/* Hero Section */}
-      <section className="py-20 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
-          <motion.span 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4"
-          >
-            Get In Touch
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-secondary leading-[0.9] tracking-tighter mb-8 uppercase italic"
-          >
-            Contact <br />
-            <span className="text-primary">The Guys.</span>
-          </motion.h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
-            Ready to start your journey? Our Manchester-based support team is standing by to help you get behind the wheel.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Contact · Manchester support"
+        title="Talk to"
+        accent="the guys."
+        description="Phone, email, or pop a question through the form below. Mon to Fri, 8am till 8pm. We reply within a working day."
+        primaryCta={{ label: 'Get matched', href: '/get-matched' }}
+        secondaryCta={{ label: 'Call us', href: 'tel:01234567890' }}
+      />
 
       {/* Main Contact Section */}
       <section className="py-16 md:py-24">

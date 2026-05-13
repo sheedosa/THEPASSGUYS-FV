@@ -10,20 +10,20 @@ interface FAQItem {
 export default function FAQ({ id, items }: { id?: string; items?: FAQItem[] }) {
   const defaultFaqs = [
     {
-      q: "How many lessons until I pass?",
-      a: "The average student takes around 40-45 hours of lessons, but with our intensive Fast Track courses, many pass in much less time. It depends entirely on your pace."
+      q: "How many lessons will I need?",
+      a: "Most learners pass after 40 to 45 hours behind the wheel. If you're picking it up quickly, our intensive course can get you ready in two weeks. If you need longer, that's fine too."
     },
     {
-      q: "Can I choose between manual and automatic?",
-      a: "Yes! We have an extensive fleet of both manual and automatic modern Mini Coopers and other dual-controlled vehicles."
+      q: "Manual or automatic?",
+      a: "Whichever you prefer. We charge the same price for both. Our cars are modern, dual-control, and insured for learner use."
     },
     {
-      q: "Do you cover my area in Manchester?",
-      a: "We cover almost every M-postcode in Greater Manchester, including Salford, Stockport, and Bolton. Use our postcode checker to be sure."
+      q: "Do you cover my area?",
+      a: "We cover every M-postcode in Greater Manchester. Salford, Stockport, Bolton, Trafford, Bury, Oldham and everywhere in between. Drop your postcode into the matcher to be sure."
     },
     {
-      q: "What is your pass rate?",
-      a: "Our network maintains a 98% pass rate across all course types, making us one of the most successful schools in the North."
+      q: "What's your pass rate?",
+      a: "Our network averages a 97% first-time pass rate across all course types."
     }
   ];
 
@@ -32,21 +32,31 @@ export default function FAQ({ id, items }: { id?: string; items?: FAQItem[] }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
-    <section id={id} className="py-16 md:py-24 overflow-hidden">
+    <section id={id} className="py-12 md:py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8 md:mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center mb-8 md:mb-16"
+          >
             <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">Support</span>
             <h2 className="text-5xl md:text-7xl font-black text-secondary tracking-tighter uppercase">
               Common <span className="text-primary italic">Questions.</span>
             </h2>
-          </div>
+          </motion.div>
 
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div 
+              <motion.div
                 key={index}
-                className="vibrant-card !p-0 !shadow-none overflow-hidden bg-white hover:border-primary transition-colors"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: index * 0.06, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="vibrant-card !p-0 !shadow-none overflow-hidden bg-white hover:border-primary transition-colors duration-500"
               >
                 <button 
                   onClick={() => setActiveIndex(activeIndex === index ? null : index)}
@@ -77,7 +87,7 @@ export default function FAQ({ id, items }: { id?: string; items?: FAQItem[] }) {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

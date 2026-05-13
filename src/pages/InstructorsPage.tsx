@@ -3,6 +3,7 @@ import SEO from '../components/SEO';
 import { UserPlus, Briefcase, Users, ShieldCheck, Clock, MapPin, Car, HelpCircle, ArrowRight } from 'lucide-react';
 import React, { useState } from 'react';
 import FinalCTA from '../components/FinalCTA';
+import PageHero from '../components/PageHero';
 
 export default function InstructorsPage() {
   const [formData, setFormData] = useState({
@@ -39,35 +40,21 @@ export default function InstructorsPage() {
   ];
 
   return (
-    <div className="pt-24 min-h-screen">
-      <SEO 
-        title="Become a Driving Instructor Manchester | Joint the Network" 
-        description="Are you an ADI in Greater Manchester? Join 'The Pass Guys' and benefit from a high-volume student network, professional support, and flexible working."
+    <div className="min-h-screen bg-bg-page">
+      <SEO
+        title="Become a Driving Instructor Manchester | Join the Network"
+        description="Are you an ADI in Greater Manchester? Join The Pass Guys for a steady stream of local students."
         canonical="https://thepassguys.co.uk/instructors"
       />
-      {/* Hero Section */}
-      <section className="py-20 overflow-hidden relative bg-white">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <motion.span 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4"
-          >
-            Become a Partner
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-8xl font-black text-secondary leading-[0.9] tracking-tighter mb-8 uppercase"
-          >
-            Join The <br />
-            Pass <span className="text-primary italic">Guys.</span>
-          </motion.h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
-            Manchester's fastest growing driving school network. We empower instructors to do what they do best: teaching the next generation to drive.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Instructors · Join the network"
+        title="Teach more."
+        accent="Admin less."
+        description="Bring your ADI badge. We bring the students. Keep your own pricing, your own diary, your own car. We just match you with learners in your area."
+        primaryCta={{ label: 'Apply to join', href: '#apply' }}
+        secondaryCta={{ label: 'See benefits', href: '#benefits' }}
+        meta={['Local students only', 'No franchise fee', 'You set the price']}
+      />
 
       {/* About Working With Us */}
       <section className="py-16 md:py-24 relative z-10">
@@ -107,7 +94,7 @@ export default function InstructorsPage() {
       </section>
 
       {/* Benefits Grid */}
-      <section className="py-16 md:py-24 bg-white overflow-hidden">
+      <section className="py-16 md:py-24 bg-bg-page overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
            <div className="text-center mb-8 md:mb-16">
               <h2 className="text-4xl md:text-6xl font-black text-secondary uppercase tracking-tighter italic">Why Choose Us?</h2>
@@ -144,7 +131,7 @@ export default function InstructorsPage() {
           <div className="max-w-4xl">
             <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">Our Standards</span>
             <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-8 md:mb-12">
-              Join a Network of <br /> <span className="text-primary italic">Elite Professionals.</span>
+              Join the Pass Guys <br /> <span className="text-primary italic">instructor network.</span>
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
@@ -155,7 +142,7 @@ export default function InstructorsPage() {
                         </div>
                         <div>
                             <h4 className="text-xl font-black uppercase mb-2">ADI Qualified</h4>
-                            <p className="text-white/60 font-medium leading-relaxed">We only partner with Fully Qualified ADIs to maintain our rigorous safety and pass standards.</p>
+                            <p className="text-white/60 font-medium leading-relaxed">We work with fully qualified ADIs only. No PDIs, no shortcuts.</p>
                         </div>
                     </div>
                     <div className="flex items-start space-x-6">
@@ -201,7 +188,7 @@ export default function InstructorsPage() {
                     </p>
                     
                     <div className="space-y-4">
-                        {["M1 - M99 Postcode Exposure", "High-Volume Lead Generation", "Instructor Success Manager"].map((item, i) => (
+                        {["M1 to M99 postcode exposure", "Steady lead flow week to week", "Your own success manager"].map((item, i) => (
                             <div key={i} className="flex items-center space-x-3">
                                 <CheckCircleIcon className="w-5 h-5 text-primary" />
                                 <span className="font-bold text-secondary text-sm uppercase">{item}</span>

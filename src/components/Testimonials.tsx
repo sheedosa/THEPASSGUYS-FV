@@ -21,7 +21,7 @@ export default function Testimonials({ id }: { id?: string }) {
   ];
 
   return (
-    <section id={id} className="py-16 md:py-24 bg-secondary text-white overflow-hidden relative">
+    <section id={id} className="py-12 md:py-24 bg-secondary text-white overflow-hidden relative">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-20">
             <div className="flex items-center justify-center gap-1 mb-4">
@@ -30,10 +30,11 @@ export default function Testimonials({ id }: { id?: string }) {
               ))}
               <span className="ml-2 font-black text-xl italic tracking-tight">5.0</span>
             </div>
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 uppercase tracking-tighter"
             >
                 Real lessons. <br /> Real <span className="text-primary italic">Success.</span>
@@ -47,11 +48,11 @@ export default function Testimonials({ id }: { id?: string }) {
             {reviews.map((r, index) => (
                 <motion.div
                     key={index}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-white/5 border border-white/10 p-6 md:p-10 rounded-[40px] relative group hover:border-primary/50 transition-all duration-300 transform-gpu"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ delay: 0.1 + index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="bg-white/5 border border-white/10 p-6 md:p-10 rounded-[40px] relative group hover:border-primary/50 transition-all duration-500"
                 >
                     <div className="flex gap-1 mb-6">
                       {[...Array(5)].map((_, i) => (

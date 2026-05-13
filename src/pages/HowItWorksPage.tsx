@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Zap, Search, UserCheck, ShieldCheck, HelpCircle, ArrowRight, Target } from 'lucide-react';
 import { useState } from 'react';
+import PageHero from '../components/PageHero';
 
 const paths = [
   {
@@ -28,22 +29,16 @@ export default function HowItWorksPage() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <div className="pt-24 bg-bg-page">
-      {/* Hero */}
-      <section className="py-16 md:py-24 bg-secondary text-white text-center">
-        <div className="container mx-auto px-4 md:px-6">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8"
-          >
-            Getting started is <span className="text-primary italic">simpler than you think</span>
-          </motion.h1>
-          <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto font-medium">
-            Whether you book direct or use our matching service, we have made learning to drive straightforward.
-          </p>
-        </div>
-      </section>
+    <div className="bg-bg-page">
+      <PageHero
+        eyebrow="Process · How it works"
+        title="Two paths."
+        accent="Same result."
+        description="Know what you need? Book direct. Not sure? Get matched. Either way, you'll be on the road inside a week."
+        primaryCta={{ label: 'Book lessons', href: '/lessons' }}
+        secondaryCta={{ label: 'Get matched', href: '/get-matched' }}
+        meta={['Matched in 7 days', 'No long contracts', 'Cancel any time']}
+      />
 
       {/* Two Paths */}
       <section className="py-16 md:py-24">

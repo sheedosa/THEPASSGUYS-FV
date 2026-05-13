@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import SEO from '../components/SEO';
 import FAQ from '../components/FAQ';
 import FinalCTA from '../components/FinalCTA';
+import PageHero from '../components/PageHero';
 
 export default function FAQPage() {
   const faqCategories = [
@@ -18,7 +19,7 @@ export default function FAQPage() {
       category: "Lessons",
       items: [
         { q: "How long is each lesson?", a: "Our standard lessons are 2 hours long. We've found this is the most effective duration for retaining new skills and making real progress." },
-        { q: "What car will I learn in?", a: "You'll learn in a modern, dual-controlled car. We use premium hatchbacks like Mini Coopers and Audi A1s to give you the best driving experience." },
+        { q: "What car will I learn in?", a: "Modern dual-control hatchbacks. Most of our instructors drive a Mini Cooper or Audi A1." },
         { q: "Do you offer intensive courses?", a: "Yes! We specialise in Fast Track intensive courses ranging from 5 to 14 days, designed to get you test-ready quickly." }
       ]
     },
@@ -41,35 +42,20 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="pt-24 min-h-screen">
-      <SEO 
-        title="Driving Lesson FAQs | The Pass Guys" 
-        description="Find answers to common questions about booking driving lessons, pricing, intensive courses, and our instructors in Manchester."
+    <div className="min-h-screen bg-bg-page">
+      <SEO
+        title="Driving Lesson FAQs | The Pass Guys"
+        description="Common questions about booking, pricing, intensive courses, and our instructors in Manchester."
         canonical="https://thepassguys.co.uk/faq"
       />
-      {/* Hero Section */}
-      <section className="py-20 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
-          <motion.span 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4"
-          >
-            Help Centre
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-secondary leading-[0.9] tracking-tighter mb-8 uppercase italic"
-          >
-            Got <br />
-            <span className="text-primary">Questions?</span>
-          </motion.h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
-            Everything you need to know about starting your journey with The Pass Guys. If you can't find the answer here, get in touch!
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Help · The basics"
+        title="Got"
+        accent="questions?"
+        description="The things most learners ask before they book. If yours isn't here, drop us a line and we'll answer it directly."
+        primaryCta={{ label: 'Contact us', href: '/contact' }}
+        secondaryCta={{ label: 'Get matched', href: '/get-matched' }}
+      />
 
       {/* Categorized FAQs */}
       <div className="py-16 md:py-24 space-y-12">

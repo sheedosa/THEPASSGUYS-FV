@@ -129,7 +129,7 @@ export default function GetMatchedPage() {
                 {[
                   { id: 'lessons', title: 'Book lessons', sub: 'Regular or intensive', icon: BookOpen },
                   { id: 'match', title: 'Get matched with an instructor', sub: "We'll find the right fit for you", icon: UserPlus },
-                  { id: 'decide', title: 'Not sure yet — help me decide', sub: "Our team will guide you", icon: HelpCircle },
+                  { id: 'decide', title: 'Not sure yet. Help me decide.', sub: "Our team will guide you", icon: HelpCircle },
                 ].map((option) => (
                   <div
                     key={option.id}

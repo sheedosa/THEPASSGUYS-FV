@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import SEO from '../components/SEO';
 import { MapPin, Navigation, Car, Heart } from 'lucide-react';
 import FinalCTA from '../components/FinalCTA';
+import PageHero from '../components/PageHero';
 
 export default function AreasPage() {
   const regions = [
@@ -45,40 +46,26 @@ export default function AreasPage() {
   ];
 
   return (
-    <div className="pt-24 min-h-screen bg-bg-page">
-      <SEO 
-        title="Driving Lessons in Manchester | Areas Covered" 
-        description="We offer driving lessons across Greater Manchester, Salford, Stockport, Bolton, Oldham, and Trafford. Check our full list of covered boroughs and postcodes."
+    <div className="min-h-screen bg-bg-page">
+      <SEO
+        title="Driving Lessons in Manchester | Areas Covered"
+        description="Driving lessons across Greater Manchester. Salford, Stockport, Bolton, Oldham, Trafford and every M-postcode."
         canonical="https://thepassguys.co.uk/areas"
       />
-      {/* Hero Section */}
-      <section className="py-20 overflow-hidden relative bg-white">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <motion.span 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4"
-          >
-            Coverage Area
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-secondary leading-[0.9] tracking-tighter mb-8 uppercase"
-          >
-            Driving Lessons in <br />
-            Greater <span className="text-primary italic">Manchester.</span>
-          </motion.h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
-            From the bustling city centre to the quiet suburbs, our network of 150+ instructors covers almost every M-postcode in the North West.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Coverage · Greater Manchester"
+        title="We cover every"
+        accent="M-postcode."
+        description="City centre to the suburbs, north to south. Our 150 instructors live and teach across all 10 boroughs."
+        primaryCta={{ label: 'Get matched', href: '/get-matched' }}
+        secondaryCta={{ label: 'See boroughs', href: '#regions' }}
+        meta={['150+ instructors', '12 boroughs', '60+ test routes']}
+      />
 
       {/* Featured Regions */}
       <section className="py-16 md:py-24 relative z-10 bg-bg-page/50">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:p-10">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 md:gap-6 md:p-10">
             {regions.map((region, index) => (
               <motion.div
                 key={index}
@@ -86,19 +73,18 @@ export default function AreasPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="vibrant-card !bg-white group relative pt-16 pb-12 px-10"
+                className="vibrant-card !bg-white !rounded-2xl md:!rounded-[40px] !shadow-none md:!shadow-[10px_10px_0_var(--color-primary)] group relative pt-10 sm:pt-14 md:pt-16 pb-6 sm:pb-10 md:pb-12 px-5 sm:px-8 md:px-10"
               >
-                {/* Floating Icon Holder */}
-                <div className="absolute -top-6 left-10 w-20 h-20 bg-secondary text-primary rounded-3xl flex items-center justify-center shadow-2xl transform group-hover:rotate-6 transition-transform z-20">
+                <div className="absolute -top-4 sm:-top-5 md:-top-6 left-4 sm:left-7 md:left-10 w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 bg-secondary text-primary rounded-xl md:rounded-3xl flex items-center justify-center shadow-2xl group-hover:rotate-6 transition-transform z-20 [&_svg]:w-4 [&_svg]:h-4 sm:[&_svg]:w-6 sm:[&_svg]:h-6 md:[&_svg]:w-8 md:[&_svg]:h-8">
                   {region.icon}
                 </div>
 
                 <div className="relative">
-                  <h3 className="text-2xl md:text-3xl font-black text-secondary uppercase tracking-tighter mb-4 leading-none">
+                  <h3 className="text-lg sm:text-xl md:text-3xl font-black text-secondary uppercase tracking-tighter mb-2 md:mb-4 leading-none">
                     {region.nameFull || region.name}
                   </h3>
-                  <div className="h-1 w-12 bg-primary mb-6 rounded-full" />
-                  <p className="text-slate-600 font-bold leading-relaxed text-sm md:text-base">
+                  <div className="h-0.5 w-8 md:h-1 md:w-12 bg-primary mb-3 md:mb-6 rounded-full" />
+                  <p className="text-slate-600 font-medium leading-relaxed text-xs sm:text-sm md:text-base">
                     {region.desc}
                   </p>
                 </div>

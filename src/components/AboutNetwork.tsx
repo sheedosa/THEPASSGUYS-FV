@@ -12,9 +12,13 @@ export default function AboutNetwork({ id }: { id?: string }) {
             className="lg:w-1/2"
           >
             <div className="vibrant-card !p-0 overflow-hidden relative aspect-square shadow-2xl">
-              <img 
-                src="https://lh3.googleusercontent.com/d/11kz4nB8sf460elOszR57yumL_vzsuTJA" 
-                alt="Our Instructors" 
+              <img
+                src="https://lh3.googleusercontent.com/d/11kz4nB8sf460elOszR57yumL_vzsuTJA"
+                alt="Our Instructors"
+                width="800"
+                height="800"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />

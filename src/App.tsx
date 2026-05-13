@@ -1,39 +1,55 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import LessonsPage from './pages/LessonsPage';
-import PricingPage from './pages/PricingPage';
-import AreasPage from './pages/AreasPage';
-import ServiceDetailPage from './pages/ServiceDetailPage';
-import InstructorsPage from './pages/InstructorsPage';
-import ResourcesPage from './pages/ResourcesPage';
-import FAQPage from './pages/FAQPage';
-import ContactPage from './pages/ContactPage';
-import AboutPage from './pages/AboutPage';
-import HowItWorksPage from './pages/HowItWorksPage';
-import GetMatchedPage from './pages/GetMatchedPage';
 import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import SmoothScroll from './components/SmoothScroll';
+import ScrollProgress from './components/ScrollProgress';
+
+const LessonsPage = lazy(() => import('./pages/LessonsPage'));
+const PricingPage = lazy(() => import('./pages/PricingPage'));
+const AreasPage = lazy(() => import('./pages/AreasPage'));
+const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'));
+const InstructorsPage = lazy(() => import('./pages/InstructorsPage'));
+const ResourcesPage = lazy(() => import('./pages/ResourcesPage'));
+const FAQPage = lazy(() => import('./pages/FAQPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const HowItWorksPage = lazy(() => import('./pages/HowItWorksPage'));
+const GetMatchedPage = lazy(() => import('./pages/GetMatchedPage'));
+
+function RouteFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="w-12 h-12 border-4 border-secondary border-t-primary rounded-full animate-spin" />
+    </div>
+  );
+}
 
 export default function App() {
   return (
     <Router>
+      <SmoothScroll />
+      <ScrollProgress />
       <div className="min-h-screen">
         <Navbar />
         <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/lessons" element={<LessonsPage />} />
-            <Route path="/services/:slug" element={<ServiceDetailPage />} />
-            <Route path="/pricing" element={<PricingPage />} />
-            <Route path="/areas" element={<AreasPage />} />
-            <Route path="/instructors" element={<InstructorsPage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/how-it-works" element={<HowItWorksPage />} />
-            <Route path="/get-matched" element={<GetMatchedPage />} />
-          </Routes>
+          <Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/lessons" element={<LessonsPage />} />
+              <Route path="/services/:slug" element={<ServiceDetailPage />} />
+              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/areas" element={<AreasPage />} />
+              <Route path="/instructors" element={<InstructorsPage />} />
+              <Route path="/resources" element={<ResourcesPage />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/how-it-works" element={<HowItWorksPage />} />
+              <Route path="/get-matched" element={<GetMatchedPage />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </div>

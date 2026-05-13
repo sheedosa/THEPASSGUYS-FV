@@ -7,37 +7,38 @@ export default function HowItWorks({ id }: { id?: string }) {
     {
       number: "01",
       icon: <Sliders className="w-8 h-8" />,
-      title: "Choose Type",
-      description: "Choose your lesson type or select one of our discounted block packages."
+      title: "Pick Your Lessons",
+      description: "Choose single lessons or block-book a course. Manual or automatic."
     },
     {
       number: "02",
       icon: <Users className="w-8 h-8" />,
       title: "Get Matched",
-      description: "Get matched with a local, vetted, and DVSA-approved instructor near you."
+      description: "We pair you with a local DVSA-approved instructor in days, not weeks."
     },
     {
       number: "03",
       icon: <CheckCircle className="w-8 h-8" />,
       title: "Start Driving",
-      description: "Book your first lesson through us and start your journey with confidence."
+      description: "Book your first lesson. Drive away with confidence."
     }
   ];
 
   return (
-    <section id={id} className="py-16 md:py-24 bg-white overflow-hidden relative">
+    <section id={id} className="py-12 md:py-24 bg-bg-page overflow-hidden relative">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-20 px-4">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-4xl sm:text-5xl md:text-6xl font-black text-secondary tracking-tighter uppercase mb-6"
           >
             How it <span className="text-primary italic">works.</span>
           </motion.h2>
           <p className="text-secondary/60 max-w-2xl mx-auto font-medium mb-8 md:mb-12">
-            Three simple steps to getting on the road with Manchester's best driving instructors.
+            Three steps. No queue, no faff, no awkward sales call.
           </p>
         </div>
 
@@ -49,10 +50,10 @@ export default function HowItWorks({ id }: { id?: string }) {
             {steps.map((step, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: index * 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                 className="relative flex items-start gap-4 sm:gap-6 md:gap-10 group"
               >
                 {/* Timeline Node */}

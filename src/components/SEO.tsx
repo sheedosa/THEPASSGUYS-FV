@@ -10,8 +10,8 @@ interface SEOProps {
 }
 
 export default function SEO({ 
-  title = "The Pass Guys | Manchester's Expert Driving School", 
-  description = "Pass fast, drive smart with The Pass Guys. Greater Manchester's leading driving school offering manual, automatic, and intensive courses with expert ADIs.",
+  title = "The Pass Guys | Manchester Driving School",
+  description = "The Pass Guys match Manchester learners with DVSA-approved instructors, usually inside a week. Manual, automatic, intensive courses across Greater Manchester.",
   canonical = "https://thepassguys.co.uk",
   type = "website",
   image = "https://picsum.photos/seed/driving/1200/630"
@@ -42,7 +42,6 @@ export default function SEO({
       <meta name="robots" content="index, follow" />
       <meta name="keywords" content="driving school manchester, driving lessons manchester, learn to drive, automatic driving lessons, manual driving lessons, intensive driving courses, the pass guys" />
       <meta name="author" content="The Pass Guys" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     </Helmet>
   );
 }

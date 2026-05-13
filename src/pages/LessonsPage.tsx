@@ -6,6 +6,7 @@ import { Check, ArrowRight, Car, Zap, RefreshCw, Compass, ShieldCheck, Clipboard
 import Pricing from '../components/Pricing';
 import HowItWorks from '../components/HowItWorks';
 import FinalCTA from '../components/FinalCTA';
+import PageHero from '../components/PageHero';
 
 export default function LessonsPage() {
   const lessonTypes = [
@@ -48,35 +49,21 @@ export default function LessonsPage() {
   ];
 
   return (
-    <div className="pt-24 min-h-screen bg-bg-page">
-      <SEO 
-        title="Driving Lessons Manchester | Manual & Automatic" 
-        description="Explore our range of driving lessons in Manchester. From manual and automatic to intensive courses, we have the perfect tuition for every learner."
+    <div className="min-h-screen bg-bg-page">
+      <SEO
+        title="Driving Lessons Manchester | Manual & Automatic"
+        description="Manual, automatic and intensive driving lessons across Greater Manchester. Pick what fits, book in minutes."
         canonical="https://thepassguys.co.uk/lessons"
       />
-      {/* Hero Section */}
-      <section className="py-20 overflow-hidden relative transform-gpu">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <motion.span 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4"
-          >
-            Services Hub
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-secondary leading-[0.9] tracking-tighter mb-8 uppercase"
-          >
-            Driving Lessons <br />
-            That Fit <span className="text-primary italic">Around You.</span>
-          </motion.h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
-            From complete beginners to advanced motorway training, our network of expert instructors provides the highest quality tuition in the North West.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Lessons · Manchester"
+        title="Driving lessons that"
+        accent="fit around you."
+        description="From your first time behind the wheel to motorway training and Pass Plus. Manual or automatic, single lessons or block-book a course."
+        primaryCta={{ label: 'See pricing', href: '#pricing' }}
+        secondaryCta={{ label: 'Get matched', href: '/get-matched' }}
+        meta={['Manual & auto', 'DVSA-approved', 'Block-booking discounts']}
+      />
 
       {/* Main Offers (Reusing Pricing component logic) */}
       <div id="main-offers">
@@ -93,7 +80,7 @@ export default function LessonsPage() {
                </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {lessonTypes.map((type, index) => (
                 <motion.div
                   key={index}
@@ -101,19 +88,19 @@ export default function LessonsPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, type: "spring" }}
-                  className="vibrant-card !shadow-none !p-6 md:p-10 border-2 border-slate-100 bg-white group hover:border-secondary transition-all"
+                  className="vibrant-card !shadow-none !p-5 sm:!p-6 md:!p-10 border-2 border-slate-100 bg-white group hover:border-secondary transition-all !rounded-2xl md:!rounded-[40px]"
                 >
-                  <div className="w-16 h-16 bg-secondary text-white rounded-2xl flex items-center justify-center mb-8 transform group-hover:-rotate-12 transition-transform shadow-lg group-hover:bg-primary group-hover:text-secondary">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-secondary text-white rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-8 group-hover:-rotate-12 transition-transform shadow-lg group-hover:bg-primary group-hover:text-secondary [&_svg]:w-4 [&_svg]:h-4 sm:[&_svg]:w-5 sm:[&_svg]:h-5 md:[&_svg]:w-8 md:[&_svg]:h-8">
                     {type.icon}
                   </div>
-                  <h3 className="text-2xl font-black text-secondary uppercase tracking-tight mb-4">{type.title}</h3>
-                  <p className="text-slate-500 font-medium leading-relaxed mb-8">{type.desc}</p>
+                  <h3 className="text-base sm:text-lg md:text-2xl font-black text-secondary uppercase tracking-tight mb-2 md:mb-4 leading-tight">{type.title}</h3>
+                  <p className="text-slate-500 font-medium leading-relaxed mb-4 md:mb-8 text-xs sm:text-sm md:text-base">{type.desc}</p>
                   <Link 
                     to={`/services/${type.slug}`}
-                    className="flex items-center space-x-2 text-secondary font-black uppercase tracking-widest text-xs group-hover:text-primary transition-colors"
+                    className="flex items-center space-x-2 text-secondary font-black uppercase tracking-widest text-[10px] sm:text-xs group-hover:text-primary transition-colors"
                   >
-                    <span>Learn More</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <span>Learn more</span>
+                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </motion.div>
               ))}
@@ -122,7 +109,7 @@ export default function LessonsPage() {
       </section>
 
       {/* How it Works (Simplified) */}
-      <div className="bg-white">
+      <div className="bg-bg-page">
         <HowItWorks id="process" />
       </div>
 

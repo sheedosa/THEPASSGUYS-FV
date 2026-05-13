@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import SEO from '../components/SEO';
 import { ExternalLink, BookOpen, Lightbulb, ClipboardCheck, ArrowRight, Shield } from 'lucide-react';
 import FinalCTA from '../components/FinalCTA';
+import PageHero from '../components/PageHero';
 
 const sections = [
   {
@@ -53,35 +54,20 @@ const sections = [
 
 export default function ResourcesPage() {
   return (
-    <div className="pt-24 min-h-screen">
-      <SEO 
-        title="Driving Resources & Theory Help | The Pass Guys" 
-        description="Comprehensive resources for learner drivers. Get theory test help, practical driving tips, and direct links to book your official DVSA tests."
+    <div className="min-h-screen bg-bg-page">
+      <SEO
+        title="Driving Resources & Theory Help | The Pass Guys"
+        description="Theory test prep, practical driving tips, official DVSA links and learner guides."
         canonical="https://thepassguys.co.uk/resources"
       />
-      {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden bg-white">
-        <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
-          <motion.span 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4"
-          >
-            Learn & Succeed
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-secondary leading-[0.9] tracking-tighter mb-8 uppercase italic"
-          >
-            Learner <br />
-            <span className="text-primary">Resources.</span>
-          </motion.h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
-            Everything you need to go from a total beginner to a confident, qualified driver. Explore our curated guides and official links.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Resources · Learner toolkit"
+        title="Pass theory."
+        accent="Pass practical."
+        description="Hand-picked guides and official DVSA links. Everything we wish someone had told us when we started driving."
+        primaryCta={{ label: 'Browse guides', href: '#guides' }}
+        secondaryCta={{ label: 'Book your test', href: 'https://www.gov.uk/book-driving-test' }}
+      />
 
       {/* Resources Grid */}
       <section className="py-16 md:py-24">
@@ -131,7 +117,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Featured Blog-style Tips Section */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-bg-page">
         <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-6">
                 <div className="max-w-2xl">
@@ -158,9 +144,13 @@ export default function ResourcesPage() {
                         className="group cursor-pointer"
                     >
                         <div className="vibrant-card !p-0 !shadow-none overflow-hidden aspect-[4/3] mb-6 relative">
-                            <img 
-                                src={post.img} 
-                                alt={post.title} 
+                            <img
+                                src={post.img}
+                                alt={post.title}
+                                width="600"
+                                height="400"
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 grayscale hover:grayscale-0"
                                 referrerPolicy="no-referrer"
                             />

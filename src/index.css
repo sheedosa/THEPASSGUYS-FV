@@ -1,90 +1,358 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Inter", sans-serif;
-  
+
   --color-primary: #00d26f;
   --color-secondary: #2D3436;
   --color-accent: #FF7675;
   --color-bg-page: #FFFDF5;
 }
 
-@layer utilities {
-  .bg-wayfinder {
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%232D3436' stroke-width='1' stroke-opacity='0.04'%3E%3Cpath d='M10 10l5 5-5 5'/%3E%3Cpath d='M25 80h10v10'/%3E%3Cpath d='M60 20l-5 5 5 5'/%3E%3Ccircle cx='80' cy='60' r='3'/%3E%3Cpath d='M40 40l10 10-10 10'/%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: scroll;
-  }
-}
-
 @layer base {
+  html {
+    overflow-x: clip;
+    scroll-behavior: auto; /* lenis owns scrolling */
+  }
   body {
-    @apply bg-bg-page text-secondary font-sans antialiased overflow-x-hidden;
+    @apply bg-bg-page text-secondary font-sans antialiased;
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%232D3436' stroke-width='1' stroke-opacity='0.04'%3E%3Cpath d='M10 10l5 5-5 5'/%3E%3Cpath d='M25 80h10v10'/%3E%3Cpath d='M60 20l-5 5 5 5'/%3E%3Ccircle cx='80' cy='60' r='3'/%3E%3Cpath d='M40 40l10 10-10 10'/%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: scroll;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Lenis-required reset */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped { overflow: hidden; }
+
+  ::selection { background: var(--color-primary); color: var(--color-secondary); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .bg-wayfinder, .bg-bg-page {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%232D3436' stroke-width='1' stroke-opacity='0.04'%3E%3Cpath d='M10 10l5 5-5 5'/%3E%3Cpath d='M25 80h10v10'/%3E%3Cpath d='M60 20l-5 5 5 5'/%3E%3Ccircle cx='80' cy='60' r='3'/%3E%3Cpath d='M40 40l10 10-10 10'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: scroll;
   }
-  
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
   .text-outline {
     -webkit-text-stroke: 1px var(--color-secondary);
     color: transparent;
   }
+  .perspective-1000 { perspective: 1000px; transform-style: preserve-3d; }
 
-  .perspective-1000 {
-    perspective: 1000px;
-    transform-style: preserve-3d;
-  }
-  
-  .vibrant-shadow {
-    box-shadow: 10px 10px 0 var(--color-primary);
-    backface-visibility: hidden;
-    will-change: transform;
-  }
-  
-  @media (min-width: 768px) {
-    .vibrant-shadow {
-        box-shadow: 15px 15px 0 var(--color-primary);
-    }
-  }
-  
+  .vibrant-shadow { box-shadow: 10px 10px 0 var(--color-primary); }
+  @media (min-width: 768px) { .vibrant-shadow { box-shadow: 15px 15px 0 var(--color-primary); } }
   .vibrant-card {
     @apply bg-white border-4 border-secondary rounded-[40px];
     box-shadow: 10px 10px 0 var(--color-primary);
-    backface-visibility: hidden;
-    will-change: transform;
-    transform-style: preserve-3d;
   }
+  @media (min-width: 768px) { .vibrant-card { box-shadow: 15px 15px 0 var(--color-primary); } }
 
   .animate-gradient-text {
-    background: linear-gradient(
-      90deg,
-      var(--color-secondary) 0%,
-      var(--color-primary) 50%,
-      var(--color-secondary) 100%
-    );
+    background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 50%, var(--color-secondary) 100%);
     background-size: 200% auto;
     animation: gradient-animation 8s linear infinite;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-
   @keyframes gradient-animation {
     0% { background-position: 0% 50%; }
     100% { background-position: 200% 50%; }
   }
 
+  /* Cinematic road perspective ------------------------------------- */
+  .cinematic-stage {
+    perspective: 480px;
+    perspective-origin: 50% 42%;
+  }
   @media (min-width: 768px) {
-    .vibrant-card {
-        box-shadow: 15px 15px 0 var(--color-primary);
+    .cinematic-stage { perspective: 700px; perspective-origin: 50% 38%; }
+  }
+  .cinematic-road {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 220%;
+    height: 180%;
+    transform: translateX(-50%) rotateX(68deg);
+    transform-origin: 50% 100%;
+    background-color: #1a1d1f;
+    background-image:
+      repeating-linear-gradient(to bottom, var(--color-primary) 0 36px, transparent 36px 84px),
+      linear-gradient(to bottom, rgba(0, 210, 111, 0.55), rgba(0, 210, 111, 0.85)),
+      linear-gradient(to bottom, rgba(0, 210, 111, 0.55), rgba(0, 210, 111, 0.85)),
+      radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.06), transparent 60%);
+    background-size: 6px 100%, 4px 100%, 4px 100%, 100% 100%;
+    background-position: 50% 0, calc(50% - 30vw) 0, calc(50% + 30vw) 0, 0 0;
+    background-repeat: no-repeat;
+    animation: road-stream 0.9s linear infinite;
+    will-change: background-position;
+  }
+  @media (min-width: 768px) {
+    .cinematic-road {
+      transform: translateX(-50%) rotateX(72deg);
+      background-position: 50% 0, calc(50% - 18vw) 0, calc(50% + 18vw) 0, 0 0;
+      animation-duration: 1.1s;
     }
+  }
+  @keyframes road-stream {
+    from { background-position-y: 0, 0, 0, 0; }
+    to   { background-position-y: 120px, 0, 0, 0; }
+  }
+  .cinematic-horizon {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 55% 35% at 50% 50%, rgba(26,29,31,0.78) 0%, rgba(26,29,31,0.45) 35%, transparent 70%),
+      linear-gradient(to bottom, var(--color-secondary) 0%, var(--color-secondary) 42%, rgba(45,52,54,0.55) 58%, transparent 80%);
+  }
+  .cinematic-glow {
+    position: absolute; left: 50%; top: 42%;
+    transform: translate(-50%, -50%);
+    width: 60vw; height: 30vh;
+    background: radial-gradient(ellipse at center, rgba(0,210,111,0.35) 0%, rgba(0,210,111,0.12) 30%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+    animation: horizon-pulse 6s ease-in-out infinite;
+  }
+  @keyframes horizon-pulse {
+    0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+    50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
+  }
+  .cinematic-grain {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.12 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: 0.1;
+    mix-blend-mode: overlay;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cinematic-road, .cinematic-glow { animation: none; }
+  }
+
+  /* Reveal mask wrapper (kept for SplitText) */
+  .reveal-mask {
+    display: inline-block;
+    overflow: hidden;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+
+  /* Hero headline per-line curtain reveal (CSS, predictable) */
+  .hero-line {
+    animation: hero-line-up 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .hero-line-1 { animation-delay: 0.10s; }
+  .hero-line-2 { animation-delay: 0.30s; }
+  .hero-line-3 { animation-delay: 0.55s; }
+  @keyframes hero-line-up {
+    from { transform: translateY(110%); }
+    to   { transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-line { animation: none; }
+  }
+
+  /* Generic page-hero fade-up reveal */
+  .hero-fade {
+    animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .hero-fade-delay-1 { animation-delay: 0.10s; }
+  .hero-fade-delay-2 { animation-delay: 0.55s; }
+  .hero-fade-delay-3 { animation-delay: 0.75s; }
+  .hero-fade-delay-4 { animation-delay: 1.00s; }
+  @keyframes hero-fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fade { animation: none; }
+  }
+
+  /* Hero printed road markings — drifting lanes in background */
+  .road-marks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .road-mark {
+    position: absolute;
+    left: -50%;
+    width: 220%;
+    height: 6px;
+    background-image: repeating-linear-gradient(
+      to right,
+      rgba(45, 52, 54, 0.085) 0 60px,
+      transparent 60px 110px
+    );
+    will-change: transform;
+    animation: road-mark-drift 45s linear infinite;
+  }
+  .road-mark-1 { top: 18%; animation-duration: 38s; }
+  .road-mark-2 { top: 44%; animation-duration: 56s; animation-direction: reverse; opacity: 0.65; }
+  .road-mark-3 { top: 68%; animation-duration: 48s; opacity: 0.85; }
+  .road-mark-4 { top: 88%; animation-duration: 62s; animation-direction: reverse; opacity: 0.5; }
+
+  /* Solid lane edges — thin continuous lines for road feel */
+  .road-edge {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(45, 52, 54, 0.05);
+    pointer-events: none;
+  }
+
+  @keyframes road-mark-drift {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-22%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .road-mark { animation: none; }
+  }
+
+  /* Hero ghost outlined display word (background) */
+  .ghost-display {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(12rem, 22vw, 26rem);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+    -webkit-text-stroke: 2px rgba(45, 52, 54, 0.10);
+    color: transparent;
+    user-select: none;
+    white-space: nowrap;
+    animation: ghost-drift 24s ease-in-out infinite alternate;
+  }
+  @keyframes ghost-drift {
+    from { transform: translate(-2%, 0); }
+    to   { transform: translate(2%, -1.5%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ghost-display { animation: none; }
+  }
+
+  /* Hero hand-drawn underline under "Start driving." */
+  .underline-stroke path {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw-underline 1.4s cubic-bezier(0.65, 0, 0.35, 1) 1.5s forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .underline-stroke path { animation: none; stroke-dashoffset: 0; }
+  }
+  @keyframes draw-underline {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* Hero card stack reveal — CSS-only, predictable */
+  .hero-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: hero-card-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .hero-card-main   { animation-delay: 0.40s; transform: translateY(40px) rotate(-3deg); }
+  .hero-card-top    { animation-delay: 0.55s; transform: translateY(-16px) rotate(6deg); }
+  .hero-card-badge  { animation-delay: 0.85s; transform: scale(0.85) rotate(-10deg); }
+  @keyframes hero-card-up {
+    to { opacity: 1; transform: translateY(0) rotate(var(--rest-rot, 0deg)); }
+  }
+  .hero-card-main  { --rest-rot: -2deg; }
+  .hero-card-top   { --rest-rot:  4deg; }
+  .hero-card-badge {
+    animation-name: hero-card-pop;
+  }
+  @keyframes hero-card-pop {
+    to { opacity: 1; transform: scale(1) rotate(-6deg); }
+  }
+
+  /* ---------- Hero: Traffic light --------------------------------- */
+  .traffic-light {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255,255,255,0.02);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .lamp {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  /* UK sequence: red → red+amber → green → amber → red. 6s cycle. */
+  .lamp-red    { animation: lamp-red    6s linear infinite; }
+  .lamp-amber  { animation: lamp-amber  6s linear infinite; }
+  .lamp-green  { animation: lamp-green  6s linear infinite; }
+
+  @keyframes lamp-red {
+    0%, 38%        { background: #ff4d4d; box-shadow: 0 0 16px rgba(255,77,77,0.7), inset 0 0 0 1px rgba(255,77,77,0.4); }
+    38.01%, 84.99% { background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); }
+    85%, 100%      { background: #ff4d4d; box-shadow: 0 0 16px rgba(255,77,77,0.7), inset 0 0 0 1px rgba(255,77,77,0.4); }
+  }
+  @keyframes lamp-amber {
+    0%, 24.99%     { background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); }
+    25%, 38%       { background: #ffb800; box-shadow: 0 0 16px rgba(255,184,0,0.7), inset 0 0 0 1px rgba(255,184,0,0.4); }
+    38.01%, 70.99% { background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); }
+    71%, 84%       { background: #ffb800; box-shadow: 0 0 16px rgba(255,184,0,0.7), inset 0 0 0 1px rgba(255,184,0,0.4); }
+    84.01%, 100%   { background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); }
+  }
+  @keyframes lamp-green {
+    0%, 37.99%     { background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); }
+    38%, 70%       { background: var(--color-primary); box-shadow: 0 0 24px rgba(0,210,111,0.85), inset 0 0 0 1px rgba(0,210,111,0.55); }
+    70.01%, 100%   { background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); }
+  }
+
+  /* ---------- Hero: Manchester skyline glow ---------------------- */
+  .skyline-glow {
+    position: absolute;
+    left: 50%;
+    bottom: 28%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 900px;
+    height: 16vh;
+    background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(0,210,111,0.45) 0%, rgba(0,210,111,0.16) 40%, transparent 70%);
+    filter: blur(28px);
+    pointer-events: none;
+    animation: horizon-pulse 6s ease-in-out infinite;
+  }
+  @media (min-width: 768px) {
+    .skyline-glow { bottom: 32%; height: 20vh; }
+  }
+
+  /* ---------- Hero: Speedometer needle ---------------------------- */
+  .speedo-needle {
+    transform-origin: 40px 40px;
+    animation: speedo-sweep 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  }
+  @keyframes speedo-sweep {
+    0%   { transform: rotate(-90deg); }
+    70%  { transform: rotate(8deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lamp-red, .lamp-amber, .lamp-green, .speedo-needle, .skyline-glow { animation: none; }
+    .lamp-green { background: var(--color-primary); box-shadow: 0 0 24px rgba(0,210,111,0.85); }
+    .speedo-needle { transform: rotate(0deg); }
   }
 }

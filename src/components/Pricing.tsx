@@ -43,7 +43,7 @@ export default function Pricing({ id }: { id?: string }) {
   ];
 
   return (
-    <section ref={containerRef} id={id} className="py-16 md:py-24 bg-white overflow-hidden relative transform-gpu">
+    <section ref={containerRef} id={id} className="py-16 md:py-24 bg-bg-page overflow-hidden relative transform-gpu">
       {/* Background Parallax */}
       <motion.div 
         style={{ y: bgTextY }}

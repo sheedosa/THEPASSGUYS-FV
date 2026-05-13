@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Target, Users, MapPin, Clock3, Award, CheckCircle, ShieldCheck, Car } from 'lucide-react';
+import PageHero from '../components/PageHero';
 
 const stats = [
   { label: 'Licensed Instructors', value: '150+', icon: Award },
@@ -11,30 +12,19 @@ const stats = [
 
 export default function AboutPage() {
   return (
-    <div className="pt-24">
-      {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-secondary text-white">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8"
-          >
-            We're The Pass Guys, <br /> <span className="text-primary italic">Manchester's Modern Driving School</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto font-medium"
-          >
-            We started because learning to drive shouldn't feel like a chore. After seeing too many learners struggle to find reliable, local instructors who actually cared about their progress, we decided to change the game.
-          </motion.p>
-        </div>
-      </section>
+    <div>
+      <PageHero
+        eyebrow="About · The Pass Guys"
+        title="We make learning"
+        accent="actually fun."
+        description="We started because finding a decent driving instructor in Manchester was painful. Now we match learners with vetted local pros, in under a week."
+        primaryCta={{ label: 'Meet the team', href: '#story' }}
+        secondaryCta={{ label: 'Get matched', href: '/get-matched' }}
+        meta={['5,000+ learners', '150+ instructors', '12 boroughs covered']}
+      />
 
       {/* Our Story */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-bg-page">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto rounded-[2.5rem] bg-bg-page p-12 border border-slate-100 shadow-xl shadow-black/5">
             <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8">Our Story</h2>
@@ -61,7 +51,7 @@ export default function AboutPage() {
       </section>
 
       {/* Numbers */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-bg-page">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
@@ -90,10 +80,10 @@ export default function AboutPage() {
             <h2 className="text-4xl font-black uppercase tracking-tighter mb-8 md:mb-16 text-center">Our Vetted Instructors</h2>
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto text-lg font-medium">
                 {[
-                    { title: "DVSA Approved", desc: "Every instructor in our network is a fully qualified Approved Driving Instructor (ADI)." },
-                    { title: "DBS Checked", desc: "Clear background checks are mandatory for all our partners." },
-                    { title: "Regular Reviews", desc: "We track learner feedback to ensure standards remain elite." },
-                    { title: "Manual & Auto", desc: "Whether you need to master the gearbox or prefer automatic, we have the right specialist." }
+                    { title: "DVSA Approved", desc: "Every instructor on our books is a fully qualified ADI." },
+                    { title: "DBS Checked", desc: "Clear background checks are non-negotiable. Everyone passes one." },
+                    { title: "Regular Reviews", desc: "Learner feedback comes in after every lesson. We act on it." },
+                    { title: "Manual & Auto", desc: "Whichever you choose, we have a specialist ready to teach you." }
                 ].map((item, i) => (
                     <div key={i} className="flex gap-4 p-6 bg-white/5 rounded-2xl">
                         <CheckCircle className="w-8 h-8 text-primary flex-shrink-0" />

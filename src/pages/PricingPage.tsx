@@ -4,6 +4,7 @@ import { ShieldCheck, Wallet, Sparkles, Clock, CheckCircle2, Info } from 'lucide
 import Pricing from '../components/Pricing';
 import FinalCTA from '../components/FinalCTA';
 import FAQ from '../components/FAQ';
+import PageHero from '../components/PageHero';
 
 export default function PricingPage() {
   const trustPoints = [
@@ -53,35 +54,21 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="pt-24 min-h-screen bg-bg-page">
-      <SEO 
-        title="Driving Lesson Prices Manchester | Blocks & Intensive" 
-        description="View our transparent driving lesson pricing in Greater Manchester. We offer competitive rates for manual and automatic lessons, block bookings, and fast-track courses."
+    <div className="min-h-screen bg-bg-page">
+      <SEO
+        title="Driving Lesson Prices Manchester | Blocks & Intensive"
+        description="Honest, upfront pricing for driving lessons across Greater Manchester. Manual, automatic, block-bookings and intensive courses."
         canonical="https://thepassguys.co.uk/pricing"
       />
-      {/* Hero Section */}
-      <section className="py-20 overflow-hidden relative bg-white">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <motion.span 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4"
-          >
-            Transparent Rates
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-secondary leading-[0.9] tracking-tighter mb-8 uppercase"
-          >
-            Simple Pricing. <br />
-            No <span className="text-primary italic">Hidden Fees.</span>
-          </motion.h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
-            We believe in honest, upfront pricing for Manchester's best driving tuition. Choose the plan that fits your budget and timeline.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Pricing · Transparent rates"
+        title="Simple pricing."
+        accent="No hidden fees."
+        description="The price you see is what you pay. Block-book to save up to £30. Cancel up to 24 hours before with no charge."
+        primaryCta={{ label: 'See plans', href: '#pricing-plans' }}
+        secondaryCta={{ label: 'Get matched', href: '/get-matched' }}
+        meta={['Block-booking discounts', 'No upfront thousands', 'Test fee at cost']}
+      />
 
       {/* Pricing Blocks */}
       <Pricing id="pricing-plans" />

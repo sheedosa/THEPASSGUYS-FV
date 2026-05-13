@@ -23,7 +23,7 @@ export default function ServiceDetailPage() {
         image={service.heroImage}
       />
       {/* Hero Section */}
-      <section className="py-20 bg-white relative overflow-hidden">
+      <section className="py-20 bg-bg-page relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-8 md:p-16 items-center">
             <motion.div
@@ -52,9 +52,13 @@ export default function ServiceDetailPage() {
               animate={{ opacity: 1, scale: 1 }}
               className="relative aspect-video rounded-[32px] overflow-hidden shadow-2xl border-4 border-secondary"
             >
-              <img 
-                src={service.heroImage} 
-                alt={service.title} 
+              <img
+                src={service.heroImage}
+                alt={service.title}
+                width="1280"
+                height="720"
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -128,7 +132,7 @@ export default function ServiceDetailPage() {
       </section>
 
       {/* Pricing Hint Section */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-bg-page">
           <div className="container mx-auto px-4 md:px-6 text-center max-w-4xl">
             <h2 className="text-4xl md:text-6xl font-black text-secondary uppercase tracking-tighter mb-8 italic">Pricing Overview</h2>
             <div className="vibrant-card !p-12 bg-bg-page border-dashed">
