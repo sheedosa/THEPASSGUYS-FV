@@ -27,32 +27,30 @@ export default function ServiceDetailPage() {
       />
 
       {/* ── Hero ────────────────────────────────────────────────────────── */}
-      <section className="pt-28 sm:pt-32 md:pt-36 pb-16 md:pb-24 px-6">
-        <div className="container mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          {/* Left — copy */}
+      <section className="pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-24 px-6">
+        <div className="container mx-auto max-w-5xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0, ease: EASE }}
-            className="lg:col-span-7 text-center lg:text-left"
           >
-            <div className="flex items-center gap-4 justify-center lg:justify-start mb-8 text-secondary/55">
-              <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
-              <span className="text-[11px] font-semibold uppercase tracking-[0.32em]">
+            <div className="hero-fade hero-fade-delay-1 flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 justify-center text-secondary/55">
+              <span className="inline-block w-8 sm:w-10 h-px bg-secondary/30" aria-hidden="true" />
+              <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.32em]">
                 Specialist tuition
               </span>
-              <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
+              <span className="inline-block w-8 sm:w-10 h-px bg-secondary/30" aria-hidden="true" />
             </div>
 
             <h1 className="leading-[0.85] mb-6 sm:mb-8 md:mb-10">
               <span className="block overflow-hidden pb-[0.1em]">
-                <span className="block font-display text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-light text-secondary/40">
+                <span className="hero-line hero-line-1 block font-display text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-light text-secondary/40">
                   {service.title}
                 </span>
               </span>
               <span className="block overflow-hidden pb-[0.1em]">
                 <span
-                  className="block font-display text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-bold text-primary"
+                  className="hero-line hero-line-2 block font-display text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-bold text-primary"
                   style={{ letterSpacing: '-0.02em' }}
                 >
                   {service.subtitle}
@@ -60,14 +58,14 @@ export default function ServiceDetailPage() {
               </span>
             </h1>
 
-            <p className="text-base md:text-lg text-secondary/65 leading-relaxed max-w-xl mb-8 mx-auto lg:mx-0">
+            <p className="hero-fade hero-fade-delay-2 text-base md:text-lg text-secondary/65 leading-relaxed max-w-xl mb-8 mx-auto">
               {service.description}
             </p>
 
-            <div className="flex items-center gap-3 justify-center lg:justify-start flex-wrap">
+            <div className="hero-fade hero-fade-delay-3 flex items-center gap-3 justify-center flex-wrap">
               <Link
                 to="/get-matched"
-                className="group inline-flex items-center gap-2 px-7 py-3 rounded-full bg-primary text-secondary text-sm font-semibold tracking-wide hover:brightness-105 hover:scale-[1.02] transition-all duration-300 shadow-sm"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-secondary text-sm font-semibold tracking-wide hover:brightness-105 hover:scale-[1.02] transition-all duration-300 shadow-sm"
               >
                 Find My Instructor
                 <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -75,27 +73,6 @@ export default function ServiceDetailPage() {
               <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.32em] px-4 py-2 rounded-full border border-secondary/15 text-secondary/70">
                 {service.pricingHint}
               </span>
-            </div>
-          </motion.div>
-
-          {/* Right — hero image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.0, delay: 0.1, ease: EASE }}
-            className="lg:col-span-5 mt-4 lg:mt-0"
-          >
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-secondary/10">
-              <img
-                src={service.heroImage}
-                alt={service.title}
-                width="1280"
-                height="720"
-                loading="eager"
-                decoding="async"
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
             </div>
           </motion.div>
         </div>
