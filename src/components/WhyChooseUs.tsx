@@ -11,7 +11,7 @@ const POINTS = [
   {
     icon: <Car className="w-8 h-8" />,
     title: 'Manual & auto',
-    description: 'Stick or shift, your choice. Same price either way, and a modern dual-control car.',
+    description: 'Manual or automatic, your call. Same price either way, in a modern dual-control car.',
   },
   {
     icon: <Timer className="w-8 h-8" />,
@@ -21,7 +21,7 @@ const POINTS = [
   {
     icon: <Calendar className="w-8 h-8" />,
     title: 'Flexible slots',
-    description: 'Early mornings, weekday evenings, full weekend blocks — we fit around your life.',
+    description: 'Early mornings, weekday evenings or full weekend blocks. We fit around your life.',
   },
 ];
 

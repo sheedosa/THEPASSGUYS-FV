@@ -79,8 +79,8 @@ export default function AboutPage() {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-secondary tracking-tighter leading-[1.05]"
             >
               Make learning to drive{' '}
-              <span className="text-primary">straightforward.</span>{' '}
-              <span className="text-secondary/40">Affordable. And actually enjoyable.</span>
+              <span className="text-primary">straightforward,</span>{' '}
+              <span className="text-secondary/40">affordable, and something you actually look forward to.</span>
             </motion.h2>
           </div>
         </div>

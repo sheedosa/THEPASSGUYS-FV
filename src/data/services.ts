@@ -25,12 +25,12 @@ export const services: Record<string, ServiceDetail> = {
   'manual-lessons': {
     slug: 'manual-lessons',
     title: 'Manual Driving Lessons',
-    subtitle: 'Master the Art of the Gearbox',
-    description: 'Manual lessons give you full control over your vehicle. Our expert instructors specialise in teaching smooth gear changes and clutch control, preparing you for a lifetime of versatile driving.',
+    subtitle: 'Gears, clutch, confidence.',
+    description: 'Manual lessons give you full control over your car. Our instructors focus on smooth gear changes and clutch control so it becomes second nature before test day.',
     whoItIsFor: [
-      "Beginners wanting full vehicle control",
-      "Those looking for the most affordable car options",
-      "Drivers planning to drive a wide range of vehicles globally"
+      "Beginners who want full control of their car",
+      "Those looking for more affordable insurance and running costs",
+      "Anyone planning to drive abroad or rent different types of car"
     ],
     benefits: [
       { 
@@ -54,26 +54,26 @@ export const services: Record<string, ServiceDetail> = {
   'automatic-lessons': {
     slug: 'automatic-lessons',
     title: 'Automatic Driving Lessons',
-    subtitle: 'The Smoother Way to Drive',
-    description: 'Automatic cars are becoming the industry standard. Focus more on the road and less on the gears with our modern automatic fleet, perfect for busy Manchester traffic.',
+    subtitle: 'Less to think about.',
+    description: 'No gears, no clutch. Automatic lets you focus on the road rather than the mechanics, which means faster progress through Manchester traffic.',
     whoItIsFor: [
-      "Those who find clutch control stressful",
-      "Students looking for a faster route to their license",
-      "People planning to own modern electric or hybrid vehicles"
+      "Anyone who finds clutch control stressful",
+      "Learners who want a quicker route to their licence",
+      "People buying a modern electric or hybrid car"
     ],
     benefits: [
-      { 
-        title: "Faster Learning", 
-        desc: "Spend less time on technicalities and more on road safety.", 
-        icon: Zap 
+      {
+        title: "Faster progress",
+        desc: "Spend less time on technicalities and more on reading the road.",
+        icon: Zap
       },
-      { 
-        title: "Stress-Free", 
-        desc: "No more stalling at busy junctions or roundabouts.", 
-        icon: ShieldCheck 
+      {
+        title: "No more stalling",
+        desc: "Busy junctions and roundabouts become much less daunting.",
+        icon: ShieldCheck
       }
     ],
-    pricingHint: "Starting from £38/hr. Optimised for fast results.",
+    pricingHint: "Starting from £38/hr. Faster to test.",
     heroImage: "https://picsum.photos/seed/auto/1200/800",
     faqs: [
       { q: "Can I drive a manual with an automatic license?", a: "No, you would need to take another test to drive a manual car." },
@@ -83,12 +83,12 @@ export const services: Record<string, ServiceDetail> = {
   'intensive-fast-track': {
     slug: 'intensive-fast-track',
     title: 'Intensive Fast Track',
-    subtitle: 'Your License in Weeks, Not Months',
-    description: 'Our intensive courses are designed for students who want to focus purely on driving over a short period. We condense months of learning into focused daily blocks.',
+    subtitle: 'From zero to pass, fast.',
+    description: 'Daily lessons over one or two weeks. Intensive courses work because the skills stay fresh between sessions, so you build momentum rather than losing it.',
     whoItIsFor: [
-      "People with upcoming job requirements",
-      "Students on summer or winter breaks",
-      "Learners who have some experience but want to finish quickly"
+      "People with a job or trip that needs a licence soon",
+      "Students with a free week or two to commit fully",
+      "Learners who've had some lessons already and want to finish quickly"
     ],
     benefits: [
       { 
@@ -109,15 +109,15 @@ export const services: Record<string, ServiceDetail> = {
       { q: "What if I fail the test?", a: "We offer discounted 'fix-up' lessons to get you back to test standard quickly." }
     ]
   },
-  'refresher-lessons': {
-    slug: 'refresher-lessons',
-    title: 'Refresher Lessons',
-    subtitle: 'Regain Your Confidence',
-    description: 'Haven’t driven in a while? Our refresher courses are perfect for license holders who want to brush up on their skills, learn new road layouts, or overcome driving anxiety.',
+  ‘refresher-lessons’: {
+    slug: ‘refresher-lessons’,
+    title: ‘Refresher Lessons’,
+    subtitle: ‘Back behind the wheel.’,
+    description: ‘Already got your licence but lost the habit? Refresher lessons are tailored to what you actually struggle with, whether that is junctions, parking, or just general nerves.’,
     whoItIsFor: [
-      "Drivers who haven't been behind the wheel for years",
-      "People move to Manchester and need to learn UK roads",
-      "Those wanting to improve parking or motorway skills"
+      "Drivers who have not been on the road for a few years",
+      "People who have moved to Manchester and want to get used to local roads",
+      "Anyone who wants to work on specific skills like parking or motorways"
     ],
     benefits: [
       { 
@@ -141,8 +141,8 @@ export const services: Record<string, ServiceDetail> = {
   'motorway-lessons': {
     slug: 'motorway-lessons',
     title: 'Motorway Lessons',
-    subtitle: 'High Speed, High Confidence',
-    description: 'Motorways can be intimidating. We teach you the specific skills needed for high-speed driving, including merging, safe following distances, and advanced observation.',
+    subtitle: 'Motorways without the nerves.',
+    description: 'Motorways are a different beast. We cover merging, lane discipline, safe following distances, and high-speed hazard perception so you feel comfortable rather than tense.',
     whoItIsFor: [
       "Newly qualified drivers",
       "Nervous motorway users",
@@ -170,8 +170,8 @@ export const services: Record<string, ServiceDetail> = {
   'pass-plus': {
     slug: 'pass-plus',
     title: 'Pass Plus Scheme',
-    subtitle: 'Become a Professional-Grade Driver',
-    description: 'Pass Plus is a government-backed training scheme that helps newly qualified drivers improve their skills and safety. It covers driving in conditions not usually covered in regular lessons.',
+    subtitle: 'Beyond the standard test.',
+    description: 'Pass Plus is a government-backed 6-module scheme for newly qualified drivers. It covers everything the standard test leaves out: night driving, rural roads, motorways, and all-weather conditions.',
     whoItIsFor: [
       "Newly qualified drivers (within 1 year of passing)",
       "Anyone wanting to reduce their insurance premiums",
@@ -199,8 +199,8 @@ export const services: Record<string, ServiceDetail> = {
   'mock-tests': {
     slug: 'mock-tests',
     title: 'Mock Driving Tests',
-    subtitle: 'Beat the Nerves, Pass First Time',
-    description: 'Experience exactly what happens on test day. Our mock tests are conducted by senior instructors following official DVSA marking criteria, giving you realistic feedback.',
+    subtitle: 'Practise the real thing.',
+    description: 'Know what to expect before test day. Our mock tests follow official DVSA marking criteria and finish with honest, detailed feedback from a senior instructor.',
     whoItIsFor: [
       "Students nearing their practical test date",
       "Nervous learners who want to de-mystify the process",

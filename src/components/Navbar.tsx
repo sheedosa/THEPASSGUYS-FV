@@ -59,7 +59,7 @@ export default function Navbar() {
             onMouseEnter={() => setActiveDropdown('lessons')}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <button className="flex items-center space-x-1 text-sm font-bold text-secondary/70 hover:text-secondary transition-colors uppercase tracking-widest">
+            <button className="flex items-center space-x-1 text-sm font-medium text-secondary/70 hover:text-secondary transition-colors">
               <span>Driving Lessons</span>
               <ChevronDown
                 className={cn(
@@ -76,13 +76,13 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden py-3"
+                  className="absolute top-full left-0 mt-2 w-72 bg-bg-page rounded-2xl shadow-2xl border border-secondary/10 overflow-hidden py-3"
                 >
                   {LESSON_LINKS.map((link) => (
                     <Link
                       key={link.name}
                       to={link.href}
-                      className="block px-4 md:px-6 py-3 text-sm font-bold text-secondary/70 hover:text-primary hover:bg-slate-50 transition-all"
+                      className="block px-4 md:px-6 py-3 text-sm font-medium text-secondary/70 hover:text-primary hover:bg-secondary/5 transition-all"
                     >
                       {link.name}
                     </Link>
@@ -96,7 +96,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               to={link.href}
-              className="text-sm font-bold text-secondary/70 hover:text-secondary transition-colors uppercase tracking-widest"
+              className="text-sm font-medium text-secondary/70 hover:text-secondary transition-colors"
             >
               {link.name}
             </Link>
@@ -105,9 +105,9 @@ export default function Navbar() {
           <MagneticButton>
             <Link
               to="/get-matched"
-              className="px-8 py-3 bg-secondary text-white font-bold rounded-full text-xs uppercase tracking-widest shadow-lg hover:bg-secondary/90 transition-all flex items-center gap-2"
+              className="px-7 py-2.5 bg-primary text-secondary font-semibold rounded-full text-sm shadow-sm hover:brightness-105 hover:scale-[1.02] transition-all duration-300 flex items-center gap-2"
             >
-              Book a Lesson <span className="text-lg">→</span>
+              Find My Instructor
             </Link>
           </MagneticButton>
         </div>
@@ -129,7 +129,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden bg-white overflow-hidden border-t border-slate-100 mt-4 px-4 md:px-6 rounded-b-2xl shadow-2xl"
+            className="lg:hidden bg-bg-page overflow-hidden border-t border-secondary/10 mt-4 px-4 md:px-6 rounded-b-2xl shadow-2xl"
           >
             <div className="flex flex-col space-y-4 py-8">
               <div>
@@ -137,7 +137,7 @@ export default function Navbar() {
                   onClick={() =>
                     setActiveDropdown(activeDropdown === 'lessons' ? null : 'lessons')
                   }
-                  className="w-full flex items-center justify-between text-xl font-bold text-secondary py-2"
+                  className="w-full flex items-center justify-between text-xl font-medium text-secondary py-2"
                 >
                   <span>Driving Lessons</span>
                   <ChevronDown
@@ -153,13 +153,13 @@ export default function Navbar() {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="overflow-hidden bg-slate-50 rounded-xl mt-2"
+                      className="overflow-hidden bg-secondary/5 rounded-xl mt-2"
                     >
                       {LESSON_LINKS.map((link) => (
                         <Link
                           key={link.name}
                           to={link.href}
-                          className="block px-4 py-3 text-lg font-bold text-secondary/60 hover:text-primary transition-colors"
+                          className="block px-4 py-3 text-lg font-medium text-secondary/70 hover:text-primary transition-colors"
                         >
                           {link.name}
                         </Link>
@@ -173,7 +173,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="text-xl font-bold text-secondary py-2 border-b border-slate-50 last:border-0"
+                  className="text-xl font-medium text-secondary py-2 border-b border-secondary/8 last:border-0"
                 >
                   {link.name}
                 </Link>
@@ -181,9 +181,9 @@ export default function Navbar() {
 
               <Link
                 to="/get-matched"
-                className="w-full py-4 bg-secondary text-white font-bold rounded-xl text-lg text-center"
+                className="w-full py-4 bg-primary text-secondary font-semibold rounded-xl text-lg text-center"
               >
-                Book a Lesson
+                Find My Instructor
               </Link>
             </div>
           </motion.div>

@@ -21,7 +21,7 @@ const steps = [
   {
     n: '03',
     title: 'Start driving',
-    desc: 'Confirm your match, jump in the car, and focus on what matters — passing.',
+    desc: 'Confirm your match, jump in the car, and focus on passing.',
   },
 ];
 
@@ -54,7 +54,7 @@ export default function HowItWorksPage() {
         eyebrow="Process"
         title="How it"
         accent="works."
-        description="Three short steps. No phone tag, no waiting lists. Just the right instructor, matched to you — free."
+        description="Three short steps. No phone tag, no waiting lists. Just the right instructor, matched to you. Free."
         primaryCta={{ label: 'Find My Instructor', href: '/get-matched' }}
         secondaryCta={{ label: 'See FAQs', href: '#faqs' }}
         meta={['Matched in 7 days', 'No long contracts', 'Free matching']}

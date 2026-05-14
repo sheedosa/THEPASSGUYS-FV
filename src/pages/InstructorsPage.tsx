@@ -67,10 +67,10 @@ export default function InstructorsPage() {
                 <span className="text-primary">built for instructors.</span>
               </motion.h2>
               <p className="mt-6 text-secondary/65 text-base md:text-lg leading-relaxed">
-                The Pass Guys isn't another franchise. We're a technology-first platform that puts instructors in the driver's seat of their own careers.
+                The Pass Guys is not a traditional franchise. You keep your own pricing, your own diary, and your own car. We just make sure your diary stays full.
               </p>
               <p className="mt-4 text-secondary/65 text-base md:text-lg leading-relaxed">
-                We handle the marketing, student screening, and automated bookings — so you can focus on delivery and student success.
+                We handle the marketing, student screening, and bookings so you can focus on what you are good at: teaching people to drive.
               </p>
             </div>
 
@@ -187,7 +187,7 @@ export default function InstructorsPage() {
               </p>
               <ul className="mt-8 space-y-3">
                 {[
-                  'M1 – M99 postcode exposure',
+                  'All Greater Manchester postcodes covered',
                   'Steady lead flow week to week',
                   'Your own success manager',
                 ].map((item) => (

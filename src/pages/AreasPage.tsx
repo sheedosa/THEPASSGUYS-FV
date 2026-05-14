@@ -18,7 +18,7 @@ const regions = [
   },
   {
     name: 'Stockport',
-    desc: 'Comprehensive coverage across the town centre, Bramhall, Hazel Grove, and Edgeley.',
+    desc: 'Stockport town centre, Bramhall, Hazel Grove, and Edgeley, all covered.',
   },
   {
     name: 'Bolton',
@@ -26,7 +26,7 @@ const regions = [
   },
   {
     name: 'Oldham & Rochdale',
-    desc: 'Extensive network serving Oldham, Chadderton, Royton, and Rochdale town centre.',
+    desc: 'Instructors across Oldham, Chadderton, Royton, and Rochdale town centre.',
   },
   {
     name: 'Trafford',

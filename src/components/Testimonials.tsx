@@ -142,8 +142,7 @@ export default function Testimonials({ id }: { id?: string }) {
             </p>
             <p className="text-white/55 max-w-lg mx-auto mb-10 leading-relaxed">
               Pass with us in the coming months and your story takes this spot.
-              No catch, no padded reviews, no recycled quotes — just real
-              learners, when we have them.
+              No catch, no padded reviews, no recycled quotes. Just real learners, when we have them.
             </p>
             <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-white/45">
               <span className="inline-block w-8 h-px bg-white/20" />

@@ -113,8 +113,8 @@ export default function ContactPage() {
                   <div className="grid md:grid-cols-2 gap-5">
                     <Field label="Phone" type="tel" placeholder="07123 456789" required={false} />
                     <SelectField
-                      label="Inquiry type"
-                      options={['General inquiry', 'Booking question', 'Intensive courses', 'Instructor partnership']}
+                      label="Enquiry type"
+                      options={['General enquiry', 'Booking question', 'Intensive courses', 'Instructor partnership']}
                     />
                   </div>
                   <TextareaField label="Message" placeholder="Hey guys, I want to pass fast…" />
