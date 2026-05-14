@@ -1,50 +1,46 @@
 import { motion } from 'motion/react';
 import SEO from '../components/SEO';
-import { MapPin, Navigation, Car, Heart } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import FinalCTA from '../components/FinalCTA';
 import PageHero from '../components/PageHero';
+import SectionLabel from '../components/ui/SectionLabel';
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const regions = [
+  {
+    name: 'Manchester',
+    desc: 'City centre and surrounding boroughs including Cheetham Hill, Didsbury, and Chorlton.',
+  },
+  {
+    name: 'Salford',
+    desc: 'Covering MediaCityUK, Eccles, Worsley, and Swinton with vetted local instructors.',
+  },
+  {
+    name: 'Stockport',
+    desc: 'Comprehensive coverage across the town centre, Bramhall, Hazel Grove, and Edgeley.',
+  },
+  {
+    name: 'Bolton',
+    desc: 'Local tuition in Farnworth, Horwich, Westhoughton, and Little Lever.',
+  },
+  {
+    name: 'Oldham & Rochdale',
+    desc: 'Extensive network serving Oldham, Chadderton, Royton, and Rochdale town centre.',
+  },
+  {
+    name: 'Trafford',
+    desc: 'Altrincham, Sale, Stretford, and Urmston covered by our patient instructor team.',
+  },
+];
+
+const boroughList = [
+  'Manchester City Centre', 'Salford', 'Stockport', 'Bolton',
+  'Oldham', 'Rochdale', 'Trafford', 'Bury', 'Wigan', 'Tameside',
+  'Glossop', 'Altrincham', 'Sale', 'Wilmslow', 'Cheadle',
+];
 
 export default function AreasPage() {
-  const regions = [
-    {
-      name: "Manchester",
-      desc: "City centre and surrounding boroughs including Cheetham Hill, Didsbury, and Chorlton.",
-      icon: <MapPin className="w-8 h-8" />
-    },
-    {
-      name: "Salford",
-      desc: "Covering MediaCityUK, Eccles, Worsley, and Swinton with expert local instructors.",
-      icon: <Navigation className="w-8 h-8" />
-    },
-    {
-      name: "Stockport",
-      desc: "Comprehensive coverage across the town centre, Bramhall, Hazel Grove, and Edgeley.",
-      icon: <Car className="w-8 h-8" />
-    },
-    {
-      name: "Bolton",
-      desc: "Local tuition in Farnworth, Horwich, Westhoughton, and Little Lever.",
-      icon: <Heart className="w-8 h-8" />
-    },
-    {
-      name: "Oldham",
-      nameFull: "Oldham & Rochdale",
-      desc: "Extensive network serving Oldham, Chadderton, Royton, and Rochdale town centre.",
-      icon: <MapPin className="w-8 h-8" />
-    },
-    {
-      name: "Trafford",
-      desc: "Altrincham, Sale, Stretford, and Urmston covered by our patient instructor team.",
-      icon: <Navigation className="w-8 h-8" />
-    }
-  ];
-
-  const boroughList = [
-    "Manchester City Centre", "Salford", "Stockport", "Bolton", 
-    "Oldham", "Rochdale", "Trafford", "Bury", "Wigan", "Tameside",
-    "Glossop", "Altrincham", "Sale", "Wilmslow", "Cheadle"
-  ];
-
   return (
     <div className="min-h-screen bg-bg-page">
       <SEO
@@ -53,82 +49,109 @@ export default function AreasPage() {
         canonical="https://thepassguys.co.uk/areas"
       />
       <PageHero
-        eyebrow="Coverage · Greater Manchester"
-        title="We cover every"
-        accent="M-postcode."
-        description="City centre to the suburbs, north to south. Our 150 instructors live and teach across all 10 boroughs."
-        primaryCta={{ label: 'Get matched', href: '/get-matched' }}
+        eyebrow="Coverage"
+        title="Local instructors."
+        accent="Near you."
+        description="City centre to the suburbs, north to south. Our 150 instructors live and teach across every borough of Greater Manchester."
+        primaryCta={{ label: 'Find My Instructor', href: '/get-matched' }}
         secondaryCta={{ label: 'See boroughs', href: '#regions' }}
-        meta={['150+ instructors', '12 boroughs', '60+ test routes']}
+        meta={['150+ instructors', '10 boroughs', '60+ test routes']}
       />
 
-      {/* Featured Regions */}
-      <section className="py-16 md:py-24 relative z-10 bg-bg-page/50">
+      {/* ── Featured Regions ────────────────────────────────────────────── */}
+      <section id="regions" className="py-20 md:py-32 bg-bg-page">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 md:gap-6 md:p-10">
-            {regions.map((region, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="vibrant-card !bg-white !rounded-2xl md:!rounded-[40px] !shadow-none md:!shadow-[10px_10px_0_var(--color-primary)] group relative pt-10 sm:pt-14 md:pt-16 pb-6 sm:pb-10 md:pb-12 px-5 sm:px-8 md:px-10"
-              >
-                <div className="absolute -top-4 sm:-top-5 md:-top-6 left-4 sm:left-7 md:left-10 w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 bg-secondary text-primary rounded-xl md:rounded-3xl flex items-center justify-center shadow-2xl group-hover:rotate-6 transition-transform z-20 [&_svg]:w-4 [&_svg]:h-4 sm:[&_svg]:w-6 sm:[&_svg]:h-6 md:[&_svg]:w-8 md:[&_svg]:h-8">
-                  {region.icon}
-                </div>
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <SectionLabel number="01" label="Regions" />
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.2, ease: EASE }}
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+            >
+              Six big regions. <br />
+              <span className="text-primary">All covered.</span>
+            </motion.h2>
+          </div>
 
-                <div className="relative">
-                  <h3 className="text-lg sm:text-xl md:text-3xl font-black text-secondary uppercase tracking-tighter mb-2 md:mb-4 leading-none">
-                    {region.nameFull || region.name}
-                  </h3>
-                  <div className="h-0.5 w-8 md:h-1 md:w-12 bg-primary mb-3 md:mb-6 rounded-full" />
-                  <p className="text-slate-600 font-medium leading-relaxed text-xs sm:text-sm md:text-base">
-                    {region.desc}
-                  </p>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
+            {regions.map((region, i) => (
+              <motion.div
+                key={region.name}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1.0, delay: i * 0.06, ease: EASE }}
+                className="bg-bg-page p-8 md:p-10 group hover:bg-white/40 transition-colors duration-500"
+              >
+                <div className="flex items-center gap-2 text-primary text-[10px] font-semibold uppercase tracking-[0.32em] mb-4">
+                  <MapPin className="w-3 h-3" />
+                  0{i + 1}
                 </div>
+                <h3 className="text-2xl md:text-3xl font-normal text-secondary tracking-tighter leading-tight mb-3">
+                  {region.name}
+                </h3>
+                <p className="text-secondary/65 leading-relaxed text-sm md:text-base">
+                  {region.desc}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Full List */}
-      <section className="py-16 md:py-24 bg-secondary text-white overflow-hidden relative">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none overflow-hidden">
-             <div className="text-[30vw] font-black text-outline -rotate-12 translate-y-1/2">AREAS</div>
-        </div>
-        
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-8 md:mb-16">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6">
-              Complete <span className="text-primary">Postcode</span> Coverage
-            </h2>
-            <p className="text-white/60 font-medium text-lg">
-              We have local instructors living and working in every borough of Greater Manchester, ensuring you get familiar with the test routes in your specific area.
-            </p>
+      {/* ── Full Borough List ───────────────────────────────────────────── */}
+      <section className="py-20 md:py-32 bg-bg-page">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <SectionLabel number="02" label="Every postcode" />
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.2, ease: EASE }}
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+            >
+              Complete <br />
+              <span className="text-primary">postcode coverage.</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.0, delay: 0.15, ease: EASE }}
+              className="mt-6 text-secondary/65 text-base md:text-lg leading-relaxed max-w-xl mx-auto"
+            >
+              Local instructors live and teach in every borough — so you learn the routes you'll actually drive on.
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {boroughList.map((borough, index) => (
-               <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.03 }}
-                className="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
-               >
-                 <div className="w-3 h-3 bg-primary rounded-full shrink-0" />
-                 <span className="text-xl font-bold uppercase tracking-tight">{borough}</span>
-               </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1.0, ease: EASE }}
+            className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
+          >
+            {boroughList.map((borough, i) => (
+              <span key={borough} className="inline-flex items-center gap-3 text-secondary/80 text-xs sm:text-sm font-medium uppercase tracking-[0.18em]">
+                <span className="inline-flex items-center gap-1.5">
+                  <MapPin className="w-3 h-3 text-primary" /> {borough}
+                </span>
+                {i < boroughList.length - 1 && (
+                  <span className="w-1 h-1 rounded-full bg-primary/60" aria-hidden="true" />
+                )}
+              </span>
             ))}
+          </motion.div>
+
+          <div className="mt-10 text-center text-secondary/45 text-[11px] uppercase tracking-[0.32em]">
+            15 areas · Matched to your postcode
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
       <FinalCTA />
     </div>
   );

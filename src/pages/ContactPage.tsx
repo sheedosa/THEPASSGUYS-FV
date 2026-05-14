@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import SEO from '../components/SEO';
 import { Phone, Mail, MapPin, Send, MessageSquare } from 'lucide-react';
-import AreasCovered from '../components/AreasCovered';
 import FinalCTA from '../components/FinalCTA';
 import PageHero from '../components/PageHero';
+import SectionLabel from '../components/ui/SectionLabel';
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const contactInfo = [
+  { icon: Phone, label: 'Call', value: '0161 123 4567', sub: 'Mon to Fri · 8am – 8pm', href: 'tel:01611234567' },
+  { icon: Mail, label: 'Email', value: 'hello@thepassguys.co.uk', sub: 'Replies within 2 hours', href: 'mailto:hello@thepassguys.co.uk' },
+  { icon: MessageSquare, label: 'Live chat', value: 'Start a chat', sub: 'Available on our portal', href: '#chat' },
+];
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -14,27 +22,6 @@ export default function ContactPage() {
     setSubmitted(true);
   };
 
-  const contactInfo = [
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: "Call Us",
-      value: "0161 123 4567",
-      desc: "Mon to Fri, 8am till 8pm"
-    },
-    {
-      icon: <Mail className="w-6 h-6" />,
-      title: "Email Us",
-      value: "hello@thepassguys.co.uk",
-      desc: "We reply within 2 hours"
-    },
-    {
-      icon: <MessageSquare className="w-6 h-6" />,
-      title: "Live Chat",
-      value: "Start a Chat",
-      desc: "Available on our portal"
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-bg-page">
       <SEO
@@ -43,130 +30,197 @@ export default function ContactPage() {
         canonical="https://thepassguys.co.uk/contact"
       />
       <PageHero
-        eyebrow="Contact · Manchester support"
+        eyebrow="Contact"
         title="Talk to"
         accent="the guys."
         description="Phone, email, or pop a question through the form below. Mon to Fri, 8am till 8pm. We reply within a working day."
-        primaryCta={{ label: 'Get matched', href: '/get-matched' }}
-        secondaryCta={{ label: 'Call us', href: 'tel:01234567890' }}
+        primaryCta={{ label: 'Find My Instructor', href: '/get-matched' }}
+        secondaryCta={{ label: 'Call us', href: 'tel:01611234567' }}
       />
 
-      {/* Main Contact Section */}
-      <section className="py-16 md:py-24">
+      {/* ── Contact methods ─────────────────────────────────────────────── */}
+      <section className="py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid lg:grid-cols-3 gap-8 md:gap-12 lg:gap-8 md:p-16">
-            
-            {/* Contact Details */}
-            <div className="lg:col-span-1 space-y-6 md:space-y-8">
-              {contactInfo.map((info, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="vibrant-card !p-6 sm:!p-8 bg-white"
-                >
-                  <div className="flex items-start space-x-4 sm:space-x-6">
-                    <div className="w-12 h-12 bg-primary text-secondary rounded-xl flex items-center justify-center shrink-0 shadow-lg border-2 border-secondary">
-                      {info.icon}
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{info.title}</p>
-                      <p className="text-lg sm:text-xl font-black text-secondary uppercase tracking-tight">{info.value}</p>
-                      <p className="text-xs sm:text-sm font-bold text-slate-500 mt-1">{info.desc}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <SectionLabel number="01" label="Reach us" />
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.2, ease: EASE }}
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+            >
+              Three ways <br />
+              <span className="text-primary">to say hi.</span>
+            </motion.h2>
+          </div>
 
-              <div className="vibrant-card !p-6 sm:!p-8 bg-secondary text-white">
-                <div className="flex items-start space-x-4 sm:space-x-6">
-                  <div className="w-12 h-12 bg-white text-secondary rounded-xl flex items-center justify-center shrink-0 shadow-lg">
-                    <MapPin className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-1">Our Base</p>
-                    <p className="text-lg sm:text-xl font-black text-white uppercase tracking-tight">Manchester Central</p>
-                    <p className="text-xs sm:text-sm font-bold text-white/60 mt-1">Covering Greater Manchester</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <div className="lg:col-span-2">
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden mb-16 md:mb-24">
+            {contactInfo.map((info, i) => (
+              <motion.a
+                key={info.label}
+                href={info.href}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="vibrant-card !p-6 sm:!p-12 bg-white h-full"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1.0, delay: i * 0.08, ease: EASE }}
+                className="bg-bg-page p-8 md:p-10 hover:bg-white/40 transition-colors duration-500 group"
               >
-                {!submitted ? (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label className="text-xs font-black text-secondary uppercase tracking-widest px-2">Your Name</label>
-                        <input required type="text" className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-4 md:px-6 py-4 font-bold text-secondary outline-none transition-all" placeholder="John Doe" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-xs font-black text-secondary uppercase tracking-widest px-2">Email Address</label>
-                        <input required type="email" className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-4 md:px-6 py-4 font-bold text-secondary outline-none transition-all" placeholder="john@example.com" />
-                      </div>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label className="text-xs font-black text-secondary uppercase tracking-widest px-2">Phone Number</label>
-                        <input type="tel" className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-4 md:px-6 py-4 font-bold text-secondary outline-none transition-all" placeholder="07123 456789" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-xs font-black text-secondary uppercase tracking-widest px-2">Inquiry Type</label>
-                        <select className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-2xl px-4 md:px-6 py-5 font-bold text-secondary outline-none transition-all appearance-none cursor-pointer">
-                          <option>General Inquiry</option>
-                          <option>Booking Question</option>
-                          <option>Intensive Courses</option>
-                          <option>Instructor Partnership</option>
-                        </select>
-                      </div>
-                    </div>
+                <div className="text-primary mb-5">
+                  <info.icon className="w-5 h-5" />
+                </div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-2">
+                  {info.label}
+                </div>
+                <div className="text-xl md:text-2xl font-normal text-secondary tracking-tight break-all group-hover:text-primary transition-colors">
+                  {info.value}
+                </div>
+                <div className="text-sm text-secondary/55 mt-2 leading-relaxed">
+                  {info.sub}
+                </div>
+              </motion.a>
+            ))}
+          </div>
 
-                    <div className="space-y-2">
-                      <label className="text-xs font-black text-secondary uppercase tracking-widest px-2">Your Message</label>
-                      <textarea required rows={4} className="w-full bg-slate-50 border-4 border-transparent focus:border-primary rounded-3xl px-4 md:px-6 py-4 font-bold text-secondary outline-none transition-all resize-none" placeholder="Hey guys, I want to pass fast..."></textarea>
-                    </div>
-
-                    <motion.button 
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      type="submit"
-                      className="w-full bg-secondary text-white py-6 rounded-2xl font-black uppercase tracking-widest text-lg flex items-center justify-center space-x-3 shadow-xl hover:bg-primary hover:text-secondary group transition-all"
-                    >
-                      <span>Send Message</span>
-                      <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </motion.button>
-                  </form>
-                ) : (
-                  <div className="h-full flex flex-col items-center justify-center text-center space-y-6 py-12">
-                    <div className="w-24 h-24 bg-primary text-secondary rounded-full flex items-center justify-center shadow-2xl border-4 border-secondary animate-bounce">
-                      <Send className="w-10 h-10" />
-                    </div>
-                    <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter">Message Sent!</h2>
-                    <p className="text-slate-500 font-bold max-w-sm">We've received your inquiry and one of the guys will get back to you within 2 hours.</p>
-                    <button onClick={() => setSubmitted(false)} className="text-secondary font-black uppercase tracking-widest text-xs border-b-2 border-primary pb-1">Send another message</button>
-                  </div>
-                )}
-              </motion.div>
+          {/* ── Form ────────────────────────────────────────────────────── */}
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10">
+              <SectionLabel number="02" label="Send a message" />
+              <motion.h2
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 1.2, ease: EASE }}
+                className="mt-6 text-3xl sm:text-4xl md:text-5xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              >
+                Pop us a <span className="text-primary">message.</span>
+              </motion.h2>
             </div>
 
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 1.2, delay: 0.15, ease: EASE }}
+              className="border border-secondary/10 rounded-2xl bg-bg-page p-6 md:p-10"
+            >
+              {!submitted ? (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid md:grid-cols-2 gap-5">
+                    <Field label="Your name" placeholder="John Doe" />
+                    <Field label="Email" type="email" placeholder="john@example.com" />
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-5">
+                    <Field label="Phone" type="tel" placeholder="07123 456789" required={false} />
+                    <SelectField
+                      label="Inquiry type"
+                      options={['General inquiry', 'Booking question', 'Intensive courses', 'Instructor partnership']}
+                    />
+                  </div>
+                  <TextareaField label="Message" placeholder="Hey guys, I want to pass fast…" />
+
+                  <button
+                    type="submit"
+                    className="group w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-primary text-secondary text-sm font-semibold tracking-wide hover:brightness-105 hover:scale-[1.01] transition-all duration-300 shadow-sm"
+                  >
+                    Send message
+                    <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" />
+                  </button>
+                </form>
+              ) : (
+                <div className="py-10 text-center space-y-5">
+                  <div className="inline-flex w-16 h-16 rounded-full bg-primary text-secondary items-center justify-center mx-auto">
+                    <Send className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-normal text-secondary tracking-tighter">
+                    Message sent.
+                  </h3>
+                  <p className="text-secondary/65 max-w-sm mx-auto leading-relaxed">
+                    We've received your inquiry and one of the guys will get back to you within 2 hours.
+                  </p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="text-sm font-medium text-secondary hover:text-primary transition-colors border-b border-secondary/20 hover:border-primary pb-0.5"
+                  >
+                    Send another message
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </div>
+
+          {/* Base / location card */}
+          <div className="max-w-3xl mx-auto mt-12 flex items-center justify-center gap-4 text-secondary/55">
+            <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.32em] flex items-center gap-2">
+              <MapPin className="w-3 h-3 text-primary" /> Manchester Central · Covering Greater Manchester
+            </span>
+            <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
           </div>
         </div>
       </section>
 
-      {/* Areas Served Section (Reusing existing component structure) */}
-      <AreasCovered id="areas" />
-
       <FinalCTA />
     </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Form primitives — minimal, hairline-bordered, primary green on focus
+ * ───────────────────────────────────────────────────────────────────────── */
+function Field({
+  label,
+  type = 'text',
+  placeholder,
+  required = true,
+}: {
+  label: string;
+  type?: string;
+  placeholder?: string;
+  required?: boolean;
+}) {
+  return (
+    <label className="block">
+      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-2">
+        {label}
+      </span>
+      <input
+        type={type}
+        required={required}
+        placeholder={placeholder}
+        className="w-full bg-white border border-secondary/15 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl px-4 py-3 text-secondary placeholder:text-secondary/30 outline-none transition-all"
+      />
+    </label>
+  );
+}
+
+function SelectField({ label, options }: { label: string; options: string[] }) {
+  return (
+    <label className="block">
+      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-2">
+        {label}
+      </span>
+      <select className="w-full bg-white border border-secondary/15 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl px-4 py-3 text-secondary outline-none transition-all cursor-pointer">
+        {options.map((o) => (
+          <option key={o}>{o}</option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+function TextareaField({ label, placeholder }: { label: string; placeholder?: string }) {
+  return (
+    <label className="block">
+      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-2">
+        {label}
+      </span>
+      <textarea
+        required
+        rows={4}
+        placeholder={placeholder}
+        className="w-full bg-white border border-secondary/15 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl px-4 py-3 text-secondary placeholder:text-secondary/30 outline-none transition-all resize-none"
+      />
+    </label>
   );
 }

@@ -1,26 +1,27 @@
 import { motion } from 'motion/react';
 import { Sliders, CheckCircle, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SectionLabel from './ui/SectionLabel';
 
 export default function HowItWorks({ id }: { id?: string }) {
   const steps = [
     {
       number: "01",
       icon: <Sliders className="w-8 h-8" />,
-      title: "Pick Your Lessons",
-      description: "Choose single lessons or block-book a course. Manual or automatic."
+      title: "Pick your lessons",
+      description: "Single lessons or a full block-booked course. Manual or automatic — your call."
     },
     {
       number: "02",
       icon: <Users className="w-8 h-8" />,
-      title: "Get Matched",
+      title: "Get matched",
       description: "We pair you with a local DVSA-approved instructor in days, not weeks."
     },
     {
       number: "03",
       icon: <CheckCircle className="w-8 h-8" />,
-      title: "Start Driving",
-      description: "Book your first lesson. Drive away with confidence."
+      title: "Start driving",
+      description: "Book your first lesson and get behind the wheel within the week."
     }
   ];
 
@@ -28,16 +29,17 @@ export default function HowItWorks({ id }: { id?: string }) {
     <section id={id} className="py-12 md:py-24 bg-bg-page overflow-hidden relative">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-20 px-4">
+          <SectionLabel number="02" label="Process" />
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl md:text-6xl font-black text-secondary tracking-tighter uppercase mb-6"
+            transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
+            className="text-4xl sm:text-5xl md:text-7xl font-medium text-secondary tracking-tighter mb-6 leading-[0.95]"
           >
-            How it <span className="text-primary italic">works.</span>
+            How it <span className="text-primary">works.</span>
           </motion.h2>
-          <p className="text-secondary/60 max-w-2xl mx-auto font-medium mb-8 md:mb-12">
+          <p className="text-secondary/60 max-w-2xl mx-auto mb-8 md:mb-12 text-base md:text-lg">
             Three steps. No queue, no faff, no awkward sales call.
           </p>
         </div>
@@ -57,23 +59,23 @@ export default function HowItWorks({ id }: { id?: string }) {
                 className="relative flex items-start gap-4 sm:gap-6 md:gap-10 group"
               >
                 {/* Timeline Node */}
-                <div className="relative z-10 shrink-0 w-16 h-16 md:w-24 md:h-24 bg-slate-50 border-4 md:border-8 border-white flex items-center justify-center rounded-[2rem] md:rounded-[3rem] shadow-lg group-hover:bg-primary group-hover:border-primary/20 transition-all duration-500 text-secondary">
+                <div className="relative z-10 shrink-0 w-16 h-16 md:w-24 md:h-24 bg-white border border-secondary/8 flex items-center justify-center rounded-[2rem] md:rounded-[3rem] shadow-ambient-sm group-hover:bg-primary group-hover:border-primary transition-all duration-700 text-secondary">
                   <div className="transform group-hover:scale-110 transition-transform duration-500">
                     <div className="scale-75 sm:scale-100">{step.icon}</div>
                   </div>
                 </div>
                 
                 {/* Step Content */}
-                <div className="flex-1 pt-1 pb-6 md:pt-4 md:pb-8 border-b-2 border-secondary/5 last:border-0">
+                <div className="flex-1 pt-1 pb-6 md:pt-4 md:pb-8 border-b border-secondary/10 last:border-0">
                   <div className="flex items-center mb-1 sm:mb-2">
-                    <span className="text-secondary/30 font-black text-3xl sm:text-4xl md:text-6xl tracking-tighter">
+                    <span className="text-secondary/30 font-normal text-3xl sm:text-4xl md:text-6xl tracking-tighter">
                        {step.number}
                     </span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl md:text-4xl font-black text-secondary tracking-tighter uppercase mb-2 sm:mb-3 leading-none group-hover:text-primary transition-colors">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal text-secondary tracking-tight mb-2 sm:mb-3 leading-tight group-hover:text-primary transition-colors">
                     {step.title}
                   </h3>
-                  <p className="text-secondary/70 text-sm sm:text-base font-medium md:text-lg leading-relaxed">
+                  <p className="text-secondary/70 text-sm sm:text-base md:text-lg leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -83,11 +85,11 @@ export default function HowItWorks({ id }: { id?: string }) {
         </div>
 
         <div className="text-center">
-          <Link 
+          <Link
             to="/how-it-works"
-            className="inline-flex items-center gap-3 text-secondary font-black uppercase tracking-[0.2em] text-sm hover:text-primary transition-colors py-4 px-8 border-2 border-secondary/10 rounded-full group"
+            className="inline-flex items-center gap-2 text-secondary font-medium text-sm hover:text-primary transition-colors py-3 px-7 border border-secondary/15 rounded-full group"
           >
-            See full process <span className="group-hover:translate-x-2 transition-transform">→</span>
+            See full process <span className="group-hover:translate-x-1 transition-transform">→</span>
           </Link>
         </div>
       </div>

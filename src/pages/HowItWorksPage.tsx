@@ -1,66 +1,143 @@
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
-import { Zap, Search, UserCheck, ShieldCheck, HelpCircle, ArrowRight, Target } from 'lucide-react';
-import { useState } from 'react';
+import { UserCheck, ShieldCheck, Zap, Target } from 'lucide-react';
 import PageHero from '../components/PageHero';
+import SectionLabel from '../components/ui/SectionLabel';
+import FAQ from '../components/FAQ';
+import FinalCTA from '../components/FinalCTA';
 
-const paths = [
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const steps = [
   {
-    title: "Book Direct",
-    description: "Ideal if you know what you need. Select your lesson, pick your package, and book immediately.",
-    steps: ["Browse our lessons", "Choose your package", "Book and pay", "Start driving"]
+    n: '01',
+    title: 'Tell us what you need',
+    desc: 'Postcode, manual or automatic, when you can drive, and how you like to learn.',
   },
   {
-    title: "Get Matched",
-    description: "Ideal if you aren't sure who to choose. Our team finds the best instructor for your specific requirements.",
-    steps: ["Fill in your details", "Our team reviews requirements", "We find your match", "You decide"]
-  }
+    n: '02',
+    title: 'We match you',
+    desc: 'Our team finds a vetted local instructor who fits your area, schedule, and style.',
+  },
+  {
+    n: '03',
+    title: 'Start driving',
+    desc: 'Confirm your match, jump in the car, and focus on what matters — passing.',
+  },
+];
+
+const firstLesson = [
+  { icon: UserCheck, title: 'Instructor intro', desc: 'Your instructor introduces themselves and gets a feel for where you are.' },
+  { icon: ShieldCheck, title: 'Zero judgment', desc: 'A supportive environment. Every ability is welcome — nervous or confident.' },
+  { icon: Zap, title: 'Safety first', desc: 'Modern, well-maintained, dual-control cars. Fully insured for learners.' },
+  { icon: Target, title: 'Set the goal', desc: 'Together you agree a lesson plan and clear milestones to track progress.' },
+];
+
+const compare = [
+  { left: 'Search endlessly', right: 'We match you' },
+  { left: 'Instructors don\'t reply', right: 'Fast response' },
+  { left: 'Guesswork', right: 'Smart matching' },
+  { left: 'Stressful', right: 'Easy' },
 ];
 
 const faqs = [
-  { q: "How quickly can I start lessons?", a: "Once booked, we generally match you and can start lessons within one week depending on availability." },
-  { q: "What if I'm not happy with my instructor?", a: "Your happiness is paramount. If you feel it's not the right fit, we will arrange a change immediately with zero fuss." },
-  { q: "Can I switch between manual and automatic?", a: "Yes, you can hold both lessons, but we recommend sticking to one until you pass your test to keep momentum high." },
-  { q: "What do I need to bring to my first lesson?", a: "Just your provisional license and comfortable footwear. We will handle the rest!" },
-  { q: "How do I pay?", a: "All payments are handled securely through our platform when you book your lessons or packages." }
+  { q: 'How quickly can I start lessons?', a: 'Once matched, you can usually start within a week depending on instructor availability in your area.' },
+  { q: "What if I'm not happy with my instructor?", a: "Just say the word and we'll arrange a swap — no fuss, no fees." },
+  { q: 'Can I switch between manual and automatic?', a: 'You can. We recommend sticking with one until test day to keep momentum.' },
+  { q: 'What do I need for the first lesson?', a: 'Just your provisional licence and comfortable shoes. We handle the rest.' },
+  { q: 'How do I pay?', a: 'Securely through our platform when you book lessons or packages. Matching itself is always free.' },
 ];
 
 export default function HowItWorksPage() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
   return (
     <div className="bg-bg-page">
       <PageHero
-        eyebrow="Process · How it works"
-        title="Two paths."
-        accent="Same result."
-        description="Know what you need? Book direct. Not sure? Get matched. Either way, you'll be on the road inside a week."
-        primaryCta={{ label: 'Book lessons', href: '/lessons' }}
-        secondaryCta={{ label: 'Get matched', href: '/get-matched' }}
-        meta={['Matched in 7 days', 'No long contracts', 'Cancel any time']}
+        eyebrow="Process"
+        title="How it"
+        accent="works."
+        description="Three short steps. No phone tag, no waiting lists. Just the right instructor, matched to you — free."
+        primaryCta={{ label: 'Find My Instructor', href: '/get-matched' }}
+        secondaryCta={{ label: 'See FAQs', href: '#faqs' }}
+        meta={['Matched in 7 days', 'No long contracts', 'Free matching']}
       />
 
-      {/* Two Paths */}
-      <section className="py-16 md:py-24">
+      {/* ── 3 Steps ─────────────────────────────────────────────────────── */}
+      <section className="py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-            {paths.map((path, i) => (
-              <motion.div 
-                key={i}
-                whileInView={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                viewport={{ once: true }}
-                className="bg-white p-6 md:p-10 rounded-[2.5rem] shadow-xl shadow-black/5 border border-slate-100 transform-gpu"
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <SectionLabel number="01" label="Steps" />
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.2, ease: EASE }}
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+            >
+              Three steps. <br />
+              <span className="text-primary">No fuss.</span>
+            </motion.h2>
+          </div>
+
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.n}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1.0, delay: i * 0.1, ease: EASE }}
+                className="bg-bg-page p-8 md:p-10"
               >
-                <h3 className="text-3xl font-black text-secondary uppercase tracking-tighter mb-4">{path.title}</h3>
-                <p className="text-secondary/60 mb-8 font-medium">{path.description}</p>
-                <div className="space-y-4">
-                  {path.steps.map((step, j) => (
-                    <div key={j} className="flex items-center gap-4 text-secondary font-bold">
-                        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-secondary text-xs">{j+1}</div>
-                        {step}
-                    </div>
-                  ))}
+                <div className="text-primary text-[10px] font-semibold uppercase tracking-[0.32em] mb-5">
+                  {step.n}
+                </div>
+                <h3 className="text-2xl md:text-3xl font-normal text-secondary tracking-tighter leading-tight mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-secondary/65 leading-relaxed text-sm md:text-base">
+                  {step.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why matching beats searching ────────────────────────────────── */}
+      <section className="py-20 md:py-32 bg-bg-page">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <SectionLabel number="02" label="Compare" />
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.2, ease: EASE }}
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+            >
+              Why matching <br />
+              <span className="text-primary">beats searching.</span>
+            </motion.h2>
+          </div>
+
+          <div className="max-w-3xl mx-auto border border-secondary/10 rounded-2xl overflow-hidden">
+            <div className="grid grid-cols-2 bg-secondary/5 text-[11px] font-semibold uppercase tracking-[0.32em] text-secondary/55">
+              <div className="p-5 md:p-6 border-r border-secondary/10">Old way</div>
+              <div className="p-5 md:p-6 text-primary">The Pass Guys</div>
+            </div>
+            {compare.map((row, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.9, delay: i * 0.06, ease: EASE }}
+                className="grid grid-cols-2 border-t border-secondary/10"
+              >
+                <div className="p-5 md:p-6 text-secondary/55 border-r border-secondary/10 line-through decoration-secondary/25">
+                  {row.left}
+                </div>
+                <div className="p-5 md:p-6 text-secondary font-medium">
+                  {row.right}
                 </div>
               </motion.div>
             ))}
@@ -68,86 +145,71 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      {/* First Lesson Expectation */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-            <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8 md:mb-12 text-center">What to Expect on Your First Lesson</h2>
-            <div className="grid sm:grid-cols-2 gap-8">
-                {[
-                    { icon: UserCheck, title: "Instructor Intro", desc: "Your instructor will introduce themselves and get to know your starting experience." },
-                    { icon: ShieldCheck, title: "No Judgment", desc: "We are all about a supportive environment where all abilities are truly welcome." },
-                    { icon: Zap, title: "Safety First", desc: "All our vehicles are modern, well-maintained, and fitted with dual-controls for your safety." },
-                    { icon: Target, title: "Setting Goals", desc: "Together, you will agree on a lesson plan and set clear goals to track your progress." }
-                ].map((item, i) => (
-                    <div key={i} className="flex gap-4 p-8 bg-white rounded-[2.5rem] border border-slate-100 shadow-xl shadow-black/5">
-                        <item.icon className="w-10 h-10 text-primary flex-shrink-0" />
-                        <div>
-                            <h4 className="font-black text-xl mb-2 text-secondary tracking-tight">{item.title}</h4>
-                            <p className="text-secondary/60 font-medium">{item.desc}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-      </section>
+      {/* ── First Lesson ────────────────────────────────────────────────── */}
+      <section className="py-20 md:py-32">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <SectionLabel number="03" label="First lesson" />
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.2, ease: EASE }}
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+            >
+              What to expect <br />
+              <span className="text-primary">first time out.</span>
+            </motion.h2>
+          </div>
 
-      {/* Matching Process */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-            <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8 md:mb-12 text-center">The Matching Process Explained</h2>
-            <div className="space-y-6">
-                {[
-                    "You fill in a short form with your requirements and preferences.",
-                    "Our team reviews your details and identifies the best instructor match for your area and level.",
-                    "We contact you within one week with your perfect match.",
-                    "You are not committed until you are happy with the proposal."
-                ].map((step, i) => (
-                    <div key={i} className="bg-white p-6 rounded-2xl border flex gap-6 items-center">
-                        <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-secondary font-black flex-shrink-0">{i+1}</div>
-                        <p className="text-secondary font-medium">{step}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4 md:px-6 max-w-3xl">
-          <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8 md:mb-12 text-center">Common Questions</h2>
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <div key={i} className="border-b border-slate-100">
-                <button 
-                  onClick={() => setActiveIndex(activeIndex === i ? null : i)}
-                  className="w-full p-6 flex items-center justify-between text-left font-bold text-secondary"
-                >
-                  {faq.q}
-                  <HelpCircle className={`w-5 h-5 transition-transform ${activeIndex === i ? 'rotate-180' : ''}`} />
-                </button>
-                {activeIndex === i && (
-                  <div className="p-6 pt-0 text-secondary/60 font-medium">{faq.a}</div>
-                )}
-              </div>
+          <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
+            {firstLesson.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1.0, delay: i * 0.08, ease: EASE }}
+                className="bg-bg-page p-7 md:p-10"
+              >
+                <div className="text-primary mb-4">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <h4 className="text-xl md:text-2xl font-normal text-secondary tracking-tight mb-2">
+                  {item.title}
+                </h4>
+                <p className="text-secondary/65 leading-relaxed text-sm md:text-base">
+                  {item.desc}
+                </p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 md:py-24 text-center">
+      {/* ── FAQ ─────────────────────────────────────────────────────────── */}
+      <section id="faqs" className="py-20 md:py-32 bg-bg-page">
         <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter mb-8 md:mb-12">Ready to get started?</h2>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Link to="/get-matched" className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-secondary font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-lg">
-                    Book a Lesson <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link to="/get-matched" className="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-lg">
-                    Get Matched <ArrowRight className="w-4 h-4" />
-                </Link>
-            </div>
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <SectionLabel number="04" label="Questions" />
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.2, ease: EASE }}
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+            >
+              Common <br />
+              <span className="text-primary">questions.</span>
+            </motion.h2>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <FAQ items={faqs} hideHeader />
+          </div>
         </div>
       </section>
+
+      <FinalCTA />
     </div>
   );
 }

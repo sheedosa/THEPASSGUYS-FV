@@ -1,5 +1,3 @@
-import React from 'react';
-import { motion } from 'motion/react';
 import SEO from '../components/SEO';
 import FAQ from '../components/FAQ';
 import FinalCTA from '../components/FinalCTA';
@@ -49,24 +47,28 @@ export default function FAQPage() {
         canonical="https://thepassguys.co.uk/faq"
       />
       <PageHero
-        eyebrow="Help · The basics"
+        eyebrow="Help"
         title="Got"
         accent="questions?"
         description="The things most learners ask before they book. If yours isn't here, drop us a line and we'll answer it directly."
-        primaryCta={{ label: 'Contact us', href: '/contact' }}
-        secondaryCta={{ label: 'Get matched', href: '/get-matched' }}
+        primaryCta={{ label: 'Find My Instructor', href: '/get-matched' }}
+        secondaryCta={{ label: 'Contact us', href: '/contact' }}
       />
 
-      {/* Categorized FAQs */}
-      <div className="py-16 md:py-24 space-y-12">
+      {/* Categorized FAQs — homepage style: hairline eyebrow + minimal section */}
+      <div className="pb-16 md:pb-24 space-y-20 md:space-y-28">
         {faqCategories.map((cat, idx) => (
           <div key={idx} className="container mx-auto px-4 md:px-6">
-            <div className="flex items-center space-x-4 mb-8">
-                <div className="h-1 flex-1 bg-slate-100" />
-                <h2 className="text-2xl font-black text-secondary uppercase tracking-widest">{cat.category}</h2>
-                <div className="h-1 flex-1 bg-slate-100" />
+            <div className="flex items-center justify-center gap-4 mb-2 text-secondary/55">
+              <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.32em]">
+                {String(idx + 1).padStart(2, '0')} <span className="mx-1.5 opacity-50">—</span> {cat.category}
+              </span>
+              <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
             </div>
-            <FAQ items={cat.items} />
+            <div className="max-w-4xl mx-auto mt-8">
+              <FAQ items={cat.items} hideHeader />
+            </div>
           </div>
         ))}
       </div>

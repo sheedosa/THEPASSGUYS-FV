@@ -1,13 +1,20 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Inter", sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-serif: "Instrument Serif", "Times New Roman", serif;
 
   --color-primary: #00d26f;
   --color-secondary: #2D3436;
   --color-accent: #FF7675;
   --color-bg-page: #FFFDF5;
+
+  /* Soft ambient shadows — premium */
+  --shadow-ambient-sm: 0 8px 24px -12px rgba(14, 17, 18, 0.10);
+  --shadow-ambient: 0 20px 48px -24px rgba(14, 17, 18, 0.14);
+  --shadow-ambient-lg: 0 30px 60px -30px rgba(14, 17, 18, 0.18);
 }
 
 @layer base {
@@ -30,12 +37,52 @@
 
   ::selection { background: var(--color-primary); color: var(--color-secondary); }
 
+  /* Optical sizing for Fraunces — wider, more prominent serifs at large display sizes */
+  h1 { font-optical-sizing: auto; }
+
+  /* ---------- Cinematic homepage ---------------------------------- */
+  /* Idle car bob — gentle vertical breathing while at rest */
+  .cinematic-car-idle {
+    animation: cinematic-idle 4.8s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes cinematic-idle {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cinematic-car-idle { animation: none; }
+  }
+
+  /* Content-layer dark frosted card — sits above video, holds copy */
+  .cine-card {
+    background: rgba(10, 12, 13, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    border-radius: 28px;
+  }
+
+  /* Trust-bar marquee — slow, smooth, pauses on hover */
+  .trustbar-track {
+    animation: trustbar-scroll 45s linear infinite;
+    will-change: transform;
+  }
+  .trustbar-track:hover {
+    animation-play-state: paused;
+  }
+  @keyframes trustbar-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+    .trustbar-track { animation: none; transform: translateX(0); }
   }
 }
 
@@ -223,6 +270,146 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .road-mark { animation: none; }
+  }
+
+  /* ---------- Journey scene -------------------------------- */
+  .journey-scene {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) {
+    .journey-scene { max-width: 480px; }
+  }
+  .journey-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Route line stroke-draws itself */
+  .journey-path {
+    stroke-dasharray: 6 9;
+    stroke-dashoffset: 600;
+    animation: journey-draw 2.4s cubic-bezier(0.65, 0, 0.35, 1) 2.5s both;
+  }
+  @keyframes journey-draw {
+    from { stroke-dashoffset: 600; }
+    to   { stroke-dashoffset: 0; }
+  }
+
+  /* Each node fades + lifts in with stagger */
+  .journey-node {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: journey-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .journey-node-1 { animation-delay: 2.65s; }
+  .journey-node-2 { animation-delay: 3.05s; }
+  .journey-node-3 { animation-delay: 3.55s; }
+  .journey-node-4 { animation-delay: 4.05s; }
+  @keyframes journey-pop {
+    from {
+      opacity: 0;
+      transform: translate(var(--tx, 0), 14px) scale(0.85);
+    }
+    to {
+      opacity: 1;
+      transform: translate(var(--tx, 0), 0) scale(1);
+    }
+  }
+
+  /* Final pass tick gets a continuous glow pulse */
+  .journey-pass-halo {
+    transform-origin: center;
+    transform-box: fill-box;
+    opacity: 0;
+    animation: journey-halo 3s ease-in-out 4.5s infinite;
+  }
+  @keyframes journey-halo {
+    0%, 100% { opacity: 0.5; transform: scale(0.9); }
+    50%      { opacity: 1;   transform: scale(1.15); }
+  }
+
+  /* Day labels gently fade in after their preceding node */
+  .journey-label {
+    opacity: 0;
+    animation: journey-fade 0.7s ease-out both;
+  }
+  .journey-label-1 { animation-delay: 2.85s; }
+  .journey-label-2 { animation-delay: 3.75s; }
+  .journey-label-3 { animation-delay: 4.25s; }
+  @keyframes journey-fade {
+    to { opacity: 0.4; }
+  }
+
+  /* Traveling pulse + trail (continuous) */
+  .journey-head, .journey-trail {
+    opacity: 0;
+    animation: journey-pulse-in 0.6s ease-out 5s forwards;
+  }
+  .journey-trail { animation-delay: 5.05s; }
+  @keyframes journey-pulse-in {
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .journey-path, .journey-node, .journey-pass-halo,
+    .journey-label, .journey-head, .journey-trail {
+      animation: none;
+      opacity: 1;
+      stroke-dashoffset: 0;
+      transform: none;
+    }
+    .journey-label { opacity: 0.4; }
+    .journey-pass-halo { opacity: 0.7; }
+  }
+
+  /* ---------- Learner car (continuous drive-across) -------- */
+  .car-track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 14%;
+    height: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .car-stage {
+    position: absolute;
+    left: 0;
+    width: 280px;
+    max-width: 70vw;
+    transform: translateX(-100%);
+    animation: car-drive-across 18s linear infinite;
+    filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.35));
+  }
+  @media (min-width: 768px) {
+    .car-stage { width: 380px; max-width: 36vw; }
+  }
+  .learner-car {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .car-wheel-spokes {
+    transform-origin: center;
+    animation: wheel-spin 0.4s linear infinite;
+  }
+  @keyframes car-drive-across {
+    0%   { transform: translateX(-110%); }
+    100% { transform: translateX(calc(100vw + 10%)); }
+  }
+  @keyframes wheel-spin {
+    to { transform: rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .car-stage { animation: none; transform: translateX(10vw); }
+    .car-wheel-spokes { animation: none; }
   }
 
   /* Hero ghost outlined display word (background) */

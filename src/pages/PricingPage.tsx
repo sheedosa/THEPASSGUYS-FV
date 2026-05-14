@@ -1,58 +1,37 @@
 import { motion } from 'motion/react';
 import SEO from '../components/SEO';
-import { ShieldCheck, Wallet, Sparkles, Clock, CheckCircle2, Info } from 'lucide-react';
+import { Wallet, ShieldCheck, CheckCircle2, Clock, Sparkles, Check } from 'lucide-react';
 import Pricing from '../components/Pricing';
 import FinalCTA from '../components/FinalCTA';
 import FAQ from '../components/FAQ';
 import PageHero from '../components/PageHero';
+import SectionLabel from '../components/ui/SectionLabel';
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const trustPoints = [
+  { icon: Wallet, title: 'No upfront thousands', desc: "Pay as you go, or block-book to save. No locking in £2,000 on day one." },
+  { icon: CheckCircle2, title: 'Small deposits', desc: 'Secure an intensive course with just a fraction of the total cost.' },
+  { icon: ShieldCheck, title: 'Vetted instructors', desc: 'Every instructor is DVSA-approved and reviewed after every lesson.' },
+];
+
+const features = [
+  'Fully insured vehicles',
+  'Modern dual controls',
+  'Free theory app access',
+  'Choice of instructor',
+  'Block-booking discounts',
+  'Student portal access',
+];
+
+const pricingFaqs = [
+  { q: 'Are there any hidden fees?', a: "No. The price you see is the price you pay. We don't charge admin fees for matching." },
+  { q: 'Do you offer student discounts?', a: "Our block-booked Standard Course saves £30 versus pay-as-you-go. That's our student deal." },
+  { q: 'What if I need to cancel?', a: 'Free reschedule with 48 hours\' notice through your student portal.' },
+  { q: 'Can I pay my instructor directly?', a: 'All payments go through our secure system — keeps your money protected and your deposit guaranteed.' },
+];
 
 export default function PricingPage() {
-  const trustPoints = [
-    {
-      icon: <Wallet className="w-8 h-8" />,
-      title: "No Large Upfront Fees",
-      desc: "We don't believe in charging thousands upfront. Pay for what you use or small blocks."
-    },
-    {
-      icon: <CheckCircle2 className="w-8 h-8" />,
-      title: "Small Deposits",
-      desc: "Secure your intensive course with just a fraction of the total cost."
-    },
-    {
-      icon: <ShieldCheck className="w-8 h-8" />,
-      title: "Instructor Quality",
-      desc: "All instructors are DVSA approved and regularly vetted for standard."
-    }
-  ];
-
-  const features = [
-    "Fully Insured Vehicles",
-    "Modern Dual Controls",
-    "Free Theory App Access",
-    "Choice of Instructor",
-    "Block Booking Discounts",
-    "Student Portal Access"
-  ];
-
-  const pricingFaqs = [
-    {
-      q: "Are there any hidden booking fees?",
-      a: "Absolutely not. The price you see is the price you pay. We don't charge administration fees for matching you with an instructor."
-    },
-    {
-      q: "Do you offer student discounts?",
-      a: "Our block booking 'Standard Course' is designed specifically to offer the best value for students, saving you £30 compared to pay-as-you-go rates."
-    },
-    {
-      q: "What happens if I need to cancel?",
-      a: "As long as you provide 48 hours notice, you can reschedule your lesson for free through our student portal."
-    },
-    {
-      q: "Can I pay my instructor directly?",
-      a: "We manage all payments through our secure central system to ensure your funds are protected and to maintain our small deposit guarantee."
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-bg-page">
       <SEO
@@ -61,96 +40,144 @@ export default function PricingPage() {
         canonical="https://thepassguys.co.uk/pricing"
       />
       <PageHero
-        eyebrow="Pricing · Transparent rates"
-        title="Simple pricing."
+        eyebrow="Pricing"
+        title="Honest pricing."
         accent="No hidden fees."
-        description="The price you see is what you pay. Block-book to save up to £30. Cancel up to 24 hours before with no charge."
-        primaryCta={{ label: 'See plans', href: '#pricing-plans' }}
-        secondaryCta={{ label: 'Get matched', href: '/get-matched' }}
+        description="The price you see is the price you pay. Block-book to save up to £30. Free 48-hour cancellation."
+        primaryCta={{ label: 'Find My Instructor', href: '/get-matched' }}
+        secondaryCta={{ label: 'See plans', href: '#pricing-plans' }}
         meta={['Block-booking discounts', 'No upfront thousands', 'Test fee at cost']}
       />
 
-      {/* Pricing Blocks */}
+      {/* Pricing plans */}
       <Pricing id="pricing-plans" />
 
-      {/* Why Our Prices are Better (Trust Points) */}
-      <section className="py-16 md:py-24 bg-secondary text-white overflow-hidden">
+      {/* ── Trust points ───────────────────────────────────────────────── */}
+      <section className="py-20 md:py-32 bg-secondary text-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-            {trustPoints.map((point, index) => (
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <SectionLabel number="02" label="Why it's fair" tone="dark" />
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.2, ease: EASE }}
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tighter leading-[0.95]"
+            >
+              No surprises. <br />
+              <span className="text-primary">Just driving.</span>
+            </motion.h2>
+          </div>
+
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden">
+            {trustPoints.map((point, i) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center md:text-left"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1.0, delay: i * 0.08, ease: EASE }}
+                className="bg-secondary p-8 md:p-10"
               >
-                <div className="w-16 h-16 bg-primary text-secondary rounded-2xl flex items-center justify-center mb-6 mx-auto md:mx-0 transform rotate-3">
-                  {point.icon}
+                <div className="text-primary mb-4">
+                  <point.icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-2xl font-black uppercase tracking-tight mb-4">{point.title}</h3>
-                <p className="text-white/60 font-medium leading-relaxed">{point.desc}</p>
+                <h3 className="text-xl md:text-2xl font-normal text-white tracking-tighter mb-2">
+                  {point.title}
+                </h3>
+                <p className="text-white/65 leading-relaxed text-sm md:text-base">
+                  {point.desc}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* What's Included / Features */}
-      <section className="py-16 md:py-24 bg-white overflow-hidden">
+      {/* ── What's included ────────────────────────────────────────────── */}
+      <section className="py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="vibrant-card !bg-bg-page !border-none grid lg:grid-cols-2 gap-8 md:p-16 items-center p-6 md:p-10 md:p-20">
+          <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
-              <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">Value Pack</span>
-              <h2 className="text-4xl md:text-6xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-8">
-                What’s included <br /> in your <span className="italic">investment.</span>
-              </h2>
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-secondary text-white rounded-xl flex items-center justify-center flex-shrink-0">
-                        <Clock className="w-5 h-5" />
-                    </div>
-                    <div>
-                        <h4 className="font-black text-secondary uppercase text-lg">Total Flexibility</h4>
-                        <p className="text-slate-500 font-medium">Cancel or reschedule lessons with ease through our student portal.</p>
-                    </div>
+              <SectionLabel number="03" label="What's included" align="left" />
+              <motion.h2
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 1.2, ease: EASE }}
+                className="mt-6 text-4xl sm:text-5xl md:text-6xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              >
+                Everything you need. <br />
+                <span className="text-primary">Nothing you don't.</span>
+              </motion.h2>
+
+              <div className="mt-8 space-y-5">
+                <div className="flex items-start gap-4">
+                  <div className="text-primary mt-1">
+                    <Clock className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-normal text-secondary tracking-tight">Total flexibility</h4>
+                    <p className="text-secondary/65 text-sm md:text-base leading-relaxed mt-1">
+                      Cancel or reschedule lessons through your student portal — free, with 48 hours' notice.
+                    </p>
+                  </div>
                 </div>
-                <div className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-secondary text-white rounded-xl flex items-center justify-center flex-shrink-0">
-                        <Sparkles className="w-5 h-5" />
-                    </div>
-                    <div>
-                        <h4 className="font-black text-secondary uppercase text-lg">Modern Fleet</h4>
-                        <p className="text-slate-500 font-medium">Learn in the latest models with full safety features and climate control.</p>
-                    </div>
+                <div className="flex items-start gap-4">
+                  <div className="text-primary mt-1">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-normal text-secondary tracking-tight">Modern fleet</h4>
+                    <p className="text-secondary/65 text-sm md:text-base leading-relaxed mt-1">
+                      Latest dual-control cars with full safety features and climate control.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {features.map((feature, index) => (
-                    <motion.div 
-                        key={index}
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.05 }}
-                        className="flex items-center space-x-3 bg-white p-4 rounded-xl shadow-sm border border-slate-100"
-                    >
-                        <CheckCircle2 className="w-5 h-5 text-primary" />
-                        <span className="font-bold text-secondary text-sm">{feature}</span>
-                    </motion.div>
-                ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
+              {features.map((feature, i) => (
+                <motion.div
+                  key={feature}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, delay: i * 0.05, ease: EASE }}
+                  className="bg-bg-page p-5 md:p-6 flex items-center gap-3"
+                >
+                  <Check className="w-4 h-4 text-primary shrink-0" strokeWidth={3} />
+                  <span className="text-sm text-secondary/85 font-medium">{feature}</span>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing FAQ (Specific) */}
-      <FAQ id="pricing-faq" items={pricingFaqs} />
+      {/* Pricing-specific FAQ */}
+      <section className="py-20 md:py-32 bg-bg-page">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <SectionLabel number="04" label="Pricing questions" />
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.2, ease: EASE }}
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+            >
+              Quick <br />
+              <span className="text-primary">answers.</span>
+            </motion.h2>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <FAQ id="pricing-faq" items={pricingFaqs} hideHeader />
+          </div>
+        </div>
+      </section>
 
-      {/* Final CTA */}
       <FinalCTA />
     </div>
   );

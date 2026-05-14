@@ -22,14 +22,14 @@ export default function Contact() {
           <div className="grid lg:grid-cols-2">
             
             {/* Contact Info */}
-            <div className="p-8 sm:p-12 lg:p-20 bg-secondary text-white flex flex-col justify-between relative overflow-hidden">
+            <div className="p-6 sm:p-10 lg:p-20 bg-secondary text-white flex flex-col justify-between relative overflow-hidden min-w-0">
                 <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
                     <div className="text-[150px] font-black text-white absolute -bottom-10 -left-10 rotate-12">CONNECT</div>
                 </div>
 
                 <div className="relative z-10">
                     <span className="text-primary font-black uppercase tracking-widest text-sm block mb-4">Get In Touch</span>
-                    <h2 className="text-4xl sm:text-6xl font-black mb-8 uppercase tracking-tighter leading-[0.9]">Let's get <br /> you behind <br /> the <span className="text-primary">wheel.</span></h2>
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-black mb-8 uppercase tracking-tighter leading-[0.9]">Let's get <br /> you behind <br /> the <span className="text-primary">wheel.</span></h2>
                     
                     <div className="space-y-6 mt-12">
                         <motion.div whileHover={{ x: 10 }} className="flex items-center space-x-6">
@@ -47,7 +47,7 @@ export default function Contact() {
                             </div>
                             <div>
                                 <p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Email Us</p>
-                                <p className="text-xl font-black italic">hello@thepassguys.com</p>
+                                <p className="text-base sm:text-xl font-black italic break-all">hello@thepassguys.com</p>
                             </div>
                         </motion.div>
                     </div>
@@ -61,7 +61,7 @@ export default function Contact() {
             </div>
 
             {/* Form */}
-            <div className="bg-white p-8 sm:p-12 lg:p-20">
+            <div className="bg-white p-6 sm:p-10 lg:p-20">
                 <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                     <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase text-secondary/40 tracking-widest">Full Name</label>

@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import SmoothScroll from './components/SmoothScroll';
-import ScrollProgress from './components/ScrollProgress';
 
 const LessonsPage = lazy(() => import('./pages/LessonsPage'));
 const PricingPage = lazy(() => import('./pages/PricingPage'));
@@ -30,7 +29,6 @@ export default function App() {
   return (
     <Router>
       <SmoothScroll />
-      <ScrollProgress />
       <div className="min-h-screen">
         <Navbar />
         <main>

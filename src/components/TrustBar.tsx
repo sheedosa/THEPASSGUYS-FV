@@ -1,36 +1,63 @@
-import { motion } from 'motion/react';
-import { Zap, Wallet, Star, ShieldCheck } from 'lucide-react';
+import { Zap, Wallet, MapPin, ShieldCheck, Car, Timer, Calendar, Sparkles } from 'lucide-react';
 
+/**
+ * Trust bar — slow continuous left-scroll marquee of credibility points.
+ * The list is duplicated twice in the DOM so the seam is invisible as it loops.
+ * Premium feel: always-on motion, reads as a wire ticker, not a marketing row.
+ */
 const ITEMS = [
-  { icon: <Zap className="w-5 h-5" />, text: 'Pass Fast' },
-  { icon: <Wallet className="w-5 h-5" />, text: 'Small Deposit' },
-  { icon: <Star className="w-5 h-5" />, text: 'Top Rated' },
-  { icon: <ShieldCheck className="w-5 h-5" />, text: 'DVSA Approved' },
+  { icon: ShieldCheck, text: 'DVSA-approved instructors' },
+  { icon: Zap, text: 'Pass in weeks, not months' },
+  { icon: Timer, text: 'Matched in 7 days' },
+  { icon: Wallet, text: 'No upfront blocks' },
+  { icon: Car, text: 'Manual & automatic' },
+  { icon: MapPin, text: 'Across Greater Manchester' },
+  { icon: Calendar, text: 'Flexible weekday & weekend slots' },
+  { icon: Sparkles, text: 'Modern dual-control cars' },
 ];
+
+const Row = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
+  <ul
+    aria-hidden={ariaHidden}
+    className="flex items-center gap-12 md:gap-16 pr-12 md:pr-16 shrink-0"
+  >
+    {ITEMS.map((item, i) => {
+      const Icon = item.icon;
+      return (
+        <li
+          key={i}
+          className="flex items-center gap-3 text-white/80 whitespace-nowrap"
+        >
+          <Icon className="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0" />
+          <span className="font-semibold uppercase tracking-wider text-xs md:text-sm">
+            {item.text}
+          </span>
+        </li>
+      );
+    })}
+  </ul>
+);
 
 export default function TrustBar() {
   return (
-    <div className="bg-secondary py-8 overflow-hidden relative border-y-4 border-primary/20">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 md:p-16 justify-items-center">
-          {ITEMS.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ delay: index * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center space-x-3 text-white/80 group cursor-default"
-            >
-              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
-                {item.icon}
-              </div>
-              <span className="font-black uppercase tracking-widest text-xs md:text-sm">
-                {item.text}
-              </span>
-            </motion.div>
-          ))}
-        </div>
+    <div
+      className="bg-secondary py-6 md:py-7 overflow-hidden relative border-y border-white/5"
+      role="region"
+      aria-label="Why The Pass Guys"
+    >
+      {/* Edge fades — soft mask so items emerge & dissolve at viewport edges */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-24 z-10 bg-gradient-to-r from-secondary to-transparent"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-24 z-10 bg-gradient-to-l from-secondary to-transparent"
+      />
+
+      <div className="trustbar-track flex w-max">
+        <Row />
+        <Row ariaHidden />
       </div>
     </div>
   );

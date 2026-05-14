@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, ArrowLeft, Check, BookOpen, UserPlus, HelpCircle, GraduationCap, Car, Calendar, Clock, MapPin, Send } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Check, BookOpen, UserPlus, HelpCircle, MapPin } from 'lucide-react';
+import SEO from '../components/SEO';
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+const STEPS_COUNT = 4;
 
 type FormData = {
   intent: string;
@@ -15,29 +19,29 @@ type FormData = {
   email: string;
 };
 
-const STEPS_COUNT = 4;
+const initialForm: FormData = {
+  intent: '',
+  experience: '',
+  transmission: '',
+  lessonType: '',
+  postcode: '',
+  availability: [],
+  startTiming: '',
+  firstName: '',
+  phone: '',
+  email: '',
+};
 
 export default function GetMatchedPage() {
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    intent: '',
-    experience: '',
-    transmission: '',
-    lessonType: '',
-    postcode: '',
-    availability: [],
-    startTiming: '',
-    firstName: '',
-    phone: '',
-    email: '',
-  });
+  const [formData, setFormData] = useState<FormData>(initialForm);
 
   const nextStep = () => {
     setStep((s) => Math.min(s + 1, STEPS_COUNT));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  
+
   const prevStep = () => {
     setStep((s) => Math.max(s - 1, 1));
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -49,7 +53,7 @@ export default function GetMatchedPage() {
 
   const toggleMultiSelect = (field: 'availability', value: string) => {
     setFormData((prev) => {
-      const current = prev[field] as string[];
+      const current = prev[field];
       const next = current.includes(value)
         ? current.filter((v) => v !== value)
         : [...current, value];
@@ -62,331 +66,412 @@ export default function GetMatchedPage() {
     setIsSubmitted(true);
   };
 
-  const renderProgress = () => (
-    <div className="mb-8">
-      <div className="flex gap-2 mb-4">
-        {[1, 2, 3, 4].map((s) => (
-          <div
-            key={s}
-            className={`h-3 flex-1 rounded-full transition-all duration-500 ${
-              s < step ? 'bg-primary' : s === step ? 'bg-secondary' : 'bg-secondary/10'
-            }`}
-          />
-        ))}
-      </div>
-      <p className="text-secondary font-black uppercase tracking-widest text-xs">Step {step} of 4</p>
-    </div>
-  );
-
-  const tileClass = (isSelected: boolean) => `
-    relative p-6 rounded-3xl border-4 transition-all duration-300 text-left group cursor-pointer
-    ${isSelected 
-      ? 'border-secondary bg-primary shadow-[10px_10px_0_rgba(45,52,54,1)]' 
-      : 'border-secondary/10 bg-white hover:border-primary/50'
-    }
-  `;
-
+  /* ── Success state ───────────────────────────────────────────────────── */
   if (isSubmitted) {
     return (
-      <div className="pt-24 sm:pt-32 pb-12 sm:pb-24 px-4 md:px-6 min-h-screen flex items-center justify-center">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="vibrant-card max-w-2xl w-full p-8 sm:p-12 text-center"
+      <div className="min-h-screen bg-bg-page pt-28 sm:pt-36 pb-24 px-6 flex items-center justify-center">
+        <SEO
+          title="Get matched | The Pass Guys"
+          description="Get matched with a local DVSA-approved driving instructor in Greater Manchester."
+          canonical="https://thepassguys.co.uk/get-matched"
+        />
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.0, ease: EASE }}
+          className="max-w-2xl w-full text-center"
         >
-          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
-            <Check className="w-8 h-8 sm:w-10 sm:h-10 text-secondary" />
+          <div className="inline-flex w-16 h-16 rounded-full bg-primary text-secondary items-center justify-center mx-auto mb-8 shadow-sm">
+            <Check className="w-7 h-7" strokeWidth={3} />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-secondary uppercase tracking-tighter mb-6">WE'VE GOT YOUR DETAILS!</h2>
-          <p className="text-secondary/70 text-lg sm:text-xl font-medium">
-            We'll be in touch very soon.
+          <div className="flex items-center justify-center gap-4 mb-8 text-secondary/55">
+            <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.32em]">All set</span>
+            <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
+          </div>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium text-secondary tracking-tighter leading-[0.95] mb-6">
+            We've got your <br />
+            <span className="text-primary">details, {formData.firstName || 'friend'}.</span>
+          </h1>
+          <p className="text-secondary/65 text-base md:text-lg leading-relaxed max-w-md mx-auto">
+            One of the team will be in touch within 24 hours with your matched instructor.
           </p>
         </motion.div>
       </div>
     );
   }
 
+  /* ── Form ────────────────────────────────────────────────────────────── */
   return (
-    <div className="pt-24 sm:pt-32 pb-12 sm:pb-24 px-4 md:px-6 min-h-screen flex items-center justify-center bg-bg-page">
-      <div className="max-w-3xl w-full">
-        {renderProgress()}
+    <div className="min-h-screen bg-bg-page pt-28 sm:pt-36 pb-24 px-6">
+      <SEO
+        title="Get matched | The Pass Guys"
+        description="Get matched with a local DVSA-approved driving instructor in Greater Manchester."
+        canonical="https://thepassguys.co.uk/get-matched"
+      />
+
+      <div className="max-w-3xl mx-auto">
+        {/* ── Eyebrow ─────────────────────────────────────────────────── */}
+        <div className="flex items-center justify-center gap-4 mb-8 text-secondary/55">
+          <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
+          <span className="text-[11px] font-semibold uppercase tracking-[0.32em]">
+            {String(step).padStart(2, '0')} <span className="mx-1.5 opacity-50">—</span> Step {step} of {STEPS_COUNT}
+          </span>
+          <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
+        </div>
+
+        {/* ── Progress bar ────────────────────────────────────────────── */}
+        <div className="flex gap-1.5 mb-12 md:mb-16">
+          {[1, 2, 3, 4].map((s) => (
+            <div
+              key={s}
+              className={`h-1 flex-1 rounded-full transition-colors duration-500 ${
+                s <= step ? 'bg-primary' : 'bg-secondary/10'
+              }`}
+            />
+          ))}
+        </div>
 
         <AnimatePresence mode="wait">
+          {/* ── Step 1 ─────────────────────────────────────────────── */}
           {step === 1 && (
-            <motion.div
-              key="step1"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="space-y-8"
-            >
-              <div>
-                <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tight mb-4 text-balance">What are you looking for?</h2>
-                <p className="text-secondary/60 font-medium">Choose an option below to start your journey.</p>
-              </div>
+            <Step key="step1">
+              <StepHeading
+                title="What are you"
+                accent="looking for?"
+                sub="Choose an option below to start your journey."
+              />
 
-              <div className="grid gap-4">
+              <div className="space-y-3">
                 {[
                   { id: 'lessons', title: 'Book lessons', sub: 'Regular or intensive', icon: BookOpen },
                   { id: 'match', title: 'Get matched with an instructor', sub: "We'll find the right fit for you", icon: UserPlus },
-                  { id: 'decide', title: 'Not sure yet. Help me decide.', sub: "Our team will guide you", icon: HelpCircle },
-                ].map((option) => (
-                  <div
-                    key={option.id}
-                    onClick={() => handleSelect('intent', option.id)}
-                    className={tileClass(formData.intent === option.id)}
-                  >
-                    <div className="flex items-center gap-6">
-                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg transition-colors ${formData.intent === option.id ? 'bg-secondary text-primary' : 'bg-slate-50 text-secondary'}`}>
-                        <option.icon className="w-6 h-6" />
+                  { id: 'decide', title: "Not sure yet. Help me decide.", sub: 'Our team will guide you', icon: HelpCircle },
+                ].map((option) => {
+                  const selected = formData.intent === option.id;
+                  return (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => handleSelect('intent', option.id)}
+                      className={`w-full text-left p-5 md:p-6 rounded-2xl border transition-all duration-300 group ${
+                        selected
+                          ? 'border-primary bg-primary/10'
+                          : 'border-secondary/10 bg-bg-page hover:border-secondary/20 hover:bg-white/40'
+                      }`}
+                    >
+                      <div className="flex items-center gap-5">
+                        <div className={`shrink-0 transition-colors ${selected ? 'text-primary' : 'text-secondary/40'}`}>
+                          <option.icon className="w-5 h-5" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-lg md:text-xl font-normal text-secondary tracking-tight">
+                            {option.title}
+                          </h3>
+                          <p className="text-secondary/55 text-sm mt-0.5">{option.sub}</p>
+                        </div>
+                        <div className={`shrink-0 w-5 h-5 rounded-full border transition-all flex items-center justify-center ${
+                          selected ? 'border-primary bg-primary' : 'border-secondary/20'
+                        }`}>
+                          {selected && <Check className="w-3 h-3 text-secondary" strokeWidth={3} />}
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="font-black text-xl text-secondary uppercase tracking-tighter">{option.title}</h3>
-                        <p className="text-secondary/60 text-sm font-bold uppercase tracking-widest">{option.sub}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                    </button>
+                  );
+                })}
               </div>
 
-              <div className="flex flex-col sm:flex-row justify-end gap-4 pt-4">
-                <button
-                  disabled={!formData.intent}
-                  onClick={nextStep}
-                  className="w-full sm:w-auto px-12 py-5 bg-secondary text-white font-black uppercase tracking-widest rounded-3xl shadow-lg hover:bg-secondary/90 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
-                >
-                  Continue <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </motion.div>
+              <Nav
+                onNext={nextStep}
+                nextDisabled={!formData.intent}
+              />
+            </Step>
           )}
 
+          {/* ── Step 2 ─────────────────────────────────────────────── */}
           {step === 2 && (
-            <motion.div
-              key="step2"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="space-y-12"
-            >
-              <div>
-                <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tight mb-4 text-balance">Tell us about yourself</h2>
-                <p className="text-secondary/60 font-medium">This helps us tailor your experience.</p>
-              </div>
+            <Step key="step2">
+              <StepHeading
+                title="Tell us"
+                accent="about you."
+                sub="This helps us tailor your match."
+              />
 
-              <div className="space-y-12">
-                {/* Experience Level */}
-                <div className="space-y-4">
-                  <span className="text-secondary/40 font-black uppercase tracking-[0.2em] text-[10px]">Experience Level</span>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {['Beginner', 'Some experience', 'Refresher'].map((v) => (
-                      <div
-                        key={v}
-                        onClick={() => handleSelect('experience', v)}
-                        className={tileClass(formData.experience === v)}
-                      >
-                        <h4 className="font-black text-sm uppercase tracking-widest">{v}</h4>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <ChoiceGroup
+                label="Experience level"
+                options={['Beginner', 'Some experience', 'Refresher']}
+                value={formData.experience}
+                onChange={(v) => handleSelect('experience', v)}
+              />
 
-                {/* Transmission */}
-                <div className="space-y-4">
-                  <span className="text-secondary/40 font-black uppercase tracking-[0.2em] text-[10px]">Transmission</span>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {['Manual', 'Automatic', 'No preference'].map((v) => (
-                      <div
-                        key={v}
-                        onClick={() => handleSelect('transmission', v)}
-                        className={tileClass(formData.transmission === v)}
-                      >
-                        <h4 className="font-black text-sm uppercase tracking-widest">{v}</h4>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <ChoiceGroup
+                label="Transmission"
+                options={['Manual', 'Automatic', 'No preference']}
+                value={formData.transmission}
+                onChange={(v) => handleSelect('transmission', v)}
+              />
 
-                {/* Lesson Type */}
-                <div className="space-y-4">
-                  <span className="text-secondary/40 font-black uppercase tracking-[0.2em] text-[10px]">Lesson Type</span>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {['Weekly lessons', 'Intensive course', 'Not sure yet'].map((v) => (
-                      <div
-                        key={v}
-                        onClick={() => handleSelect('lessonType', v)}
-                        className={tileClass(formData.lessonType === v)}
-                      >
-                        <h4 className="font-black text-sm uppercase tracking-widest">{v}</h4>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <ChoiceGroup
+                label="Lesson type"
+                options={['Weekly lessons', 'Intensive course', 'Not sure yet']}
+                value={formData.lessonType}
+                onChange={(v) => handleSelect('lessonType', v)}
+              />
 
-              <div className="flex flex-col-reverse sm:flex-row justify-between gap-4 pt-8 border-t border-secondary/5">
-                <button
-                  onClick={prevStep}
-                  className="w-full sm:w-auto px-8 py-5 border-4 border-secondary/10 bg-white text-secondary font-black uppercase tracking-widest rounded-3xl hover:bg-slate-50 transition-all flex items-center justify-center gap-3 group"
-                >
-                  <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" /> Back
-                </button>
-                <button
-                  disabled={!formData.experience || !formData.transmission || !formData.lessonType}
-                  onClick={nextStep}
-                  className="w-full sm:w-auto px-12 py-5 bg-secondary text-white font-black uppercase tracking-widest rounded-3xl shadow-lg hover:bg-secondary/90 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
-                >
-                  Continue <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </motion.div>
+              <Nav
+                onBack={prevStep}
+                onNext={nextStep}
+                nextDisabled={!formData.experience || !formData.transmission || !formData.lessonType}
+              />
+            </Step>
           )}
 
+          {/* ── Step 3 ─────────────────────────────────────────────── */}
           {step === 3 && (
-            <motion.div
-              key="step3"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="space-y-12"
-            >
+            <Step key="step3">
+              <StepHeading
+                title="Practical"
+                accent="details."
+                sub="Where and when should we start?"
+              />
+
+              {/* Postcode */}
               <div>
-                <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tight mb-4 text-balance">Practical details</h2>
-                <p className="text-secondary/60 font-medium">Where and when should we start?</p>
-              </div>
-
-              <div className="space-y-12">
-                {/* Postcode */}
-                <div className="space-y-4">
-                  <span className="text-secondary/40 font-black uppercase tracking-[0.2em] text-[10px]">Postcode</span>
-                  <div className="relative">
-                    <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 text-secondary/30 w-6 h-6" />
-                    <input
-                      type="text"
-                      placeholder="e.g. M1 1AA"
-                      value={formData.postcode}
-                      onChange={(e) => handleSelect('postcode', e.target.value)}
-                      className="w-full bg-white border-4 border-secondary/5 focus:border-primary rounded-3xl px-16 py-6 font-bold text-secondary outline-none transition-all placeholder:text-secondary/20"
-                    />
-                  </div>
-                </div>
-
-                {/* Availability */}
-                <div className="space-y-4">
-                  <span className="text-secondary/40 font-black uppercase tracking-[0.2em] text-[10px]">Availability (Select multiple)</span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {['Weekday mornings', 'Weekday afternoons', 'Evenings', 'Weekends', 'Flexible'].map((v) => (
-                      <div
-                        key={v}
-                        onClick={() => toggleMultiSelect('availability', v)}
-                        className={tileClass(formData.availability.includes(v))}
-                      >
-                        <h4 className="font-black text-sm uppercase tracking-widest">{v}</h4>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Start Timing */}
-                <div className="space-y-4">
-                  <span className="text-secondary/40 font-black uppercase tracking-[0.2em] text-[10px]">How soon do you want to start?</span>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {['ASAP', 'Within a month', 'Just exploring'].map((v) => (
-                      <div
-                        key={v}
-                        onClick={() => handleSelect('startTiming', v)}
-                        className={tileClass(formData.startTiming === v)}
-                      >
-                        <h4 className="font-black text-sm uppercase tracking-widest">{v}</h4>
-                      </div>
-                    ))}
-                  </div>
+                <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-3">
+                  Postcode
+                </span>
+                <div className="relative">
+                  <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-primary w-4 h-4" />
+                  <input
+                    type="text"
+                    placeholder="e.g. M1 1AA"
+                    value={formData.postcode}
+                    onChange={(e) => handleSelect('postcode', e.target.value)}
+                    className="w-full bg-white border border-secondary/15 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl pl-11 pr-4 py-3.5 text-secondary placeholder:text-secondary/30 outline-none transition-all"
+                  />
                 </div>
               </div>
 
-              <div className="flex flex-col-reverse sm:flex-row justify-between gap-4 pt-8 border-t border-secondary/5">
-                <button
-                  onClick={prevStep}
-                  className="w-full sm:w-auto px-8 py-5 border-4 border-secondary/10 bg-white text-secondary font-black uppercase tracking-widest rounded-3xl hover:bg-slate-50 transition-all flex items-center justify-center gap-3 group"
-                >
-                  <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" /> Back
-                </button>
-                <button
-                  disabled={!formData.postcode || !formData.startTiming || formData.availability.length === 0}
-                  onClick={nextStep}
-                  className="w-full sm:w-auto px-12 py-5 bg-secondary text-white font-black uppercase tracking-widest rounded-3xl shadow-lg hover:bg-secondary/90 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
-                >
-                  Continue <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </motion.div>
+              <ChoiceGroup
+                label="Availability — select all that work"
+                options={['Weekday mornings', 'Weekday afternoons', 'Evenings', 'Weekends', 'Flexible']}
+                value={formData.availability}
+                onChange={(v) => toggleMultiSelect('availability', v as string)}
+                multi
+                columns={3}
+              />
+
+              <ChoiceGroup
+                label="How soon do you want to start?"
+                options={['ASAP', 'Within a month', 'Just exploring']}
+                value={formData.startTiming}
+                onChange={(v) => handleSelect('startTiming', v)}
+              />
+
+              <Nav
+                onBack={prevStep}
+                onNext={nextStep}
+                nextDisabled={!formData.postcode || !formData.startTiming || formData.availability.length === 0}
+              />
+            </Step>
           )}
 
+          {/* ── Step 4 ─────────────────────────────────────────────── */}
           {step === 4 && (
-            <motion.div
-              key="step4"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="space-y-12"
-            >
-              <div>
-                <h2 className="text-4xl md:text-5xl font-black text-secondary uppercase tracking-tight mb-4 text-balance">Contact details</h2>
-                <p className="text-secondary/60 font-medium">How should we reach you?</p>
-              </div>
+            <Step key="step4">
+              <StepHeading
+                title="Contact"
+                accent="details."
+                sub="How should we reach you with your match?"
+              />
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <label className="text-secondary/40 font-black uppercase tracking-[0.2em] text-[10px]">First Name</label>
-                  <input
-                    required
-                    type="text"
-                    value={formData.firstName}
-                    onChange={(e) => handleSelect('firstName', e.target.value)}
-                    className="w-full bg-white border-4 border-secondary/5 focus:border-primary rounded-[2rem] px-8 py-5 font-bold text-secondary outline-none transition-all"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-secondary/40 font-black uppercase tracking-[0.2em] text-[10px]">Phone Number</label>
-                  <input
-                    required
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => handleSelect('phone', e.target.value)}
-                    className="w-full bg-white border-4 border-secondary/5 focus:border-primary rounded-[2rem] px-8 py-5 font-bold text-secondary outline-none transition-all"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-secondary/40 font-black uppercase tracking-[0.2em] text-[10px]">Email Address</label>
-                  <input
-                    required
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => handleSelect('email', e.target.value)}
-                    className="w-full bg-white border-4 border-secondary/5 focus:border-primary rounded-[2rem] px-8 py-5 font-bold text-secondary outline-none transition-all"
-                  />
-                </div>
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <FieldInput
+                  label="First name"
+                  type="text"
+                  value={formData.firstName}
+                  onChange={(v) => handleSelect('firstName', v)}
+                />
+                <FieldInput
+                  label="Phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(v) => handleSelect('phone', v)}
+                />
+                <FieldInput
+                  label="Email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(v) => handleSelect('email', v)}
+                />
 
-                <div className="flex flex-col-reverse sm:flex-row justify-between gap-4 pt-12 border-t border-secondary/5">
+                <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 pt-8 mt-2 border-t border-secondary/10">
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="w-full sm:w-auto px-8 py-5 border-4 border-secondary/10 bg-white text-secondary font-black uppercase tracking-widest rounded-3xl hover:bg-slate-50 transition-all flex items-center justify-center gap-3 group"
+                    className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-secondary/20 text-secondary text-sm font-medium hover:bg-secondary/5 transition-colors duration-300"
                   >
-                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" /> Back
+                    <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" />
+                    Back
                   </button>
                   <button
                     type="submit"
-                    className="w-full sm:w-auto px-12 py-5 bg-primary text-secondary font-black uppercase tracking-widest rounded-3xl shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-3 group"
+                    className="group inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-primary text-secondary text-sm font-semibold tracking-wide hover:brightness-105 hover:scale-[1.02] transition-all duration-300 shadow-sm"
                   >
-                    Find My Instructor <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    Find My Instructor
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
                 </div>
+                <p className="text-center text-secondary/45 text-xs sm:text-sm tracking-wide pt-2">
+                  Free · 2 minutes · No commitment
+                </p>
               </form>
-            </motion.div>
+            </Step>
           )}
         </AnimatePresence>
       </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Form primitives
+ * ───────────────────────────────────────────────────────────────────────── */
+
+function Step({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 16 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -16 }}
+      transition={{ duration: 0.6, ease: EASE }}
+      className="space-y-10"
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function StepHeading({ title, accent, sub }: { title: string; accent: string; sub: string }) {
+  return (
+    <div>
+      <h2 className="leading-[0.95] tracking-tighter">
+        <span className="block text-3xl sm:text-4xl md:text-5xl font-medium text-secondary/55">
+          {title}
+        </span>
+        <span className="block text-4xl sm:text-5xl md:text-6xl font-semibold text-primary mt-1">
+          {accent}
+        </span>
+      </h2>
+      <p className="mt-4 text-secondary/65 text-base md:text-lg leading-relaxed max-w-md">
+        {sub}
+      </p>
+    </div>
+  );
+}
+
+function ChoiceGroup({
+  label,
+  options,
+  value,
+  onChange,
+  multi = false,
+  columns = 2,
+}: {
+  label: string;
+  options: string[];
+  value: string | string[];
+  onChange: (v: string) => void;
+  multi?: boolean;
+  columns?: 2 | 3;
+}) {
+  const isSelected = (v: string) =>
+    multi ? (Array.isArray(value) && value.includes(v)) : value === v;
+  return (
+    <div>
+      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-3">
+        {label}
+      </span>
+      <div className={`grid gap-2.5 grid-cols-1 ${columns === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-3'}`}>
+        {options.map((o) => {
+          const selected = isSelected(o);
+          return (
+            <button
+              key={o}
+              type="button"
+              onClick={() => onChange(o)}
+              className={`text-sm px-4 py-3.5 rounded-xl border transition-all duration-300 ${
+                selected
+                  ? 'border-primary bg-primary text-secondary font-semibold'
+                  : 'border-secondary/15 bg-white text-secondary/75 hover:border-secondary/30 hover:text-secondary font-medium'
+              }`}
+            >
+              {o}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function FieldInput({
+  label,
+  type,
+  value,
+  onChange,
+}: {
+  label: string;
+  type: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <label className="block">
+      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-2">
+        {label}
+      </span>
+      <input
+        required
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full bg-white border border-secondary/15 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl px-4 py-3.5 text-secondary outline-none transition-all"
+      />
+    </label>
+  );
+}
+
+function Nav({
+  onBack,
+  onNext,
+  nextDisabled,
+}: {
+  onBack?: () => void;
+  onNext: () => void;
+  nextDisabled?: boolean;
+}) {
+  return (
+    <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 pt-6 mt-2 border-t border-secondary/10">
+      {onBack ? (
+        <button
+          type="button"
+          onClick={onBack}
+          className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-secondary/20 text-secondary text-sm font-medium hover:bg-secondary/5 transition-colors duration-300"
+        >
+          <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" />
+          Back
+        </button>
+      ) : <span />}
+      <button
+        type="button"
+        onClick={onNext}
+        disabled={nextDisabled}
+        className="group inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-primary text-secondary text-sm font-semibold tracking-wide hover:brightness-105 hover:scale-[1.02] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 shadow-sm"
+      >
+        Continue
+        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+      </button>
     </div>
   );
 }
