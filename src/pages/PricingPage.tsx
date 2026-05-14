@@ -28,7 +28,7 @@ const pricingFaqs = [
   { q: 'Are there any hidden fees?', a: "No. The price you see is the price you pay. We don't charge admin fees for matching." },
   { q: 'Do you offer student discounts?', a: "Our block-booked Standard Course saves £30 versus pay-as-you-go. That's our student deal." },
   { q: 'What if I need to cancel?', a: 'Free reschedule with 48 hours\' notice through your student portal.' },
-  { q: 'Can I pay my instructor directly?', a: 'All payments go through our secure system — keeps your money protected and your deposit guaranteed.' },
+  { q: 'Can I pay my instructor directly?', a: 'All payments go through our secure system, which keeps your money protected and your deposit guaranteed.' },
 ];
 
 export default function PricingPage() {
@@ -119,7 +119,7 @@ export default function PricingPage() {
                   <div>
                     <h4 className="text-lg font-normal text-secondary tracking-tight">Total flexibility</h4>
                     <p className="text-secondary/65 text-sm md:text-base leading-relaxed mt-1">
-                      Cancel or reschedule lessons through your student portal — free, with 48 hours' notice.
+                      Cancel or reschedule lessons through your student portal, free with 48 hours notice.
                     </p>
                   </div>
                 </div>

@@ -123,7 +123,7 @@ export default function AreasPage() {
               transition={{ duration: 1.0, delay: 0.15, ease: EASE }}
               className="mt-6 text-secondary/65 text-base md:text-lg leading-relaxed max-w-xl mx-auto"
             >
-              Local instructors live and teach in every borough — so you learn the routes you'll actually drive on.
+              Local instructors live and teach in every borough, so you learn the routes you will actually drive on.
             </motion.p>
           </div>
 

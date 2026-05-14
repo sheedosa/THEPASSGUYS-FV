@@ -44,7 +44,7 @@ export default function InstructorsPage() {
         eyebrow="Instructors"
         title="Teach more."
         accent="Admin less."
-        description="Bring your ADI badge. We bring the students. Keep your own pricing, your own diary, your own car — we just match you with local learners."
+        description="Bring your ADI badge. We bring the students. Keep your own pricing, your own diary, your own car. We just match you with local learners."
         primaryCta={{ label: 'Apply to join', href: '#apply' }}
         secondaryCta={{ label: 'See benefits', href: '#benefits' }}
         meta={['Local students only', 'No franchise fee', 'You set the price']}

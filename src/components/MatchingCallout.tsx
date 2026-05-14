@@ -30,7 +30,7 @@ export default function MatchingCallout() {
             </h2>
 
             <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-8 md:mb-12 max-w-2xl mx-auto">
-              Finding a local instructor is hard. Finding one who teaches the way you actually learn is harder still. Tell us how you tick — we sort the rest within a week.
+              Finding a local instructor is hard. Finding one who teaches the way you actually learn is harder still. Tell us how you learn and we sort the rest within a week.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 md:mb-12">

@@ -253,7 +253,7 @@ export default function GetMatchedPage() {
               </div>
 
               <ChoiceGroup
-                label="Availability — select all that work"
+                label="Availability (select all that apply)"
                 options={['Weekday mornings', 'Weekday afternoons', 'Evenings', 'Weekends', 'Flexible']}
                 value={formData.availability}
                 onChange={(v) => toggleMultiSelect('availability', v as string)}

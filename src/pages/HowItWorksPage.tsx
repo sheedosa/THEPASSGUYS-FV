@@ -27,7 +27,7 @@ const steps = [
 
 const firstLesson = [
   { icon: UserCheck, title: 'Instructor intro', desc: 'Your instructor introduces themselves and gets a feel for where you are.' },
-  { icon: ShieldCheck, title: 'Zero judgment', desc: 'A supportive environment. Every ability is welcome — nervous or confident.' },
+  { icon: ShieldCheck, title: 'Zero judgment', desc: 'A supportive environment. Every ability is welcome, whether you are nervous or experienced.' },
   { icon: Zap, title: 'Safety first', desc: 'Modern, well-maintained, dual-control cars. Fully insured for learners.' },
   { icon: Target, title: 'Set the goal', desc: 'Together you agree a lesson plan and clear milestones to track progress.' },
 ];
@@ -41,7 +41,7 @@ const compare = [
 
 const faqs = [
   { q: 'How quickly can I start lessons?', a: 'Once matched, you can usually start within a week depending on instructor availability in your area.' },
-  { q: "What if I'm not happy with my instructor?", a: "Just say the word and we'll arrange a swap — no fuss, no fees." },
+  { q: "What if I'm not happy with my instructor?", a: "Just say the word and we'll arrange a swap. No fuss, no fees." },
   { q: 'Can I switch between manual and automatic?', a: 'You can. We recommend sticking with one until test day to keep momentum.' },
   { q: 'What do I need for the first lesson?', a: 'Just your provisional licence and comfortable shoes. We handle the rest.' },
   { q: 'How do I pay?', a: 'Securely through our platform when you book lessons or packages. Matching itself is always free.' },

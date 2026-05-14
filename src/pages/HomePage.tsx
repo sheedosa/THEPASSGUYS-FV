@@ -128,7 +128,7 @@ function Section2Match() {
           transition={{ duration: 1.0, delay: 0.15, ease: EASE }}
           className="mt-6 text-secondary/65 text-base md:text-lg max-w-md mx-auto leading-relaxed"
         >
-          Tell us your location, availability, and how you like to learn. We match you with a vetted local instructor — free, in minutes.
+          Tell us your location, availability, and how you like to learn. We match you with a vetted local instructor. Free, in minutes.
         </motion.p>
         <motion.div
           initial={{ opacity: 1, y: 16 }}

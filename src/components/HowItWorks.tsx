@@ -9,7 +9,7 @@ export default function HowItWorks({ id }: { id?: string }) {
       number: "01",
       icon: <Sliders className="w-8 h-8" />,
       title: "Pick your lessons",
-      description: "Single lessons or a full block-booked course. Manual or automatic — your call."
+      description: "Single lessons or a full block-booked course. Manual or automatic. Your call."
     },
     {
       number: "02",

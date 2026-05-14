@@ -84,7 +84,7 @@ export default function Hero({ id }: { id?: string }) {
               transition={{ duration: 1.1, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
               className="text-base md:text-lg text-secondary/60 mt-8 mb-10 max-w-xl mx-auto leading-relaxed"
             >
-              DVSA-approved instructors matched to you in days — not weeks. Manchester's most straightforward way to get your licence.
+              DVSA-approved instructors matched to you in days, not weeks. Manchester's most straightforward way to get your licence.
             </motion.p>
 
             {/* CTAs */}
