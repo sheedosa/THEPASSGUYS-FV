@@ -2,12 +2,10 @@ import { motion, MotionConfig } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { MapPin, Sparkles, ArrowRight } from 'lucide-react';
 import SEO from '../components/SEO';
+import ScrollVideoHero from '../components/ScrollVideoHero';
 
 /**
- * Homepage — 5 full-viewport storytelling sections on the brand cream.
- *
- * The car animation slot is left empty (the lower half of Section 1) — a
- * custom animation will be dropped in later. Everything else is content.
+ * Homepage — scroll-driven video hero followed by storytelling sections.
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -30,80 +28,6 @@ function SectionEyebrow({ number, label }: { number: string; label: string }) {
   );
 }
 
-/* ============================== SECTION 1 — HERO ============================== */
-function Section1Hero() {
-  return (
-    /*
-     * Section fills the full viewport height.
-     * Content is anchored to the top (pt-32+) — the lower ~55% is intentionally
-     * empty space reserved for the 3D car animation.
-     */
-    <section className="relative min-h-screen px-6">
-      <div className="relative z-20 w-full max-w-5xl mx-auto pt-32 sm:pt-36 md:pt-40 text-center">
-
-        {/* ── Headline ───────────────────────────────────────────────────── */}
-        <h1 className="leading-[0.85]">
-
-          {/* Line 1 — the setup: small, light, muted — reads as a label */}
-          <span className="block overflow-hidden pb-[0.1em]">
-            <span className="hero-line hero-line-1 block font-display
-              text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem]
-              font-light text-secondary/40">
-              Learn to drive.
-            </span>
-          </span>
-
-          {/* Line 2 — the payoff: bold Fraunces, "pass." in brand green */}
-          <span className="block overflow-hidden pb-[0.1em]">
-            <span
-              className="hero-line hero-line-2 block font-display
-                text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem]
-                font-bold text-secondary"
-              style={{ letterSpacing: '-0.02em' }}
-            >
-              Actually{' '}
-              <span className="text-primary">pass.</span>
-            </span>
-          </span>
-
-        </h1>
-
-        {/* ── CTAs ───────────────────────────────────────────────────────── */}
-        <div className="hero-fade hero-fade-delay-3 mt-10 flex items-center gap-3 justify-center flex-wrap">
-          {/* Primary — green, matches brand accent */}
-          <Link
-            to="/get-matched"
-            className="group inline-flex items-center gap-2
-              px-7 py-3 rounded-full
-              bg-primary text-secondary
-              text-sm font-semibold tracking-wide
-              hover:brightness-105 hover:scale-[1.02]
-              transition-all duration-300 shadow-sm"
-          >
-            Find My Instructor
-            <span aria-hidden="true"
-              className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
-          </Link>
-
-          {/* Secondary — ghost outline */}
-          <Link
-            to="/how-it-works"
-            className="px-7 py-3 rounded-full
-              border border-secondary/20 text-secondary
-              text-sm font-medium tracking-wide
-              hover:bg-secondary/5 transition-colors duration-300"
-          >
-            How it works
-          </Link>
-        </div>
-
-      </div>
-      {/* ↓↓ open space — car animation lives here ↓↓ */}
-    </section>
-  );
-}
 
 /* ============================== SECTION 2 — MATCH ============================ */
 function Section2Match() {
@@ -323,7 +247,7 @@ export default function HomePage() {
     <MotionConfig reducedMotion="never">
       <SEO />
       <div className="bg-bg-page">
-        <Section1Hero />
+        <ScrollVideoHero />
         <Section2Match />
         <Section3Vehicles />
         <Section4Coverage />
