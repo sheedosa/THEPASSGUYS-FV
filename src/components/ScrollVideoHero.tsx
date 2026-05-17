@@ -271,37 +271,6 @@ function VideoScene({
  * ScrollVideoHero — all 6 scenes in sequence
  * ───────────────────────────────────────────────────────────────────────────── */
 export default function ScrollVideoHero() {
-  const [prefersReduced, setPrefersReduced] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReduced(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
-
-  if (prefersReduced) {
-    // Static fallback: just show the first and last scene headings
-    return (
-      <section id="hero-story" className="bg-bg-page py-24 sm:py-32 px-6 text-center">
-        <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-secondary tracking-tight mb-4 sm:mb-6">
-          Learn to Drive with Confidence
-        </h2>
-        <p className="text-base sm:text-lg text-secondary/65 mb-6 sm:mb-8 max-w-md mx-auto">
-          Expert instructors, every lesson
-        </p>
-        <Link
-          to="/get-matched"
-          className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-primary text-secondary font-semibold text-base sm:text-lg rounded-full hover:scale-[1.03] transition-transform duration-300 shadow-lg"
-        >
-          Find My Instructor
-          <span aria-hidden="true">→</span>
-        </Link>
-      </section>
-    );
-  }
-
   return (
     <section id="hero-story">
       {SCENES.map((scene, i) => (
