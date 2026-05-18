@@ -24,21 +24,10 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [isOverHero, setIsOverHero] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-
-      const hero = document.querySelector('[data-hero="immersive"]');
-      if (hero) {
-        const rect = hero.getBoundingClientRect();
-        setIsOverHero(rect.bottom > 80);
-      } else {
-        setIsOverHero(false);
-      }
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -66,12 +55,8 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-4 md:px-12 py-4',
-        isScrolled
-          ? 'bg-secondary py-3 shadow-md'
-          : isOverHero
-            ? 'bg-transparent py-4'
-            : 'bg-secondary py-4',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-4 md:px-12 bg-secondary',
+        isScrolled ? 'py-3 shadow-md' : 'py-4',
       )}
     >
       <div className="container mx-auto flex items-center justify-between">
@@ -81,10 +66,7 @@ export default function Navbar() {
             alt="The Pass Guys"
             width={300}
             height={168}
-            className={cn(
-              'h-10 sm:h-12 w-auto transition-all duration-500',
-              isOverHero && !isScrolled ? 'brightness-100' : 'brightness-100',
-            )}
+            className="h-10 sm:h-12 w-auto transition-all duration-500"
           />
         </Link>
 
