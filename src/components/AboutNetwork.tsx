@@ -25,7 +25,7 @@ export default function AboutNetwork({ id }: { id?: string }) {
               <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent flex items-end p-12">
                 <div>
                     <h3 className="text-4xl font-black text-white uppercase tracking-tighter leading-none mb-2">Our Instructor <br /> <span className="text-primary italic">Network.</span></h3>
-                    <p className="text-white/60 font-bold uppercase tracking-widest text-[10px]">Over 150+ Professional Coaches</p>
+                    <p className="text-white font-bold uppercase tracking-widest text-[10px]">Over 150+ Professional Coaches</p>
                 </div>
               </div>
             </div>

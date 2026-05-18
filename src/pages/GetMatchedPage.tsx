@@ -84,16 +84,16 @@ export default function GetMatchedPage() {
           <div className="inline-flex w-16 h-16 rounded-full bg-primary text-secondary items-center justify-center mx-auto mb-8 shadow-sm">
             <Check className="w-7 h-7" strokeWidth={3} />
           </div>
-          <div className="flex items-center justify-center gap-4 mb-8 text-secondary/55">
+          <div className="flex items-center justify-center gap-4 mb-8 text-secondary/80">
             <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
             <span className="text-[11px] font-semibold uppercase tracking-[0.32em]">All set</span>
             <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium text-secondary tracking-tighter leading-[0.95] mb-6">
-            We've got your <br />
-            <span className="text-primary">details, {formData.firstName || 'friend'}.</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-display text-secondary tracking-[0.02em] leading-[0.92] mb-6">
+            WE'VE GOT YOUR <br />
+            <span className="text-primary">DETAILS, {(formData.firstName || 'FRIEND').toUpperCase()}.</span>
           </h1>
-          <p className="text-secondary/65 text-base md:text-lg leading-relaxed max-w-md mx-auto">
+          <p className="text-secondary text-base md:text-lg leading-relaxed max-w-md mx-auto">
             One of the team will be in touch within 24 hours with your matched instructor.
           </p>
         </motion.div>
@@ -111,8 +111,15 @@ export default function GetMatchedPage() {
       />
 
       <div className="max-w-3xl mx-auto">
+        {/* ── Pricing context ──────────────────────────────────────────── */}
+        <div className="flex items-center justify-center gap-3 mb-5">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-secondary text-[11px] font-accent font-semibold uppercase tracking-[0.15em]">
+            From £35/hr · No commitment
+          </span>
+        </div>
+
         {/* ── Eyebrow ─────────────────────────────────────────────────── */}
-        <div className="flex items-center justify-center gap-4 mb-8 text-secondary/55">
+        <div className="flex items-center justify-center gap-4 mb-8 text-secondary/80">
           <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
           <span className="text-[11px] font-semibold uppercase tracking-[0.32em]">
             {String(step).padStart(2, '0')} <span className="mx-1.5 opacity-50">—</span> Step {step} of {STEPS_COUNT}
@@ -161,14 +168,14 @@ export default function GetMatchedPage() {
                       }`}
                     >
                       <div className="flex items-center gap-5">
-                        <div className={`shrink-0 transition-colors ${selected ? 'text-primary' : 'text-secondary/40'}`}>
+                        <div className={`shrink-0 transition-colors ${selected ? 'text-primary' : 'text-secondary/80'}`}>
                           <option.icon className="w-5 h-5" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg md:text-xl font-normal text-secondary tracking-tight">
+                          <h3 className="text-lg md:text-xl font-display text-secondary tracking-[0.01em]">
                             {option.title}
                           </h3>
-                          <p className="text-secondary/55 text-sm mt-0.5">{option.sub}</p>
+                          <p className="text-secondary text-sm mt-0.5">{option.sub}</p>
                         </div>
                         <div className={`shrink-0 w-5 h-5 rounded-full border transition-all flex items-center justify-center ${
                           selected ? 'border-primary bg-primary' : 'border-secondary/20'
@@ -237,7 +244,7 @@ export default function GetMatchedPage() {
 
               {/* Postcode */}
               <div>
-                <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-3">
+                <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/80 mb-3">
                   Postcode
                 </span>
                 <div className="relative">
@@ -247,7 +254,11 @@ export default function GetMatchedPage() {
                     placeholder="e.g. M1 1AA"
                     value={formData.postcode}
                     onChange={(e) => handleSelect('postcode', e.target.value)}
-                    className="w-full bg-white border border-secondary/15 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl pl-11 pr-4 py-3.5 text-secondary placeholder:text-secondary/30 outline-none transition-all"
+                    autoComplete="postal-code"
+                    autoCapitalize="characters"
+                    inputMode="text"
+                    aria-label="Postcode"
+                    className="w-full bg-white border border-secondary/15 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl pl-11 pr-4 py-3.5 text-secondary placeholder:text-secondary/50 outline-none transition-all"
                   />
                 </div>
               </div>
@@ -309,21 +320,24 @@ export default function GetMatchedPage() {
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-secondary/20 text-secondary text-sm font-medium hover:bg-secondary/5 transition-colors duration-300"
+                    className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-sm border border-secondary/20 text-secondary text-sm font-accent font-semibold uppercase tracking-[0.08em] hover:bg-secondary/5 transition-colors duration-300"
                   >
                     <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" />
                     Back
                   </button>
                   <button
                     type="submit"
-                    className="group inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-primary text-secondary text-sm font-semibold tracking-wide hover:brightness-105 hover:scale-[1.02] transition-all duration-300 shadow-sm"
+                    className="group inline-flex items-center justify-center gap-2 px-7 py-3 rounded-sm bg-primary text-secondary text-sm font-accent font-bold uppercase tracking-[0.08em] hover:brightness-105 hover:scale-[1.02] transition-all duration-300 shadow-sm"
                   >
                     Find My Instructor
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
                 </div>
-                <p className="text-center text-secondary/45 text-xs sm:text-sm tracking-wide pt-2">
+                <p className="text-center text-secondary/80 text-xs sm:text-sm tracking-wide pt-2">
                   Free · 2 minutes · No commitment
+                </p>
+                <p className="text-center text-secondary/60 text-[11px] leading-relaxed pt-3 max-w-sm mx-auto">
+                  By submitting, you agree to our <a href="/privacy" className="underline hover:text-primary transition-colors">privacy policy</a>. We only use your details to match you with an instructor.
                 </p>
               </form>
             </Step>
@@ -338,7 +352,7 @@ export default function GetMatchedPage() {
  * Form primitives
  * ───────────────────────────────────────────────────────────────────────── */
 
-function Step({ children }: { children: React.ReactNode }) {
+function Step({ children, ...rest }: { children: React.ReactNode } & React.ComponentProps<typeof motion.div>) {
   return (
     <motion.div
       initial={{ opacity: 0, x: 16 }}
@@ -356,14 +370,14 @@ function StepHeading({ title, accent, sub }: { title: string; accent: string; su
   return (
     <div>
       <h2 className="leading-[0.95] tracking-tighter">
-        <span className="block text-3xl sm:text-4xl md:text-5xl font-medium text-secondary/55">
+        <span className="block text-3xl sm:text-4xl md:text-5xl font-display text-secondary/70 tracking-[0.02em] uppercase">
           {title}
         </span>
-        <span className="block text-4xl sm:text-5xl md:text-6xl font-semibold text-primary mt-1">
+        <span className="block text-4xl sm:text-5xl md:text-6xl font-display text-primary tracking-[0.02em] uppercase mt-1">
           {accent}
         </span>
       </h2>
-      <p className="mt-4 text-secondary/65 text-base md:text-lg leading-relaxed max-w-md">
+      <p className="mt-4 text-secondary text-base md:text-lg leading-relaxed max-w-md">
         {sub}
       </p>
     </div>
@@ -389,7 +403,7 @@ function ChoiceGroup({
     multi ? (Array.isArray(value) && value.includes(v)) : value === v;
   return (
     <div>
-      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-3">
+      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/80 mb-3">
         {label}
       </span>
       <div className={`grid gap-2.5 grid-cols-1 ${columns === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-3'}`}>
@@ -426,15 +440,33 @@ function FieldInput({
   value: string;
   onChange: (v: string) => void;
 }) {
+  // Derive sensible mobile keyboard + autofill defaults from the input type.
+  const autoComplete =
+    type === 'email'
+      ? 'email'
+      : type === 'tel'
+        ? 'tel'
+        : label.toLowerCase().includes('first')
+          ? 'given-name'
+          : label.toLowerCase().includes('last')
+            ? 'family-name'
+            : label.toLowerCase().includes('name')
+              ? 'name'
+              : undefined;
+  const inputMode =
+    type === 'email' ? 'email' : type === 'tel' ? 'tel' : undefined;
+
   return (
     <label className="block">
-      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-2">
+      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/80 mb-2">
         {label}
       </span>
       <input
         required
         type={type}
         value={value}
+        autoComplete={autoComplete}
+        inputMode={inputMode}
         onChange={(e) => onChange(e.target.value)}
         className="w-full bg-white border border-secondary/15 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl px-4 py-3.5 text-secondary outline-none transition-all"
       />
@@ -457,7 +489,7 @@ function Nav({
         <button
           type="button"
           onClick={onBack}
-          className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-secondary/20 text-secondary text-sm font-medium hover:bg-secondary/5 transition-colors duration-300"
+          className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-sm border border-secondary/20 text-secondary text-sm font-accent font-semibold uppercase tracking-[0.08em] hover:bg-secondary/5 transition-colors duration-300"
         >
           <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" />
           Back
@@ -467,7 +499,7 @@ function Nav({
         type="button"
         onClick={onNext}
         disabled={nextDisabled}
-        className="group inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-primary text-secondary text-sm font-semibold tracking-wide hover:brightness-105 hover:scale-[1.02] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 shadow-sm"
+        className="group inline-flex items-center justify-center gap-2 px-7 py-3 rounded-sm bg-primary text-secondary text-sm font-accent font-bold uppercase tracking-[0.08em] hover:brightness-105 hover:scale-[1.02] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 shadow-sm"
       >
         Continue
         <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

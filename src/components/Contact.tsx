@@ -37,7 +37,7 @@ export default function Contact() {
                                 <Phone />
                             </div>
                             <div>
-                                <p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Call Us</p>
+                                <p className="text-[10px] text-white/80 font-black uppercase tracking-widest">Call Us</p>
                                 <p className="text-xl font-black italic">0800 123 4567</p>
                             </div>
                         </motion.div>
@@ -46,14 +46,14 @@ export default function Contact() {
                                 <Mail />
                             </div>
                             <div>
-                                <p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Email Us</p>
+                                <p className="text-[10px] text-white/80 font-black uppercase tracking-widest">Email Us</p>
                                 <p className="text-base sm:text-xl font-black italic break-all">hello@thepassguys.com</p>
                             </div>
                         </motion.div>
                     </div>
                 </div>
 
-                <div className="mt-16 pt-8 border-t border-white/5 flex space-x-8 text-[10px] font-black uppercase tracking-widest text-white/30 relative z-10">
+                <div className="mt-16 pt-8 border-t border-white/5 flex space-x-8 text-[10px] font-black uppercase tracking-widest text-white/60 relative z-10">
                     <a href="#" className="hover:text-primary transition-colors">Instagram</a>
                     <a href="#" className="hover:text-primary transition-colors">Facebook</a>
                     <a href="#" className="hover:text-primary transition-colors">TikTok</a>
@@ -64,7 +64,7 @@ export default function Contact() {
             <div className="bg-white p-6 sm:p-10 lg:p-20">
                 <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase text-secondary/40 tracking-widest">Full Name</label>
+                        <label className="text-[10px] font-black uppercase text-secondary/80 tracking-widest">Full Name</label>
                         <input 
                             type="text" 
                             className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-4 text-secondary focus:outline-none focus:border-primary transition-all font-bold placeholder:opacity-30"
@@ -72,7 +72,7 @@ export default function Contact() {
                         />
                     </div>
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase text-secondary/40 tracking-widest">Email Address</label>
+                        <label className="text-[10px] font-black uppercase text-secondary/80 tracking-widest">Email Address</label>
                         <input 
                             type="email" 
                             className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-4 text-secondary focus:outline-none focus:border-primary transition-all font-bold placeholder:opacity-30"
@@ -80,7 +80,7 @@ export default function Contact() {
                         />
                     </div>
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase text-secondary/40 tracking-widest">Message</label>
+                        <label className="text-[10px] font-black uppercase text-secondary/80 tracking-widest">Message</label>
                         <textarea 
                             rows={4}
                             className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-4 text-secondary focus:outline-none focus:border-primary transition-all resize-none font-bold placeholder:opacity-30"

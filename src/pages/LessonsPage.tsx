@@ -13,7 +13,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const lessonTypes = [
   { title: 'Manual lessons', slug: 'manual-lessons', icon: Car, desc: 'Master the gears with expert manual instructors.' },
   { title: 'Automatic lessons', slug: 'automatic-lessons', icon: Zap, desc: 'Focus on the road in modern automatic cars.' },
-  { title: 'Refresher lessons', slug: 'refresher-lessons', icon: RefreshCw, desc: 'Confidence back on the road after a break.' },
+  { title: 'Refresher lessons', slug: 'refresher-lessons', icon: RefreshCw, desc: 'Get your confidence back on the road after a break.' },
   { title: 'Motorway lessons', slug: 'motorway-lessons', icon: Compass, desc: 'Learn to handle high-speed roads safely.' },
   { title: 'Pass Plus', slug: 'pass-plus', icon: ShieldCheck, desc: 'Six modules of post-test training. Lower insurance.' },
   { title: 'Mock tests', slug: 'mock-tests', icon: ClipboardCheck, desc: 'Realistic test simulations with DVSA-approved ADIs.' },
@@ -50,14 +50,14 @@ export default function LessonsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Lessons for <br />
-              <span className="text-primary">every need.</span>
+              LESSONS FOR <br />
+              <span className="text-primary">EVERY NEED.</span>
             </motion.h2>
           </div>
 
-          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
             {lessonTypes.map((type, i) => (
               <motion.div
                 key={type.slug}
@@ -65,20 +65,20 @@ export default function LessonsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 1.0, delay: i * 0.06, ease: EASE }}
-                className="group bg-bg-page p-7 md:p-10 hover:bg-white/40 transition-colors duration-500"
+                className="group bg-white p-7 md:p-10 hover:bg-primary/5 shadow-sm rounded-xl border border-secondary/8 transition-colors duration-500"
               >
-                <div className="text-primary mb-5">
-                  <type.icon className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                  <type.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-normal text-secondary tracking-tight mb-2">
+                <h3 className="text-xl md:text-2xl font-display text-secondary tracking-[0.01em] uppercase mb-2">
                   {type.title}
                 </h3>
-                <p className="text-secondary/65 leading-relaxed text-sm md:text-base mb-6">
+                <p className="text-secondary leading-relaxed text-sm md:text-base mb-6">
                   {type.desc}
                 </p>
                 <Link
                   to={`/services/${type.slug}`}
-                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-secondary/70 hover:text-primary transition-colors"
+                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-secondary/60 hover:text-primary transition-colors"
                 >
                   Learn more
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />

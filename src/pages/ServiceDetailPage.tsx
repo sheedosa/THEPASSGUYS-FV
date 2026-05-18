@@ -34,7 +34,7 @@ export default function ServiceDetailPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0, ease: EASE }}
           >
-            <div className="hero-fade hero-fade-delay-1 flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 justify-center text-secondary/55">
+            <div className="hero-fade hero-fade-delay-1 flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 justify-center text-secondary/80">
               <span className="inline-block w-8 sm:w-10 h-px bg-secondary/30" aria-hidden="true" />
               <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.32em]">
                 Specialist tuition
@@ -44,13 +44,13 @@ export default function ServiceDetailPage() {
 
             <h1 className="leading-[0.85] mb-6 sm:mb-8 md:mb-10">
               <span className="block overflow-hidden pb-[0.1em]">
-                <span className="hero-line hero-line-1 block font-display text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-light text-secondary/40">
+                <span className="hero-line hero-line-1 block font-display text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-light text-secondary/70">
                   {service.title}
                 </span>
               </span>
               <span className="block overflow-hidden pb-[0.1em]">
                 <span
-                  className="hero-line hero-line-2 block font-display text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-bold text-primary"
+                  className="hero-line hero-line-2 block font-display text-[clamp(2.5rem,11vw,7.5rem)] font-bold text-primary break-words"
                   style={{ letterSpacing: '-0.02em' }}
                 >
                   {service.subtitle}
@@ -58,7 +58,7 @@ export default function ServiceDetailPage() {
               </span>
             </h1>
 
-            <p className="hero-fade hero-fade-delay-2 text-base md:text-lg text-secondary/65 leading-relaxed max-w-xl mb-8 mx-auto">
+            <p className="hero-fade hero-fade-delay-2 text-base md:text-lg text-secondary leading-relaxed max-w-xl mb-8 mx-auto">
               {service.description}
             </p>
 
@@ -70,7 +70,7 @@ export default function ServiceDetailPage() {
                 Find My Instructor
                 <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
-              <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.32em] px-4 py-2 rounded-full border border-secondary/15 text-secondary/70">
+              <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.32em] px-4 py-2 rounded-full border border-secondary/15 text-secondary">
                 {service.pricingHint}
               </span>
             </div>
@@ -91,14 +91,14 @@ export default function ServiceDetailPage() {
               className="rounded-2xl bg-secondary text-white p-8 md:p-10"
             >
               <SectionLabel number="01" label="Who it's for" align="left" tone="dark" />
-              <h2 className="mt-6 text-3xl md:text-4xl font-medium text-white tracking-tighter leading-[1.05] mb-8">
-                Built for <span className="text-primary">learners like you.</span>
+              <h2 className="mt-6 text-3xl md:text-4xl font-display text-white tracking-[0.02em] leading-[0.92] uppercase mb-8">
+                BUILT FOR <span className="text-primary">LEARNERS LIKE YOU.</span>
               </h2>
               <ul className="space-y-4">
                 {service.whoItIsFor.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-white/80 leading-relaxed">{item}</span>
+                    <span className="text-white leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -107,8 +107,8 @@ export default function ServiceDetailPage() {
             {/* Benefits */}
             <div>
               <SectionLabel number="02" label="What you get" align="left" />
-              <h2 className="mt-6 text-3xl md:text-4xl font-medium text-secondary tracking-tighter leading-[1.05] mb-10">
-                Why it <span className="text-primary">works.</span>
+              <h2 className="mt-6 text-3xl md:text-4xl font-display text-secondary tracking-[0.02em] leading-[0.92] uppercase mb-10">
+                WHY IT <span className="text-primary">WORKS.</span>
               </h2>
               <div className="space-y-8">
                 {service.benefits.map((benefit, i) => (
@@ -120,14 +120,14 @@ export default function ServiceDetailPage() {
                     transition={{ duration: 0.9, delay: i * 0.08, ease: EASE }}
                     className="flex items-start gap-5"
                   >
-                    <div className="text-primary mt-1">
-                      <benefit.icon className="w-5 h-5" />
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <benefit.icon className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-lg md:text-xl font-normal text-secondary tracking-tight mb-1">
+                      <h3 className="text-lg md:text-xl font-display text-secondary tracking-[0.01em] uppercase mb-1">
                         {benefit.title}
                       </h3>
-                      <p className="text-secondary/65 leading-relaxed text-sm md:text-base">
+                      <p className="text-secondary leading-relaxed text-sm md:text-base">
                         {benefit.desc}
                       </p>
                     </div>
@@ -149,9 +149,9 @@ export default function ServiceDetailPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Honest <span className="text-primary">pricing.</span>
+              HONEST <span className="text-primary">PRICING.</span>
             </motion.h2>
 
             <motion.div
@@ -159,12 +159,12 @@ export default function ServiceDetailPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 1.0, delay: 0.15, ease: EASE }}
-              className="mt-10 inline-flex items-center gap-3 px-6 py-3 rounded-full bg-secondary/5 border border-secondary/10 text-secondary text-sm font-medium"
+              className="mt-10 inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-secondary/10 shadow-sm text-secondary text-sm font-medium"
             >
               {service.pricingHint}
             </motion.div>
 
-            <p className="text-secondary/65 mt-6 leading-relaxed max-w-lg mx-auto">
+            <p className="text-secondary mt-6 leading-relaxed max-w-lg mx-auto">
               All our rates are transparent. No hidden booking or admin fees. Flexible payment options to suit your budget.
             </p>
 
@@ -189,10 +189,10 @@ export default function ServiceDetailPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Common <br />
-              <span className="text-primary">questions.</span>
+              COMMON <br />
+              <span className="text-primary">QUESTIONS.</span>
             </motion.h2>
           </div>
           <div className="max-w-4xl mx-auto">

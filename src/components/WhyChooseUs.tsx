@@ -57,7 +57,7 @@ export default function WhyChooseUs({ id }: { id?: string }) {
               <h3 className="text-lg sm:text-xl md:text-2xl font-medium text-secondary tracking-tight mb-2 md:mb-4 leading-tight">
                 {point.title}
               </h3>
-              <p className="text-secondary/60 leading-relaxed text-xs sm:text-sm md:text-base">
+              <p className="text-secondary leading-relaxed text-xs sm:text-sm md:text-base">
                 {point.description}
               </p>
             </motion.div>

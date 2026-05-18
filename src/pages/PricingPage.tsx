@@ -62,10 +62,10 @@ export default function PricingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-white tracking-[0.02em] leading-[0.92]"
             >
-              No surprises. <br />
-              <span className="text-primary">Just driving.</span>
+              NO SURPRISES. <br />
+              <span className="text-primary">JUST DRIVING.</span>
             </motion.h2>
           </div>
 
@@ -79,13 +79,13 @@ export default function PricingPage() {
                 transition={{ duration: 1.0, delay: i * 0.08, ease: EASE }}
                 className="bg-secondary p-8 md:p-10"
               >
-                <div className="text-primary mb-4">
-                  <point.icon className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-5">
+                  <point.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-normal text-white tracking-tighter mb-2">
+                <h3 className="text-xl md:text-2xl font-display text-white tracking-[0.01em] uppercase mb-2">
                   {point.title}
                 </h3>
-                <p className="text-white/65 leading-relaxed text-sm md:text-base">
+                <p className="text-white leading-relaxed text-sm md:text-base">
                   {point.desc}
                 </p>
               </motion.div>
@@ -105,31 +105,31 @@ export default function PricingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 1.2, ease: EASE }}
-                className="mt-6 text-4xl sm:text-5xl md:text-6xl font-medium text-secondary tracking-tighter leading-[0.95]"
+                className="mt-6 text-4xl sm:text-5xl md:text-6xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
               >
-                Everything you need. <br />
-                <span className="text-primary">Nothing you don't.</span>
+                EVERYTHING YOU NEED. <br />
+                <span className="text-primary">NOTHING YOU DON'T.</span>
               </motion.h2>
 
               <div className="mt-8 space-y-5">
                 <div className="flex items-start gap-4">
-                  <div className="text-primary mt-1">
-                    <Clock className="w-5 h-5" />
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <Clock className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-normal text-secondary tracking-tight">Total flexibility</h4>
-                    <p className="text-secondary/65 text-sm md:text-base leading-relaxed mt-1">
+                    <h4 className="text-lg font-display text-secondary tracking-[0.01em] uppercase">Total flexibility</h4>
+                    <p className="text-secondary text-sm md:text-base leading-relaxed mt-1">
                       Cancel or reschedule lessons through your student portal, free with 48 hours notice.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="text-primary mt-1">
-                    <Sparkles className="w-5 h-5" />
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <Sparkles className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-normal text-secondary tracking-tight">Modern fleet</h4>
-                    <p className="text-secondary/65 text-sm md:text-base leading-relaxed mt-1">
+                    <h4 className="text-lg font-display text-secondary tracking-[0.01em] uppercase">Modern fleet</h4>
+                    <p className="text-secondary text-sm md:text-base leading-relaxed mt-1">
                       Latest dual-control cars with full safety features and climate control.
                     </p>
                   </div>
@@ -145,10 +145,10 @@ export default function PricingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.8, delay: i * 0.05, ease: EASE }}
-                  className="bg-bg-page p-5 md:p-6 flex items-center gap-3"
+                  className="bg-white p-5 md:p-6 flex items-center gap-3"
                 >
                   <Check className="w-4 h-4 text-primary shrink-0" strokeWidth={3} />
-                  <span className="text-sm text-secondary/85 font-medium">{feature}</span>
+                  <span className="text-sm text-secondary font-medium">{feature}</span>
                 </motion.div>
               ))}
             </div>
@@ -166,10 +166,10 @@ export default function PricingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Quick <br />
-              <span className="text-primary">answers.</span>
+              QUICK <br />
+              <span className="text-primary">ANSWERS.</span>
             </motion.h2>
           </div>
           <div className="max-w-4xl mx-auto">

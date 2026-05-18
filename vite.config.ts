@@ -28,6 +28,7 @@ export default defineConfig(() => {
             'react-vendor': ['react', 'react-dom', 'react-router-dom'],
             'motion-vendor': ['motion'],
             'icons-vendor': ['lucide-react'],
+            'gsap-vendor': ['gsap'],
           },
         },
       },

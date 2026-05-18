@@ -5,7 +5,7 @@ import SectionLabel from './ui/SectionLabel';
 
 export default function FinalCTA() {
   return (
-    <section className="py-24 md:py-40 bg-secondary overflow-hidden relative">
+    <section data-section="final-cta" className="py-24 md:py-40 bg-secondary overflow-hidden relative">
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
         <motion.div
           className="absolute top-6 md:p-10 left-10 w-96 h-96 bg-primary rounded-full blur-[120px]"
@@ -27,17 +27,18 @@ export default function FinalCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl md:text-6xl lg:text-7xl font-medium text-white tracking-tighter leading-[0.95] mb-8"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display text-white tracking-[0.02em] leading-[0.92] mb-8"
           >
-            Ready to start? <br />
-            <span className="text-primary">Find your instructor.</span>
+            READY TO START?
+            <br />
+            <span className="text-primary">FIND YOUR INSTRUCTOR.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 1.1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="text-white/60 text-base md:text-lg mb-10 md:mb-14 max-w-xl mx-auto"
+            className="text-white text-base md:text-lg mb-10 md:mb-14 max-w-xl mx-auto font-sans"
           >
             Free matching. No waiting lists. Get connected with a local instructor in minutes.
           </motion.p>
@@ -52,22 +53,22 @@ export default function FinalCTA() {
             <MagneticButton>
               <Link
                 to="/get-matched"
-                className="group inline-flex items-center gap-3 px-9 py-4 sm:px-12 sm:py-5 bg-primary text-secondary font-semibold rounded-full hover:scale-[1.03] transition-transform duration-500 shadow-ambient-lg shadow-primary/25 text-base sm:text-lg"
+                className="group inline-flex items-center gap-3 px-9 py-4 sm:px-12 sm:py-5 bg-primary text-secondary font-accent font-bold uppercase tracking-[0.08em] rounded-sm hover:bg-primary-hover hover:shadow-yellow hover:-translate-y-0.5 transition-all duration-300 text-base sm:text-lg"
               >
                 Find My Instructor
                 <span aria-hidden="true" className="inline-block transition-transform duration-500 group-hover:translate-x-1">→</span>
               </Link>
             </MagneticButton>
-            <p className="text-white/45 text-xs sm:text-sm tracking-wide">
+            <p className="font-accent text-white/80 text-xs sm:text-sm tracking-wide uppercase">
               Free · 2 minutes · No commitment
             </p>
           </motion.div>
 
-          <div className="mt-12 md:mt-20 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-6 md:gap-x-8 text-white/35 font-semibold uppercase tracking-[0.32em] text-[10px] whitespace-nowrap">
+          <div className="mt-12 md:mt-20 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:gap-x-6 md:gap-x-8 text-white/70 font-accent font-semibold uppercase tracking-[0.24em] sm:tracking-[0.32em] text-[10px]">
              <span>DVSA-approved</span>
-             <span className="w-1 h-1 bg-primary rounded-full" />
+             <span className="w-1 h-1 bg-primary rounded-full" aria-hidden="true" />
              <span>Free matching</span>
-             <span className="w-1 h-1 bg-primary rounded-full" />
+             <span className="w-1 h-1 bg-primary rounded-full" aria-hidden="true" />
              <span>Greater Manchester</span>
           </div>
         </div>

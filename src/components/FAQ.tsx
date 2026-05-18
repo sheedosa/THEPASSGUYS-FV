@@ -54,9 +54,9 @@ export default function FAQ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
-                className="text-4xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+                className="text-4xl md:text-6xl lg:text-8xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
               >
-                Common <span className="text-primary">questions.</span>
+                COMMON <span className="text-primary">QUESTIONS.</span>
               </motion.h2>
             </div>
           )}
@@ -77,7 +77,7 @@ export default function FAQ({
                     className="w-full py-7 flex items-center justify-between text-left group gap-6"
                   >
                     <span
-                      className={`text-lg md:text-2xl font-normal tracking-tight transition-all duration-500 ${
+                      className={`text-lg md:text-2xl font-display tracking-[0.01em] transition-all duration-500 ${
                         isOpen ? 'text-primary' : 'text-secondary group-hover:text-secondary/70'
                       }`}
                     >
@@ -85,7 +85,7 @@ export default function FAQ({
                     </span>
                     <ChevronDown
                       className={`w-5 h-5 shrink-0 transition-all duration-500 ${
-                        isOpen ? 'rotate-180 text-primary' : 'text-secondary/40'
+                        isOpen ? 'rotate-180 text-primary' : 'text-secondary/80'
                       }`}
                     />
                   </button>
@@ -99,7 +99,7 @@ export default function FAQ({
                         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="text-secondary/65 text-base md:text-lg leading-relaxed max-w-2xl pb-8">
+                        <p className="text-secondary text-base md:text-lg leading-relaxed max-w-2xl pb-8 font-sans">
                           {faq.a}
                         </p>
                       </motion.div>

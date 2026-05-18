@@ -47,7 +47,7 @@ export default function InstructorsPage() {
         description="Bring your ADI badge. We bring the students. Keep your own pricing, your own diary, your own car. We just match you with local learners."
         primaryCta={{ label: 'Apply to join', href: '#apply' }}
         secondaryCta={{ label: 'See benefits', href: '#benefits' }}
-        meta={['Local students only', 'No franchise fee', 'You set the price']}
+        meta={['Local students only', 'Low weekly fee', 'You set the price']}
       />
 
       {/* ── About the network ───────────────────────────────────────────── */}
@@ -61,29 +61,29 @@ export default function InstructorsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 1.2, ease: EASE }}
-                className="mt-6 text-4xl sm:text-5xl md:text-6xl font-medium text-secondary tracking-tighter leading-[0.95]"
+                className="mt-6 text-4xl sm:text-5xl md:text-6xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
               >
-                A driving school <br />
-                <span className="text-primary">built for instructors.</span>
+                A DRIVING SCHOOL <br />
+                <span className="text-primary">BUILT FOR INSTRUCTORS.</span>
               </motion.h2>
-              <p className="mt-6 text-secondary/65 text-base md:text-lg leading-relaxed">
+              <p className="mt-6 text-secondary text-base md:text-lg leading-relaxed">
                 The Pass Guys is not a traditional franchise. You keep your own pricing, your own diary, and your own car. We just make sure your diary stays full.
               </p>
-              <p className="mt-4 text-secondary/65 text-base md:text-lg leading-relaxed">
+              <p className="mt-4 text-secondary text-base md:text-lg leading-relaxed">
                 We handle the marketing, student screening, and bookings so you can focus on what you are good at: teaching people to drive.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
               <div className="bg-secondary text-white p-7 md:p-8">
-                <Briefcase className="w-5 h-5 text-primary mb-4" />
-                <h4 className="text-lg md:text-xl font-normal mb-2">Modern franchise</h4>
-                <p className="text-white/65 text-sm leading-relaxed">Low weekly fees and zero commission on your lesson rates.</p>
+                <Briefcase className="w-6 h-6 text-primary mb-4" />
+                <h4 className="text-lg md:text-xl font-display uppercase mb-2">Modern franchise</h4>
+                <p className="text-white text-sm leading-relaxed">Low weekly fees and zero commission on your lesson rates.</p>
               </div>
               <div className="bg-bg-page p-7 md:p-8">
-                <UserPlus className="w-5 h-5 text-primary mb-4" />
-                <h4 className="text-lg md:text-xl font-normal text-secondary mb-2">Instant scale</h4>
-                <p className="text-secondary/65 text-sm leading-relaxed">Access a pool of 500+ active learners waiting for tuition in Manchester.</p>
+                <UserPlus className="w-6 h-6 text-primary mb-4" />
+                <h4 className="text-lg md:text-xl font-display uppercase text-secondary mb-2">Instant scale</h4>
+                <p className="text-secondary text-sm leading-relaxed">Access a pool of 500+ active learners waiting for tuition in Manchester.</p>
               </div>
             </div>
           </div>
@@ -100,14 +100,14 @@ export default function InstructorsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              The good <br />
-              <span className="text-primary">stuff.</span>
+              THE GOOD <br />
+              <span className="text-primary">STUFF.</span>
             </motion.h2>
           </div>
 
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
             {benefits.map((b, i) => (
               <motion.div
                 key={b.title}
@@ -115,15 +115,15 @@ export default function InstructorsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 1.0, delay: i * 0.08, ease: EASE }}
-                className="bg-bg-page p-8 md:p-10"
+                className="bg-white p-8 md:p-10 rounded-xl border border-secondary/8"
               >
-                <div className="text-primary mb-5">
-                  <b.icon className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                  <b.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-normal text-secondary tracking-tight mb-2">
+                <h3 className="text-xl md:text-2xl font-display text-secondary tracking-[0.01em] uppercase mb-2">
                   {b.title}
                 </h3>
-                <p className="text-secondary/65 leading-relaxed text-sm md:text-base">
+                <p className="text-secondary leading-relaxed text-sm md:text-base">
                   {b.desc}
                 </p>
               </motion.div>
@@ -142,23 +142,23 @@ export default function InstructorsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tighter leading-[0.95]"
+              className="mt-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-white tracking-[0.02em] leading-[0.92]"
             >
-              Join the <br />
-              <span className="text-primary">network.</span>
+              JOIN THE <br />
+              <span className="text-primary">NETWORK.</span>
             </motion.h2>
           </div>
 
           <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden">
             {standards.map((s) => (
               <div key={s.title} className="bg-secondary p-7 md:p-10">
-                <div className="text-primary mb-4">
-                  <s.icon className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center mb-5">
+                  <s.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h4 className="text-xl md:text-2xl font-normal text-white tracking-tight mb-2">
+                <h4 className="text-xl md:text-2xl font-display text-white tracking-[0.01em] uppercase mb-2">
                   {s.title}
                 </h4>
-                <p className="text-white/65 leading-relaxed text-sm md:text-base">{s.desc}</p>
+                <p className="text-white leading-relaxed text-sm md:text-base">{s.desc}</p>
               </div>
             ))}
           </div>
@@ -177,12 +177,12 @@ export default function InstructorsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 1.2, ease: EASE }}
-                className="mt-6 text-4xl sm:text-5xl md:text-6xl font-medium text-secondary tracking-tighter leading-[0.95]"
+                className="mt-6 text-4xl sm:text-5xl md:text-6xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
               >
-                Start your <br />
-                <span className="text-primary">next chapter.</span>
+                START YOUR <br />
+                <span className="text-primary">NEXT CHAPTER.</span>
               </motion.h2>
-              <p className="mt-6 text-secondary/65 text-base md:text-lg leading-relaxed">
+              <p className="mt-6 text-secondary text-base md:text-lg leading-relaxed">
                 Fill out the form and a member of our partnership team will be in touch within 24 hours to discuss onboarding.
               </p>
               <ul className="mt-8 space-y-3">
@@ -191,7 +191,7 @@ export default function InstructorsPage() {
                   'Steady lead flow week to week',
                   'Your own success manager',
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-secondary/80 text-sm">
+                  <li key={item} className="flex items-center gap-3 text-secondary text-sm font-medium">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
                     {item}
                   </li>
@@ -205,7 +205,7 @@ export default function InstructorsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 1.2, delay: 0.15, ease: EASE }}
-              className="border border-secondary/10 rounded-2xl bg-bg-page p-6 md:p-10"
+              className="border border-secondary/10 rounded-xl bg-white p-6 md:p-10 shadow-sm"
             >
               {!submitted ? (
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -221,7 +221,7 @@ export default function InstructorsPage() {
                     onChange={(v) => setFormData({ ...formData, location: v })}
                     placeholder="e.g. Stockport"
                   />
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <SelectField
                       label="Car type"
                       value={formData.carType}
@@ -238,13 +238,13 @@ export default function InstructorsPage() {
                       options={[
                         { value: 'full-time', label: 'Full-time' },
                         { value: 'part-time', label: 'Part-time' },
-                        { value: 'ev-only', label: 'Eve/Weekend' },
+                        { value: 'ev-only', label: 'Evenings & Weekends' },
                       ]}
                     />
                   </div>
                   <button
                     type="submit"
-                    className="group w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-primary text-secondary text-sm font-semibold tracking-wide hover:brightness-105 hover:scale-[1.01] transition-all duration-300 shadow-sm"
+                    className="group w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-sm bg-primary text-secondary text-sm font-accent font-semibold tracking-wide hover:brightness-105 hover:scale-[1.01] transition-all duration-300 shadow-sm"
                   >
                     Apply to join
                     <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -255,10 +255,10 @@ export default function InstructorsPage() {
                   <div className="inline-flex w-16 h-16 rounded-full bg-primary text-secondary items-center justify-center mx-auto">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-normal text-secondary tracking-tighter">
+                  <h3 className="text-2xl md:text-3xl font-display text-secondary tracking-[0.01em] uppercase">
                     Application sent.
                   </h3>
-                  <p className="text-secondary/65 max-w-sm mx-auto leading-relaxed">
+                  <p className="text-secondary max-w-sm mx-auto leading-relaxed">
                     Thanks, {formData.name || 'mate'}. Our team will call you within 24 hours.
                   </p>
                   <button
@@ -291,9 +291,15 @@ function Field({
   onChange: (v: string) => void;
   placeholder?: string;
 }) {
+  const lower = label.toLowerCase();
+  const autoComplete = lower.includes('location') || lower.includes('city') || lower.includes('area')
+    ? 'address-level2'
+    : lower.includes('name')
+      ? 'name'
+      : undefined;
   return (
     <label className="block">
-      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-2">
+      <span className="block text-[10px] font-accent font-bold uppercase tracking-[0.32em] text-secondary/80 mb-2">
         {label}
       </span>
       <input
@@ -302,7 +308,8 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-white border border-secondary/15 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl px-4 py-3 text-secondary placeholder:text-secondary/30 outline-none transition-all"
+        autoComplete={autoComplete}
+        className="w-full bg-white border border-secondary/15 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl px-4 py-3 text-secondary placeholder:text-secondary/50 outline-none transition-all"
       />
     </label>
   );
@@ -321,7 +328,7 @@ function SelectField({
 }) {
   return (
     <label className="block">
-      <span className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/55 mb-2">
+      <span className="block text-[10px] font-accent font-bold uppercase tracking-[0.32em] text-secondary/80 mb-2">
         {label}
       </span>
       <select

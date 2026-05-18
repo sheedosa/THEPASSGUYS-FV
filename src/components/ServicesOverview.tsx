@@ -50,13 +50,13 @@ export default function ServicesOverview() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="text-secondary/60 max-w-2xl mx-auto mb-6 text-base md:text-lg"
+            className="text-secondary max-w-2xl mx-auto mb-6 text-base md:text-lg"
           >
             From your first lesson to your test pass. Pick what fits.
           </motion.p>
           
           {/* Mobile Swipe Hint */}
-          <div className="flex items-center gap-2 text-secondary/40 text-xs font-semibold uppercase tracking-wider md:hidden animate-pulse">
+          <div className="flex items-center gap-2 text-secondary/80 text-xs font-semibold uppercase tracking-wider md:hidden animate-pulse">
             <span>Swipe to explore</span>
             <span className="text-lg leading-none">→</span>
           </div>
@@ -81,7 +81,7 @@ export default function ServicesOverview() {
                 {service.title}
               </h3>
 
-              <p className="text-secondary/60 mb-10 leading-relaxed flex-1 text-sm md:text-base">
+              <p className="text-secondary mb-10 leading-relaxed flex-1 text-sm md:text-base">
                 {service.description}
               </p>
 

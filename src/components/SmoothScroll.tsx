@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * Smooth scroll wrapper.
  * Lenis owns the scroll loop; ScrollTrigger is hooked into Lenis so any
- * GSAP scroll-driven timeline (see CinematicCar) scrubs perfectly in sync.
+ * GSAP scroll-driven timeline scrubs perfectly in sync.
  */
 export default function SmoothScroll() {
   useEffect(() => {

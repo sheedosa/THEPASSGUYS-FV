@@ -68,14 +68,14 @@ export default function AreasPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Six big regions. <br />
-              <span className="text-primary">All covered.</span>
+              SIX BIG REGIONS. <br />
+              <span className="text-primary">ALL COVERED.</span>
             </motion.h2>
           </div>
 
-          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
             {regions.map((region, i) => (
               <motion.div
                 key={region.name}
@@ -83,16 +83,16 @@ export default function AreasPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 1.0, delay: i * 0.06, ease: EASE }}
-                className="bg-bg-page p-8 md:p-10 group hover:bg-white/40 transition-colors duration-500"
+                className="bg-white p-8 md:p-10 rounded-xl border border-secondary/8 group hover:bg-white/40 transition-colors duration-500"
               >
-                <div className="flex items-center gap-2 text-primary text-[10px] font-semibold uppercase tracking-[0.32em] mb-4">
-                  <MapPin className="w-3 h-3" />
-                  0{i + 1}
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-secondary text-[11px] font-bold font-accent">0{i + 1}</span>
+                  <MapPin className="w-4 h-4 text-primary" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-normal text-secondary tracking-tighter leading-tight mb-3">
+                <h3 className="text-2xl md:text-3xl font-display text-secondary tracking-[0.01em] uppercase leading-tight mb-3">
                   {region.name}
                 </h3>
-                <p className="text-secondary/65 leading-relaxed text-sm md:text-base">
+                <p className="text-secondary leading-relaxed text-sm md:text-base">
                   {region.desc}
                 </p>
               </motion.div>
@@ -111,17 +111,17 @@ export default function AreasPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Complete <br />
-              <span className="text-primary">postcode coverage.</span>
+              COMPLETE <br />
+              <span className="text-primary">POSTCODE COVERAGE.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.0, delay: 0.15, ease: EASE }}
-              className="mt-6 text-secondary/65 text-base md:text-lg leading-relaxed max-w-xl mx-auto"
+              className="mt-6 text-secondary text-base md:text-lg leading-relaxed max-w-xl mx-auto"
             >
               Local instructors live and teach in every borough, so you learn the routes you will actually drive on.
             </motion.p>
@@ -135,9 +135,9 @@ export default function AreasPage() {
             className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
           >
             {boroughList.map((borough, i) => (
-              <span key={borough} className="inline-flex items-center gap-3 text-secondary/80 text-xs sm:text-sm font-medium uppercase tracking-[0.18em]">
+              <span key={borough} className="inline-flex items-center gap-3 text-secondary text-xs sm:text-sm font-semibold uppercase tracking-[0.18em]">
                 <span className="inline-flex items-center gap-1.5">
-                  <MapPin className="w-3 h-3 text-primary" /> {borough}
+                  <MapPin className="w-3.5 h-3.5 text-secondary" /> {borough}
                 </span>
                 {i < boroughList.length - 1 && (
                   <span className="w-1 h-1 rounded-full bg-primary/60" aria-hidden="true" />
@@ -146,8 +146,8 @@ export default function AreasPage() {
             ))}
           </motion.div>
 
-          <div className="mt-10 text-center text-secondary/45 text-[11px] uppercase tracking-[0.32em]">
-            15 areas · Matched to your postcode
+          <div className="mt-10 text-center text-secondary/80 text-[11px] uppercase tracking-[0.32em]">
+            10 boroughs · Matched to your postcode
           </div>
         </div>
       </section>

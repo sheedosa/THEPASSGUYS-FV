@@ -29,7 +29,7 @@ export default function MatchingCallout() {
               Not just a driving school, we find the <span className="text-primary">right instructor</span> for you.
             </h2>
 
-            <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-8 md:mb-12 max-w-2xl mx-auto">
+            <p className="text-white text-lg md:text-xl leading-relaxed mb-8 md:mb-12 max-w-2xl mx-auto">
               Finding a local instructor is hard. Finding one who teaches the way you actually learn is harder still. Tell us how you learn and we sort the rest within a week.
             </p>
 

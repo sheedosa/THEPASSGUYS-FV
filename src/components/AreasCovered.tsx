@@ -109,7 +109,7 @@ export default function AreasCovered({ id }: { id?: string }) {
           >
             We cover all of <span className="text-primary">Greater Manchester.</span>
           </motion.h2>
-          <p className="text-secondary/60 text-base md:text-lg max-w-xl mx-auto mt-4">
+          <p className="text-secondary text-base md:text-lg max-w-xl mx-auto mt-4">
             <span className="hidden md:inline">Hover over a borough to highlight it. </span>
             <span className="md:hidden">Tap a borough to highlight it. </span>
             Pick any region to see local instructors.
@@ -197,7 +197,7 @@ export default function AreasCovered({ id }: { id?: string }) {
             transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
             className="space-y-6"
           >
-            <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-secondary/45 font-medium">
+            <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-secondary/80 font-medium">
               <span className="inline-block w-8 h-px bg-secondary/20" />
               <span className="hidden md:inline">{active ? 'Borough' : 'All boroughs'}</span>
               <span className="md:hidden">Coverage</span>
@@ -206,7 +206,7 @@ export default function AreasCovered({ id }: { id?: string }) {
               <p className="text-3xl md:text-5xl font-normal tracking-tighter text-secondary">
                 {active ? BOROUGHS.find(b => b.id === active)?.name : 'All 10 boroughs.'}
               </p>
-              <p className="text-secondary/60 mt-3 text-base md:text-lg">
+              <p className="text-secondary mt-3 text-base md:text-lg">
                 {active
                   ? 'DVSA-approved instructors live in this borough and teach surrounding postcodes daily.'
                   : 'We operate across Manchester, Salford, Trafford, Stockport, Tameside, Oldham, Rochdale, Bury, Bolton, and Wigan.'}

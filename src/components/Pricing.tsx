@@ -41,10 +41,10 @@ export default function Pricing({ id }: { id?: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 1.2, ease: EASE }}
-            className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+            className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
           >
-            One price. <br />
-            <span className="text-primary">Three ways to learn.</span>
+            SIMPLE PRICING. <br />
+            <span className="text-primary">THREE WAYS TO LEARN.</span>
           </motion.h2>
         </div>
 
@@ -69,22 +69,22 @@ export default function Pricing({ id }: { id?: string }) {
                 </div>
               )}
 
-              <h3 className={`text-xl md:text-2xl font-normal tracking-tighter mb-2 ${plan.recommended ? 'text-white' : 'text-secondary'}`}>
+              <h3 className={`text-xl md:text-2xl font-display tracking-[0.01em] uppercase mb-2 ${plan.recommended ? 'text-white' : 'text-secondary'}`}>
                 {plan.name}
               </h3>
 
               <div className="flex items-baseline gap-2 mb-8">
-                <span className={`text-5xl md:text-6xl font-normal tracking-tighter ${plan.recommended ? 'text-white' : 'text-secondary'}`}>
+                <span className={`text-5xl md:text-6xl font-display tracking-[0.02em] ${plan.recommended ? 'text-white' : 'text-secondary'}`}>
                   £{plan.price}
                 </span>
-                <span className={`text-[11px] font-medium uppercase tracking-[0.2em] ${plan.recommended ? 'text-white/55' : 'text-secondary/55'}`}>
+                <span className={`text-[11px] font-medium uppercase tracking-[0.2em] ${plan.recommended ? 'text-white/80' : 'text-secondary/80'}`}>
                   {plan.unit}
                 </span>
               </div>
 
               <ul className="space-y-3 mb-10 grow">
                 {plan.features.map((f) => (
-                  <li key={f} className={`flex items-center gap-3 text-sm ${plan.recommended ? 'text-white/80' : 'text-secondary/75'}`}>
+                  <li key={f} className={`flex items-center gap-3 text-sm ${plan.recommended ? 'text-white' : 'text-secondary'}`}>
                     <Check className={`w-4 h-4 shrink-0 ${plan.recommended ? 'text-primary' : 'text-primary'}`} strokeWidth={3} />
                     {f}
                   </li>
@@ -93,13 +93,13 @@ export default function Pricing({ id }: { id?: string }) {
 
               <Link
                 to="/get-matched"
-                className={`group inline-flex items-center justify-center gap-2 py-3 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 ${
+                className={`group inline-flex items-center justify-center gap-2 py-3 rounded-sm text-sm font-accent font-bold uppercase tracking-[0.08em] transition-all duration-300 ${
                   plan.recommended
-                    ? 'bg-primary text-secondary hover:brightness-105'
+                    ? 'bg-primary text-secondary hover:bg-primary-hover hover:shadow-yellow'
                     : 'border border-secondary/20 text-secondary hover:bg-secondary/5'
                 }`}
               >
-                Choose plan
+                CHOOSE PLAN
                 <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
             </motion.div>

@@ -14,24 +14,8 @@ interface PageHeroProps {
 }
 
 /**
- * PageHero — the standard hero for every non-homepage page.
- *
- * Visual hierarchy (top → bottom, in descending weight):
- *
- *   1. Eyebrow         — small caps, tracked, secondary/55              (the context)
- *   2. Headline line 1 — large, font-medium, secondary/55               (the setup)
- *   3. Headline line 2 — XL, font-semibold, primary green               (the payoff — visual anchor)
- *   4. Description     — body, secondary/65                              (the explanation)
- *   5. CTAs            — primary green pill + ghost outline              (the action)
- *   6. Meta strip      — micro caps, tracked, secondary/45               (the proof)
- *
- * Responsive sizing is keyed to clean breakpoints (no arbitrary rems on
- * mobile) so the headline always sits comfortably above the fold:
- *
- *   base:  5xl / 6xl   →  6rem total
- *   sm:    6xl / 7xl   →  ~8rem total
- *   md:    7xl / 8xl   →  ~10rem total
- *   lg:    6rem / 7.5rem → 13.5rem total
+ * PageHero — immersive dark hero for every non-homepage page.
+ * Dark bg-secondary with yellow glow, road-mark textures, film grain.
  */
 export default function PageHero({
   eyebrow,
@@ -44,55 +28,67 @@ export default function PageHero({
   aside,
 }: PageHeroProps) {
   return (
-    <section className="relative bg-bg-page text-secondary overflow-hidden pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-24 px-6">
+    <section className="relative bg-secondary text-white overflow-hidden pt-32 sm:pt-36 md:pt-44 pb-20 md:pb-32 px-6">
+      {/* ── Decorative background ───────────────────────────────────── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Yellow ambient glow orbs */}
+        <div className="absolute top-[20%] left-[15%] w-[450px] h-[450px] bg-primary/8 rounded-full blur-[140px]" />
+        <div className="absolute bottom-[10%] right-[20%] w-[350px] h-[350px] bg-primary/6 rounded-full blur-[120px]" />
+
+        {/* Horizontal road marking dashes */}
+        <div className="absolute top-[32%] left-0 right-0 h-[2px] opacity-[0.035]"
+          style={{ background: 'repeating-linear-gradient(to right, white 0 40px, transparent 40px 90px)' }}
+        />
+        <div className="absolute top-[58%] left-0 right-0 h-[2px] opacity-[0.025]"
+          style={{ background: 'repeating-linear-gradient(to right, transparent 0 30px, white 30px 65px, transparent 65px 110px)' }}
+        />
+        <div className="absolute top-[80%] left-0 right-0 h-[2px] opacity-[0.02]"
+          style={{ background: 'repeating-linear-gradient(to right, white 0 50px, transparent 50px 100px)' }}
+        />
+
+        {/* Film grain overlay */}
+        <div className="cinematic-grain" />
+      </div>
+
       <div
-        className={`container mx-auto relative ${
+        className={`container mx-auto relative z-10 ${
           aside ? 'grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center max-w-6xl' : 'max-w-5xl'
         }`}
       >
         <div className={aside ? 'lg:col-span-7 text-center lg:text-left' : 'text-center mx-auto'}>
-          {/* ── 1. Eyebrow ─────────────────────────────────────────────────── */}
+          {/* ── 1. Eyebrow ──────────────────────────────────────────────── */}
           <div
-            className={`hero-fade hero-fade-delay-1 flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 text-secondary/55 ${
+            className={`hero-fade hero-fade-delay-1 flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 text-white/80 ${
               aside ? 'justify-center lg:justify-start' : 'justify-center'
             }`}
           >
-            <span className="inline-block w-8 sm:w-10 h-px bg-secondary/30" aria-hidden="true" />
-            <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.32em]">
+            <span className="inline-block w-8 sm:w-10 h-px bg-white/20" aria-hidden="true" />
+            <span className="font-accent text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.32em]">
               {eyebrow}
             </span>
-            <span className="inline-block w-8 sm:w-10 h-px bg-secondary/30" aria-hidden="true" />
+            <span className="inline-block w-8 sm:w-10 h-px bg-white/20" aria-hidden="true" />
           </div>
 
-          {/* ── 2 + 3. Headline (the visual anchor) ────────────────────────── */}
-          <h1 className="leading-[0.85] mb-6 sm:mb-8 md:mb-10">
-            {/* Line 1 — setup: small, light, muted — reads as a label/preamble */}
+          {/* ── 2 + 3. Headline ─────────────────────────────────────────── */}
+          <h1 className="leading-[0.88] mb-6 sm:mb-8 md:mb-10">
             <span className="block overflow-hidden pb-[0.1em]">
-              <span
-                className="hero-line hero-line-1 block font-display
-                  text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem]
-                  font-light text-secondary/40"
-              >
+              <span className="hero-line hero-line-1 block font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] text-white/70 tracking-[0.02em]">
                 {title}
               </span>
             </span>
-            {/* Line 2 — payoff: dominant, bold Fraunces serif in brand green */}
             <span className="block overflow-hidden pb-[0.1em]">
               <span
-                className="hero-line hero-line-2 block font-display
-                  text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem]
-                  font-bold text-primary"
-                style={{ letterSpacing: '-0.02em' }}
+                className="hero-line hero-line-2 block font-display uppercase text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] text-primary tracking-[0.01em]"
               >
                 {accent}
               </span>
             </span>
           </h1>
 
-          {/* ── 4. Description ─────────────────────────────────────────────── */}
+          {/* ── 4. Description ──────────────────────────────────────────── */}
           {description && (
             <p
-              className={`hero-fade hero-fade-delay-2 text-base sm:text-lg text-secondary/65 leading-relaxed max-w-xl mb-8 sm:mb-10 ${
+              className={`hero-fade hero-fade-delay-2 text-base sm:text-lg text-white leading-relaxed max-w-xl mb-8 sm:mb-10 font-sans ${
                 aside ? 'mx-auto lg:mx-0' : 'mx-auto'
               }`}
             >
@@ -100,7 +96,7 @@ export default function PageHero({
             </p>
           )}
 
-          {/* ── 5. CTAs ────────────────────────────────────────────────────── */}
+          {/* ── 5. CTAs ─────────────────────────────────────────────────── */}
           {(primaryCta || secondaryCta) && (
             <div
               className={`hero-fade hero-fade-delay-3 flex items-center gap-3 flex-wrap ${
@@ -108,29 +104,48 @@ export default function PageHero({
               }`}
             >
               {primaryCta && (
-                <Link
-                  to={primaryCta.href}
-                  className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-secondary text-sm font-semibold tracking-wide hover:brightness-105 hover:scale-[1.02] transition-all duration-300 shadow-sm"
-                >
-                  {primaryCta.label}
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
+                /^(tel:|mailto:|http)/.test(primaryCta.href) ? (
+                  <a
+                    href={primaryCta.href}
+                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-secondary font-accent font-bold uppercase tracking-[0.08em] rounded-sm text-sm hover:bg-primary-hover hover:shadow-yellow hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    {primaryCta.label}
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </a>
+                ) : (
+                  <Link
+                    to={primaryCta.href}
+                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-secondary font-accent font-bold uppercase tracking-[0.08em] rounded-sm text-sm hover:bg-primary-hover hover:shadow-yellow hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    {primaryCta.label}
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
+                )
               )}
               {secondaryCta && (
-                <Link
-                  to={secondaryCta.href}
-                  className="px-7 py-3.5 rounded-full border border-secondary/25 text-secondary text-sm font-semibold tracking-wide hover:bg-secondary/5 transition-colors duration-300"
-                >
-                  {secondaryCta.label}
-                </Link>
+                /^(tel:|mailto:|http)/.test(secondaryCta.href) ? (
+                  <a
+                    href={secondaryCta.href}
+                    className="px-8 py-3.5 rounded-sm border border-white/20 text-white font-accent font-semibold uppercase tracking-[0.08em] text-sm hover:bg-white/5 transition-colors duration-300"
+                  >
+                    {secondaryCta.label}
+                  </a>
+                ) : (
+                  <Link
+                    to={secondaryCta.href}
+                    className="px-8 py-3.5 rounded-sm border border-white/20 text-white font-accent font-semibold uppercase tracking-[0.08em] text-sm hover:bg-white/5 transition-colors duration-300"
+                  >
+                    {secondaryCta.label}
+                  </Link>
+                )
               )}
             </div>
           )}
 
-          {/* ── 6. Meta strip ──────────────────────────────────────────────── */}
+          {/* ── 6. Meta strip ───────────────────────────────────────────── */}
           {meta && meta.length > 0 && (
             <div
-              className={`hero-fade hero-fade-delay-4 mt-10 sm:mt-12 md:mt-14 pt-6 border-t border-secondary/10 flex flex-wrap items-center gap-x-5 gap-y-2 sm:gap-x-7 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.32em] text-secondary/45 ${
+              className={`hero-fade hero-fade-delay-4 mt-12 sm:mt-14 md:mt-16 pt-6 border-t border-white/10 flex flex-wrap items-center gap-x-5 gap-y-2 sm:gap-x-7 text-[10px] sm:text-[11px] font-accent font-semibold uppercase tracking-[0.32em] text-white/70 ${
                 aside ? 'justify-center lg:justify-start' : 'justify-center'
               }`}
             >

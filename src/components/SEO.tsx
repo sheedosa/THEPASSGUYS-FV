@@ -14,7 +14,7 @@ export default function SEO({
   description = "The Pass Guys match Manchester learners with DVSA-approved instructors, usually inside a week. Manual, automatic, intensive courses across Greater Manchester.",
   canonical = "https://thepassguys.co.uk",
   type = "website",
-  image = "https://picsum.photos/seed/driving/1200/630"
+  image = "https://thepassguys.co.uk/og-image.jpg"
 }: SEOProps) {
   const siteTitle = title.includes("The Pass Guys") ? title : `${title} | The Pass Guys`;
 

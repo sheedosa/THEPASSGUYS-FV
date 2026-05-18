@@ -35,11 +35,11 @@ export default function HowItWorks({ id }: { id?: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-5xl md:text-7xl font-medium text-secondary tracking-tighter mb-6 leading-[0.95]"
+            className="text-4xl sm:text-5xl md:text-7xl font-display text-secondary tracking-[0.02em] mb-6 leading-[0.92]"
           >
-            How it <span className="text-primary">works.</span>
+            HOW IT <span className="text-primary">WORKS.</span>
           </motion.h2>
-          <p className="text-secondary/60 max-w-2xl mx-auto mb-8 md:mb-12 text-base md:text-lg">
+          <p className="text-secondary max-w-2xl mx-auto mb-8 md:mb-12 text-base md:text-lg">
             Three steps. No queue, no faff, no awkward sales call.
           </p>
         </div>
@@ -68,14 +68,14 @@ export default function HowItWorks({ id }: { id?: string }) {
                 {/* Step Content */}
                 <div className="flex-1 pt-1 pb-6 md:pt-4 md:pb-8 border-b border-secondary/10 last:border-0">
                   <div className="flex items-center mb-1 sm:mb-2">
-                    <span className="text-secondary/30 font-normal text-3xl sm:text-4xl md:text-6xl tracking-tighter">
+                    <span className="text-primary/40 font-display text-3xl sm:text-4xl md:text-6xl tracking-[0.02em]">
                        {step.number}
                     </span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal text-secondary tracking-tight mb-2 sm:mb-3 leading-tight group-hover:text-primary transition-colors">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-display text-secondary tracking-[0.01em] uppercase mb-2 sm:mb-3 leading-tight group-hover:text-primary transition-colors">
                     {step.title}
                   </h3>
-                  <p className="text-secondary/70 text-sm sm:text-base md:text-lg leading-relaxed">
+                  <p className="text-secondary text-sm sm:text-base md:text-lg leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -87,7 +87,7 @@ export default function HowItWorks({ id }: { id?: string }) {
         <div className="text-center">
           <Link
             to="/how-it-works"
-            className="inline-flex items-center gap-2 text-secondary font-medium text-sm hover:text-primary transition-colors py-3 px-7 border border-secondary/15 rounded-full group"
+            className="inline-flex items-center gap-2 text-secondary font-accent font-semibold text-sm uppercase tracking-[0.08em] hover:text-primary transition-colors py-3 px-7 border border-secondary/15 rounded-sm group"
           >
             See full process <span className="group-hover:translate-x-1 transition-transform">→</span>
           </Link>

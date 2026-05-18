@@ -59,7 +59,7 @@ export default function Testimonials({ id }: { id?: string }) {
 
           {/* Compact stars line — only renders when there are real reviews to back the claim */}
           {hasReviews && (
-            <div className="inline-flex items-center gap-2 text-white/60 text-xs uppercase tracking-[0.3em]">
+            <div className="inline-flex items-center gap-2 text-white/80 text-xs uppercase tracking-[0.3em]">
               <span className="flex items-center gap-0.5">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-3 h-3 fill-primary text-primary" />
@@ -102,7 +102,7 @@ export default function Testimonials({ id }: { id?: string }) {
 
             {/* Dots + counter */}
             <div className="flex items-center justify-center gap-6 mt-12">
-              <span className="text-white/40 text-xs font-medium tracking-[0.3em]">
+              <span className="text-white/80 text-xs font-medium tracking-[0.3em]">
                 {String(index + 1).padStart(2, '0')} / {String(REVIEWS.length).padStart(2, '0')}
               </span>
               <span className="inline-block w-8 h-px bg-white/20" />
@@ -140,11 +140,11 @@ export default function Testimonials({ id }: { id?: string }) {
               </span>{' '}
               right now. Want to be one of them?
             </p>
-            <p className="text-white/55 max-w-lg mx-auto mb-10 leading-relaxed">
+            <p className="text-white max-w-lg mx-auto mb-10 leading-relaxed">
               Pass with us in the coming months and your story takes this spot.
               No catch, no padded reviews, no recycled quotes. Just real learners, when we have them.
             </p>
-            <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-white/45">
+            <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-white/80">
               <span className="inline-block w-8 h-px bg-white/20" />
               <span>Reviews — coming soon</span>
               <span className="inline-block w-8 h-px bg-white/20" />

@@ -1,4 +1,4 @@
-import { ShieldCheck, Zap, Repeat, Compass, GraduationCap, ClipboardCheck, Timer } from 'lucide-react';
+import { ShieldCheck, Zap, Repeat, Compass, GraduationCap, ClipboardCheck, Timer, Users, Clock } from 'lucide-react';
 
 export interface FAQItem {
   q: string;
@@ -48,7 +48,7 @@ export const services: Record<string, ServiceDetail> = {
     heroImage: "https://picsum.photos/seed/manual/1200/800",
     faqs: [
       { q: "Is manual harder than automatic?", a: "It has a steeper learning curve initially due to the clutch, but most students find it rewarding once mastered." },
-      { q: "Will I pass faster in a manual?", a: "Usually, automatic is faster to learn, but manual gives you a license for both types of cars." }
+      { q: "Will I pass faster in a manual?", a: "Usually, automatic is faster to learn, but manual gives you a licence for both types of cars." }
     ]
   },
   'automatic-lessons': {
@@ -73,11 +73,53 @@ export const services: Record<string, ServiceDetail> = {
         icon: ShieldCheck
       }
     ],
-    pricingHint: "Starting from £38/hr. Faster to test.",
+    pricingHint: "Starting from £35/hr. Same price as manual.",
     heroImage: "https://picsum.photos/seed/auto/1200/800",
     faqs: [
-      { q: "Can I drive a manual with an automatic license?", a: "No, you would need to take another test to drive a manual car." },
+      { q: "Can I drive a manual with an automatic licence?", a: "No, you would need to take another test to drive a manual car." },
       { q: "Are automatic cars better for city driving?", a: "Absolutely. Stop-start traffic in Manchester is much easier in an automatic." }
+    ]
+  },
+  'beginner-lessons': {
+    slug: 'beginner-lessons',
+    title: 'Beginner Driving Lessons',
+    subtitle: 'Your very first steps.',
+    description: 'Never been behind the wheel? No problem. Our beginner specialists start from absolute zero — controls, mirrors, moving off — at your pace.',
+    whoItIsFor: [
+      'Complete beginners with no driving experience',
+      'Anyone who has never had a lesson before',
+      'Nervous first-timers who want a patient instructor',
+      'Learners who want to build from the basics up'
+    ],
+    benefits: [
+      {
+        title: 'Start from zero',
+        desc: 'No assumptions. Your instructor builds from the absolute basics at your speed.',
+        icon: Users
+      },
+      {
+        title: 'Patient instructors',
+        desc: 'Hand-picked for beginners. Calm, encouraging, and experienced with nervous learners.',
+        icon: ShieldCheck
+      },
+      {
+        title: 'Structured progress',
+        desc: 'A clear lesson plan with milestones so you can see how far you have come.',
+        icon: Clock
+      },
+      {
+        title: 'Modern dual-control cars',
+        desc: 'Fully insured, dual-control vehicles so your instructor can keep you safe while you learn.',
+        icon: Zap
+      }
+    ],
+    pricingHint: 'Starting from £35/hr. Block discounts available.',
+    heroImage: 'https://picsum.photos/seed/beginner/1200/800',
+    faqs: [
+      { q: 'How many lessons will I need as a complete beginner?', a: 'Most beginners need between 40 and 50 hours of professional tuition before they are test-ready, but everyone learns at a different pace.' },
+      { q: 'Do I need a provisional licence before I start?', a: 'Yes, you will need a valid provisional driving licence. You can apply for one online through the DVSA website.' },
+      { q: 'Will my instructor judge me for not knowing anything?', a: 'Absolutely not. Our beginner specialists teach new starters every single day. They expect you to know nothing and will guide you through everything step by step.' },
+      { q: 'Can I start with automatic if I find manual too difficult?', a: 'Of course. Many beginners find automatic easier at first. You can switch at any point and we will match you with the right instructor.' }
     ]
   },
   'intensive-fast-track': {
@@ -109,11 +151,11 @@ export const services: Record<string, ServiceDetail> = {
       { q: "What if I fail the test?", a: "We offer discounted 'fix-up' lessons to get you back to test standard quickly." }
     ]
   },
-  ‘refresher-lessons’: {
-    slug: ‘refresher-lessons’,
-    title: ‘Refresher Lessons’,
-    subtitle: ‘Back behind the wheel.’,
-    description: ‘Already got your licence but lost the habit? Refresher lessons are tailored to what you actually struggle with, whether that is junctions, parking, or just general nerves.’,
+  'refresher-lessons': {
+    slug: 'refresher-lessons',
+    title: 'Refresher Lessons',
+    subtitle: 'Back behind the wheel.',
+    description: 'Already got your licence but lost the habit? Refresher lessons are tailored to what you actually struggle with, whether that is junctions, parking, or just general nerves.',
     whoItIsFor: [
       "Drivers who have not been on the road for a few years",
       "People who have moved to Manchester and want to get used to local roads",
@@ -134,7 +176,7 @@ export const services: Record<string, ServiceDetail> = {
     pricingHint: "Starting from £35/hr. No minimum lessons required.",
     heroImage: "https://picsum.photos/seed/refresher/1200/800",
     faqs: [
-      { q: "Do I need a provisional license?", a: "No, you must hold a full valid driving license for refresher lessons." },
+      { q: "Do I need a provisional licence?", a: "No, you must hold a full valid driving licence for refresher lessons." },
       { q: "Can we use my own car?", a: "Yes, after an initial assessment in our dual-controlled vehicle for safety." }
     ]
   },
@@ -164,7 +206,7 @@ export const services: Record<string, ServiceDetail> = {
     heroImage: "https://picsum.photos/seed/motorway/1200/800",
     faqs: [
       { q: "Is motorway driving part of the standard test?", a: "Learners can now have lessons on motorways with an instructor, but it's not a required part of the test." },
-      { q: "Will this lower my insurance?", a: "Many insurers look favorably on advanced training, potentially reducing premiums." }
+      { q: "Will this lower my insurance?", a: "Many insurers look favourably on advanced training, potentially reducing premiums." }
     ]
   },
   'pass-plus': {

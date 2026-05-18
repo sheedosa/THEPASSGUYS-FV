@@ -26,7 +26,7 @@ const Row = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
       return (
         <li
           key={i}
-          className="flex items-center gap-3 text-white/80 whitespace-nowrap"
+          className="flex items-center gap-3 text-white whitespace-nowrap"
         >
           <Icon className="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0" />
           <span className="font-semibold uppercase tracking-wider text-xs md:text-sm">

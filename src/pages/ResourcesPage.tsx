@@ -7,7 +7,13 @@ import SectionLabel from '../components/ui/SectionLabel';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const sections = [
+const sections: {
+  title: string;
+  icon: typeof Shield;
+  description: string;
+  comingSoon?: boolean;
+  items: { name: string; url?: string }[];
+}[] = [
   {
     title: 'DVSA official',
     icon: Shield,
@@ -23,33 +29,36 @@ const sections = [
     title: 'Theory test',
     icon: BookOpen,
     description: 'Master the signs, rules, and hazard perception.',
+    comingSoon: true,
     items: [
-      { name: 'Top 10 theory apps', url: '#' },
-      { name: 'Hazard perception guide', url: '#' },
-      { name: 'Common signs cheat sheet', url: '#' },
-      { name: 'Mock theory tests', url: '#' },
+      { name: 'Top 10 theory apps' },
+      { name: 'Hazard perception guide' },
+      { name: 'Common signs cheat sheet' },
+      { name: 'Mock theory tests' },
     ],
   },
   {
     title: 'Driving tips',
     icon: Lightbulb,
     description: 'Practical advice from our network of expert ADIs.',
+    comingSoon: true,
     items: [
-      { name: 'Perfecting the parallel park', url: '#' },
-      { name: 'Roundabouts made easy', url: '#' },
-      { name: 'Economical driving habits', url: '#' },
-      { name: 'Night driving essentials', url: '#' },
+      { name: 'Perfecting the parallel park' },
+      { name: 'Roundabouts made easy' },
+      { name: 'Economical driving habits' },
+      { name: 'Night driving essentials' },
     ],
   },
   {
     title: 'Test prep',
     icon: ClipboardCheck,
     description: 'What to expect on your big day.',
+    comingSoon: true,
     items: [
-      { name: '"Show me, tell me" Q&A', url: '#' },
-      { name: 'Test day checklist', url: '#' },
-      { name: 'Managing test nerves', url: '#' },
-      { name: 'Common failing mistakes', url: '#' },
+      { name: '"Show me, tell me" Q&A' },
+      { name: 'Test day checklist' },
+      { name: 'Managing test nerves' },
+      { name: 'Common failing mistakes' },
     ],
   },
 ];
@@ -57,7 +66,7 @@ const sections = [
 const posts = [
   { title: '5 cold-weather driving secrets', date: 'Jan 12', category: 'Safety', img: 'https://picsum.photos/seed/winter/600/400' },
   { title: 'How to master high-speed merging', date: 'Feb 04', category: 'Motorway', img: 'https://picsum.photos/seed/merging/600/400' },
-  { title: 'The 2024 practical test update', date: 'Mar 22', category: 'Industry', img: 'https://picsum.photos/seed/test/600/400' },
+  { title: 'The 2026 practical test update', date: 'Mar 22', category: 'Industry', img: 'https://picsum.photos/seed/test/600/400' },
 ];
 
 export default function ResourcesPage() {
@@ -87,14 +96,14 @@ export default function ResourcesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Everything <br />
-              <span className="text-primary">in one place.</span>
+              EVERYTHING <br />
+              <span className="text-primary">IN ONE PLACE.</span>
             </motion.h2>
           </div>
 
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
             {sections.map((section, i) => (
               <motion.div
                 key={section.title}
@@ -102,36 +111,49 @@ export default function ResourcesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 1.0, delay: i * 0.08, ease: EASE }}
-                className="bg-bg-page p-8 md:p-10"
+                className="bg-white p-8 md:p-10 rounded-xl border border-secondary/8"
               >
-                <div className="text-primary mb-5">
-                  <section.icon className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                  <section.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-normal text-secondary tracking-tight mb-2">
-                  {section.title}
-                </h3>
-                <p className="text-secondary/65 leading-relaxed text-sm md:text-base mb-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-xl md:text-2xl font-display text-secondary tracking-[0.01em] uppercase">
+                    {section.title}
+                  </h3>
+                  {section.comingSoon && (
+                    <span className="text-[9px] font-accent font-bold uppercase tracking-[0.2em] px-2.5 py-1 rounded-full bg-primary/10 text-primary">
+                      Coming soon
+                    </span>
+                  )}
+                </div>
+                <p className="text-secondary leading-relaxed text-sm md:text-base mb-6">
                   {section.description}
                 </p>
 
                 <ul className="divide-y divide-secondary/10 border-t border-secondary/10">
                   {section.items.map((item) => (
                     <li key={item.name}>
-                      <a
-                        href={item.url}
-                        target={item.url.startsWith('http') ? '_blank' : '_self'}
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-between py-3 group/item hover:text-primary transition-colors"
-                      >
-                        <span className="text-sm font-medium text-secondary/80 group-hover/item:text-primary transition-colors">
-                          {item.name}
-                        </span>
-                        <span className="text-secondary/40 group-hover/item:text-primary group-hover/item:translate-x-1 transition-all">
-                          {item.url.startsWith('http')
-                            ? <ExternalLink className="w-3.5 h-3.5" />
-                            : <ArrowRight className="w-3.5 h-3.5" />}
-                        </span>
-                      </a>
+                      {item.url ? (
+                        <a
+                          href={item.url}
+                          target={item.url.startsWith('http') ? '_blank' : '_self'}
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between py-3 group/item hover:text-primary transition-colors"
+                        >
+                          <span className="text-sm font-medium text-secondary group-hover/item:text-primary transition-colors">
+                            {item.name}
+                          </span>
+                          <span className="text-secondary/80 group-hover/item:text-primary group-hover/item:translate-x-1 transition-all">
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </span>
+                        </a>
+                      ) : (
+                        <div className="flex items-center justify-between py-3 opacity-50">
+                          <span className="text-sm font-medium text-secondary">
+                            {item.name}
+                          </span>
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -151,10 +173,10 @@ export default function ResourcesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Latest from <br />
-              <span className="text-primary">our instructors.</span>
+              LATEST FROM <br />
+              <span className="text-primary">OUR INSTRUCTORS.</span>
             </motion.h2>
           </div>
 
@@ -183,10 +205,10 @@ export default function ResourcesPage() {
                     {post.category}
                   </div>
                 </div>
-                <div className="text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/45 mb-2">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.32em] text-secondary/80 mb-2">
                   {post.date}
                 </div>
-                <h3 className="text-xl md:text-2xl font-normal text-secondary tracking-tight leading-tight group-hover:text-primary transition-colors">
+                <h3 className="text-xl md:text-2xl font-display text-secondary tracking-[0.01em] leading-tight group-hover:text-primary transition-colors">
                   {post.title}
                 </h3>
               </motion.article>

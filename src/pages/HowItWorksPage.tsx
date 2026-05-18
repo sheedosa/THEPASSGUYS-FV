@@ -70,14 +70,14 @@ export default function HowItWorksPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Three steps. <br />
-              <span className="text-primary">No fuss.</span>
+              THREE STEPS. <br />
+              <span className="text-primary">NO FUSS.</span>
             </motion.h2>
           </div>
 
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {steps.map((step, i) => (
               <motion.div
                 key={step.n}
@@ -85,15 +85,15 @@ export default function HowItWorksPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 1.0, delay: i * 0.1, ease: EASE }}
-                className="bg-bg-page p-8 md:p-10"
+                className="bg-white p-8 md:p-10 rounded-xl border border-secondary/8"
               >
-                <div className="text-primary text-[10px] font-semibold uppercase tracking-[0.32em] mb-5">
+                <div className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-secondary text-[11px] font-bold font-accent mb-5">
                   {step.n}
                 </div>
-                <h3 className="text-2xl md:text-3xl font-normal text-secondary tracking-tighter leading-tight mb-3">
+                <h3 className="text-2xl md:text-3xl font-display text-secondary tracking-[0.01em] uppercase leading-tight mb-3">
                   {step.title}
                 </h3>
-                <p className="text-secondary/65 leading-relaxed text-sm md:text-base">
+                <p className="text-secondary leading-relaxed text-sm md:text-base">
                   {step.desc}
                 </p>
               </motion.div>
@@ -112,15 +112,15 @@ export default function HowItWorksPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Why matching <br />
-              <span className="text-primary">beats searching.</span>
+              WHY MATCHING <br />
+              <span className="text-primary">BEATS SEARCHING.</span>
             </motion.h2>
           </div>
 
           <div className="max-w-3xl mx-auto border border-secondary/10 rounded-2xl overflow-hidden">
-            <div className="grid grid-cols-2 bg-secondary/5 text-[11px] font-semibold uppercase tracking-[0.32em] text-secondary/55">
+            <div className="grid grid-cols-2 bg-secondary/5 text-[11px] font-accent font-bold uppercase tracking-[0.32em] text-secondary/80">
               <div className="p-5 md:p-6 border-r border-secondary/10">Old way</div>
               <div className="p-5 md:p-6 text-primary">The Pass Guys</div>
             </div>
@@ -133,7 +133,7 @@ export default function HowItWorksPage() {
                 transition={{ duration: 0.9, delay: i * 0.06, ease: EASE }}
                 className="grid grid-cols-2 border-t border-secondary/10"
               >
-                <div className="p-5 md:p-6 text-secondary/55 border-r border-secondary/10 line-through decoration-secondary/25">
+                <div className="p-5 md:p-6 text-secondary/65 border-r border-secondary/10 line-through decoration-secondary/25">
                   {row.left}
                 </div>
                 <div className="p-5 md:p-6 text-secondary font-medium">
@@ -155,14 +155,14 @@ export default function HowItWorksPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              What to expect <br />
-              <span className="text-primary">first time out.</span>
+              WHAT TO EXPECT <br />
+              <span className="text-primary">FIRST TIME OUT.</span>
             </motion.h2>
           </div>
 
-          <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-px bg-secondary/10 border border-secondary/10 rounded-2xl overflow-hidden">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
             {firstLesson.map((item, i) => (
               <motion.div
                 key={i}
@@ -170,15 +170,15 @@ export default function HowItWorksPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 1.0, delay: i * 0.08, ease: EASE }}
-                className="bg-bg-page p-7 md:p-10"
+                className="bg-white p-7 md:p-10 rounded-xl border border-secondary/8"
               >
-                <div className="text-primary mb-4">
-                  <item.icon className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                  <item.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h4 className="text-xl md:text-2xl font-normal text-secondary tracking-tight mb-2">
+                <h4 className="text-xl md:text-2xl font-display text-secondary tracking-[0.01em] uppercase mb-2">
                   {item.title}
                 </h4>
-                <p className="text-secondary/65 leading-relaxed text-sm md:text-base">
+                <p className="text-secondary leading-relaxed text-sm md:text-base">
                   {item.desc}
                 </p>
               </motion.div>
@@ -197,10 +197,10 @@ export default function HowItWorksPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-secondary tracking-tighter leading-[0.95]"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-secondary tracking-[0.02em] leading-[0.92]"
             >
-              Common <br />
-              <span className="text-primary">questions.</span>
+              COMMON <br />
+              <span className="text-primary">QUESTIONS.</span>
             </motion.h2>
           </div>
           <div className="max-w-4xl mx-auto">

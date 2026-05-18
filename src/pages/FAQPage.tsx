@@ -25,7 +25,7 @@ export default function FAQPage() {
       category: "Pricing",
       items: [
         { q: "How much do lessons cost?", a: "Pricing varies slightly based on location and whether you choose manual or automatic. Check our Pricing page for the most up-to-date rates." },
-        { q: "Do you offer block booking discounts?", a: "Absolutely. We offer discounted rates when you book and pay for 10 or 20 hours upfront." },
+        { q: "Do you offer block booking discounts?", a: "Absolutely. We offer discounted rates when you book and pay for 10 hours upfront." },
         { q: "Are there any hidden fees?", a: "No. Our pricing is transparent. The only additional cost you'll face is the DVSA test fee when the time comes." }
       ]
     },
@@ -59,12 +59,12 @@ export default function FAQPage() {
       <div className="pb-16 md:pb-24 space-y-20 md:space-y-28">
         {faqCategories.map((cat, idx) => (
           <div key={idx} className="container mx-auto px-4 md:px-6">
-            <div className="flex items-center justify-center gap-4 mb-2 text-secondary/55">
-              <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
-              <span className="text-[11px] font-semibold uppercase tracking-[0.32em]">
+            <div className="flex items-center justify-center gap-4 mb-2 text-secondary/80">
+              <span className="inline-block w-10 h-px bg-secondary/15" aria-hidden="true" />
+              <span className="text-[11px] font-accent font-bold uppercase tracking-[0.32em]">
                 {String(idx + 1).padStart(2, '0')} <span className="mx-1.5 opacity-50">—</span> {cat.category}
               </span>
-              <span className="inline-block w-10 h-px bg-secondary/25" aria-hidden="true" />
+              <span className="inline-block w-10 h-px bg-secondary/15" aria-hidden="true" />
             </div>
             <div className="max-w-4xl mx-auto mt-8">
               <FAQ items={cat.items} hideHeader />
