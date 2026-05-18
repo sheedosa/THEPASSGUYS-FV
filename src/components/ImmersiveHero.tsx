@@ -1,7 +1,10 @@
 import { useRef, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import PrefetchLink from './PrefetchLink';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Prefetch the GetMatched chunk as soon as the user hovers the hero CTA.
+const Link = PrefetchLink;
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * ImmersiveHero — Full-bleed cinematic video hero

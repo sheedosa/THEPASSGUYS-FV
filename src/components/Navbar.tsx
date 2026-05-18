@@ -1,9 +1,14 @@
 import { useState, useEffect, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import MagneticButton from './MagneticButton';
+import PrefetchLink from './PrefetchLink';
+
+// Use a Link that prefetches its chunk on first hover/focus/tap. Everywhere
+// else in this file just imports `PrefetchLink` as `Link`.
+const Link = PrefetchLink;
 
 const LESSON_LINKS = [
   { name: 'Manual Lessons', href: '/services/manual-lessons' },
@@ -33,8 +38,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname]);
 
+  // Close menus on route change. (ScrollToTop handles the scroll reset.)
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
   }, [location.pathname]);

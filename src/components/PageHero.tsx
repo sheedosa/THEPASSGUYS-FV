@@ -1,6 +1,10 @@
-import { Link } from 'react-router-dom';
+import PrefetchLink from './PrefetchLink';
 import { ArrowRight } from 'lucide-react';
 import { ReactNode } from 'react';
+
+// PageHero is on every internal page hero. Its CTAs almost always link to
+// /get-matched or another core route — prefetch on hover/focus.
+const Link = PrefetchLink;
 
 interface PageHeroProps {
   eyebrow: string;

@@ -1,7 +1,10 @@
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
+import PrefetchLink from './PrefetchLink';
 import MagneticButton from './MagneticButton';
 import SectionLabel from './ui/SectionLabel';
+
+// Hover/focus/tap on the final CTA prefetches /get-matched.
+const Link = PrefetchLink;
 
 export default function FinalCTA() {
   return (

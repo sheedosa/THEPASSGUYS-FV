@@ -1,5 +1,7 @@
 import { Phone, Mail, MessageSquare, Instagram, Facebook, Twitter } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import PrefetchLink from './PrefetchLink';
+// Hover/focus/tap on a footer link prefetches the destination chunk.
+const Link = PrefetchLink;
 
 export default function Footer() {
   return (
