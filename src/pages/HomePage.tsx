@@ -58,13 +58,19 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 /* ═══════════════════════════════════════════════════════════════════════════
  * SECTION: Stats Marquee — Continuous horizontal scroll of operational facts
  * ═══════════════════════════════════════════════════════════════════════════ */
-const MARQUEE_ITEMS: { value: string; label: string; accent?: boolean }[] = [
-  { value: '10', label: 'Greater Manchester boroughs' },
-  { value: '48hr', label: 'Typical match time', accent: true },
-  { value: 'Manual', label: 'Or automatic' },
-  { value: '£35', label: 'Per hour, all-in', accent: true },
-  { value: 'DVSA', label: 'Approved instructors' },
-  { value: 'Zero', label: 'Hidden fees', accent: true },
+const MARQUEE_ITEMS: {
+  value: string;
+  label: string;
+  /** Shorter label used on small screens so the stat fits in view. */
+  shortLabel?: string;
+  accent?: boolean;
+}[] = [
+  { value: '10', label: 'Greater Manchester boroughs', shortLabel: 'Boroughs' },
+  { value: '48hr', label: 'Typical match time', shortLabel: 'Match time', accent: true },
+  { value: 'Manual', label: 'Or automatic', shortLabel: '+ Auto' },
+  { value: '£35', label: 'Per hour, all-in', shortLabel: 'Per hour', accent: true },
+  { value: 'DVSA', label: 'Approved instructors', shortLabel: 'Approved' },
+  { value: 'Zero', label: 'Hidden fees', shortLabel: 'Hidden fees', accent: true },
 ];
 
 function StatsMarquee() {
@@ -82,36 +88,39 @@ function StatsMarquee() {
       </div>
 
       {/* Eyebrow */}
-      <div className="relative z-10 container mx-auto px-4 md:px-6 pt-10 md:pt-14 pb-6 md:pb-8 flex items-center justify-center gap-3">
-        <span className="w-8 h-px bg-primary/60" aria-hidden="true" />
-        <span className="font-accent text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.4em] text-white/70">
+      <div className="relative z-10 container mx-auto px-4 md:px-6 pt-8 md:pt-14 pb-5 md:pb-8 flex items-center justify-center gap-3">
+        <span className="w-6 sm:w-8 h-px bg-primary/60" aria-hidden="true" />
+        <span className="font-accent text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.32em] sm:tracking-[0.4em] text-white/70">
           At a glance
         </span>
-        <span className="w-8 h-px bg-primary/60" aria-hidden="true" />
+        <span className="w-6 sm:w-8 h-px bg-primary/60" aria-hidden="true" />
       </div>
 
       {/* Marquee track */}
-      <div className="relative z-10 pb-12 md:pb-16">
+      <div className="relative z-10 pb-10 md:pb-16">
         <div className="trustbar-track flex whitespace-nowrap items-center will-change-transform">
           {loop.map((item, i) => (
             <div
               key={i}
-              className="flex items-center gap-8 md:gap-14 px-6 md:px-12 shrink-0"
+              className="flex items-center gap-4 sm:gap-8 md:gap-14 px-3 sm:px-6 md:px-12 shrink-0"
             >
-              <div className="flex items-baseline gap-4 md:gap-6">
+              {/* Mobile: stacked value+label. Desktop (md+): inline baseline */}
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 md:gap-6 items-center text-center sm:text-left">
                 <span
-                  className={`font-display tracking-[0.02em] leading-[0.85] text-[clamp(3rem,9vw,8rem)] ${
+                  className={`font-display tracking-[0.02em] leading-[0.85] text-[clamp(2.5rem,11vw,8rem)] ${
                     item.accent ? 'text-primary' : 'text-white'
                   }`}
                 >
                   {item.value}
                 </span>
-                <span className="font-accent text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-white/60 max-w-[10rem] whitespace-normal leading-tight">
-                  {item.label}
+                {/* Short label on mobile, full label on sm+ */}
+                <span className="font-accent text-[10px] md:text-sm font-bold uppercase tracking-[0.24em] sm:tracking-[0.3em] text-white/60 sm:max-w-[10rem] whitespace-nowrap sm:whitespace-normal leading-tight">
+                  <span className="sm:hidden">{item.shortLabel ?? item.label}</span>
+                  <span className="hidden sm:inline">{item.label}</span>
                 </span>
               </div>
               <span
-                className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary shrink-0"
+                className="w-1 h-1 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 rounded-full bg-primary shrink-0"
                 aria-hidden="true"
               />
             </div>
@@ -120,8 +129,8 @@ function StatsMarquee() {
       </div>
 
       {/* Edge fades to mask the loop seam */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-secondary to-transparent pointer-events-none z-20" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-secondary to-transparent pointer-events-none z-20" />
+      <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-16 md:w-32 bg-gradient-to-r from-secondary to-transparent pointer-events-none z-20" />
+      <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-16 md:w-32 bg-gradient-to-l from-secondary to-transparent pointer-events-none z-20" />
     </section>
   );
 }
