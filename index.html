@@ -38,11 +38,12 @@
     <!-- Preload LCP logo -->
     <link rel="preload" as="image" href="/logo.png" type="image/png" />
 
-    <!-- Preload hero video for instant playback -->
-    <link rel="preload" as="video" href="https://d8j0ntlcm91z4.cloudfront.net/user_3CZmSrapB7IYHyQar1KNZhNGQ6X/hf_20260518_111644_a408553e-d4e8-4ab6-9f00-f48f9646a2d2.mp4" type="video/mp4" />
+    <!-- Preconnect to video CDN — establish TCP + TLS early so hero starts streaming the moment it's parsed -->
+    <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin />
+    <link rel="dns-prefetch" href="https://d8j0ntlcm91z4.cloudfront.net" />
 
-    <!-- Preconnect to video CDN -->
-    <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" />
+    <!-- Preload hero video for instant playback (high priority, only on screens where it will actually play) -->
+    <link rel="preload" as="video" href="https://d8j0ntlcm91z4.cloudfront.net/user_3CZmSrapB7IYHyQar1KNZhNGQ6X/hf_20260518_111644_a408553e-d4e8-4ab6-9f00-f48f9646a2d2.mp4" type="video/mp4" fetchpriority="high" crossorigin />
 
     <!-- Structured Data: LocalBusiness -->
     <script type="application/ld+json">

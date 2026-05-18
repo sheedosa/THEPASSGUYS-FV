@@ -14,41 +14,77 @@ import Pricing from '../components/Pricing';
  * Palette: Pass Yellow (#FFD500) primary, Jet Black (#0A0A0A) secondary, Light Grey (#F5F5F5) bg.
  */
 
-/** Force-autoplay a video when it enters the viewport, pause when it leaves. */
-function useAutoplayVideo() {
+/**
+ * Force-autoplay a video when it enters the viewport, pause when it leaves.
+ *
+ * Loading strategy (priority-aware):
+ *  1. Markup ships with `preload="none"` and an empty <source>, so the browser
+ *     does NOT fetch these videos during initial page load — keeping bandwidth
+ *     reserved for the hero video and LCP.
+ *  2. As soon as the element gets within ~one screen of the viewport, an
+ *     IntersectionObserver promotes the source and calls .load(). This is the
+ *     happy path: just-in-time fetching.
+ *  3. As a safety net (e.g. user never scrolls, or IO is throttled), an
+ *     `requestIdleCallback` fallback fires ~3s after mount and loads the
+ *     source while the browser is idle. Hero is always done by then.
+ */
+function useLazyAutoplayVideo(src: string) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
 
+    let loadedOnce = false;
+
+    const ensureSource = () => {
+      if (loadedOnce) return;
+      loadedOnce = true;
+      const source = video.querySelector('source');
+      if (source && !source.getAttribute('src')) {
+        source.setAttribute('src', src);
+        video.preload = 'auto';
+        video.load();
+      }
+    };
+
     const play = () => {
       video.muted = true;
       video.play().catch(() => {});
     };
 
+    // Primary path: load when near the viewport
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          if (video.readyState >= 2) {
-            play();
-          } else {
-            video.addEventListener('canplay', play, { once: true });
-          }
+          ensureSource();
+          if (video.readyState >= 2) play();
+          else video.addEventListener('canplay', play, { once: true });
         } else {
           video.pause();
         }
       },
-      { threshold: 0.25 },
+      { threshold: 0, rootMargin: '400px 0px 400px 0px' },
     );
     observer.observe(video);
 
-    // Also try on mount in case already visible
-    if (video.readyState >= 2) play();
-    else video.addEventListener('canplay', play, { once: true });
+    // Fallback: kick off loading during idle time after the hero has had its
+    // chance. This guarantees the videos are ready even if the user never
+    // scrolls, or if IO fires late.
+    type IdleWindow = Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    const w = window as IdleWindow;
+    const schedule = w.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 3000));
+    const cancel = w.cancelIdleCallback ?? window.clearTimeout;
+    const idleHandle = schedule(() => ensureSource(), { timeout: 4000 });
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      observer.disconnect();
+      cancel(idleHandle as number);
+    };
+  }, [src]);
 
   return ref;
 }
@@ -241,8 +277,8 @@ const VIDEOS = {
 };
 
 function WhyUs() {
-  const trackingRef = useAutoplayVideo();
-  const interiorRef = useAutoplayVideo();
+  const trackingRef = useLazyAutoplayVideo(VIDEOS.tracking);
+  const interiorRef = useLazyAutoplayVideo(VIDEOS.interior);
 
   return (
     <section data-section="why-us" className="py-24 md:py-36 bg-bg-page overflow-hidden">
@@ -274,13 +310,16 @@ function WhyUs() {
           >
             <video
               ref={trackingRef}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover bg-secondary/10"
               muted
               loop
               playsInline
-              preload="auto"
+              preload="none"
+              aria-label="Driving lesson footage"
             >
-              <source src={VIDEOS.tracking} type="video/mp4" />
+              {/* src is injected by the IntersectionObserver hook so it does not
+                  compete with the hero video's bandwidth on first paint. */}
+              <source type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-secondary/20 to-transparent pointer-events-none" />
           </motion.div>
@@ -363,13 +402,15 @@ function WhyUs() {
           >
             <video
               ref={interiorRef}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover bg-secondary/10"
               muted
               loop
               playsInline
-              preload="auto"
+              preload="none"
+              aria-label="Instructor and student in dual-control car"
             >
-              <source src={VIDEOS.interior} type="video/mp4" />
+              {/* src is injected lazily — see useLazyAutoplayVideo */}
+              <source type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-secondary/20 to-transparent pointer-events-none" />
           </motion.div>
