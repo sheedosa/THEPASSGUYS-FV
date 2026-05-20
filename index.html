@@ -1,13 +1,119 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#00d26f" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- ── Primary SEO ────────────────────────────────────────────── -->
+    <title>The Pass Guys | Driving Lessons in Manchester &amp; the North West</title>
+    <meta
+      name="description"
+      content="The Pass Guys match Manchester learners with vetted DVSA-approved instructors. Manual or automatic, from £35/hr. Pay-as-you-go, block lessons, or intensive Fast Track courses."
+    />
+    <meta
+      name="keywords"
+      content="driving lessons Manchester, driving school Manchester, learn to drive Manchester, DVSA approved instructor, intensive driving course Manchester, manual driving lessons, automatic driving lessons, pass driving test, North West driving school"
+    />
+    <meta name="author" content="The Pass Guys" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://thepassguys.co.uk/" />
+
+    <!-- ── Open Graph (image intentionally omitted for now) ───────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="The Pass Guys" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:title" content="The Pass Guys | Manchester Driving School" />
+    <meta
+      property="og:description"
+      content="Vetted, DVSA-approved instructors across Greater Manchester. Pay-as-you-go from £35/hr, or pass fast on an intensive Fast Track course."
+    />
+    <meta property="og:url" content="https://thepassguys.co.uk/" />
+    <!-- TODO: add og:image once social card asset is finalised
+         <meta property="og:image" content="https://thepassguys.co.uk/og-image.jpg" />
+         <meta property="og:image:width" content="1200" />
+         <meta property="og:image:height" content="630" /> -->
+
+    <!-- ── Twitter / X card (image intentionally omitted for now) ─── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Pass Guys | Manchester Driving School" />
+    <meta
+      name="twitter:description"
+      content="Vetted, DVSA-approved instructors across Greater Manchester. From £35/hr."
+    />
+    <!-- TODO: add twitter:image once social card asset is finalised -->
+
+    <!-- ── Network hints ──────────────────────────────────────────── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Hero video preload — drives first impression -->
+    <link rel="preload" as="video" href="/hero-bg.mp4" type="video/mp4" />
+
+    <!-- ── Structured data: DrivingSchool ─────────────────────────── -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "DrivingSchool",
+        "name": "The Pass Guys",
+        "url": "https://thepassguys.co.uk",
+        "description": "DVSA-approved driving lessons across Greater Manchester and the North West.",
+        "priceRange": "£35-£1500",
+        "areaServed": [
+          { "@type": "City", "name": "Manchester" },
+          { "@type": "City", "name": "Salford" },
+          { "@type": "City", "name": "Stockport" },
+          { "@type": "City", "name": "Bolton" },
+          { "@type": "City", "name": "Oldham" },
+          { "@type": "City", "name": "Rochdale" },
+          { "@type": "City", "name": "Trafford" },
+          { "@type": "City", "name": "Bury" },
+          { "@type": "City", "name": "Wigan" },
+          { "@type": "City", "name": "Tameside" }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Manchester",
+          "addressRegion": "Greater Manchester",
+          "addressCountry": "GB"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Driving lessons",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Pay As You Go",
+              "price": "35",
+              "priceCurrency": "GBP",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "35",
+                "priceCurrency": "GBP",
+                "unitCode": "HUR"
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "Standard Course (10 lessons)",
+              "price": "320",
+              "priceCurrency": "GBP"
+            },
+            {
+              "@type": "Offer",
+              "name": "Fast Track Intensive",
+              "price": "1500",
+              "priceCurrency": "GBP"
+            }
+          ]
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
