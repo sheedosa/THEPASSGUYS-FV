@@ -1,68 +1,80 @@
 import { motion } from 'motion/react';
 import { Map } from 'lucide-react';
 
-export default function AreasCovered({ id }: { id?: string }) {
-  const areas = [
-    "Manchester City Centre", "Salford", "Stockport", "Bolton", 
-    "Oldham", "Rochdale", "Trafford", "Bury", "Wigan", "Tameside"
-  ];
+const AREAS = [
+  'Manchester City',
+  'Salford',
+  'Stockport',
+  'Bolton',
+  'Oldham',
+  'Rochdale',
+  'Trafford',
+  'Bury',
+  'Wigan',
+  'Tameside',
+];
 
+export default function AreasCovered({ id }: { id?: string }) {
   return (
-    <section id="areas" className="py-24 overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="vibrant-card !shadow-none bg-white grid lg:grid-cols-2 overflow-hidden">
-          {/* Map Image / Placeholder */}
-          <div className="relative min-h-[400px] bg-secondary flex items-center justify-center p-12 overflow-hidden group">
-            <motion.div 
-               animate={{ scale: [1, 1.05, 1] }}
-               transition={{ repeat: Infinity, duration: 20 }}
-               className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
-            >
-              <img 
-                src="https://lh3.googleusercontent.com/d/1dVcID4aAABluu2o-rSNqO93RivVMloTw" 
-                alt="Greater Manchester Area" 
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
-            </motion.div>
-            <div className="relative z-10 text-center">
-              <div className="w-24 h-24 bg-primary text-secondary rounded-[32px] flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-12 transition-transform shadow-2xl">
-                <Map className="w-12 h-12" />
-              </div>
-              <h3 className="text-4xl font-black text-white uppercase tracking-tighter">Greater Manchester</h3>
-              <p className="text-primary font-bold uppercase tracking-[0.2em] text-xs mt-2">Our Primary Focus</p>
+    <section id={id} className="py-16 md:py-24 overflow-hidden">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+        <div
+          className="bg-white border-4 border-secondary rounded-3xl overflow-hidden grid lg:grid-cols-2"
+          style={{ boxShadow: '6px 6px 0 var(--color-primary)' }}
+        >
+          {/* Left — bold dark panel with map icon */}
+          <div className="relative bg-secondary text-white p-8 md:p-12 flex flex-col items-center justify-center text-center min-h-[260px] lg:min-h-[420px]">
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-3xl bg-primary text-secondary flex items-center justify-center mx-auto mb-5 border-4 border-secondary shadow-2xl">
+              <Map className="w-10 h-10 md:w-12 md:h-12" strokeWidth={2.25} />
             </div>
+            <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter leading-[0.9]">
+              Greater Manchester
+            </h3>
+            <p className="text-primary font-black uppercase tracking-[0.32em] text-[10px] mt-3">
+              Our primary focus
+            </p>
           </div>
 
-          {/* Area List */}
-          <div className="p-10 md:p-20 flex flex-col justify-center bg-white">
-            <h2 className="text-4xl font-black text-secondary uppercase tracking-tighter mb-8 leading-[0.9]">
-              We teach <br /> right across <br /> <span className="text-primary italic">the North West.</span>
+          {/* Right — copy + pill row + CTA */}
+          <div className="p-8 md:p-12 flex flex-col justify-center">
+            <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">
+              Coverage
+            </span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-6">
+              Across the <span className="text-primary">North West.</span>
             </h2>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {areas.map((area, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="flex items-center space-x-2 text-primary transition-colors cursor-default"
+            <p className="text-slate-600 text-base md:text-lg font-medium leading-relaxed mb-8 max-w-md">
+              Vetted local instructors who know the test routes in your area.
+            </p>
+
+            {/* Area pills — wrap as needed, no fixed column count */}
+            <div className="flex flex-wrap gap-2 mb-8">
+              {AREAS.map((area, i) => (
+                <motion.span
+                  key={area}
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: i * 0.04,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="px-3 py-1.5 rounded-full bg-slate-100 text-secondary text-xs sm:text-sm font-black uppercase tracking-tight"
                 >
-                  <div className="w-1.5 h-1.5 bg-secondary rounded-full" />
-                  <span className="font-bold text-sm tracking-tight">{area}</span>
-                </motion.div>
+                  {area}
+                </motion.span>
               ))}
             </div>
 
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-12 w-full sm:w-max px-10 py-5 bg-primary text-secondary font-black uppercase tracking-widest rounded-2xl shadow-xl"
+            <motion.a
+              href="#services"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full sm:w-max px-8 py-4 bg-primary text-secondary font-black uppercase tracking-widest rounded-full border-4 border-secondary text-sm md:text-base text-center shadow-[6px_6px_0_var(--color-secondary)] hover:shadow-[4px_4px_0_var(--color-secondary)] transition-all"
             >
-              Check Your Postcode
-            </motion.button>
+              Book Now
+            </motion.a>
           </div>
         </div>
       </div>

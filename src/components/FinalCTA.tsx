@@ -12,7 +12,7 @@ export default function FinalCTA() {
   const xValue = useTransform(scrollYProgress, [0, 1], [-200, 200]);
 
   return (
-    <section ref={containerRef} className="py-24 bg-secondary overflow-hidden relative">
+    <section ref={containerRef} className="py-14 md:py-24 bg-secondary overflow-hidden relative">
       {/* Parallax Background Text */}
       <motion.div 
         style={{ x: xValue }}
@@ -21,25 +21,30 @@ export default function FinalCTA() {
         <span className="text-[25vw] font-black text-white uppercase select-none">GET YOUR LICENSE GET YOUR LICENSE</span>
       </motion.div>
 
-      <div className="container mx-auto px-6 relative z-10 text-center">
-        <div className="vibrant-card bg-primary p-12 md:p-24 border-none shadow-[20px_20px_0_rgba(0,0,0,0.2)]">
-          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-secondary uppercase tracking-tighter leading-[0.8] mb-12">
-            Ready to <br /> start <br /><span className="text-white italic">driving?</span>
+      <div className="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10 text-center">
+        <div className="bg-primary rounded-3xl border-4 border-secondary p-8 sm:p-12 md:p-16 lg:p-20 shadow-[6px_6px_0_rgba(0,0,0,0.25)] md:shadow-[12px_12px_0_rgba(0,0,0,0.25)]">
+          <span className="text-secondary/70 font-black uppercase tracking-[0.32em] text-[10px] md:text-xs block mb-4">
+            Last stop
+          </span>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-8 md:mb-12">
+            Ready to start{' '}
+            <span className="text-white italic">driving?</span>
           </h2>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group px-12 py-6 bg-secondary text-white font-black uppercase tracking-[0.2em] rounded-full text-xl flex items-center space-x-3 shadow-2xl"
+
+          <div className="flex justify-center">
+            <motion.a
+              href="#services"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              className="group inline-flex items-center gap-3 px-10 py-5 md:px-12 md:py-6 bg-secondary text-white font-black uppercase tracking-[0.16em] rounded-full text-base md:text-lg"
             >
-              <span>Book Your First Lesson</span>
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-            </motion.button>
+              <span>Book Now</span>
+              <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
+            </motion.a>
           </div>
 
-          <p className="mt-12 text-secondary/60 font-black uppercase tracking-widest text-xs">
-            No long waiting lists. Instant matching.
+          <p className="mt-8 md:mt-10 text-secondary/60 font-black uppercase tracking-widest text-[10px] md:text-xs">
+            No waiting lists · Instant matching
           </p>
         </div>
       </div>

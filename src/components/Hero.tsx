@@ -1,100 +1,138 @@
-import { motion, useScroll, useTransform, useSpring } from 'motion/react';
-import { useRef } from 'react';
+import type { ReactNode } from 'react';
+import { motion, type Variants } from 'motion/react';
+import { ArrowRight } from 'lucide-react';
+
+/**
+ * Hero — title slams in word-by-word, then the green "Smart." block pops
+ * with rotation, then the CTA and supporting line lift up. Each word lives
+ * inside an overflow-hidden mask so it appears from below the line.
+ *
+ * Choreography (timeline):
+ *   0.00s   Pass     slides up
+ *   0.08s   fast,    slides up
+ *   0.18s   Drive    slides up
+ *   0.34s   Smart.   pops + rotates into place
+ *   0.55s   CTA      lifts up
+ *   0.70s   sub-line fades in
+ */
+
+const containerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+// Each word: starts ~110% below baseline + slightly squashed, springs into
+// its final position. `back.out`-ish easing for the punchy feel.
+const wordVariants: Variants = {
+  hidden: { y: '110%', scaleY: 1.1 },
+  visible: {
+    y: 0,
+    scaleY: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 140,
+      damping: 18,
+      mass: 0.7,
+    },
+  },
+};
+
+// Helper that wraps a single word in a mask + the inner motion span.
+// The outer span has `overflow: hidden` so anything below the baseline
+// is clipped — that's what creates the "letter dropped behind a line"
+// reveal effect.
+function Word({ children, accent = false }: { children: ReactNode; accent?: boolean }) {
+  return (
+    <span
+      className="inline-block overflow-hidden align-baseline"
+      style={{ paddingBottom: '0.08em', marginBottom: '-0.08em' }}
+    >
+      <motion.span
+        variants={wordVariants}
+        className={`inline-block ${accent ? 'text-primary bg-secondary px-4 py-1 rounded-xl mt-2 relative' : ''}`}
+        style={accent ? { transformOrigin: '50% 100%' } : undefined}
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+}
 
 export default function Hero({ id }: { id?: string }) {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  const smoothScroll = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  const textTranslation = useTransform(smoothScroll, [0, 1], [0, -200]);
-
   return (
-    <section id={id} ref={containerRef} className="relative min-h-screen lg:min-h-[110vh] flex items-center pt-24 pb-12 lg:pb-0 overflow-hidden transform-gpu">
-      {/* Parallax Background Text */}
-      <motion.div 
-        style={{ x: textTranslation }}
-        className="absolute bottom-10 left-0 whitespace-nowrap opacity-[0.03] select-none pointer-events-none transform-gpu hidden lg:block"
+    <section
+      id={id}
+      className="relative flex flex-col items-center pt-24 sm:pt-32 md:pt-40 pb-10 sm:pb-16 md:pb-20 overflow-hidden"
+    >
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="container mx-auto px-4 sm:px-6"
       >
-        <span className="text-[20vw] font-black text-outline uppercase tracking-tighter">THE PASS GUYS THE PASS GUYS</span>
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-secondary leading-[0.85] tracking-tighter text-center text-balance">
+          <Word>Pass</Word>
+          <span>&nbsp;</span>
+          <Word>fast,</Word>
+          <br />
+          <Word>Drive</Word>
+          <span>&nbsp;</span>
+          <Word accent>Smart.</Word>
+        </h1>
+
+        {/* CTA — fades in after the title finishes */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.55,
+            type: 'spring',
+            stiffness: 110,
+            damping: 18,
+          }}
+          className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+        >
+          <a
+            href="#services"
+            className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 bg-primary text-secondary font-black uppercase tracking-widest text-base sm:text-lg rounded-full border-4 border-secondary shadow-[6px_6px_0_var(--color-secondary)] hover:-translate-y-0.5 hover:shadow-[4px_4px_0_var(--color-secondary)] active:translate-y-0 active:shadow-[2px_2px_0_var(--color-secondary)] transition-all duration-200"
+          >
+            Book Now
+            <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+          </a>
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
+            className="text-xs sm:text-sm font-bold uppercase tracking-widest text-secondary/60"
+          >
+            From £35 / hour · No commitment
+          </motion.span>
+        </motion.div>
       </motion.div>
 
-      <div className="container mx-auto px-6 relative z-10 py-12">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 lg:items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 100, damping: 20 }}
-          >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-secondary leading-[0.85] tracking-tighter mb-8 text-balance">
-              Pass fast,<br />
-              Drive <motion.span 
-                initial={{ rotate: -5, scale: 0.9 }}
-                animate={{ rotate: 1, scale: 1 }}
-                transition={{ delay: 0.5, type: "spring" }}
-                className="text-primary bg-secondary px-4 py-1 rounded-xl inline-block mt-2 relative"
-              >
-                Smart.
-              </motion.span>
-            </h1>
-            
-            <p className="text-slate-600 text-lg md:text-xl max-w-lg mb-10 leading-relaxed font-medium">
-              The UK's most energetic driving school. We don't just teach you how to pass the test; we teach you how to dominate the road with confidence.
-            </p>
-
-            {/* Postcode Input Box */}
-            <div className="vibrant-card !p-4 mb-8 max-w-md bg-white border-4 border-secondary flex flex-col sm:flex-row gap-3">
-              <input 
-                type="text" 
-                placeholder="Enter Postcode (e.g. M1)" 
-                className="flex-1 bg-slate-50 rounded-2xl px-6 py-4 font-black text-secondary uppercase tracking-widest placeholder:text-secondary/30 focus:outline-none"
-              />
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-primary text-secondary font-black uppercase tracking-widest px-8 py-4 rounded-xl shadow-lg border-2 border-secondary"
-              >
-                Go
-              </motion.button>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-0">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto px-10 py-5 bg-secondary text-white font-black uppercase tracking-widest rounded-full flex items-center justify-center space-x-2 sm:shadow-[0_20px_0_rgba(0,0,0,0.1)] hover:sm:shadow-[0_10px_0_rgba(0,0,0,0.1)] transition-all text-lg"
-              >
-                <span>Book Now</span>
-              </motion.button>
-              
-              <button className="w-full sm:w-auto px-10 py-5 bg-transparent text-secondary font-black uppercase tracking-widest rounded-full flex items-center justify-center space-x-2 border-4 border-secondary hover:bg-secondary hover:text-white transition-all text-lg font-black">
-                <span>Supporting Info</span>
-              </button>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: "spring", stiffness: 50, damping: 15 }}
-            className="relative mt-2 lg:mt-0"
-          >
-            <img 
-              src="https://lh3.googleusercontent.com/d/15SayWyrpNJrk1Gtc0cQnLV7Dq2i-yaSC" 
-              alt="The Pass Guys Hero" 
-              className="w-full h-auto object-cover rounded-[40px] transform-gpu"
-              referrerPolicy="no-referrer"
-            />
-          </motion.div>
-        </div>
-      </div>
+      {/* Background video — slides up + fades in once the title settles */}
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="mt-4 sm:mt-8 md:mt-12 w-full flex justify-center"
+      >
+        <video
+          className="w-full sm:w-auto sm:max-w-[75%] md:max-w-[60%] lg:max-w-[55%] h-auto object-contain"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
     </section>
   );
 }

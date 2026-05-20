@@ -10,6 +10,7 @@ import ResourcesPage from './pages/ResourcesPage';
 import FAQPage from './pages/FAQPage';
 import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer';
+import StickyMobileCTA from './components/StickyMobileCTA';
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         </main>
         <Footer />
       </div>
+      <StickyMobileCTA />
     </Router>
   );
 }

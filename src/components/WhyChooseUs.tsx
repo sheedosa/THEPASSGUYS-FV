@@ -1,65 +1,93 @@
 import { motion } from 'motion/react';
 import { Award, Clock, Heart, Users } from 'lucide-react';
 
-export default function WhyChooseUs({ id }: { id?: string }) {
-  const points = [
-    {
-      icon: <Award className="w-8 h-8" />,
-      title: "Top Rated School",
-      description: "Thousands of students pass with us every year with record-breaking scores."
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Vetted Instructors",
-      description: "Only the most patient and highly-qualified ADIs join our energetic network."
-    },
-    {
-      icon: <Clock className="w-8 h-8" />,
-      title: "Flexible Hours",
-      description: "Early mornings, late evenings, or weekend slots - we work around your life."
-    },
-    {
-      icon: <Heart className="w-8 h-8" />,
-      title: "Student Focused",
-      description: "We don't just teach you to pass; we teach you the confidence to dominate the road."
-    }
-  ];
+type Point = {
+  icon: typeof Award;
+  title: string;
+  description: string;
+  mobile?: boolean;
+};
 
+// `mobile: true` points show on every viewport. The other two appear from
+// sm: up so phones get the two strongest differentiators only.
+const POINTS: Point[] = [
+  {
+    icon: Award,
+    title: 'Top rated school',
+    description: 'Thousands of students pass with us every year.',
+    mobile: true,
+  },
+  {
+    icon: Users,
+    title: 'Vetted instructors',
+    description: 'Only the most patient, qualified ADIs join the network.',
+    mobile: true,
+  },
+  {
+    icon: Clock,
+    title: 'Flexible hours',
+    description: 'Early mornings, evenings, or weekends — we fit your life.',
+  },
+  {
+    icon: Heart,
+    title: 'Student focused',
+    description: "We don't just teach you to pass — we teach you to drive.",
+  },
+];
+
+export default function WhyChooseUs({ id }: { id?: string }) {
   return (
-    <section id={id} className="py-24">
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section id={id} className="py-16 md:py-24">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
+          {/* Left — copy block */}
           <div>
-            <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">Why Us</span>
-            <h2 className="text-5xl md:text-7xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-8">
-              Why thousands <br /> choose <span className="text-primary italic">The Pass Guys.</span>
+            <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">
+              Why Us
+            </span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-6 text-balance">
+              Most schools teach you to pass.{' '}
+              <span className="text-primary italic">We teach you to drive.</span>
             </h2>
-            <p className="text-slate-500 text-lg md:text-xl max-w-lg font-medium leading-relaxed mb-10">
-              We’ve rebuilt the driving school experience from the ground up to be faster, simpler, and more exciting.
+            <p className="text-slate-500 text-base md:text-lg font-medium leading-relaxed max-w-lg">
+              We&apos;ve rebuilt the driving school experience from the ground
+              up — faster, simpler, and more exciting.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {points.map((point, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, type: "spring" }}
-                className="vibrant-card !p-8 !shadow-none border-2 border-slate-100 hover:border-secondary transition-colors group"
-              >
-                <div className="w-14 h-14 bg-secondary text-white rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-12 transition-transform shadow-lg group-hover:bg-primary group-hover:text-secondary">
-                  {point.icon}
-                </div>
-                <h3 className="text-xl font-black text-secondary uppercase tracking-tight mb-2">
-                  {point.title}
-                </h3>
-                <p className="text-slate-500 text-sm font-semibold leading-relaxed">
-                  {point.description}
-                </p>
-              </motion.div>
-            ))}
+          {/* Right — 2x2 card grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            {POINTS.map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <motion.div
+                  key={p.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  whileHover={{ y: -4 }}
+                  transition={{
+                    duration: 0.55,
+                    delay: i * 0.08,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className={`bg-white border-4 border-secondary rounded-3xl p-6 md:p-7 transition-all group ${
+                    p.mobile ? '' : 'hidden sm:block'
+                  }`}
+                  style={{ boxShadow: '6px 6px 0 var(--color-primary)' }}
+                >
+                  <div className="w-12 h-12 bg-secondary text-white rounded-2xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-secondary group-hover:rotate-6 transition-all">
+                    <Icon className="w-6 h-6" strokeWidth={2.25} />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-black text-secondary uppercase tracking-tight leading-none mb-3">
+                    {p.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm font-bold leading-relaxed">
+                    {p.description}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>
