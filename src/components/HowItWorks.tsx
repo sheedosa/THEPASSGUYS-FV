@@ -101,7 +101,7 @@ export default function HowItWorks({ id }: { id?: string }) {
             Three taps. <span className="text-primary">You&apos;re driving.</span>
           </p>
           <a
-            href="#services"
+            href="/book"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-black uppercase tracking-widest rounded-full text-sm md:text-base hover:bg-primary hover:text-secondary transition-colors"
           >
             Get matched

@@ -149,7 +149,7 @@ export default function Pricing({ id }: { id?: string }) {
               </ul>
 
               <Link
-                to={`/services/${plan.slug}`}
+                to="/book"
                 className={`w-full py-4 rounded-full font-black uppercase tracking-widest text-sm text-center transition-all ${
                   plan.recommended
                     ? 'bg-primary text-secondary hover:bg-white'

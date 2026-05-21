@@ -34,7 +34,7 @@ export default function FinalCTA() {
 
           <div className="flex justify-center">
             <motion.a
-              href="#services"
+              href="/book"
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.96 }}
               className="group inline-flex items-center gap-3 px-10 py-5 md:px-12 md:py-6 bg-secondary text-white font-black uppercase tracking-[0.16em] rounded-full text-base md:text-lg"

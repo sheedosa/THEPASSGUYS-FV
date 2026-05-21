@@ -31,7 +31,7 @@ export default function MidPageCTA() {
             </p>
           </div>
           <a
-            href="#services"
+            href="/book"
             className="group inline-flex w-full md:w-auto items-center justify-center gap-2 px-7 py-4 bg-secondary text-primary font-black uppercase tracking-widest rounded-full text-sm md:text-base hover:bg-secondary/90 transition-colors duration-200 whitespace-nowrap shrink-0"
           >
             Book Now

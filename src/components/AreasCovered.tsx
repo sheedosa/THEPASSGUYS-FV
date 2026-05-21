@@ -141,7 +141,7 @@ export default function AreasCovered({ id }: { id?: string }) {
                           {result.studentCount} students matched in your area this year.
                         </p>
                         <a
-                          href="#services"
+                          href="/book"
                           className="inline-flex items-center gap-1 mt-2 text-primary font-black uppercase tracking-widest text-xs hover:underline"
                         >
                           Book your first lesson

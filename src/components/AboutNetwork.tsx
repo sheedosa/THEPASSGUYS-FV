@@ -70,10 +70,10 @@ export default function AboutNetwork({ id }: { id?: string }) {
             Founded as a driving school. Built on instructors who can teach.
           </p>
           <Link
-            to="/about"
+            to="/book"
             className="group inline-flex items-center gap-2 mt-5 text-secondary font-black uppercase tracking-widest text-xs md:text-sm hover:text-primary transition-colors"
           >
-            See the network
+            Get matched with one
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </motion.div>

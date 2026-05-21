@@ -1,17 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
-import LessonsPage from './pages/LessonsPage';
-import PricingPage from './pages/PricingPage';
-import AreasPage from './pages/AreasPage';
-import ServiceDetailPage from './pages/ServiceDetailPage';
-import InstructorsPage from './pages/InstructorsPage';
-import ResourcesPage from './pages/ResourcesPage';
-import FAQPage from './pages/FAQPage';
-import ContactPage from './pages/ContactPage';
+import BookPage from './pages/BookPage';
 import Footer from './components/Footer';
 import StickyMobileCTA from './components/StickyMobileCTA';
 
+/**
+ * Route map — intentionally minimal for v1.
+ *
+ *   /        Homepage funnel (the main conversion experience)
+ *   /book    Short lead-capture form
+ *   *        Anything else redirects back to home
+ *
+ * The other route stubs (lessons, pricing, areas, instructors, etc.)
+ * are commented out below so we can re-enable them quickly once we have
+ * real content. Until then, every path funnels users to the homepage,
+ * and every Book Now CTA funnels them to /book.
+ */
 export default function App() {
   return (
     <Router>
@@ -20,14 +25,9 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/lessons" element={<LessonsPage />} />
-            <Route path="/services/:slug" element={<ServiceDetailPage />} />
-            <Route path="/pricing" element={<PricingPage />} />
-            <Route path="/areas" element={<AreasPage />} />
-            <Route path="/instructors" element={<InstructorsPage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/book" element={<BookPage />} />
+            {/* Catch-all → home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
         <Footer />

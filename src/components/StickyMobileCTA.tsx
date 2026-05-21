@@ -35,7 +35,7 @@ export default function StickyMobileCTA() {
           className="lg:hidden fixed bottom-0 inset-x-0 z-40 px-3 pb-3 pointer-events-none"
         >
           <a
-            href="#services"
+            href="/book"
             aria-label="Book your first lesson"
             className="pointer-events-auto flex items-center justify-between gap-3 px-5 py-3.5 bg-primary text-secondary font-black uppercase tracking-widest rounded-full border-4 border-secondary shadow-[0_10px_25px_-5px_rgba(0,0,0,0.35)]"
           >
