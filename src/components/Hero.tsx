@@ -1,6 +1,48 @@
-import type { ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { motion, type Variants } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
+
+/**
+ * Reliable autoplay for the hero video.
+ *
+ * Desktop browsers (Chrome especially) sometimes refuse the HTML
+ * `autoplay` attribute even when the video is muted — common triggers
+ * are data-saver mode, low-power state, or restored tabs. This hook
+ * calls `.play()` explicitly once the video can play, retries on
+ * `canplay`, and resumes when the tab returns to the foreground.
+ */
+function useEnsureAutoplay(ref: { current: HTMLVideoElement | null }) {
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+
+    const tryPlay = () => {
+      video.muted = true; // required by autoplay policies
+      video.play().catch(() => {
+        // Some browsers reject silently — fall through. The next user
+        // interaction will allow play() to succeed on retry.
+      });
+    };
+
+    // If the video is already ready (e.g. cached), play immediately.
+    if (video.readyState >= 2) tryPlay();
+
+    video.addEventListener('loadeddata', tryPlay);
+    video.addEventListener('canplay', tryPlay);
+
+    // Resume when the tab returns to the foreground.
+    const onVisibility = () => {
+      if (!document.hidden) tryPlay();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    return () => {
+      video.removeEventListener('loadeddata', tryPlay);
+      video.removeEventListener('canplay', tryPlay);
+      document.removeEventListener('visibilitychange', onVisibility);
+    };
+  }, [ref]);
+}
 
 /**
  * Hero — title slams in word-by-word, then the green "Smart." block pops
@@ -64,6 +106,9 @@ function Word({ children, accent = false }: { children: ReactNode; accent?: bool
 }
 
 export default function Hero({ id }: { id?: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEnsureAutoplay(videoRef);
+
   return (
     <section
       id={id}
@@ -136,12 +181,17 @@ export default function Hero({ id }: { id?: string }) {
         className="mt-4 sm:mt-8 md:mt-12 w-full flex justify-center"
       >
         <video
+          ref={videoRef}
           className="w-full sm:w-auto sm:max-w-[75%] md:max-w-[60%] lg:max-w-[55%] h-auto object-contain"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
+          disableRemotePlayback
+          // `aria-hidden` — purely decorative, gives screen readers nothing
+          // useful and avoids announcing media controls.
+          aria-hidden="true"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
