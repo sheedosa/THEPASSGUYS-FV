@@ -47,9 +47,9 @@ const PLANS: Plan[] = [
 
 export default function Pricing({ id }: { id?: string }) {
   return (
-    <section id={id} className="py-16 md:py-24 bg-white overflow-hidden relative">
+    <section id={id} className="py-16 md:py-24 bg-secondary text-white overflow-hidden relative">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 relative z-10">
-        {/* Section header — shared rhythm */}
+        {/* Section header — inverted for dark theme */}
         <div className="text-center mb-12 md:mb-16">
           <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">
             Plans
@@ -59,11 +59,11 @@ export default function Pricing({ id }: { id?: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-5xl md:text-7xl font-black text-secondary uppercase tracking-tighter leading-[0.9]"
+            className="text-4xl sm:text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9]"
           >
             Simple <span className="text-primary">pricing.</span>
           </motion.h2>
-          <p className="text-slate-500 max-w-md mx-auto mt-6 text-base md:text-lg font-medium">
+          <p className="text-white/60 max-w-md mx-auto mt-6 text-base md:text-lg font-medium">
             One price, no hidden fees. Pick what works for you.
           </p>
         </div>
@@ -83,12 +83,12 @@ export default function Pricing({ id }: { id?: string }) {
               whileHover={{ y: -6 }}
               className={`relative flex flex-col p-7 md:p-8 rounded-3xl border-4 transition-all ${
                 plan.recommended
-                  ? 'bg-secondary text-white border-secondary md:scale-[1.03] z-10'
+                  ? 'bg-primary text-secondary border-secondary md:scale-[1.03] z-10'
                   : 'bg-white text-secondary border-secondary'
               }`}
               style={{
                 boxShadow: plan.recommended
-                  ? '8px 8px 0 var(--color-primary)'
+                  ? '8px 8px 0 rgba(255,255,255,0.15)'
                   : '6px 6px 0 var(--color-primary)',
               }}
             >
@@ -108,7 +108,7 @@ export default function Pricing({ id }: { id?: string }) {
               {plan.tag && (
                 <p
                   className={`text-[10px] font-black uppercase tracking-[0.32em] mb-2 ${
-                    plan.recommended ? 'text-primary' : 'text-secondary/50'
+                    plan.recommended ? 'text-secondary/70' : 'text-secondary/50'
                   }`}
                 >
                   {plan.tag}
@@ -124,7 +124,7 @@ export default function Pricing({ id }: { id?: string }) {
                 </span>
                 <span
                   className={`text-xs font-black uppercase tracking-widest ${
-                    plan.recommended ? 'text-primary' : 'text-secondary/50'
+                    plan.recommended ? 'text-secondary/70' : 'text-secondary/50'
                   }`}
                 >
                   {plan.priceSuffix}
@@ -134,13 +134,7 @@ export default function Pricing({ id }: { id?: string }) {
               <ul className="flex-1 space-y-3.5 mb-8">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-center gap-3">
-                    <div
-                      className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${
-                        plan.recommended
-                          ? 'bg-primary text-secondary'
-                          : 'bg-secondary text-white'
-                      }`}
-                    >
+                    <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 bg-secondary text-white">
                       <Check className="w-4 h-4" strokeWidth={3.5} />
                     </div>
                     <span className="text-sm font-bold opacity-90">{f}</span>

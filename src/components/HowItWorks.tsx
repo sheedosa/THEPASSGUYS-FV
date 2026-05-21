@@ -24,7 +24,7 @@ const STEPS = [
 
 export default function HowItWorks({ id }: { id?: string }) {
   return (
-    <section id={id} className="py-16 md:py-24 bg-white overflow-hidden relative">
+    <section id={id} className="py-16 md:py-24 bg-slate-50 overflow-hidden relative">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center mb-12 md:mb-16">
           <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">
@@ -44,7 +44,7 @@ export default function HowItWorks({ id }: { id?: string }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative">
           {/* Desktop horizontal connector */}
           <div
-            className="hidden md:block absolute top-[88px] left-12 right-12 h-1 bg-slate-100 z-0"
+            className="hidden md:block absolute top-[88px] left-12 right-12 h-1 bg-slate-200 z-0"
             aria-hidden="true"
           />
 

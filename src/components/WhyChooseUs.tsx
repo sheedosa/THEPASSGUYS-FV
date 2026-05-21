@@ -42,7 +42,7 @@ const POINTS: Point[] = [
 
 export default function WhyChooseUs({ id }: { id?: string }) {
   return (
-    <section id={id} className="py-16 md:py-24">
+    <section id={id} className="py-16 md:py-24 bg-slate-50">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Left — copy block */}
