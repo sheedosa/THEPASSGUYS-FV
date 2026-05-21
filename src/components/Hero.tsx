@@ -75,6 +75,19 @@ export default function Hero({ id }: { id?: string }) {
         variants={containerVariants}
         className="container mx-auto px-4 sm:px-6"
       >
+        {/* Location eyebrow — answers "is this for me?" in the first second */}
+        <motion.p
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-3 sm:mb-4"
+        >
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary text-primary text-[10px] sm:text-xs font-black uppercase tracking-[0.32em]">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" aria-hidden="true" />
+            Manchester · North West
+          </span>
+        </motion.p>
+
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-secondary leading-[0.85] tracking-tighter text-center text-balance">
           <Word>Pass</Word>
           <span>&nbsp;</span>
@@ -110,7 +123,7 @@ export default function Hero({ id }: { id?: string }) {
             transition={{ delay: 0.7, duration: 0.5 }}
             className="text-xs sm:text-sm font-bold uppercase tracking-widest text-secondary/60"
           >
-            From £35 / hour · No commitment
+            First lesson this week · From £35/hr
           </motion.span>
         </motion.div>
       </motion.div>

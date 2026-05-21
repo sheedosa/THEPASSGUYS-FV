@@ -4,35 +4,44 @@ import { Check } from 'lucide-react';
 
 type Plan = {
   name: string;
+  tag?: string;
   price: string;
   priceSuffix?: string;
   slug: string;
   features: string[];
   recommended?: boolean;
+  ribbon?: string;
 };
 
+// Plan names sell the OUTCOME, not the internal category. "Try It" /
+// "Most Choose This" / "Pass This Month" each promise a specific result
+// and reduce decision paralysis under short attention.
 const PLANS: Plan[] = [
   {
-    name: 'Pay As You Go',
+    name: 'Try It',
+    tag: 'Pay as you go',
     price: '35',
     priceSuffix: '/ hr',
     slug: 'manual-lessons',
-    features: ['No Commitment', 'Standard Pickup', 'Manual or Auto', 'Local Instructor'],
+    features: ['No commitment', 'Manual or automatic', 'Local instructor', 'Cancel anytime'],
   },
   {
-    name: 'Standard Course',
+    name: 'Most Choose This',
+    tag: 'Block of 10',
     price: '320',
     priceSuffix: 'block',
     slug: 'automatic-lessons',
-    features: ['Block of 10 Lessons', 'Save £30 Overall', 'Free Theory App', 'Priority Booking'],
+    features: ['10 lessons booked', 'Free theory app', 'Priority booking', 'Save £30'],
     recommended: true,
+    ribbon: 'Save £30',
   },
   {
-    name: 'Fast Track',
+    name: 'Pass This Month',
+    tag: 'Fast Track',
     price: '1500',
     priceSuffix: 'all-in',
     slug: 'intensive-fast-track',
-    features: ['40h Intensive Week', 'Practical Test Included', 'Guaranteed Match', 'Dedicated Support'],
+    features: ['40h intensive week', 'Practical test included', 'Guaranteed match', 'Dedicated support'],
   },
 ];
 
@@ -89,7 +98,23 @@ export default function Pricing({ id }: { id?: string }) {
                 </div>
               )}
 
-              <h3 className="text-2xl md:text-3xl font-black mb-3 uppercase tracking-tight leading-none">
+              {/* Savings ribbon — sits in top-right corner of card */}
+              {plan.ribbon && (
+                <div className="absolute -top-3 -right-3 rotate-6 bg-white text-secondary px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border-2 border-secondary shadow-md">
+                  {plan.ribbon}
+                </div>
+              )}
+
+              {plan.tag && (
+                <p
+                  className={`text-[10px] font-black uppercase tracking-[0.32em] mb-2 ${
+                    plan.recommended ? 'text-primary' : 'text-secondary/50'
+                  }`}
+                >
+                  {plan.tag}
+                </p>
+              )}
+              <h3 className="text-2xl md:text-3xl font-black mb-4 uppercase tracking-tight leading-none">
                 {plan.name}
               </h3>
 

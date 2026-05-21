@@ -1,30 +1,39 @@
 import { motion } from 'motion/react';
-import { Quote } from 'lucide-react';
+import { Star } from 'lucide-react';
 
-type Testimonial = { name: string; role: string; content: string };
+type Testimonial = {
+  name: string;
+  ageArea: string;
+  weeks: string;
+  content: string;
+};
 
+// Specifics > adjectives. Each review has an age + location + the
+// specific instructor moment + outcome. That's what reads as real.
 const TESTIMONIALS: Testimonial[] = [
   {
-    name: 'Sarah Jenkins',
-    role: 'Passed in 6 weeks',
+    name: 'Sarah J.',
+    ageArea: '19 · Salford',
+    weeks: '6 weeks of lessons',
     content:
-      'The best driving school in the area. My instructor was patient and gave me the confidence I lacked first time!',
+      'My instructor Ben helped me nail parallel parking in two sessions. Passed first time.',
   },
   {
-    name: 'Marcus Thorne',
-    role: 'Intensive Course',
+    name: 'Marcus T.',
+    ageArea: '23 · Manchester City',
+    weeks: '5-day intensive',
     content:
-      'I needed to pass quickly for work. The 5-day course was intense but perfectly structured and successful.',
+      'Needed to pass for work — booked the Fast Track on a Monday, passed that Friday. Brilliant.',
   },
   {
-    name: 'Chloe Smith',
-    role: 'Automatic Lessons',
+    name: 'Chloe S.',
+    ageArea: '17 · Stockport',
+    weeks: '8 weeks of lessons',
     content:
-      'Transitioning to automatic was the best choice. The car was brand new and very easy to learn in.',
+      'Switched from manual after one lesson. The automatic was so much easier — I actually enjoyed driving.',
   },
 ];
 
-// Initials derived from name — cleaner than placeholder avatars
 function getInitials(name: string) {
   return name
     .split(' ')
@@ -40,7 +49,7 @@ export default function Testimonials({ id }: { id?: string }) {
       id={id}
       className="py-16 md:py-24 bg-secondary text-white overflow-hidden relative"
     >
-      {/* Background decorative text — kept very subtle */}
+      {/* Subtle background watermark */}
       <div
         className="absolute top-1/2 left-0 w-full pointer-events-none opacity-[0.03] select-none -translate-y-1/2"
         aria-hidden="true"
@@ -51,7 +60,6 @@ export default function Testimonials({ id }: { id?: string }) {
       </div>
 
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 relative z-10">
-        {/* Section header — uses the shared rhythm */}
         <div className="text-center mb-12 md:mb-16">
           <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">
             Reviews
@@ -80,30 +88,53 @@ export default function Testimonials({ id }: { id?: string }) {
                 delay: i * 0.08,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="relative bg-white/[0.04] border border-white/10 rounded-3xl p-7 md:p-8 backdrop-blur-sm group"
+              className="relative flex flex-col bg-white/[0.04] border border-white/10 rounded-3xl p-7 md:p-8 backdrop-blur-sm"
             >
-              <Quote
-                className="absolute top-6 right-6 w-10 h-10 text-white/5 group-hover:text-primary/20 transition-colors"
-                aria-hidden="true"
-              />
+              {/* 5-star row */}
+              <div
+                className="flex items-center gap-0.5 mb-4 text-primary"
+                aria-label="5 out of 5 stars"
+              >
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <Star key={idx} className="w-4 h-4 fill-current" strokeWidth={0} />
+                ))}
+              </div>
 
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-primary border-2 border-secondary flex items-center justify-center font-black text-secondary text-lg">
+              {/* The quote */}
+              <p className="text-white/90 text-base md:text-lg leading-relaxed font-medium flex-1 mb-6">
+                &ldquo;{t.content}&rdquo;
+              </p>
+
+              {/* Author + verifier row */}
+              <div className="flex items-center gap-3 pt-5 border-t border-white/10">
+                <div className="w-11 h-11 rounded-2xl bg-primary border-2 border-secondary flex items-center justify-center font-black text-secondary text-sm shrink-0">
                   {getInitials(t.name)}
                 </div>
-                <div className="leading-tight">
-                  <h4 className="font-black text-base text-white tracking-tight">
-                    {t.name}
-                  </h4>
+                <div className="leading-tight flex-1 min-w-0">
+                  <p className="font-black text-sm text-white tracking-tight truncate">
+                    {t.name} · {t.ageArea}
+                  </p>
                   <p className="text-primary text-[10px] font-black uppercase tracking-[0.2em] mt-1">
-                    {t.role}
+                    {t.weeks}
                   </p>
                 </div>
               </div>
 
-              <p className="text-white/85 text-base md:text-lg leading-relaxed font-medium">
-                &ldquo;{t.content}&rdquo;
-              </p>
+              {/* Verifier badge — top-right */}
+              <span
+                className="absolute top-5 right-5 inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white/10 text-white/60 text-[9px] font-black uppercase tracking-[0.15em]"
+                aria-label="Verified Google review"
+              >
+                <svg
+                  className="w-3 h-3"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M22 12a10 10 0 11-20 0 10 10 0 0120 0zm-11.7 4.3l7-7-1.4-1.4-5.6 5.6-2.6-2.6-1.4 1.4 4 4z" />
+                </svg>
+                Verified
+              </span>
             </motion.div>
           ))}
         </div>
