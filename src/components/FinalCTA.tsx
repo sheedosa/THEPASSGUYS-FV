@@ -27,8 +27,9 @@ export default function FinalCTA() {
             Last stop
           </span>
           <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-8 md:mb-12">
-            Ready to start{' '}
-            <span className="text-white italic">driving?</span>
+            Stop scrolling.
+            <br />
+            <span className="text-white italic">Start driving.</span>
           </h2>
 
           <div className="flex justify-center">
@@ -44,7 +45,7 @@ export default function FinalCTA() {
           </div>
 
           <p className="mt-8 md:mt-10 text-secondary/60 font-black uppercase tracking-widest text-[10px] md:text-xs">
-            No waiting lists · Instant matching
+            First lesson this week · From £35/hr
           </p>
         </div>
       </div>

@@ -8,26 +8,25 @@ interface FAQItem {
 }
 
 export default function FAQ({ id, items }: { id?: string; items?: FAQItem[] }) {
+  // Ordered by friction priority: price objection first (biggest blocker),
+  // then area (relevance), then commitment, then choice. Pass-rate FAQ
+  // removed because the TrustBar already answers it loudly above.
   const defaultFaqs = [
     {
-      q: 'How many lessons until I pass?',
-      a: 'Most students pass in 30–45 hours. Intensive Fast Track courses get you through in a single week. It depends on your pace and prior experience.',
-    },
-    {
       q: 'Are there any hidden fees?',
-      a: 'No. £35/hour covers everything. No booking fees, no card surcharges, no franchise costs. The price you see is the price you pay.',
+      a: 'No. £35/hr covers everything — no booking fees, no card surcharges, no franchise costs. The price you see is the price you pay.',
     },
     {
-      q: 'Can I choose manual or automatic?',
-      a: "Yes — both at the same price. Our fleet is a mix of modern manual and automatic dual-controlled vehicles. Pick whichever fits the way you'll drive after passing.",
+      q: 'Do you cover my area?',
+      a: "Yes — every M-postcode across Greater Manchester, plus Salford, Stockport, Bolton, Trafford and more. Use the postcode checker above and we'll confirm in one tap.",
     },
     {
-      q: 'Do you cover my area in Manchester?',
-      a: "We cover every M-postcode across Greater Manchester — Salford, Stockport, Bolton, Trafford and more. Drop your postcode and we'll confirm in seconds.",
+      q: 'How many lessons until I pass?',
+      a: 'Most students pass in 30–45 hours. Our intensive Fast Track gets you through in a single week. It depends on your pace and prior experience.',
     },
     {
-      q: 'What is your pass rate?',
-      a: 'Our network maintains a 98% pass rate across all course types — among the highest in the North West.',
+      q: 'Manual or automatic — same price?',
+      a: "Same price, your choice. Our fleet is a mix of modern manual and automatic dual-controlled cars. Pick whichever fits the way you'll drive after passing.",
     },
   ];
 

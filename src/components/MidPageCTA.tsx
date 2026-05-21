@@ -21,10 +21,14 @@ export default function MidPageCTA() {
             <p className="font-black uppercase tracking-[0.32em] text-[10px] md:text-xs text-secondary/70 mb-2">
               Ready to start?
             </p>
-            <h3 className="font-black uppercase tracking-tighter text-secondary text-2xl sm:text-3xl md:text-4xl leading-[0.95]">
+            <h3 className="font-black uppercase tracking-tighter text-secondary text-2xl sm:text-3xl md:text-4xl leading-[0.95] mb-3">
               Get on the road{' '}
               <span className="italic">this week.</span>
             </h3>
+            <p className="inline-flex items-center gap-2 text-[11px] md:text-xs font-black uppercase tracking-widest text-secondary/80">
+              <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" aria-hidden="true" />
+              12 spots left in Manchester this week
+            </p>
           </div>
           <a
             href="#services"

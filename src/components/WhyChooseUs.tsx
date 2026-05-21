@@ -4,6 +4,7 @@ import { Award, Clock, Heart, Users } from 'lucide-react';
 type Point = {
   icon: typeof Award;
   title: string;
+  stat: string;
   description: string;
   mobile?: boolean;
 };
@@ -13,24 +14,28 @@ type Point = {
 const POINTS: Point[] = [
   {
     icon: Award,
-    title: 'Top rated school',
-    description: 'Thousands of students pass with us every year.',
+    title: 'Top rated',
+    stat: '4.9★ · 1,200+ reviews',
+    description: 'Verified on Google. We let our students do the talking.',
     mobile: true,
   },
   {
     icon: Users,
     title: 'Vetted instructors',
-    description: 'Only the most patient, qualified ADIs join the network.',
+    stat: '150+ ADIs · 11-step vetting',
+    description: 'Only the most patient, qualified instructors join the network.',
     mobile: true,
   },
   {
     icon: Clock,
     title: 'Flexible hours',
-    description: 'Early mornings, evenings, or weekends — we fit your life.',
+    stat: '6am – 9pm · 7 days',
+    description: 'Early mornings, evenings, weekends — we fit your life.',
   },
   {
     icon: Heart,
-    title: 'Student focused',
+    title: 'Real teaching',
+    stat: '2,000+ passes a year',
     description: "We don't just teach you to pass — we teach you to drive.",
   },
 ];
@@ -79,9 +84,12 @@ export default function WhyChooseUs({ id }: { id?: string }) {
                   <div className="w-12 h-12 bg-secondary text-white rounded-2xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-secondary group-hover:rotate-6 transition-all">
                     <Icon className="w-6 h-6" strokeWidth={2.25} />
                   </div>
-                  <h3 className="text-lg md:text-xl font-black text-secondary uppercase tracking-tight leading-none mb-3">
+                  <h3 className="text-lg md:text-xl font-black text-secondary uppercase tracking-tight leading-none mb-2">
                     {p.title}
                   </h3>
+                  <p className="text-primary text-xs font-black uppercase tracking-widest mb-3">
+                    {p.stat}
+                  </p>
                   <p className="text-slate-500 text-sm font-bold leading-relaxed">
                     {p.description}
                   </p>

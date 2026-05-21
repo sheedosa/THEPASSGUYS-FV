@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { MapPin, Sliders, CalendarCheck } from 'lucide-react';
+import { MapPin, Sliders, CalendarCheck, ArrowRight } from 'lucide-react';
 
 const STEPS = [
   {
@@ -87,6 +87,27 @@ export default function HowItWorks({ id }: { id?: string }) {
             );
           })}
         </div>
+
+        {/* Trailing CTA — the natural conversion moment after the user
+            sees how simple the flow is */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.55, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-12 md:mt-14 text-center"
+        >
+          <p className="text-secondary font-black uppercase tracking-tighter text-2xl md:text-3xl mb-5">
+            Three taps. <span className="text-primary">You&apos;re driving.</span>
+          </p>
+          <a
+            href="#services"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-black uppercase tracking-widest rounded-full text-sm md:text-base hover:bg-primary hover:text-secondary transition-colors"
+          >
+            Get matched
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );
