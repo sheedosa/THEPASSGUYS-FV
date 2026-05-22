@@ -7,10 +7,11 @@ import {
   CheckCircle2,
   Phone,
   User,
-  Settings,
+  Cog,
   GraduationCap,
   Clock,
   MapPin,
+  Mail,
 } from 'lucide-react';
 
 /* ------------------------------------------------------------------ */
@@ -26,11 +27,94 @@ interface FormData {
   transmission: Transmission | null;
   experience: Experience | null;
   urgency: Urgency | null;
+  email: string;
   phone: string;
   postcode: string;
 }
 
 const TOTAL_STEPS = 5;
+
+/* ------------------------------------------------------------------ */
+/*  Validation helpers                                                 */
+/* ------------------------------------------------------------------ */
+
+/** At least 2 alpha characters */
+const isValidName = (v: string) => v.trim().length >= 2;
+
+/** Standard email regex */
+const isValidEmail = (v: string) =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+
+/**
+ * UK phone: 07xxx, 01xxx, 02xxx, 03xxx, or +44 prefix.
+ * Strips spaces/dashes, then checks 10-13 digit range.
+ */
+const isValidUKPhone = (v: string) => {
+  const stripped = v.replace(/[\s\-()]+/g, '');
+  if (/^\+44/.test(stripped)) {
+    return /^\+44\d{9,11}$/.test(stripped);
+  }
+  return /^0[1-37]\d{8,10}$/.test(stripped);
+};
+
+/**
+ * UK postcode: e.g. M1 1AA, M14 5RT, SW1A 1AA, EC1A 1BB
+ * Allows with or without space.
+ */
+const isValidUKPostcode = (v: string) =>
+  /^[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}$/i.test(v.trim());
+
+/* ------------------------------------------------------------------ */
+/*  Custom SVG icons for Manual / Automatic                            */
+/* ------------------------------------------------------------------ */
+
+/** Classic H-pattern gearshift icon */
+function ManualIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      {/* H-pattern lines */}
+      <line x1="16" y1="14" x2="16" y2="50" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+      <line x1="32" y1="14" x2="32" y2="50" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+      <line x1="48" y1="14" x2="48" y2="50" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+      <line x1="16" y1="32" x2="32" y2="32" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+      <line x1="32" y1="32" x2="48" y2="32" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+      {/* Gear dots */}
+      <circle cx="16" cy="14" r="4" fill="currentColor" />
+      <circle cx="16" cy="50" r="4" fill="currentColor" />
+      <circle cx="32" cy="14" r="4" fill="currentColor" />
+      <circle cx="32" cy="50" r="4" fill="currentColor" />
+      <circle cx="48" cy="14" r="4" fill="currentColor" />
+      <circle cx="48" cy="50" r="4" fill="currentColor" />
+    </svg>
+  );
+}
+
+/** Automatic drive selector icon (P R N D) */
+function AutoIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      {/* Vertical selector rail */}
+      <rect x="10" y="6" width="44" height="52" rx="8" stroke="currentColor" strokeWidth="3.5" />
+      {/* Mode labels */}
+      <text x="32" y="20" textAnchor="middle" fill="currentColor" fontSize="10" fontWeight="900" fontFamily="system-ui">P</text>
+      <text x="32" y="32" textAnchor="middle" fill="currentColor" fontSize="10" fontWeight="900" fontFamily="system-ui">R</text>
+      <text x="32" y="44" textAnchor="middle" fill="currentColor" fontSize="10" fontWeight="900" fontFamily="system-ui">N</text>
+      {/* D is highlighted */}
+      <rect x="16" y="48" width="32" height="2" rx="1" fill="currentColor" opacity="0.3" />
+      <text x="32" y="56" textAnchor="middle" fill="currentColor" fontSize="11" fontWeight="900" fontFamily="system-ui">D</text>
+    </svg>
+  );
+}
 
 /* ------------------------------------------------------------------ */
 /*  Option data                                                        */
@@ -40,19 +124,19 @@ const TRANSMISSION_OPTIONS: {
   value: Transmission;
   label: string;
   sub: string;
-  emoji: string;
+  Icon: typeof ManualIcon;
 }[] = [
   {
     value: 'manual',
     label: 'Manual',
     sub: 'Learn with a gearstick',
-    emoji: '🔧',
+    Icon: ManualIcon,
   },
   {
     value: 'automatic',
     label: 'Automatic',
     sub: 'No clutch, easier to learn',
-    emoji: '🅰️',
+    Icon: AutoIcon,
   },
 ];
 
@@ -138,26 +222,28 @@ const slideTransition = {
 
 export default function BookPage() {
   const [step, setStep] = useState(1);
-  const [direction, setDirection] = useState(1); // 1 = forward, -1 = back
+  const [direction, setDirection] = useState(1);
   const [data, setData] = useState<FormData>({
     firstName: '',
     transmission: null,
     experience: null,
     urgency: null,
+    email: '',
     phone: '',
     postcode: '',
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const nameRef = useRef<HTMLInputElement>(null);
-  const phoneRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
 
   /* Auto-focus text inputs when their step appears */
   useEffect(() => {
     const timer = setTimeout(() => {
       if (step === 1) nameRef.current?.focus();
-      if (step === 5) phoneRef.current?.focus();
+      if (step === 5) emailRef.current?.focus();
     }, 350);
     return () => clearTimeout(timer);
   }, [step]);
@@ -176,7 +262,7 @@ export default function BookPage() {
   const canAdvance = (): boolean => {
     switch (step) {
       case 1:
-        return data.firstName.trim().length >= 2;
+        return isValidName(data.firstName);
       case 2:
         return data.transmission !== null;
       case 3:
@@ -185,16 +271,38 @@ export default function BookPage() {
         return data.urgency !== null;
       case 5:
         return (
-          data.phone.trim().length >= 7 && data.postcode.trim().length >= 2
+          isValidEmail(data.email) &&
+          isValidUKPhone(data.phone) &&
+          isValidUKPostcode(data.postcode)
         );
       default:
         return false;
     }
   };
 
+  /* ---- Field-level error messages ---- */
+  const getFieldError = (field: string): string | null => {
+    if (!touched[field]) return null;
+    switch (field) {
+      case 'email':
+        if (!data.email.trim()) return null;
+        return isValidEmail(data.email) ? null : 'Please enter a valid email address';
+      case 'phone':
+        if (!data.phone.trim()) return null;
+        return isValidUKPhone(data.phone) ? null : 'Please enter a valid UK phone number';
+      case 'postcode':
+        if (!data.postcode.trim()) return null;
+        return isValidUKPostcode(data.postcode) ? null : 'Please enter a valid UK postcode';
+      default:
+        return null;
+    }
+  };
+
   /* ---- Submit ---- */
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    // Mark all step 5 fields as touched to show errors
+    setTouched({ email: true, phone: true, postcode: true });
     if (!canAdvance()) return;
     setSubmitting(true);
 
@@ -225,8 +333,19 @@ export default function BookPage() {
     setTimeout(goNext, 300);
   };
 
+  /* ---- Mark a field as touched on blur ---- */
+  const markTouched = (field: string) => {
+    setTouched((t) => ({ ...t, [field]: true }));
+  };
+
   /* ---- Progress ---- */
   const progress = ((step - 1) / (TOTAL_STEPS - 1)) * 100;
+
+  /* ---- Shared input class ---- */
+  const inputBase =
+    'w-full px-5 py-4 bg-white border-4 rounded-2xl font-bold text-secondary text-lg placeholder:text-slate-400 placeholder:font-medium focus:outline-none transition-colors';
+  const inputOk = 'border-secondary focus:border-primary';
+  const inputErr = 'border-red-400 focus:border-red-500';
 
   return (
     <section className="min-h-screen py-16 md:py-24 px-4 sm:px-6">
@@ -317,7 +436,7 @@ export default function BookPage() {
                         }
                         onKeyDown={handleKeyDown}
                         placeholder="e.g. Sarah"
-                        className="w-full px-5 py-4 bg-white border-4 border-secondary rounded-2xl font-bold text-secondary text-lg placeholder:text-slate-400 placeholder:font-medium focus:outline-none focus:border-primary"
+                        className={`${inputBase} ${inputOk}`}
                       />
 
                       <button
@@ -345,7 +464,7 @@ export default function BookPage() {
                     >
                       <div className="flex items-center gap-3 mb-4">
                         <span className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                          <Settings className="w-5 h-5 text-primary" strokeWidth={2.5} />
+                          <Cog className="w-5 h-5 text-primary" strokeWidth={2.5} />
                         </span>
                         <span className="text-primary font-black uppercase tracking-[0.3em] text-[11px]">
                           Lesson type
@@ -362,6 +481,7 @@ export default function BookPage() {
                       <div className="grid grid-cols-2 gap-4">
                         {TRANSMISSION_OPTIONS.map((opt) => {
                           const selected = data.transmission === opt.value;
+                          const { Icon } = opt;
                           return (
                             <button
                               key={opt.value}
@@ -375,7 +495,11 @@ export default function BookPage() {
                                   : 'border-secondary bg-white hover:bg-slate-50 shadow-[4px_4px_0_var(--color-secondary)] hover:-translate-y-0.5'
                               }`}
                             >
-                              <span className="text-4xl">{opt.emoji}</span>
+                              <Icon
+                                className={`w-12 h-12 transition-colors ${
+                                  selected ? 'text-primary' : 'text-secondary'
+                                }`}
+                              />
                               <span className="font-black text-secondary uppercase tracking-tight text-base">
                                 {opt.label}
                               </span>
@@ -552,13 +676,42 @@ export default function BookPage() {
                       </p>
 
                       <form onSubmit={handleSubmit} className="space-y-4">
+                        {/* Email */}
+                        <label className="block">
+                          <span className="block text-xs font-black uppercase tracking-widest text-secondary mb-2">
+                            <Mail className="w-3.5 h-3.5 inline-block mr-1.5 -mt-0.5" />
+                            Email address
+                          </span>
+                          <input
+                            ref={emailRef}
+                            type="email"
+                            required
+                            autoComplete="email"
+                            inputMode="email"
+                            value={data.email}
+                            onChange={(e) =>
+                              setData({ ...data, email: e.target.value })
+                            }
+                            onBlur={() => markTouched('email')}
+                            placeholder="sarah@example.com"
+                            className={`${inputBase} ${
+                              getFieldError('email') ? inputErr : inputOk
+                            }`}
+                          />
+                          {getFieldError('email') && (
+                            <span className="block text-[11px] font-bold text-red-500 mt-1.5">
+                              {getFieldError('email')}
+                            </span>
+                          )}
+                        </label>
+
                         {/* Phone */}
                         <label className="block">
                           <span className="block text-xs font-black uppercase tracking-widest text-secondary mb-2">
+                            <Phone className="w-3.5 h-3.5 inline-block mr-1.5 -mt-0.5" />
                             Phone number
                           </span>
                           <input
-                            ref={phoneRef}
                             type="tel"
                             required
                             autoComplete="tel"
@@ -567,17 +720,27 @@ export default function BookPage() {
                             onChange={(e) =>
                               setData({ ...data, phone: e.target.value })
                             }
+                            onBlur={() => markTouched('phone')}
                             placeholder="07700 900 000"
-                            className="w-full px-5 py-4 bg-white border-4 border-secondary rounded-2xl font-bold text-secondary text-lg placeholder:text-slate-400 placeholder:font-medium focus:outline-none focus:border-primary"
+                            className={`${inputBase} ${
+                              getFieldError('phone') ? inputErr : inputOk
+                            }`}
                           />
-                          <span className="block text-[11px] font-bold text-secondary/50 mt-1.5">
-                            We&apos;ll only call you about your lessons.
-                          </span>
+                          {getFieldError('phone') ? (
+                            <span className="block text-[11px] font-bold text-red-500 mt-1.5">
+                              {getFieldError('phone')}
+                            </span>
+                          ) : (
+                            <span className="block text-[11px] font-bold text-secondary/50 mt-1.5">
+                              We&apos;ll only call you about your lessons.
+                            </span>
+                          )}
                         </label>
 
                         {/* Postcode */}
                         <label className="block">
                           <span className="block text-xs font-black uppercase tracking-widest text-secondary mb-2">
+                            <MapPin className="w-3.5 h-3.5 inline-block mr-1.5 -mt-0.5" />
                             Your postcode
                           </span>
                           <input
@@ -590,9 +753,17 @@ export default function BookPage() {
                             onChange={(e) =>
                               setData({ ...data, postcode: e.target.value })
                             }
+                            onBlur={() => markTouched('postcode')}
                             placeholder="M14 5RT"
-                            className="w-full px-5 py-4 bg-white border-4 border-secondary rounded-2xl font-black uppercase tracking-widest text-secondary text-lg placeholder:text-slate-400 placeholder:font-medium placeholder:normal-case placeholder:tracking-normal focus:outline-none focus:border-primary"
+                            className={`${inputBase} font-black uppercase tracking-widest placeholder:normal-case placeholder:tracking-normal ${
+                              getFieldError('postcode') ? inputErr : inputOk
+                            }`}
                           />
+                          {getFieldError('postcode') && (
+                            <span className="block text-[11px] font-bold text-red-500 mt-1.5">
+                              {getFieldError('postcode')}
+                            </span>
+                          )}
                         </label>
 
                         {/* Submit */}
