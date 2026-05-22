@@ -1,65 +1,232 @@
-import { useState, type FormEvent } from 'react';
+import { useState, useRef, useEffect, type FormEvent, type KeyboardEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, Phone } from 'lucide-react';
+import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  Phone,
+  User,
+  Settings,
+  GraduationCap,
+  Clock,
+  MapPin,
+} from 'lucide-react';
 
-/**
- * BookPage — single-purpose lead capture form.
- *
- * Kept to 4 fields because every extra field reduces completion ~10%.
- * On submit we move to a success state telling the user what happens
- * next (managing expectations is part of conversion).
- *
- * No backend yet — wire this up to a webhook / form service / API as
- * soon as one is ready. Until then, the submit handler logs to console
- * so you can verify the data shape.
- */
+/* ------------------------------------------------------------------ */
+/*  Types                                                              */
+/* ------------------------------------------------------------------ */
 
+type Transmission = 'manual' | 'automatic';
+type Experience = 'beginner' | 'some-lessons' | 'refresher';
 type Urgency = 'asap' | 'this-month' | 'just-exploring';
 
 interface FormData {
   firstName: string;
+  transmission: Transmission | null;
+  experience: Experience | null;
+  urgency: Urgency | null;
   phone: string;
   postcode: string;
-  urgency: Urgency;
 }
+
+const TOTAL_STEPS = 5;
+
+/* ------------------------------------------------------------------ */
+/*  Option data                                                        */
+/* ------------------------------------------------------------------ */
+
+const TRANSMISSION_OPTIONS: {
+  value: Transmission;
+  label: string;
+  sub: string;
+  emoji: string;
+}[] = [
+  {
+    value: 'manual',
+    label: 'Manual',
+    sub: 'Learn with a gearstick',
+    emoji: '🔧',
+  },
+  {
+    value: 'automatic',
+    label: 'Automatic',
+    sub: 'No clutch, easier to learn',
+    emoji: '🅰️',
+  },
+];
+
+const EXPERIENCE_OPTIONS: {
+  value: Experience;
+  label: string;
+  sub: string;
+}[] = [
+  {
+    value: 'beginner',
+    label: 'Complete beginner',
+    sub: "Never had a lesson before",
+  },
+  {
+    value: 'some-lessons',
+    label: 'Had some lessons',
+    sub: 'Some experience but not test-ready',
+  },
+  {
+    value: 'refresher',
+    label: 'Refresher',
+    sub: 'I have a licence, just need a brush-up',
+  },
+];
 
 const URGENCY_OPTIONS: { value: Urgency; label: string; sub: string }[] = [
   { value: 'asap', label: 'ASAP', sub: 'I want to start this week' },
-  { value: 'this-month', label: 'This month', sub: 'Within the next few weeks' },
-  { value: 'just-exploring', label: 'Just exploring', sub: 'No rush, gathering info' },
+  {
+    value: 'this-month',
+    label: 'This month',
+    sub: 'Within the next few weeks',
+  },
+  {
+    value: 'just-exploring',
+    label: 'Just exploring',
+    sub: 'No rush, gathering info',
+  },
 ];
 
+/* ------------------------------------------------------------------ */
+/*  Slide animation helpers                                            */
+/* ------------------------------------------------------------------ */
+
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 80 : -80,
+    opacity: 0,
+    position: 'absolute' as const,
+    top: 0,
+    left: 0,
+    right: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    position: 'relative' as const,
+    top: 'auto',
+    left: 'auto',
+    right: 'auto',
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -80 : 80,
+    opacity: 0,
+    position: 'absolute' as const,
+    top: 0,
+    left: 0,
+    right: 0,
+  }),
+};
+
+const slideTransition = {
+  x: { type: 'spring' as const, stiffness: 400, damping: 35 },
+  opacity: { duration: 0.15 },
+  position: { duration: 0 },
+  top: { duration: 0 },
+  left: { duration: 0 },
+  right: { duration: 0 },
+};
+
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
+
 export default function BookPage() {
+  const [step, setStep] = useState(1);
+  const [direction, setDirection] = useState(1); // 1 = forward, -1 = back
   const [data, setData] = useState<FormData>({
     firstName: '',
+    transmission: null,
+    experience: null,
+    urgency: null,
     phone: '',
     postcode: '',
-    urgency: 'asap',
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
+  const nameRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+
+  /* Auto-focus text inputs when their step appears */
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (step === 1) nameRef.current?.focus();
+      if (step === 5) phoneRef.current?.focus();
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [step]);
+
+  /* ---- Navigation ---- */
+  const goNext = () => {
+    setDirection(1);
+    setStep((s) => Math.min(s + 1, TOTAL_STEPS));
+  };
+  const goBack = () => {
+    setDirection(-1);
+    setStep((s) => Math.max(s - 1, 1));
+  };
+
+  /* ---- Validation per step ---- */
+  const canAdvance = (): boolean => {
+    switch (step) {
+      case 1:
+        return data.firstName.trim().length >= 2;
+      case 2:
+        return data.transmission !== null;
+      case 3:
+        return data.experience !== null;
+      case 4:
+        return data.urgency !== null;
+      case 5:
+        return (
+          data.phone.trim().length >= 7 && data.postcode.trim().length >= 2
+        );
+      default:
+        return false;
+    }
+  };
+
+  /* ---- Submit ---- */
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!canAdvance()) return;
     setSubmitting(true);
 
-    // TODO: replace with real endpoint. For now, log the lead so it's
-    // easy to verify the form works end-to-end.
+    // TODO: replace with Firebase Firestore write
     // eslint-disable-next-line no-console
     console.log('Lead submitted:', data);
 
-    // Fake latency so the user sees the loading state
     await new Promise((r) => setTimeout(r, 600));
 
     setSubmitting(false);
     setSubmitted(true);
   };
 
-  const canSubmit =
-    data.firstName.trim().length >= 2 &&
-    data.phone.trim().length >= 7 &&
-    data.postcode.trim().length >= 2;
+  /* ---- Handle Enter key on text steps ---- */
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' && canAdvance() && step < TOTAL_STEPS) {
+      e.preventDefault();
+      goNext();
+    }
+  };
+
+  /* ---- Auto-advance on card selection (steps 2-4) ---- */
+  const selectAndAdvance = <K extends keyof FormData>(
+    key: K,
+    value: FormData[K],
+  ) => {
+    setData((d) => ({ ...d, [key]: value }));
+    setTimeout(goNext, 300);
+  };
+
+  /* ---- Progress ---- */
+  const progress = ((step - 1) / (TOTAL_STEPS - 1)) * 100;
 
   return (
     <section className="min-h-screen py-16 md:py-24 px-4 sm:px-6">
@@ -76,154 +243,392 @@ export default function BookPage() {
         <AnimatePresence mode="wait">
           {!submitted ? (
             <motion.div
-              key="form"
+              key="form-wizard"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Header */}
-              <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">
-                Book your spot
-              </span>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-4">
-                Get matched.{' '}
-                <span className="text-primary italic">Get driving.</span>
-              </h1>
-              <p className="text-slate-500 text-base md:text-lg font-medium mb-10 leading-relaxed">
-                One short form. A real human calls you within 24 hours with
-                your matched instructor.
-              </p>
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* First name */}
-                <label className="block">
-                  <span className="block text-xs font-black uppercase tracking-widest text-secondary mb-2">
-                    Your first name
+              {/* ── Progress bar ───────────────────────────────────── */}
+              <div className="mb-8">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-black uppercase tracking-widest text-secondary/50">
+                    Step {step} of {TOTAL_STEPS}
                   </span>
-                  <input
-                    type="text"
-                    required
-                    autoComplete="given-name"
-                    value={data.firstName}
-                    onChange={(e) =>
-                      setData({ ...data, firstName: e.target.value })
-                    }
-                    placeholder="e.g. Sarah"
-                    className="w-full px-5 py-4 bg-white border-4 border-secondary rounded-2xl font-bold text-secondary placeholder:text-slate-400 placeholder:font-medium focus:outline-none focus:border-primary text-base"
+                  {step > 1 && (
+                    <button
+                      type="button"
+                      onClick={goBack}
+                      className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-widest text-secondary/50 hover:text-secondary transition-colors"
+                    >
+                      <ArrowLeft className="w-3 h-3" />
+                      Back
+                    </button>
+                  )}
+                </div>
+                <div className="h-2 bg-secondary/10 rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-primary rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progress}%` }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                   />
-                </label>
+                </div>
+              </div>
 
-                {/* Phone */}
-                <label className="block">
-                  <span className="block text-xs font-black uppercase tracking-widest text-secondary mb-2">
-                    Phone number
-                  </span>
-                  <input
-                    type="tel"
-                    required
-                    autoComplete="tel"
-                    inputMode="tel"
-                    value={data.phone}
-                    onChange={(e) =>
-                      setData({ ...data, phone: e.target.value })
-                    }
-                    placeholder="07700 900 000"
-                    className="w-full px-5 py-4 bg-white border-4 border-secondary rounded-2xl font-bold text-secondary placeholder:text-slate-400 placeholder:font-medium focus:outline-none focus:border-primary text-base"
-                  />
-                  <span className="block text-[11px] font-bold text-secondary/50 mt-2">
-                    We&apos;ll only call you about your lessons.
-                  </span>
-                </label>
+              {/* ── Step slides ────────────────────────────────────── */}
+              <div className="relative overflow-hidden">
+                <AnimatePresence initial={false} custom={direction}>
+                  {/* ──────── Step 1: Name ──────── */}
+                  {step === 1 && (
+                    <motion.div
+                      key="step-1"
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={slideTransition}
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                          <User className="w-5 h-5 text-primary" strokeWidth={2.5} />
+                        </span>
+                        <span className="text-primary font-black uppercase tracking-[0.3em] text-[11px]">
+                          About you
+                        </span>
+                      </div>
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-3">
+                        What&apos;s your{' '}
+                        <span className="text-primary italic">first name?</span>
+                      </h1>
+                      <p className="text-slate-500 font-medium mb-8">
+                        So we know what to call you when we ring.
+                      </p>
 
-                {/* Postcode */}
-                <label className="block">
-                  <span className="block text-xs font-black uppercase tracking-widest text-secondary mb-2">
-                    Your postcode
-                  </span>
-                  <input
-                    type="text"
-                    required
-                    autoComplete="postal-code"
-                    autoCapitalize="characters"
-                    spellCheck={false}
-                    value={data.postcode}
-                    onChange={(e) =>
-                      setData({ ...data, postcode: e.target.value })
-                    }
-                    placeholder="M14 5RT"
-                    className="w-full px-5 py-4 bg-white border-4 border-secondary rounded-2xl font-black uppercase tracking-widest text-secondary placeholder:text-slate-400 placeholder:font-medium placeholder:normal-case placeholder:tracking-normal focus:outline-none focus:border-primary text-base"
-                  />
-                </label>
+                      <input
+                        ref={nameRef}
+                        type="text"
+                        required
+                        autoComplete="given-name"
+                        value={data.firstName}
+                        onChange={(e) =>
+                          setData({ ...data, firstName: e.target.value })
+                        }
+                        onKeyDown={handleKeyDown}
+                        placeholder="e.g. Sarah"
+                        className="w-full px-5 py-4 bg-white border-4 border-secondary rounded-2xl font-bold text-secondary text-lg placeholder:text-slate-400 placeholder:font-medium focus:outline-none focus:border-primary"
+                      />
 
-                {/* Urgency — radio group as buttons */}
-                <fieldset>
-                  <legend className="block text-xs font-black uppercase tracking-widest text-secondary mb-3">
-                    When do you want to start?
-                  </legend>
-                  <div className="space-y-2">
-                    {URGENCY_OPTIONS.map((opt) => {
-                      const selected = data.urgency === opt.value;
-                      return (
-                        <label
-                          key={opt.value}
-                          className={`flex items-start gap-3 px-5 py-4 rounded-2xl border-4 cursor-pointer transition-all ${
-                            selected
-                              ? 'border-primary bg-primary/10'
-                              : 'border-secondary bg-white hover:bg-slate-50'
-                          }`}
-                        >
-                          <input
-                            type="radio"
-                            name="urgency"
-                            value={opt.value}
-                            checked={selected}
-                            onChange={() =>
-                              setData({ ...data, urgency: opt.value })
-                            }
-                            className="sr-only"
-                          />
-                          <span
-                            className={`mt-1 w-5 h-5 rounded-full border-2 border-secondary shrink-0 flex items-center justify-center ${
-                              selected ? 'bg-primary' : 'bg-white'
-                            }`}
-                            aria-hidden="true"
-                          >
-                            {selected && (
-                              <span className="w-2 h-2 rounded-full bg-secondary" />
-                            )}
+                      <button
+                        type="button"
+                        onClick={goNext}
+                        disabled={!canAdvance()}
+                        className="mt-6 w-full py-4 bg-primary text-secondary font-black uppercase tracking-widest rounded-full border-4 border-secondary text-sm shadow-[4px_4px_0_var(--color-secondary)] hover:-translate-y-0.5 hover:shadow-[3px_3px_0_var(--color-secondary)] active:translate-y-0 active:shadow-[2px_2px_0_var(--color-secondary)] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-[4px_4px_0_var(--color-secondary)] transition-all duration-200 inline-flex items-center justify-center gap-2"
+                      >
+                        Continue
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </motion.div>
+                  )}
+
+                  {/* ──────── Step 2: Transmission ──────── */}
+                  {step === 2 && (
+                    <motion.div
+                      key="step-2"
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={slideTransition}
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                          <Settings className="w-5 h-5 text-primary" strokeWidth={2.5} />
+                        </span>
+                        <span className="text-primary font-black uppercase tracking-[0.3em] text-[11px]">
+                          Lesson type
+                        </span>
+                      </div>
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-3">
+                        Manual or{' '}
+                        <span className="text-primary italic">Automatic?</span>
+                      </h1>
+                      <p className="text-slate-500 font-medium mb-8">
+                        Tap one — you can always change later.
+                      </p>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        {TRANSMISSION_OPTIONS.map((opt) => {
+                          const selected = data.transmission === opt.value;
+                          return (
+                            <button
+                              key={opt.value}
+                              type="button"
+                              onClick={() =>
+                                selectAndAdvance('transmission', opt.value)
+                              }
+                              className={`group relative flex flex-col items-center gap-3 px-5 py-8 rounded-2xl border-4 cursor-pointer transition-all text-center ${
+                                selected
+                                  ? 'border-primary bg-primary/10 shadow-[4px_4px_0_var(--color-primary)]'
+                                  : 'border-secondary bg-white hover:bg-slate-50 shadow-[4px_4px_0_var(--color-secondary)] hover:-translate-y-0.5'
+                              }`}
+                            >
+                              <span className="text-4xl">{opt.emoji}</span>
+                              <span className="font-black text-secondary uppercase tracking-tight text-base">
+                                {opt.label}
+                              </span>
+                              <span className="text-secondary/50 text-xs font-bold">
+                                {opt.sub}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* ──────── Step 3: Experience ──────── */}
+                  {step === 3 && (
+                    <motion.div
+                      key="step-3"
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={slideTransition}
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                          <GraduationCap className="w-5 h-5 text-primary" strokeWidth={2.5} />
+                        </span>
+                        <span className="text-primary font-black uppercase tracking-[0.3em] text-[11px]">
+                          Your experience
+                        </span>
+                      </div>
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-3">
+                        Where are you{' '}
+                        <span className="text-primary italic">starting?</span>
+                      </h1>
+                      <p className="text-slate-500 font-medium mb-8">
+                        This helps us match you with the right instructor.
+                      </p>
+
+                      <div className="space-y-3">
+                        {EXPERIENCE_OPTIONS.map((opt) => {
+                          const selected = data.experience === opt.value;
+                          return (
+                            <button
+                              key={opt.value}
+                              type="button"
+                              onClick={() =>
+                                selectAndAdvance('experience', opt.value)
+                              }
+                              className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-4 cursor-pointer transition-all text-left ${
+                                selected
+                                  ? 'border-primary bg-primary/10'
+                                  : 'border-secondary bg-white hover:bg-slate-50 hover:-translate-y-0.5'
+                              }`}
+                            >
+                              <span
+                                className={`w-5 h-5 rounded-full border-2 border-secondary shrink-0 flex items-center justify-center transition-colors ${
+                                  selected ? 'bg-primary' : 'bg-white'
+                                }`}
+                              >
+                                {selected && (
+                                  <span className="w-2 h-2 rounded-full bg-secondary" />
+                                )}
+                              </span>
+                              <span className="flex-1">
+                                <span className="block font-black text-secondary uppercase tracking-tight text-sm">
+                                  {opt.label}
+                                </span>
+                                <span className="block text-secondary/50 text-xs font-bold mt-0.5">
+                                  {opt.sub}
+                                </span>
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* ──────── Step 4: Urgency ──────── */}
+                  {step === 4 && (
+                    <motion.div
+                      key="step-4"
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={slideTransition}
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                          <Clock className="w-5 h-5 text-primary" strokeWidth={2.5} />
+                        </span>
+                        <span className="text-primary font-black uppercase tracking-[0.3em] text-[11px]">
+                          Timing
+                        </span>
+                      </div>
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-3">
+                        When do you want{' '}
+                        <span className="text-primary italic">to start?</span>
+                      </h1>
+                      <p className="text-slate-500 font-medium mb-8">
+                        No commitment — just helps us prioritise.
+                      </p>
+
+                      <div className="space-y-3">
+                        {URGENCY_OPTIONS.map((opt) => {
+                          const selected = data.urgency === opt.value;
+                          return (
+                            <button
+                              key={opt.value}
+                              type="button"
+                              onClick={() =>
+                                selectAndAdvance('urgency', opt.value)
+                              }
+                              className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-4 cursor-pointer transition-all text-left ${
+                                selected
+                                  ? 'border-primary bg-primary/10'
+                                  : 'border-secondary bg-white hover:bg-slate-50 hover:-translate-y-0.5'
+                              }`}
+                            >
+                              <span
+                                className={`w-5 h-5 rounded-full border-2 border-secondary shrink-0 flex items-center justify-center transition-colors ${
+                                  selected ? 'bg-primary' : 'bg-white'
+                                }`}
+                              >
+                                {selected && (
+                                  <span className="w-2 h-2 rounded-full bg-secondary" />
+                                )}
+                              </span>
+                              <span className="flex-1">
+                                <span className="block font-black text-secondary uppercase tracking-tight text-sm">
+                                  {opt.label}
+                                </span>
+                                <span className="block text-secondary/50 text-xs font-bold mt-0.5">
+                                  {opt.sub}
+                                </span>
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* ──────── Step 5: Contact details ──────── */}
+                  {step === 5 && (
+                    <motion.div
+                      key="step-5"
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={slideTransition}
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                          <MapPin className="w-5 h-5 text-primary" strokeWidth={2.5} />
+                        </span>
+                        <span className="text-primary font-black uppercase tracking-[0.3em] text-[11px]">
+                          Almost there
+                        </span>
+                      </div>
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-3">
+                        How do we{' '}
+                        <span className="text-primary italic">reach you?</span>
+                      </h1>
+                      <p className="text-slate-500 font-medium mb-8">
+                        Last step, {data.firstName || 'mate'} — then we&apos;ll
+                        match you with an instructor.
+                      </p>
+
+                      <form onSubmit={handleSubmit} className="space-y-4">
+                        {/* Phone */}
+                        <label className="block">
+                          <span className="block text-xs font-black uppercase tracking-widest text-secondary mb-2">
+                            Phone number
                           </span>
-                          <span className="flex-1">
-                            <span className="block font-black text-secondary uppercase tracking-tight text-sm">
-                              {opt.label}
-                            </span>
-                            <span className="block text-secondary/60 text-xs font-bold mt-0.5">
-                              {opt.sub}
-                            </span>
+                          <input
+                            ref={phoneRef}
+                            type="tel"
+                            required
+                            autoComplete="tel"
+                            inputMode="tel"
+                            value={data.phone}
+                            onChange={(e) =>
+                              setData({ ...data, phone: e.target.value })
+                            }
+                            placeholder="07700 900 000"
+                            className="w-full px-5 py-4 bg-white border-4 border-secondary rounded-2xl font-bold text-secondary text-lg placeholder:text-slate-400 placeholder:font-medium focus:outline-none focus:border-primary"
+                          />
+                          <span className="block text-[11px] font-bold text-secondary/50 mt-1.5">
+                            We&apos;ll only call you about your lessons.
                           </span>
                         </label>
-                      );
-                    })}
-                  </div>
-                </fieldset>
 
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={!canSubmit || submitting}
-                  className="w-full py-5 bg-primary text-secondary font-black uppercase tracking-widest rounded-full border-4 border-secondary text-base md:text-lg shadow-[6px_6px_0_var(--color-secondary)] hover:-translate-y-0.5 hover:shadow-[4px_4px_0_var(--color-secondary)] active:translate-y-0 active:shadow-[2px_2px_0_var(--color-secondary)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:-translate-y-0 disabled:hover:shadow-[6px_6px_0_var(--color-secondary)] transition-all duration-200"
-                >
-                  {submitting ? 'Sending…' : 'Get matched'}
-                </button>
+                        {/* Postcode */}
+                        <label className="block">
+                          <span className="block text-xs font-black uppercase tracking-widest text-secondary mb-2">
+                            Your postcode
+                          </span>
+                          <input
+                            type="text"
+                            required
+                            autoComplete="postal-code"
+                            autoCapitalize="characters"
+                            spellCheck={false}
+                            value={data.postcode}
+                            onChange={(e) =>
+                              setData({ ...data, postcode: e.target.value })
+                            }
+                            placeholder="M14 5RT"
+                            className="w-full px-5 py-4 bg-white border-4 border-secondary rounded-2xl font-black uppercase tracking-widest text-secondary text-lg placeholder:text-slate-400 placeholder:font-medium placeholder:normal-case placeholder:tracking-normal focus:outline-none focus:border-primary"
+                          />
+                        </label>
 
-                <p className="text-center text-[11px] font-bold text-secondary/50 leading-relaxed">
-                  By tapping above you agree we can call/text you about your
-                  lesson booking. No spam, ever.
-                </p>
-              </form>
+                        {/* Submit */}
+                        <button
+                          type="submit"
+                          disabled={!canAdvance() || submitting}
+                          className="mt-2 w-full py-5 bg-primary text-secondary font-black uppercase tracking-widest rounded-full border-4 border-secondary text-base md:text-lg shadow-[6px_6px_0_var(--color-secondary)] hover:-translate-y-0.5 hover:shadow-[4px_4px_0_var(--color-secondary)] active:translate-y-0 active:shadow-[2px_2px_0_var(--color-secondary)] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-[6px_6px_0_var(--color-secondary)] transition-all duration-200"
+                        >
+                          {submitting ? 'Sending...' : 'Get matched'}
+                        </button>
+
+                        <p className="text-center text-[11px] font-bold text-secondary/50 leading-relaxed">
+                          By tapping above you agree to our{' '}
+                          <Link
+                            to="/privacy"
+                            className="underline hover:text-primary transition-colors"
+                          >
+                            Privacy Policy
+                          </Link>{' '}
+                          and{' '}
+                          <Link
+                            to="/terms"
+                            className="underline hover:text-primary transition-colors"
+                          >
+                            Terms
+                          </Link>
+                          . We&apos;ll only contact you about your booking.
+                        </p>
+                      </form>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </motion.div>
           ) : (
-            // ── Success state ────────────────────────────────────────
+            /* ── Success state ──────────────────────────────────── */
             <motion.div
               key="success"
               initial={{ opacity: 0, scale: 0.96 }}
@@ -245,7 +650,9 @@ export default function BookPage() {
               </h1>
               <p className="text-slate-500 text-base md:text-lg font-medium mb-8 leading-relaxed max-w-md mx-auto">
                 A real human from the Pass Guys team will call you{' '}
-                <span className="text-secondary font-black">within 24 hours</span>{' '}
+                <span className="text-secondary font-black">
+                  within 24 hours
+                </span>{' '}
                 with an instructor matched to your area.
               </p>
 
