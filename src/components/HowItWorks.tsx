@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { MapPin, Sliders, CalendarCheck, ArrowRight } from 'lucide-react';
 
 const STEPS = [
@@ -100,13 +101,13 @@ export default function HowItWorks({ id }: { id?: string }) {
           <p className="text-secondary font-black uppercase tracking-tighter text-2xl md:text-3xl mb-5">
             Three taps. <span className="text-primary">You&apos;re driving.</span>
           </p>
-          <a
-            href="/book"
+          <Link
+            to="/book"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-black uppercase tracking-widest rounded-full text-sm md:text-base hover:bg-primary hover:text-secondary transition-colors"
           >
             Get matched
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

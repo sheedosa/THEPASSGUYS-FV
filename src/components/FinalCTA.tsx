@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 /**
@@ -92,15 +93,18 @@ export default function FinalCTA() {
             </h2>
 
             <div className="flex justify-center">
-              <motion.a
-                href="/book"
+              <motion.div
                 whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.96 }}
-                className="group inline-flex items-center gap-3 px-10 py-5 md:px-12 md:py-6 bg-primary text-secondary font-black uppercase tracking-[0.16em] rounded-full text-base md:text-lg border-4 border-secondary"
               >
-                <span>Book Now</span>
-                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
-              </motion.a>
+                <Link
+                  to="/book"
+                  className="group inline-flex items-center gap-3 px-10 py-5 md:px-12 md:py-6 bg-primary text-secondary font-black uppercase tracking-[0.16em] rounded-full text-base md:text-lg border-4 border-secondary"
+                >
+                  <span>Book Now</span>
+                  <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
             </div>
 
             <p className="mt-8 md:mt-10 text-white/50 font-black uppercase tracking-widest text-[10px] md:text-xs">

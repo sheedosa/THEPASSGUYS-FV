@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { MapPin, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 /**
@@ -135,13 +136,13 @@ export default function AreasCovered({ id }: { id?: string }) {
                         <p className="text-secondary/70 text-sm font-bold mt-1">
                           We have instructors ready in your area.
                         </p>
-                        <a
-                          href="/book"
+                        <Link
+                          to="/book"
                           className="inline-flex items-center gap-1 mt-2 text-primary font-black uppercase tracking-widest text-xs hover:underline"
                         >
                           Book your first lesson
                           <ArrowRight className="w-3.5 h-3.5" />
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   )}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 /**
@@ -44,8 +45,8 @@ export default function StickyMobileCTA() {
           transition={{ type: 'spring', stiffness: 320, damping: 28 }}
           className="lg:hidden fixed bottom-0 inset-x-0 z-40 px-3 pb-3 pointer-events-none"
         >
-          <a
-            href="/book"
+          <Link
+            to="/book"
             aria-label="Book your first lesson"
             className="pointer-events-auto flex items-center justify-between gap-3 px-5 py-3.5 bg-primary text-secondary font-black uppercase tracking-widest rounded-full border-4 border-secondary shadow-[0_10px_25px_-5px_rgba(0,0,0,0.35)]"
           >
@@ -58,7 +59,7 @@ export default function StickyMobileCTA() {
             <span className="w-9 h-9 rounded-full bg-secondary text-primary flex items-center justify-center">
               <ArrowRight className="w-5 h-5" />
             </span>
-          </a>
+          </Link>
         </motion.div>
       )}
     </AnimatePresence>

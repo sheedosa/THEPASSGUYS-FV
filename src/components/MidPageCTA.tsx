@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 /**
@@ -31,13 +32,13 @@ export default function MidPageCTA() {
               Fill out a 30-second form · We match you within 24 hours
             </p>
           </div>
-          <a
-            href="/book"
+          <Link
+            to="/book"
             className="group inline-flex w-full md:w-auto items-center justify-center gap-2 px-7 py-4 bg-secondary text-primary font-black uppercase tracking-widest rounded-full text-sm md:text-base hover:bg-secondary/90 transition-colors duration-200 whitespace-nowrap shrink-0"
           >
             Book Now
             <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
