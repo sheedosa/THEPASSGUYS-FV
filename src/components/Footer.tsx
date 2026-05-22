@@ -8,7 +8,7 @@ import { ArrowRight } from 'lucide-react';
  */
 export default function Footer() {
   return (
-    <footer className="py-16 md:py-20 bg-secondary text-white">
+    <footer className="pt-16 md:pt-20 pb-28 lg:pb-20 bg-secondary text-white">
       <div className="container mx-auto max-w-5xl px-4 sm:px-6">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 mb-12 items-center">
           {/* Brand */}
@@ -42,11 +42,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-3 text-[10px] text-white/30 font-black uppercase tracking-[0.3em]">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50 font-black uppercase tracking-[0.2em]">
           <p>© 2026 The Pass Guys · Greater Manchester</p>
           <div className="flex gap-6">
-            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
-            <Link to="/terms" className="hover:text-primary transition-colors">Terms</Link>
+            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-primary transition-colors">Terms &amp; Conditions</Link>
           </div>
         </div>
       </div>
