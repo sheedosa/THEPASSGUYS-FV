@@ -29,7 +29,7 @@ const POPULAR_AREAS = [
 ];
 
 type Result =
-  | { status: 'covered'; area: string; studentCount: number }
+  | { status: 'covered'; area: string }
   | { status: 'uncovered'; area: string }
   | { status: 'invalid' };
 
@@ -46,12 +46,7 @@ function checkPostcode(raw: string): Result {
     return { status: 'uncovered', area: fullOutward };
   }
 
-  // Deterministic but realistic student count per outward code so the
-  // number doesn't flicker on re-check.
-  const seed = Array.from(fullOutward).reduce((a, c) => a + c.charCodeAt(0), 0);
-  const studentCount = 28 + (seed % 35); // 28–62 range
-
-  return { status: 'covered', area: fullOutward, studentCount };
+  return { status: 'covered', area: fullOutward };
 }
 
 export default function AreasCovered({ id }: { id?: string }) {
@@ -138,7 +133,7 @@ export default function AreasCovered({ id }: { id?: string }) {
                           Yes — we cover {result.area}!
                         </p>
                         <p className="text-secondary/70 text-sm font-bold mt-1">
-                          {result.studentCount} students matched in your area this year.
+                          We have instructors ready in your area.
                         </p>
                         <a
                           href="/book"
@@ -173,7 +168,7 @@ export default function AreasCovered({ id }: { id?: string }) {
             {/* Popular areas as small reassurance row */}
             <div className="mt-10 pt-8 border-t border-slate-100">
               <p className="text-[10px] font-black uppercase tracking-[0.32em] text-slate-400 mb-4">
-                Most booked in
+                Areas we cover
               </p>
               <div className="flex flex-wrap items-center justify-center gap-2">
                 {POPULAR_AREAS.map((area) => (

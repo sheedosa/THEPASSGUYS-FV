@@ -1,7 +1,6 @@
 import Hero from '../components/Hero';
 import TrustBar from '../components/TrustBar';
-import Testimonials from '../components/Testimonials';
-import AboutNetwork from '../components/AboutNetwork';
+import ThePromise from '../components/ThePromise';
 import HowItWorks from '../components/HowItWorks';
 import AreasCovered from '../components/AreasCovered';
 import Pricing from '../components/Pricing';
@@ -11,31 +10,30 @@ import FAQ from '../components/FAQ';
 import FinalCTA from '../components/FinalCTA';
 
 /**
- * Home page section flow — optimised for conversion:
+ * Home page — restructured for a NEW business (no reviews, no stats).
  *
- *   Hook        : Hero
- *   Reassure    : TrustBar          (4 quick proof signals)
- *   Prove       : Testimonials      (real-mouth proof, social)
- *                 AboutNetwork      (hard numbers: 150+, 2k+, 98%)
- *   Inform      : HowItWorks        (process clarity)
- *                 AreasCovered      (relevance to user's area)
- *   Sell        : Pricing           (now they've been sold, show £)
- *                 WhyChooseUs       (differentiation)
- *   Convert     : MidPageCTA        (off-ramp before objections)
- *                 FAQ               (close remaining doubts)
- *                 FinalCTA          (closing pitch)
+ * Section flow:
  *
- * QuickAccess was removed from the homepage — Student Portal,
- * Become an Instructor, and Learner Resources now live in the footer
- * and main nav respectively.
+ *   Hook        : Hero               (brand + video + CTA)
+ *   Reassure    : TrustBar           (3 verifiable facts — DVSA, flexible, manual/auto)
+ *   Promise     : ThePromise         (what every student gets — dark section)
+ *   Inform      : HowItWorks         (3-step process — light tint)
+ *                 AreasCovered       (postcode checker — white)
+ *   Sell        : Pricing            (transparent plans — dark section)
+ *                 WhyChooseUs        (commitments, not claims — light tint)
+ *   Convert     : MidPageCTA         (off-ramp before objections)
+ *                 FAQ                (close remaining doubts)
+ *                 FinalCTA           (closing pitch — dark section)
+ *
+ * Removed: Testimonials (no real reviews yet), AboutNetwork (no real stats).
+ * Replaced with: ThePromise (honest commitments the business can deliver).
  */
 export default function HomePage() {
   return (
     <>
       <Hero id="hero" />
       <TrustBar />
-      <Testimonials id="testimonials" />
-      <AboutNetwork id="about" />
+      <ThePromise id="our-promise" />
       <HowItWorks id="how-it-works" />
       <AreasCovered id="areas" />
       <Pricing id="services" />

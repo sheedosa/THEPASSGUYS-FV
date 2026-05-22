@@ -48,9 +48,30 @@
     <!-- ── Network hints ──────────────────────────────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
-    <!-- Hero video preload — drives first impression -->
-    <link rel="preload" as="video" href="/hero-bg.mp4" type="video/mp4" />
+    <!-- ── Font loading ──────────────────────────────────────────────
+         Moved from CSS @import to <link> for non-blocking loading.
+         Only weights actually used: 400 (body), 500 (medium), 700 (bold), 900 (black).
+         display=swap prevents FOIT (flash of invisible text). -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+      />
+    </noscript>
 
     <!-- ── Structured data: DrivingSchool ─────────────────────────── -->
     <script type="application/ld+json">

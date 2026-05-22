@@ -1,20 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Inter", sans-serif;
-  
+
   --color-primary: #00d26f;
   --color-secondary: #2D3436;
   --color-accent: #FF7675;
   --color-bg-page: #FFFFFF;
 }
 
-@layer utilities {
-  .bg-wayfinder {
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%232D3436' stroke-width='1' stroke-opacity='0.04'%3E%3Cpath d='M10 10l5 5-5 5'/%3E%3Cpath d='M25 80h10v10'/%3E%3Cpath d='M60 20l-5 5 5 5'/%3E%3Ccircle cx='80' cy='60' r='3'/%3E%3Cpath d='M40 40l10 10-10 10'/%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: fixed;
+/* ── Smooth scrolling ─────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
@@ -23,6 +26,31 @@
     @apply bg-bg-page text-secondary font-sans antialiased overflow-x-hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+  }
+
+  /* Paint isolation — each section composites independently so a
+     repaint in one section never forces the browser to repaint sibling
+     sections. Big win on long scroll pages. */
+  section {
+    contain: layout style paint;
+    position: relative;
+  }
+
+  /* Offset anchor scroll targets so they don't land behind the sticky
+     navbar. Matches the tallest nav state (scrolled, ~72px). */
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
+  /* GPU-promote elements that will be animated by Framer Motion.
+     Framer already applies transforms, but hinting contain + layer
+     avoids the initial "jank" frame when the element first enters
+     the compositor. */
+  [style*="transform"],
+  [style*="opacity"] {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
   }
 }
 
@@ -30,7 +58,7 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .text-outline {
     -webkit-text-stroke: 1px var(--color-secondary);
     color: transparent;
@@ -40,146 +68,27 @@
     perspective: 1000px;
     transform-style: preserve-3d;
   }
-  
+
   .vibrant-shadow {
     box-shadow: 10px 10px 0 var(--color-primary);
     backface-visibility: hidden;
-    will-change: transform;
   }
-  
+
   @media (min-width: 768px) {
     .vibrant-shadow {
         box-shadow: 15px 15px 0 var(--color-primary);
     }
   }
-  
+
   .vibrant-card {
     @apply bg-white border-4 border-secondary rounded-[40px];
     box-shadow: 10px 10px 0 var(--color-primary);
     backface-visibility: hidden;
-    will-change: transform;
-    transform-style: preserve-3d;
   }
 
   @media (min-width: 768px) {
     .vibrant-card {
         box-shadow: 15px 15px 0 var(--color-primary);
-    }
-  }
-
-  /* ── Aurora sweep ───────────────────────────────────────────────────
-     Two heavily-blurred linear gradient layers crossfade across the
-     viewport like a soft northern-lights wash. Each layer animates a
-     background-position oscillation independently so the resulting
-     blend is never twice the same. Sits at the back of the canvas. */
-  .bg-aurora {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-  .bg-aurora::before,
-  .bg-aurora::after {
-    content: '';
-    position: absolute;
-    inset: -30%;
-    filter: blur(90px);
-    will-change: background-position;
-    pointer-events: none;
-  }
-  .bg-aurora::before {
-    background: linear-gradient(
-      135deg,
-      transparent 0%,
-      #b8f3d4 30%,
-      #4ee29a 55%,
-      transparent 80%
-    );
-    background-size: 240% 240%;
-    opacity: 0.45;
-    animation: aurora-shift-a 22s ease-in-out infinite alternate;
-  }
-  .bg-aurora::after {
-    background: linear-gradient(
-      -45deg,
-      transparent 0%,
-      var(--color-primary) 35%,
-      #a9eecc 65%,
-      transparent 95%
-    );
-    background-size: 220% 220%;
-    opacity: 0.3;
-    animation: aurora-shift-b 28s ease-in-out infinite alternate;
-  }
-  @keyframes aurora-shift-a {
-    0%   { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-  }
-  @keyframes aurora-shift-b {
-    0%   { background-position: 100% 0%; }
-    100% { background-position: 0% 100%; }
-  }
-
-  /* ── Animated road stripes ──────────────────────────────────────────
-     Faint motorway-lane markings drift horizontally at different speeds
-     and directions across the canvas. Repeating linear-gradients deliver
-     the dashed pattern; CSS keyframes do the translation. Layered above
-     the aurora at very low opacity so they read as a watermark, not a
-     literal road. */
-  .bg-road-stripes {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .bg-road-stripe {
-    position: absolute;
-    left: -50%;
-    width: 200%;
-    height: 6px;
-    background: repeating-linear-gradient(
-      to right,
-      var(--color-secondary) 0 44px,
-      transparent 44px 96px
-    );
-    opacity: 0.05;
-    will-change: transform;
-  }
-  .bg-road-stripe-1 { top: 14%; animation: road-drift 48s linear infinite; }
-  .bg-road-stripe-2 { top: 32%; opacity: 0.04; animation: road-drift 62s linear infinite reverse; }
-  .bg-road-stripe-3 { top: 50%; animation: road-drift 54s linear infinite; }
-  .bg-road-stripe-4 { top: 68%; opacity: 0.04; animation: road-drift 70s linear infinite reverse; }
-  .bg-road-stripe-5 { top: 86%; animation: road-drift 58s linear infinite; }
-  @keyframes road-drift {
-    from { transform: translateX(0); }
-    to   { transform: translateX(50%); }
-  }
-
-  /* ── Mobile boost ────────────────────────────────────────────────
-     On phones the blur softens the gradient so much that it looks
-     near-white. Tighten the blur and bump opacities so the wash is
-     actually visible at viewport widths under 768px. */
-  @media (max-width: 767px) {
-    .bg-aurora::before {
-      filter: blur(55px);
-      opacity: 0.7;
-      background-size: 180% 180%;
-    }
-    .bg-aurora::after {
-      filter: blur(55px);
-      opacity: 0.55;
-      background-size: 170% 170%;
-    }
-    .bg-road-stripe { opacity: 0.08; }
-    .bg-road-stripe-2,
-    .bg-road-stripe-4 { opacity: 0.06; }
-  }
-
-  /* Accessibility: honour reduced-motion preference */
-  @media (prefers-reduced-motion: reduce) {
-    .bg-aurora::before,
-    .bg-aurora::after,
-    .bg-road-stripe {
-      animation: none !important;
     }
   }
 }

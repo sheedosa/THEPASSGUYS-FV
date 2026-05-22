@@ -17,8 +17,18 @@ export default function StickyMobileCTA() {
   useEffect(() => {
     // Show only after the user has scrolled past the hero region
     // (~70% of one viewport height is a safe threshold across phones).
+    // rAF-throttled to avoid layout thrash on fast scrolling.
+    let ticking = false;
     const threshold = () => window.innerHeight * 0.7;
-    const onScroll = () => setVisible(window.scrollY > threshold());
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setVisible(window.scrollY > threshold());
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);

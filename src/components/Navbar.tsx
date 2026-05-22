@@ -20,8 +20,8 @@ import { cn } from '@/lib/utils';
 type MenuItem = { label: string; anchor?: string; href?: string; primary?: boolean };
 
 const MENU_ITEMS: MenuItem[] = [
+  { label: 'Our Promise', anchor: '#our-promise' },
   { label: 'How it works', anchor: '#how-it-works' },
-  { label: 'Reviews', anchor: '#testimonials' },
   { label: 'Pricing', anchor: '#services' },
   { label: 'Coverage', anchor: '#areas' },
   { label: 'FAQ', anchor: '#faq' },
@@ -34,10 +34,19 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Sticky-state cosmetic flag
+  // Sticky-state cosmetic flag — passive for zero scroll-jank
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

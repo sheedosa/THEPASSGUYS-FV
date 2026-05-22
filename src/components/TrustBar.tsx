@@ -1,66 +1,68 @@
 import { motion } from 'motion/react';
-import { ShieldCheck, Wallet, Star } from 'lucide-react';
+import { ShieldCheck, Clock, Car } from 'lucide-react';
 
 /**
- * TrustBar — one dominant stat carries the whole section, then three
- * supporting micro-pills reinforce it.
+ * ValueProps — three honest, verifiable facts about the service.
  *
- * Why one hero stat instead of four equal cards: a scanning user under
- * 3s of attention locks on one number, not four. Four equal claims average
- * out in the mind; one bold claim with quiet evidence reads as confidence.
+ * No inflated stats or fake reviews. Every claim here is something
+ * a new student can verify on day one:
+ *   - DVSA approved → checkable on the DVSA register
+ *   - Flexible hours → they'll experience it when booking
+ *   - Manual or auto → their choice at booking
  */
 
-const PILLS = [
-  { icon: ShieldCheck, label: 'DVSA approved' },
-  { icon: Wallet, label: 'From £30 down' },
-  { icon: Star, label: '4.9★ on Google' },
+const PROPS = [
+  {
+    icon: ShieldCheck,
+    title: 'DVSA Approved',
+    description: 'Every instructor is DVSA-registered and fully qualified.',
+  },
+  {
+    icon: Clock,
+    title: 'Flexible Hours',
+    description: 'Early mornings, evenings, and weekends — we fit your life.',
+  },
+  {
+    icon: Car,
+    title: 'Manual or Auto',
+    description: 'Modern dual-control cars. Same price, your choice.',
+  },
 ];
 
 export default function TrustBar() {
   return (
     <section className="relative py-12 md:py-20 px-4 sm:px-6">
       <div className="container mx-auto max-w-5xl">
-        {/* Hero stat card */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="bg-secondary text-white border-4 border-secondary rounded-3xl p-7 md:p-10 text-center"
-          style={{ boxShadow: '6px 6px 0 var(--color-primary)' }}
-        >
-          <p className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-xs mb-3">
-            Pass Rate
-          </p>
-          <p className="font-black text-secondary leading-none tracking-tighter text-[clamp(5rem,18vw,9rem)]">
-            <span className="text-primary">98%</span>
-          </p>
-          <p className="mt-2 md:mt-4 font-black uppercase tracking-tight text-white text-base md:text-xl">
-            Manchester&apos;s highest.
-          </p>
-        </motion.div>
-
-        {/* Supporting pills — small, evidential */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ delay: 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-5 md:mt-6 flex flex-wrap items-center justify-center gap-2 md:gap-3"
-        >
-          {PILLS.map((pill) => {
-            const Icon = pill.icon;
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
+          {PROPS.map((prop, i) => {
+            const Icon = prop.icon;
             return (
-              <span
-                key={pill.label}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border-2 border-secondary text-secondary text-xs md:text-sm font-black uppercase tracking-tight"
+              <motion.div
+                key={prop.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{
+                  duration: 0.55,
+                  delay: i * 0.08,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="bg-white border-4 border-secondary rounded-3xl p-6 md:p-7 text-center group"
+                style={{ boxShadow: '6px 6px 0 var(--color-primary)' }}
               >
-                <Icon className="w-4 h-4 text-primary" strokeWidth={2.5} />
-                {pill.label}
-              </span>
+                <div className="w-12 h-12 bg-secondary text-white rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-secondary group-hover:rotate-6 transition-all">
+                  <Icon className="w-6 h-6" strokeWidth={2.25} />
+                </div>
+                <h3 className="text-lg md:text-xl font-black text-secondary uppercase tracking-tight leading-none mb-2">
+                  {prop.title}
+                </h3>
+                <p className="text-slate-500 text-sm font-bold leading-relaxed">
+                  {prop.description}
+                </p>
+              </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

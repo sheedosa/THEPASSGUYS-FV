@@ -1,42 +1,51 @@
 import { motion } from 'motion/react';
-import { Award, Clock, Heart, Users } from 'lucide-react';
+import { Shield, Repeat, Headphones, MapPinned } from 'lucide-react';
 
 type Point = {
-  icon: typeof Award;
+  icon: typeof Shield;
   title: string;
-  stat: string;
+  tagline: string;
   description: string;
   mobile?: boolean;
 };
 
-// `mobile: true` points show on every viewport. The other two appear from
-// sm: up so phones get the two strongest differentiators only.
+/**
+ * The TPG Standard — commitments, not claims.
+ *
+ * Old version had fake stats (4.9★, 1,200+ reviews, 2,000+ passes).
+ * New version frames the same differentiators as promises the business
+ * can fulfil from day one. Every point is something a student will
+ * experience — not something they have to take on trust.
+ *
+ * `mobile: true` points show on every viewport. The other two appear
+ * from sm: up so phones get the two strongest differentiators only.
+ */
 const POINTS: Point[] = [
   {
-    icon: Award,
-    title: 'Top rated',
-    stat: '4.9★ · 1,200+ reviews',
-    description: 'Verified on Google. We let our students do the talking.',
+    icon: Shield,
+    title: 'DVSA approved',
+    tagline: 'Every single instructor',
+    description: 'Fully qualified, CRB-checked, and registered on the official DVSA list. No exceptions.',
     mobile: true,
   },
   {
-    icon: Users,
-    title: 'Vetted instructors',
-    stat: '150+ ADIs · 11-step vetting',
-    description: 'Only the most patient, qualified instructors join the network.',
+    icon: MapPinned,
+    title: 'Local to you',
+    tagline: 'Greater Manchester wide',
+    description: 'Your instructor lives and drives in your area. No long pickups, no wasted time.',
     mobile: true,
   },
   {
-    icon: Clock,
-    title: 'Flexible hours',
-    stat: '6am – 9pm · 7 days',
-    description: 'Early mornings, evenings, weekends — we fit your life.',
+    icon: Repeat,
+    title: 'Cancel free',
+    tagline: '24h notice, no charge',
+    description: 'Life happens. Reschedule or cancel with 24 hours\' notice — zero fees.',
   },
   {
-    icon: Heart,
-    title: 'Real teaching',
-    stat: '2,000+ passes a year',
-    description: "We don't just teach you to pass — we teach you to drive.",
+    icon: Headphones,
+    title: 'Real support',
+    tagline: 'Talk to a person',
+    description: 'Questions before or after booking? A real human answers — not a chatbot.',
   },
 ];
 
@@ -48,15 +57,15 @@ export default function WhyChooseUs({ id }: { id?: string }) {
           {/* Left — copy block */}
           <div>
             <span className="text-primary font-black uppercase tracking-[0.4em] text-xs block mb-4">
-              Why Us
+              The Standard
             </span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-secondary uppercase tracking-tighter leading-[0.9] mb-6 text-balance">
-              Most schools teach you to pass.{' '}
-              <span className="text-primary italic">We teach you to drive.</span>
+              What every student{' '}
+              <span className="text-primary italic">gets.</span>
             </h2>
             <p className="text-slate-500 text-base md:text-lg font-medium leading-relaxed max-w-lg">
-              We&apos;ve rebuilt the driving school experience from the ground
-              up — faster, simpler, and more exciting.
+              Not marketing promises — real commitments we deliver on
+              from your very first lesson.
             </p>
           </div>
 
@@ -88,7 +97,7 @@ export default function WhyChooseUs({ id }: { id?: string }) {
                     {p.title}
                   </h3>
                   <p className="text-primary text-xs font-black uppercase tracking-widest mb-3">
-                    {p.stat}
+                    {p.tagline}
                   </p>
                   <p className="text-slate-500 text-sm font-bold leading-relaxed">
                     {p.description}

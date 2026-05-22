@@ -3,8 +3,10 @@ import { ArrowRight } from 'lucide-react';
 
 /**
  * MidPageCTA — slim conversion off-ramp between content sections.
- * Same horizontal-band layout on every screen size; padding scales down
- * on mobile so the shadow never clips off-screen.
+ *
+ * Removed fake scarcity ("12 spots left"). Replaced with honest
+ * urgency: the sooner you start, the sooner you pass. No invented
+ * numbers, no artificial countdown.
  */
 export default function MidPageCTA() {
   return (
@@ -25,9 +27,8 @@ export default function MidPageCTA() {
               Get on the road{' '}
               <span className="italic">this week.</span>
             </h3>
-            <p className="inline-flex items-center gap-2 text-[11px] md:text-xs font-black uppercase tracking-widest text-secondary/80">
-              <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" aria-hidden="true" />
-              12 spots left in Manchester this week
+            <p className="text-[11px] md:text-xs font-black uppercase tracking-widest text-secondary/80">
+              Fill out a 30-second form · We match you within 24 hours
             </p>
           </div>
           <a

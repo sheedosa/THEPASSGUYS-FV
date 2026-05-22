@@ -146,7 +146,7 @@ export default function Pricing({ id }: { id?: string }) {
                 to="/book"
                 className={`w-full py-4 rounded-full font-black uppercase tracking-widest text-sm text-center transition-all ${
                   plan.recommended
-                    ? 'bg-primary text-secondary hover:bg-white'
+                    ? 'bg-secondary text-white hover:bg-white hover:text-secondary'
                     : 'bg-secondary text-white hover:bg-primary hover:text-secondary'
                 }`}
               >
