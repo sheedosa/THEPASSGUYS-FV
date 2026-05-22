@@ -2,30 +2,33 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import BookPage from './pages/BookPage';
+import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';
 import Footer from './components/Footer';
 import StickyMobileCTA from './components/StickyMobileCTA';
+import ScrollToTop from './components/ScrollToTop';
 
 /**
- * Route map — intentionally minimal for v1.
+ * Route map:
  *
- *   /        Homepage funnel (the main conversion experience)
- *   /book    Short lead-capture form
- *   *        Anything else redirects back to home
- *
- * The other route stubs (lessons, pricing, areas, instructors, etc.)
- * are commented out below so we can re-enable them quickly once we have
- * real content. Until then, every path funnels users to the homepage,
- * and every Book Now CTA funnels them to /book.
+ *   /          Homepage funnel
+ *   /book      Lead-capture form
+ *   /privacy   Privacy Policy (GDPR)
+ *   /terms     Terms & Conditions
+ *   *          Catch-all → home
  */
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen">
         <Navbar />
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/book" element={<BookPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
             {/* Catch-all → home */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
