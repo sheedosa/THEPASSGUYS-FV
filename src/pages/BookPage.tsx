@@ -249,13 +249,17 @@ export default function BookPage() {
   }, [step]);
 
   /* ---- Navigation ---- */
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
   const goNext = () => {
     setDirection(1);
     setStep((s) => Math.min(s + 1, TOTAL_STEPS));
+    scrollTop();
   };
   const goBack = () => {
     setDirection(-1);
     setStep((s) => Math.max(s - 1, 1));
+    scrollTop();
   };
 
   /* ---- Validation per step ---- */
@@ -314,6 +318,7 @@ export default function BookPage() {
 
     setSubmitting(false);
     setSubmitted(true);
+    scrollTop();
   };
 
   /* ---- Handle Enter key on text steps ---- */
