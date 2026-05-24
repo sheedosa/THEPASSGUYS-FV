@@ -17,24 +17,38 @@ function useEnsureAutoplay(ref: { current: HTMLVideoElement | null }) {
     const video = ref.current;
     if (!video) return;
 
+    // React's `muted` prop has a known quirk where it doesn't always set
+    // the HTML attribute that Chrome's autoplay policy reads. Force both
+    // the IDL property and the attribute up-front so the very first
+    // play() attempt is allowed.
+    video.muted = true;
+    video.setAttribute('muted', '');
+    video.defaultMuted = true;
+    // playsInline is also required on iOS Safari for inline autoplay.
+    video.setAttribute('playsinline', '');
+
     const tryPlay = () => {
-      video.muted = true; // required by autoplay policies
+      video.muted = true;
       video.play().catch(() => {
-        // Some browsers reject silently — the next user interaction
-        // will let play() succeed on retry.
+        // Autoplay rejected — the one-shot user-gesture listener below
+        // will pick it up the moment the user clicks, scrolls, or
+        // touches anything on the page.
       });
     };
 
-    // Safety net: if the `loop` attribute is ever dropped by the browser,
-    // manually rewind and replay on `ended`. We do NOT touch `pause`
-    // because the browser legitimately pauses during buffering — fighting
-    // it causes a worse outcome than the rare case it's solving.
+    // Fire immediately, then again as soon as enough data is buffered.
+    tryPlay();
+    if (video.readyState >= 2) tryPlay();
+
+    // Safety net: if the `loop` attribute is ever dropped, manually
+    // rewind on `ended`. We do NOT touch `pause` — the browser
+    // legitimately pauses during buffering and fighting it makes
+    // playback worse than the rare case it's solving.
     const onEnded = () => {
       video.currentTime = 0;
       tryPlay();
     };
 
-    if (video.readyState >= 2) tryPlay();
     video.addEventListener('loadeddata', tryPlay);
     video.addEventListener('canplay', tryPlay);
     video.addEventListener('ended', onEnded);
@@ -45,11 +59,32 @@ function useEnsureAutoplay(ref: { current: HTMLVideoElement | null }) {
     };
     document.addEventListener('visibilitychange', onVisibility);
 
+    // One-shot user-gesture fallback for Chrome's strict autoplay
+    // policy. If the first .play() was blocked because the user has
+    // zero media-engagement history on the domain, this listener
+    // retries on the very next click / scroll / touch / keystroke
+    // anywhere on the page — then removes itself.
+    const onFirstGesture = () => {
+      tryPlay();
+      window.removeEventListener('pointerdown', onFirstGesture);
+      window.removeEventListener('touchstart', onFirstGesture);
+      window.removeEventListener('keydown', onFirstGesture);
+      window.removeEventListener('scroll', onFirstGesture);
+    };
+    window.addEventListener('pointerdown', onFirstGesture, { once: true, passive: true });
+    window.addEventListener('touchstart', onFirstGesture, { once: true, passive: true });
+    window.addEventListener('keydown', onFirstGesture, { once: true });
+    window.addEventListener('scroll', onFirstGesture, { once: true, passive: true });
+
     return () => {
       video.removeEventListener('loadeddata', tryPlay);
       video.removeEventListener('canplay', tryPlay);
       video.removeEventListener('ended', onEnded);
       document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('pointerdown', onFirstGesture);
+      window.removeEventListener('touchstart', onFirstGesture);
+      window.removeEventListener('keydown', onFirstGesture);
+      window.removeEventListener('scroll', onFirstGesture);
     };
   }, [ref]);
 }
@@ -183,23 +218,22 @@ export default function Hero({ id }: { id?: string }) {
         </motion.div>
       </motion.div>
 
-      {/* Hero video — large, contained block below the headline so the
-          car and animation get full visibility without sitting under the
-          title. Slides up + fades in once the title settles.
-          On mobile we go full-bleed (edge to edge) for maximum impact;
-          on desktop we cap at ~80% so the page still breathes. */}
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-8 sm:mt-12 md:mt-16 w-full flex justify-center"
-      >
+      {/* Hero video — large, contained block below the headline.
+          IMPORTANT: this is NOT wrapped in a framer-motion opacity
+          animation. Chrome's autoplay policy heuristically blocks
+          playback for elements that start at opacity:0, even if they
+          fade in immediately. Rendering the video at full visibility
+          from the first frame gives the browser the clearest "this is
+          a primary on-screen media element" signal it needs to
+          allow muted autoplay. */}
+      <div className="mt-8 sm:mt-12 md:mt-16 w-full flex justify-center">
         <div className="w-full sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] xl:max-w-6xl">
           <video
             ref={videoRef}
             className="w-full h-auto object-contain"
             autoPlay
             muted
+            defaultMuted
             loop
             playsInline
             preload="auto"
@@ -209,7 +243,7 @@ export default function Hero({ id }: { id?: string }) {
             <source src="/hero-bg.mp4" type="video/mp4" />
           </video>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
