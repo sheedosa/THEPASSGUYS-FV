@@ -61,30 +61,45 @@ function useEnsureAutoplay(ref: { current: HTMLVideoElement | null }) {
 
     // One-shot user-gesture fallback for Chrome's strict autoplay
     // policy. If the first .play() was blocked because the user has
-    // zero media-engagement history on the domain, this listener
-    // retries on the very next click / scroll / touch / keystroke
-    // anywhere on the page — then removes itself.
+    // zero media-engagement history on the domain, the very next
+    // intentional or incidental gesture restarts playback.
+    //
+    // CRITICAL: we listen for `mousemove` and `wheel` in addition to
+    // click/touch/scroll. Desktop users often just *look* at a page
+    // without clicking — a tiny mouse movement is the earliest reliable
+    // signal that the user is engaged, and Chrome's policy counts it
+    // as a user gesture.
+    const GESTURES: (keyof WindowEventMap)[] = [
+      'mousemove',
+      'pointerdown',
+      'touchstart',
+      'wheel',
+      'keydown',
+      'scroll',
+    ];
     const onFirstGesture = () => {
       tryPlay();
-      window.removeEventListener('pointerdown', onFirstGesture);
-      window.removeEventListener('touchstart', onFirstGesture);
-      window.removeEventListener('keydown', onFirstGesture);
-      window.removeEventListener('scroll', onFirstGesture);
+      GESTURES.forEach((g) => window.removeEventListener(g, onFirstGesture));
     };
-    window.addEventListener('pointerdown', onFirstGesture, { once: true, passive: true });
-    window.addEventListener('touchstart', onFirstGesture, { once: true, passive: true });
-    window.addEventListener('keydown', onFirstGesture, { once: true });
-    window.addEventListener('scroll', onFirstGesture, { once: true, passive: true });
+    GESTURES.forEach((g) =>
+      window.addEventListener(g, onFirstGesture, { once: true, passive: true } as AddEventListenerOptions)
+    );
+
+    // Belt-and-braces: if 1.5 s after mount the video still hasn't
+    // started advancing (currentTime stuck at 0), retry play. This
+    // catches cases where canplay/loadeddata fired but the play()
+    // promise was silently rejected and no gesture has happened yet.
+    const retryTimer = window.setTimeout(() => {
+      if (video.currentTime < 0.05 || video.paused) tryPlay();
+    }, 1500);
 
     return () => {
       video.removeEventListener('loadeddata', tryPlay);
       video.removeEventListener('canplay', tryPlay);
       video.removeEventListener('ended', onEnded);
       document.removeEventListener('visibilitychange', onVisibility);
-      window.removeEventListener('pointerdown', onFirstGesture);
-      window.removeEventListener('touchstart', onFirstGesture);
-      window.removeEventListener('keydown', onFirstGesture);
-      window.removeEventListener('scroll', onFirstGesture);
+      GESTURES.forEach((g) => window.removeEventListener(g, onFirstGesture));
+      window.clearTimeout(retryTimer);
     };
   }, [ref]);
 }
