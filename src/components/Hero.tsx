@@ -133,15 +133,26 @@ const wordVariants: Variants = {
 // The outer span has `overflow: hidden` so anything below the baseline
 // is clipped — that's what creates the "letter dropped behind a line"
 // reveal effect.
+//
+// Padding/margin trick keeps room for descenders (the 'y' in "Drive",
+// the comma in "fast,") so they don't get clipped by overflow:hidden.
 function Word({ children, accent = false }: { children: ReactNode; accent?: boolean }) {
   return (
     <span
       className="inline-block overflow-hidden align-baseline"
-      style={{ paddingBottom: '0.08em', marginBottom: '-0.08em' }}
+      style={{ paddingBottom: '0.12em', marginBottom: '-0.12em' }}
     >
       <motion.span
         variants={wordVariants}
-        className={`inline-block ${accent ? 'text-primary bg-secondary px-4 py-1 rounded-xl mt-2 relative' : ''}`}
+        className={
+          accent
+            ? // Stamped accent: tight padding hugging the letterforms,
+              // slight counter-rotation so it reads as a confident stamp
+              // rather than a floating chip. Drop-shadow adds depth that
+              // separates it from the page even on busy backgrounds.
+              'inline-block text-primary bg-secondary px-3 sm:px-4 md:px-5 py-0.5 sm:py-1 rounded-xl -rotate-2 shadow-[4px_4px_0_var(--color-primary)] sm:shadow-[6px_6px_0_var(--color-primary)]'
+            : 'inline-block'
+        }
         style={accent ? { transformOrigin: '50% 100%' } : undefined}
       >
         {children}
@@ -178,13 +189,25 @@ export default function Hero({ id }: { id?: string }) {
           </span>
         </motion.p>
 
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-secondary leading-[0.85] tracking-tighter text-center text-balance">
+        <h1
+          className="text-[3.25rem] sm:text-7xl md:text-8xl lg:text-[7.5rem] xl:text-[9rem] font-black text-secondary leading-[0.82] text-center text-balance tracking-tight md:tracking-[-0.04em] antialiased"
+          style={{
+            // Optical-quality rendering for display-size type:
+            // - optimizeLegibility turns on kerning + ligatures
+            // - explicit kern + cv/ss features ask Inter for its
+            //   designed-not-defaults letterforms where available
+            textRendering: 'optimizeLegibility',
+            fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1, "ss01" 1',
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale',
+          }}
+        >
           <Word>Pass</Word>
-          <span>&nbsp;</span>
+          <span className="inline-block w-[0.25em]" aria-hidden="true" />
           <Word>fast,</Word>
           <br />
           <Word>Drive</Word>
-          <span>&nbsp;</span>
+          <span className="inline-block w-[0.25em]" aria-hidden="true" />
           <Word accent>Smart.</Word>
         </h1>
 
