@@ -19,37 +19,25 @@ function useEnsureAutoplay(ref: { current: HTMLVideoElement | null }) {
 
     const tryPlay = () => {
       video.muted = true; // required by autoplay policies
-      // Force loop on every play attempt — some browsers (notably Safari
-      // on low-power mode) silently drop the `loop` attribute.
-      video.loop = true;
-      const p = video.play();
-      if (p && typeof p.catch === 'function') {
-        p.catch(() => {
-          // Some browsers reject silently — the next user interaction
-          // will let play() succeed on retry.
-        });
-      }
+      video.play().catch(() => {
+        // Some browsers reject silently — the next user interaction
+        // will let play() succeed on retry.
+      });
     };
 
-    // If the video is already ready (e.g. cached), play immediately.
-    if (video.readyState >= 2) tryPlay();
-
-    // Belt-and-braces: any time playback stops for any reason (browser
-    // memory pressure, autoplay throttling, end-of-stream race), force
-    // it to resume from the current position.
-    const onPause = () => tryPlay();
+    // Safety net: if the `loop` attribute is ever dropped by the browser,
+    // manually rewind and replay on `ended`. We do NOT touch `pause`
+    // because the browser legitimately pauses during buffering — fighting
+    // it causes a worse outcome than the rare case it's solving.
     const onEnded = () => {
-      // Manual loop fallback in case the `loop` attribute is dropped.
       video.currentTime = 0;
       tryPlay();
     };
-    const onStalled = () => tryPlay();
 
+    if (video.readyState >= 2) tryPlay();
     video.addEventListener('loadeddata', tryPlay);
     video.addEventListener('canplay', tryPlay);
-    video.addEventListener('pause', onPause);
     video.addEventListener('ended', onEnded);
-    video.addEventListener('stalled', onStalled);
 
     // Resume when the tab returns to the foreground.
     const onVisibility = () => {
@@ -57,21 +45,11 @@ function useEnsureAutoplay(ref: { current: HTMLVideoElement | null }) {
     };
     document.addEventListener('visibilitychange', onVisibility);
 
-    // Heartbeat: every 2s confirm the video is still playing. Cheap,
-    // catches edge cases where neither `pause` nor `stalled` fire
-    // (some mobile browsers go quiet on aggressive battery saving).
-    const heartbeat = window.setInterval(() => {
-      if (video.paused || video.ended) tryPlay();
-    }, 2000);
-
     return () => {
       video.removeEventListener('loadeddata', tryPlay);
       video.removeEventListener('canplay', tryPlay);
-      video.removeEventListener('pause', onPause);
       video.removeEventListener('ended', onEnded);
-      video.removeEventListener('stalled', onStalled);
       document.removeEventListener('visibilitychange', onVisibility);
-      window.clearInterval(heartbeat);
     };
   }, [ref]);
 }
