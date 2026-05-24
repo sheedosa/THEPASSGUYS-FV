@@ -131,13 +131,6 @@ export default function Hero({ id }: { id?: string }) {
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
 
-      {/* Legibility overlay — soft wash so the title and CTA always pop
-          regardless of what's happening in the video underneath. */}
-      <div
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-white/55 via-white/35 to-white/70"
-        aria-hidden="true"
-      />
-
       <motion.div
         initial="hidden"
         animate="visible"
