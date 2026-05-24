@@ -113,24 +113,8 @@ export default function Hero({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className="relative flex flex-col items-center justify-center min-h-[100svh] pt-24 sm:pt-32 md:pt-40 pb-20 sm:pb-28 md:pb-32 overflow-hidden"
+      className="relative flex flex-col items-center pt-24 sm:pt-32 md:pt-40 pb-10 sm:pb-16 md:pb-20 overflow-hidden"
     >
-      {/* Full-bleed background video — sits behind everything in the hero.
-          object-cover crops to fill regardless of aspect ratio. */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover -z-10"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        disableRemotePlayback
-        aria-hidden="true"
-      >
-        <source src="/hero-bg.mp4" type="video/mp4" />
-      </video>
-
       <motion.div
         initial="hidden"
         animate="visible"
@@ -188,6 +172,34 @@ export default function Hero({ id }: { id?: string }) {
             First lesson this week · From £35/hr
           </motion.span>
         </motion.div>
+      </motion.div>
+
+      {/* Hero video — large, contained block below the headline so the
+          car and animation get full visibility without sitting under the
+          title. Slides up + fades in once the title settles.
+          On mobile we go full-bleed (edge to edge) for maximum impact;
+          on desktop we cap at ~80% so the page still breathes. */}
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="mt-8 sm:mt-12 md:mt-16 w-full flex justify-center"
+      >
+        <div className="w-full sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] xl:max-w-6xl">
+          <video
+            ref={videoRef}
+            className="w-full h-auto object-contain"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            disableRemotePlayback
+            aria-hidden="true"
+          >
+            <source src="/hero-bg.mp4" type="video/mp4" />
+          </video>
+        </div>
       </motion.div>
     </section>
   );
