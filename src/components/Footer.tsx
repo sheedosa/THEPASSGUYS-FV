@@ -13,13 +13,16 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 mb-12 items-center">
           {/* Brand */}
           <div>
-            <Link to="/" className="inline-flex items-center gap-3 mb-5 group">
-              <span className="bg-primary px-2.5 py-1 rounded-lg font-black text-secondary group-hover:scale-110 transition-transform">
-                PG
-              </span>
-              <span className="text-2xl font-black tracking-tighter">
-                THE PASS GUYS
-              </span>
+            <Link to="/" className="inline-flex items-center mb-5 group" aria-label="The Pass Guys — Home">
+              <img
+                src="/logo.png"
+                alt="The Pass Guys"
+                width="200"
+                height="200"
+                className="h-20 md:h-24 w-auto bg-white rounded-2xl p-2 group-hover:scale-105 transition-transform"
+                loading="lazy"
+                decoding="async"
+              />
             </Link>
             <p className="text-white/50 leading-relaxed font-medium max-w-sm">
               DVSA-approved driving instructors across Greater Manchester.
