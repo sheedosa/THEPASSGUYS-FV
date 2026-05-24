@@ -105,10 +105,10 @@ export default function Navbar() {
         <div className="container mx-auto flex items-center justify-between">
           <Link to="/" className="flex items-center group" aria-label="The Pass Guys — Home">
             <img
-              src="/logo.png"
+              src="/logo-sm.png"
               alt="The Pass Guys"
-              width="160"
-              height="160"
+              width="800"
+              height="450"
               className="h-12 md:h-14 w-auto group-hover:scale-105 transition-transform"
               loading="eager"
               decoding="async"

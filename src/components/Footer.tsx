@@ -15,11 +15,11 @@ export default function Footer() {
           <div>
             <Link to="/" className="inline-flex items-center mb-5 group" aria-label="The Pass Guys — Home">
               <img
-                src="/logo.png"
+                src="/logo-sm.png"
                 alt="The Pass Guys"
-                width="200"
-                height="200"
-                className="h-20 md:h-24 w-auto bg-white rounded-2xl p-2 group-hover:scale-105 transition-transform"
+                width="800"
+                height="450"
+                className="h-20 md:h-24 w-auto group-hover:scale-105 transition-transform"
                 loading="lazy"
                 decoding="async"
               />
