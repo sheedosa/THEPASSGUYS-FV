@@ -113,13 +113,36 @@ export default function Hero({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className="relative flex flex-col items-center pt-24 sm:pt-32 md:pt-40 pb-10 sm:pb-16 md:pb-20 overflow-hidden"
+      className="relative flex flex-col items-center justify-center min-h-[100svh] pt-24 sm:pt-32 md:pt-40 pb-20 sm:pb-28 md:pb-32 overflow-hidden"
     >
+      {/* Full-bleed background video — sits behind everything in the hero.
+          object-cover crops to fill regardless of aspect ratio. */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover -z-10"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        disableRemotePlayback
+        aria-hidden="true"
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
+
+      {/* Legibility overlay — soft wash so the title and CTA always pop
+          regardless of what's happening in the video underneath. */}
+      <div
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-white/55 via-white/35 to-white/70"
+        aria-hidden="true"
+      />
+
       <motion.div
         initial="hidden"
         animate="visible"
         variants={containerVariants}
-        className="container mx-auto px-4 sm:px-6"
+        className="relative container mx-auto px-4 sm:px-6"
       >
         {/* Location eyebrow — answers "is this for me?" in the first second */}
         <motion.p
@@ -172,30 +195,6 @@ export default function Hero({ id }: { id?: string }) {
             First lesson this week · From £35/hr
           </motion.span>
         </motion.div>
-      </motion.div>
-
-      {/* Background video — slides up + fades in once the title settles */}
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-4 sm:mt-8 md:mt-12 w-full flex justify-center"
-      >
-        <video
-          ref={videoRef}
-          className="w-full sm:w-auto sm:max-w-[75%] md:max-w-[60%] lg:max-w-[55%] h-auto object-contain"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          disableRemotePlayback
-          // `aria-hidden` — purely decorative, gives screen readers nothing
-          // useful and avoids announcing media controls.
-          aria-hidden="true"
-        >
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
       </motion.div>
     </section>
   );
