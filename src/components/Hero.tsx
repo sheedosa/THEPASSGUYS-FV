@@ -278,7 +278,9 @@ export default function Hero({ id }: { id?: string }) {
             disableRemotePlayback
             aria-hidden="true"
           >
-            <source src="/hero-bg.mp4" type="video/mp4" />
+            {/* Version query string busts the browser + CDN cache when
+                the video file is replaced. Bump on every swap. */}
+            <source src="/hero-bg.mp4?v=3" type="video/mp4" />
           </video>
         </div>
       </div>
