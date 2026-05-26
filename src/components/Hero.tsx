@@ -278,9 +278,13 @@ export default function Hero({ id }: { id?: string }) {
             disableRemotePlayback
             aria-hidden="true"
           >
-            {/* Version query string busts the browser + CDN cache when
-                the video file is replaced. Bump on every swap. */}
-            <source src="/hero-bg.mp4?v=3" type="video/mp4" />
+            {/* Versioned filename rather than query string — guarantees a
+                fully fresh URL on every video swap, sidesteps CDN cache
+                edge cases, and avoids any chance of browsers applying
+                different autoplay heuristics to query-stringed media.
+                Bump the suffix (-v4, -v5, ...) whenever the file is
+                replaced. */}
+            <source src="/hero-bg-v3.mp4" type="video/mp4" />
           </video>
         </div>
       </div>
