@@ -121,7 +121,7 @@ export default function Navbar() {
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isOpen}
             aria-controls="primary-menu"
-            className="relative w-11 h-11 flex items-center justify-center rounded-full bg-secondary text-white hover:bg-primary hover:text-secondary transition-colors"
+            className="relative w-11 h-11 flex items-center justify-center rounded-md text-secondary hover:text-primary transition-colors"
           >
             <AnimatePresence mode="wait" initial={false}>
               {isOpen ? (
@@ -133,7 +133,7 @@ export default function Navbar() {
                   transition={{ duration: 0.2 }}
                   className="absolute inset-0 flex items-center justify-center"
                 >
-                  <X className="w-5 h-5" strokeWidth={2.5} />
+                  <X className="w-7 h-7" strokeWidth={2.75} />
                 </motion.span>
               ) : (
                 <motion.span
@@ -144,7 +144,7 @@ export default function Navbar() {
                   transition={{ duration: 0.2 }}
                   className="absolute inset-0 flex items-center justify-center"
                 >
-                  <Menu className="w-5 h-5" strokeWidth={2.5} />
+                  <Menu className="w-7 h-7" strokeWidth={2.75} />
                 </motion.span>
               )}
             </AnimatePresence>
