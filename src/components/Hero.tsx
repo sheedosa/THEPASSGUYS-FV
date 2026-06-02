@@ -105,7 +105,7 @@ export default function Hero({ id }: { id?: string }) {
         </motion.p>
 
         <h1
-          className="text-[3.25rem] sm:text-7xl md:text-8xl lg:text-[7.5rem] xl:text-[9rem] font-black text-secondary leading-[0.82] text-center text-balance tracking-tight md:tracking-[-0.04em] antialiased"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-secondary leading-[0.88] text-center text-balance tracking-tight md:tracking-[-0.03em] antialiased"
           style={{
             // Optical-quality rendering for display-size type:
             // - optimizeLegibility turns on kerning + ligatures
