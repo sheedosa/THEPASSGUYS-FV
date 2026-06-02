@@ -136,23 +136,15 @@ export default function Hero({ id }: { id?: string }) {
             stiffness: 110,
             damping: 18,
           }}
-          className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+          className="mt-6 sm:mt-8 flex items-center justify-center"
         >
           <Link
             to="/book"
-            className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 bg-primary text-secondary font-black uppercase tracking-widest text-base sm:text-lg rounded-full border-4 border-secondary shadow-[6px_6px_0_var(--color-secondary)] hover:-translate-y-0.5 hover:shadow-[4px_4px_0_var(--color-secondary)] active:translate-y-0 active:shadow-[2px_2px_0_var(--color-secondary)] transition-all duration-200"
+            className="group inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 bg-primary text-secondary font-black uppercase tracking-widest text-base sm:text-lg rounded-full border-4 border-secondary shadow-[6px_6px_0_var(--color-secondary)] hover:-translate-y-0.5 hover:shadow-[4px_4px_0_var(--color-secondary)] active:translate-y-0 active:shadow-[2px_2px_0_var(--color-secondary)] transition-all duration-200"
           >
             Book Now
             <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.5 }}
-            className="text-xs sm:text-sm font-bold uppercase tracking-widest text-secondary/60"
-          >
-            First lesson this week · From £35/hr
-          </motion.span>
         </motion.div>
       </motion.div>
 
