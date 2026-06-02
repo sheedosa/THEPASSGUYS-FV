@@ -83,7 +83,7 @@ export default function Hero({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className="relative flex flex-col items-center pt-24 sm:pt-32 md:pt-40 pb-10 sm:pb-16 md:pb-20 overflow-hidden bg-white"
+      className="relative flex flex-col items-center pt-24 sm:pt-28 md:pt-32 pb-0 overflow-hidden bg-white"
     >
       <motion.div
         initial="hidden"
@@ -179,9 +179,9 @@ export default function Hero({ id }: { id?: string }) {
           3. A brightness lift pushes the video's slightly off-white
              backdrop (#F6FAFF) up to true white so it vanishes cleanly
              under the multiply blend. */}
-      <div className="mt-8 sm:mt-12 md:mt-16 w-full flex justify-center">
+      <div className="mt-4 sm:mt-6 md:-mt-2 lg:-mt-6 w-full flex justify-center">
         <div
-          className="w-full sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] xl:max-w-6xl"
+          className="w-full sm:max-w-[95%] md:max-w-[90%] lg:max-w-[85%] xl:max-w-7xl"
           style={{
             WebkitMaskImage:
               'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
