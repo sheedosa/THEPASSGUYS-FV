@@ -192,7 +192,7 @@ export default function Hero({ id }: { id?: string }) {
                 different autoplay heuristics to query-stringed media.
                 Bump the suffix (-v5, -v6, ...) whenever the file is
                 replaced. */}
-            <source src="/hero-bg-v5.mp4" type="video/mp4" />
+            <source src="/hero-bg-v6.mp4" type="video/mp4" />
           </video>
         </div>
       </div>
