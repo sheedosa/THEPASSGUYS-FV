@@ -179,9 +179,9 @@ export default function Hero({ id }: { id?: string }) {
           3. A brightness lift pushes the video's slightly off-white
              backdrop (#F6FAFF) up to true white so it vanishes cleanly
              under the multiply blend. */}
-      <div className="mt-4 sm:mt-6 md:-mt-2 lg:-mt-6 w-full flex justify-center">
+      <div className="mt-4 sm:mt-6 md:mt-2 w-full flex justify-center">
         <div
-          className="w-full sm:max-w-[95%] md:max-w-[90%] lg:max-w-[85%] xl:max-w-7xl"
+          className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl"
           style={{
             WebkitMaskImage:
               'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
@@ -189,6 +189,12 @@ export default function Hero({ id }: { id?: string }) {
               'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
           }}
         >
+          {/* The video element MUST NOT have `controls` and MUST have
+              `muted`, `autoPlay`, `playsInline`, and `loop` as HTML
+              attributes. The useVideoAutoplay hook also forces these
+              via JS as a safety net. `disableRemotePlayback` prevents
+              the Cast/AirPlay overlay; `disablePictureInPicture`
+              prevents the PiP button Chrome adds on hover. */}
           <video
             ref={videoRef}
             className="w-full h-auto object-contain mix-blend-multiply"
@@ -199,6 +205,8 @@ export default function Hero({ id }: { id?: string }) {
             playsInline
             preload="auto"
             disableRemotePlayback
+            disablePictureInPicture
+            controlsList="nodownload nofullscreen noremoteplayback"
             aria-hidden="true"
           >
             <source src="/hero-bg-v6.mp4" type="video/mp4" />
