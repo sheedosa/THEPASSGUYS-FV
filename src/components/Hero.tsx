@@ -168,16 +168,7 @@ export default function Hero({ id }: { id?: string }) {
         <div className="w-full sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] xl:max-w-6xl">
           <video
             ref={videoRef}
-            // Background-removal effect: the source clip has a near-white
-            // (~#F1F3FA) backdrop. On our pure-white page, `mix-blend-mode:
-            // multiply` makes white melt into the page (white × white =
-            // white = invisible) while the darker car pixels show through —
-            // so the car reads as if it's sitting straight on the page with
-            // no video box. The brightness/contrast lift pushes the slightly
-            // off-white backdrop up to true white so it vanishes completely;
-            // saturate keeps the green P-plate and bodywork from going flat.
-            className="w-full h-auto object-contain mix-blend-multiply"
-            style={{ filter: 'brightness(1.06) contrast(1.04) saturate(1.05)' }}
+            className="w-full h-auto object-contain"
             autoPlay
             muted
             loop
