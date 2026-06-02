@@ -164,11 +164,35 @@ export default function Hero({ id }: { id?: string }) {
           from the first frame gives the browser the clearest "this is
           a primary on-screen media element" signal it needs to
           allow muted autoplay. */}
+      {/* Hero video — two layers make the car feel like it's painted
+          straight onto the page with no visible container:
+
+          1. mix-blend-multiply on the video: white pixels in the clip
+             become invisible against the white hero bg (white × white =
+             white). Only the darker car pixels show through.
+
+          2. Feathered CSS mask on the wrapper: a radial gradient that's
+             fully opaque in the centre and fades to transparent at the
+             edges. This dissolves the hard rectangular frame so there
+             are no corners or borders — the car just melts into the page.
+
+          3. A brightness lift pushes the video's slightly off-white
+             backdrop (#F6FAFF) up to true white so it vanishes cleanly
+             under the multiply blend. */}
       <div className="mt-8 sm:mt-12 md:mt-16 w-full flex justify-center">
-        <div className="w-full sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] xl:max-w-6xl">
+        <div
+          className="w-full sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] xl:max-w-6xl"
+          style={{
+            WebkitMaskImage:
+              'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
+            maskImage:
+              'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
+          }}
+        >
           <video
             ref={videoRef}
-            className="w-full h-auto object-contain"
+            className="w-full h-auto object-contain mix-blend-multiply"
+            style={{ filter: 'brightness(1.08) contrast(1.03) saturate(1.05)' }}
             autoPlay
             muted
             loop
@@ -177,12 +201,6 @@ export default function Hero({ id }: { id?: string }) {
             disableRemotePlayback
             aria-hidden="true"
           >
-            {/* Versioned filename rather than query string — guarantees a
-                fully fresh URL on every video swap, sidesteps CDN cache
-                edge cases, and avoids any chance of browsers applying
-                different autoplay heuristics to query-stringed media.
-                Bump the suffix (-v5, -v6, ...) whenever the file is
-                replaced. */}
             <source src="/hero-bg-v6.mp4" type="video/mp4" />
           </video>
         </div>
