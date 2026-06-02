@@ -1,108 +1,8 @@
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useRef, type ReactNode } from 'react';
 import { motion, type Variants } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-
-/**
- * Reliable autoplay for the hero video.
- *
- * Desktop browsers (Chrome especially) sometimes refuse the HTML
- * `autoplay` attribute even when the video is muted — common triggers
- * are data-saver mode, low-power state, or restored tabs. This hook
- * calls `.play()` explicitly once the video can play, retries on
- * `canplay`, and resumes when the tab returns to the foreground.
- */
-function useEnsureAutoplay(ref: { current: HTMLVideoElement | null }) {
-  useEffect(() => {
-    const video = ref.current;
-    if (!video) return;
-
-    // React's `muted` prop has a known quirk where it doesn't always set
-    // the HTML attribute that Chrome's autoplay policy reads. Force both
-    // the IDL property and the attribute up-front so the very first
-    // play() attempt is allowed.
-    video.muted = true;
-    video.setAttribute('muted', '');
-    video.defaultMuted = true;
-    // playsInline is also required on iOS Safari for inline autoplay.
-    video.setAttribute('playsinline', '');
-
-    const tryPlay = () => {
-      video.muted = true;
-      video.play().catch(() => {
-        // Autoplay rejected — the one-shot user-gesture listener below
-        // will pick it up the moment the user clicks, scrolls, or
-        // touches anything on the page.
-      });
-    };
-
-    // Fire immediately, then again as soon as enough data is buffered.
-    tryPlay();
-    if (video.readyState >= 2) tryPlay();
-
-    // Safety net: if the `loop` attribute is ever dropped, manually
-    // rewind on `ended`. We do NOT touch `pause` — the browser
-    // legitimately pauses during buffering and fighting it makes
-    // playback worse than the rare case it's solving.
-    const onEnded = () => {
-      video.currentTime = 0;
-      tryPlay();
-    };
-
-    video.addEventListener('loadeddata', tryPlay);
-    video.addEventListener('canplay', tryPlay);
-    video.addEventListener('ended', onEnded);
-
-    // Resume when the tab returns to the foreground.
-    const onVisibility = () => {
-      if (!document.hidden) tryPlay();
-    };
-    document.addEventListener('visibilitychange', onVisibility);
-
-    // One-shot user-gesture fallback for Chrome's strict autoplay
-    // policy. If the first .play() was blocked because the user has
-    // zero media-engagement history on the domain, the very next
-    // intentional or incidental gesture restarts playback.
-    //
-    // CRITICAL: we listen for `mousemove` and `wheel` in addition to
-    // click/touch/scroll. Desktop users often just *look* at a page
-    // without clicking — a tiny mouse movement is the earliest reliable
-    // signal that the user is engaged, and Chrome's policy counts it
-    // as a user gesture.
-    const GESTURES: (keyof WindowEventMap)[] = [
-      'mousemove',
-      'pointerdown',
-      'touchstart',
-      'wheel',
-      'keydown',
-      'scroll',
-    ];
-    const onFirstGesture = () => {
-      tryPlay();
-      GESTURES.forEach((g) => window.removeEventListener(g, onFirstGesture));
-    };
-    GESTURES.forEach((g) =>
-      window.addEventListener(g, onFirstGesture, { once: true, passive: true } as AddEventListenerOptions)
-    );
-
-    // Belt-and-braces: if 1.5 s after mount the video still hasn't
-    // started advancing (currentTime stuck at 0), retry play. This
-    // catches cases where canplay/loadeddata fired but the play()
-    // promise was silently rejected and no gesture has happened yet.
-    const retryTimer = window.setTimeout(() => {
-      if (video.currentTime < 0.05 || video.paused) tryPlay();
-    }, 1500);
-
-    return () => {
-      video.removeEventListener('loadeddata', tryPlay);
-      video.removeEventListener('canplay', tryPlay);
-      video.removeEventListener('ended', onEnded);
-      document.removeEventListener('visibilitychange', onVisibility);
-      GESTURES.forEach((g) => window.removeEventListener(g, onFirstGesture));
-      window.clearTimeout(retryTimer);
-    };
-  }, [ref]);
-}
+import { useVideoAutoplay } from '../hooks/useVideoAutoplay';
 
 /**
  * Hero — title slams in word-by-word, then the green "Smart." block pops
@@ -178,7 +78,7 @@ function Word({ children, accent = false }: { children: ReactNode; accent?: bool
 
 export default function Hero({ id }: { id?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  useEnsureAutoplay(videoRef);
+  useVideoAutoplay(videoRef);
 
   return (
     <section
@@ -268,10 +168,18 @@ export default function Hero({ id }: { id?: string }) {
         <div className="w-full sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] xl:max-w-6xl">
           <video
             ref={videoRef}
-            className="w-full h-auto object-contain"
+            // Background-removal effect: the source clip has a near-white
+            // (~#F1F3FA) backdrop. On our pure-white page, `mix-blend-mode:
+            // multiply` makes white melt into the page (white × white =
+            // white = invisible) while the darker car pixels show through —
+            // so the car reads as if it's sitting straight on the page with
+            // no video box. The brightness/contrast lift pushes the slightly
+            // off-white backdrop up to true white so it vanishes completely;
+            // saturate keeps the green P-plate and bodywork from going flat.
+            className="w-full h-auto object-contain mix-blend-multiply"
+            style={{ filter: 'brightness(1.06) contrast(1.04) saturate(1.05)' }}
             autoPlay
             muted
-            defaultMuted
             loop
             playsInline
             preload="auto"
@@ -282,7 +190,7 @@ export default function Hero({ id }: { id?: string }) {
                 fully fresh URL on every video swap, sidesteps CDN cache
                 edge cases, and avoids any chance of browsers applying
                 different autoplay heuristics to query-stringed media.
-                Bump the suffix (-v4, -v5, ...) whenever the file is
+                Bump the suffix (-v5, -v6, ...) whenever the file is
                 replaced. */}
             <source src="/hero-bg-v5.mp4" type="video/mp4" />
           </video>

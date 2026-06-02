@@ -1,42 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-
-/**
- * Reliable autoplay — same pattern as hero + ThePromise videos.
- */
-function useEnsureAutoplay(ref: { current: HTMLVideoElement | null }) {
-  useEffect(() => {
-    const video = ref.current;
-    if (!video) return;
-
-    const tryPlay = () => {
-      video.muted = true;
-      video.play().catch(() => {});
-    };
-
-    if (video.readyState >= 2) tryPlay();
-    video.addEventListener('loadeddata', tryPlay);
-    video.addEventListener('canplay', tryPlay);
-
-    const onVisibility = () => {
-      if (!document.hidden) tryPlay();
-    };
-    document.addEventListener('visibilitychange', onVisibility);
-
-    return () => {
-      video.removeEventListener('loadeddata', tryPlay);
-      video.removeEventListener('canplay', tryPlay);
-      document.removeEventListener('visibilitychange', onVisibility);
-    };
-  }, [ref]);
-}
+import { useVideoAutoplay } from '../hooks/useVideoAutoplay';
 
 export default function FinalCTA() {
   const containerRef = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  useEnsureAutoplay(videoRef);
+  useVideoAutoplay(videoRef);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -71,7 +42,7 @@ export default function FinalCTA() {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             disableRemotePlayback
             aria-hidden="true"
           >

@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Zap, UserCheck, Banknote } from 'lucide-react';
+import { useVideoAutoplay } from '../hooks/useVideoAutoplay';
 
 /**
  * ThePromise — commitments section with an embedded learner-driving video.
@@ -16,34 +17,6 @@ import { ArrowRight, Zap, UserCheck, Banknote } from 'lucide-react';
  * logical proof (the 3 cards). Seeing a real learner driving reinforces
  * the promise before the user reads the details.
  */
-
-/** Reliable autoplay — same pattern as the hero video. */
-function useEnsureAutoplay(ref: { current: HTMLVideoElement | null }) {
-  useEffect(() => {
-    const video = ref.current;
-    if (!video) return;
-
-    const tryPlay = () => {
-      video.muted = true;
-      video.play().catch(() => {});
-    };
-
-    if (video.readyState >= 2) tryPlay();
-    video.addEventListener('loadeddata', tryPlay);
-    video.addEventListener('canplay', tryPlay);
-
-    const onVisibility = () => {
-      if (!document.hidden) tryPlay();
-    };
-    document.addEventListener('visibilitychange', onVisibility);
-
-    return () => {
-      video.removeEventListener('loadeddata', tryPlay);
-      video.removeEventListener('canplay', tryPlay);
-      document.removeEventListener('visibilitychange', onVisibility);
-    };
-  }, [ref]);
-}
 
 const COMMITMENTS = [
   {
@@ -68,7 +41,7 @@ const COMMITMENTS = [
 
 export default function ThePromise({ id }: { id?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  useEnsureAutoplay(videoRef);
+  useVideoAutoplay(videoRef);
 
   return (
     <section
@@ -126,7 +99,7 @@ export default function ThePromise({ id }: { id?: string }) {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             disableRemotePlayback
             aria-hidden="true"
           >
