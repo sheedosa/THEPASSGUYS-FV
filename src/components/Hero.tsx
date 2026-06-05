@@ -85,38 +85,18 @@ export default function Hero({ id }: { id?: string }) {
       id={id}
       className="relative flex flex-col items-center justify-center min-h-[75svh] sm:min-h-[80svh] md:min-h-[85svh] pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden bg-white"
     >
-      {/* ── Background video layer ──────────────────────────────────
-          Absolutely positioned to fill the entire hero section. The
-          car stays the same size via max-w constraints on the inner
-          wrapper. mix-blend-multiply makes the white video backdrop
-          invisible against bg-white. The radial mask feathers the
-          edges so there's no visible frame.
-
-          The video is NOT wrapped in a framer-motion opacity animation
-          — Chrome's autoplay policy blocks elements that start at
-          opacity:0. Full visibility from frame one. */}
-      {/* Background video — absolutely fills the hero section.
-          Three techniques erase any sense of a video "box":
-
-          1. mix-blend-multiply: white pixels = invisible on bg-white.
-          2. brightness(1.12): pushes the video's off-white (#F6FAFF)
-             to pure white so EVERY non-car pixel vanishes.
-          3. Linear edge masks on all 4 sides: each edge fades from
-             opaque to transparent over the outer ~15%. Unlike a radial
-             mask, linear edges don't create a visible oval boundary —
-             they just silently dissolve each border independently,
-             so the car floats with zero frame. */}
-      {/* Background video — no mask, no frame. mix-blend-multiply
-          alone handles the transparency: every white/near-white pixel
-          in the video vanishes against bg-white. The car just exists
-          on the page with zero boundary. The brightness push ensures
-          even the slightly off-white video backdrop (#F6FAFF) goes
-          pure white so nothing shows. */}
+      {/* Background video — the car floats on the page with zero frame.
+          The source video (v8) is cropped tight: all grey edges removed
+          so every border pixel is near-white (~252-255). mix-blend-multiply
+          makes those white pixels invisible against bg-white. brightness
+          pushes any remaining off-white to pure 255. No mask needed.
+          The video is NOT wrapped in framer-motion opacity — Chrome blocks
+          autoplay on elements that start at opacity:0. */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <video
           ref={videoRef}
           className="w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-auto object-contain mix-blend-multiply"
-          style={{ filter: 'brightness(1.14) contrast(1.04) saturate(1.08)' }}
+          style={{ filter: 'brightness(1.08) contrast(1.04) saturate(1.08)' }}
           autoPlay
           muted
           loop
@@ -127,7 +107,7 @@ export default function Hero({ id }: { id?: string }) {
           controlsList="nodownload nofullscreen noremoteplayback"
           aria-hidden="true"
         >
-          <source src="/hero-bg-v7.mp4" type="video/mp4" />
+          <source src="/hero-bg-v8.mp4" type="video/mp4" />
         </video>
       </div>
 
