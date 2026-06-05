@@ -85,26 +85,16 @@ export default function Hero({ id }: { id?: string }) {
       id={id}
       className="relative flex flex-col items-center justify-center min-h-[75svh] sm:min-h-[80svh] md:min-h-[85svh] pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden bg-white"
     >
-      {/* Background video — the car floats on the page with zero frame.
-
-          The dark pixels at the video edges (car shadow, wheel edges)
-          are part of the actual car, not removable by cropping. They
-          create a visible rectangular boundary where the video element
-          ends. The fix: scale the video ~20% larger than its container
-          on mobile so the edges overflow off-screen. The car stays
-          centred at the same visual size, but the shadow/wheel pixels
-          at the borders are pushed outside the clipped area.
-
-          On desktop the max-w constraints keep the car small enough
-          that its edges don't reach the viewport — no overflow needed.
-
-          mix-blend-multiply handles the white background pixels.
-          The video is NOT in a framer-motion opacity wrapper — Chrome
-          blocks autoplay on elements that start at opacity:0. */}
+      {/* Background video — no scale, no crop, no mask. The full car
+          (including wheels and shadow) is always visible. mix-blend-multiply
+          makes white pixels invisible against bg-white. brightness pushes
+          the video's near-white backdrop to pure white. The video is NOT
+          in a framer-motion opacity wrapper — Chrome blocks autoplay on
+          elements that start at opacity:0. */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <video
           ref={videoRef}
-          className="w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-auto object-contain mix-blend-multiply scale-[1.3] sm:scale-[1.15] md:scale-100"
+          className="w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-auto object-contain mix-blend-multiply"
           style={{ filter: 'brightness(1.08) contrast(1.04) saturate(1.08)' }}
           autoPlay
           muted
