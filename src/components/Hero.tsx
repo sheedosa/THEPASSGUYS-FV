@@ -83,7 +83,7 @@ export default function Hero({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className="relative flex flex-col items-center justify-center min-h-[85svh] sm:min-h-[90svh] pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 md:pb-24 overflow-hidden bg-white"
+      className="relative flex flex-col items-center justify-center min-h-[75svh] sm:min-h-[80svh] md:min-h-[85svh] pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden bg-white"
     >
       {/* ── Background video layer ──────────────────────────────────
           Absolutely positioned to fill the entire hero section. The
@@ -106,25 +106,32 @@ export default function Hero({ id }: { id?: string }) {
              mask, linear edges don't create a visible oval boundary —
              they just silently dissolve each border independently,
              so the car floats with zero frame. */}
+      {/* Background video — absolutely fills the hero section.
+          Mobile: video fills full width (no max-w) so the car is
+          prominent on small screens. Centred vertically so it sits
+          behind the text naturally.
+          Desktop: capped at max-w-2xl so the car stays proportional.
+          Edge masks are softer on mobile (5%/3%) to avoid clipping
+          the car on narrow screens. */}
       <div
-        className="absolute inset-0 flex items-end justify-center pointer-events-none"
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
         style={{
           WebkitMaskImage: [
-            'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
-            'linear-gradient(to bottom, transparent, black 8%, black 85%, transparent)',
+            'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
+            'linear-gradient(to bottom, transparent, black 3%, black 92%, transparent)',
           ].join(', '),
           WebkitMaskComposite: 'destination-in',
           maskImage: [
-            'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
-            'linear-gradient(to bottom, transparent, black 8%, black 85%, transparent)',
+            'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
+            'linear-gradient(to bottom, transparent, black 3%, black 92%, transparent)',
           ].join(', '),
           maskComposite: 'intersect',
         }}
       >
         <video
           ref={videoRef}
-          className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl h-auto object-contain mix-blend-multiply"
-          style={{ filter: 'brightness(1.12) contrast(1.02) saturate(1.05)' }}
+          className="w-[90%] sm:w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-auto object-contain mix-blend-multiply"
+          style={{ filter: 'brightness(1.10) contrast(1.03) saturate(1.06)' }}
           autoPlay
           muted
           loop
