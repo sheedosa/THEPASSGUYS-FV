@@ -83,15 +83,55 @@ export default function Hero({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className="relative flex flex-col items-center pt-24 sm:pt-28 md:pt-32 pb-0 overflow-hidden bg-white"
+      className="relative flex flex-col items-center justify-center min-h-[85svh] sm:min-h-[90svh] pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 md:pb-24 overflow-hidden bg-white"
     >
+      {/* ── Background video layer ──────────────────────────────────
+          Absolutely positioned to fill the entire hero section. The
+          car stays the same size via max-w constraints on the inner
+          wrapper. mix-blend-multiply makes the white video backdrop
+          invisible against bg-white. The radial mask feathers the
+          edges so there's no visible frame.
+
+          The video is NOT wrapped in a framer-motion opacity animation
+          — Chrome's autoplay policy blocks elements that start at
+          opacity:0. Full visibility from frame one. */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div
+          className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl"
+          style={{
+            WebkitMaskImage:
+              'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
+            maskImage:
+              'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
+          }}
+        >
+          <video
+            ref={videoRef}
+            className="w-full h-auto object-contain mix-blend-multiply"
+            style={{ filter: 'brightness(1.08) contrast(1.03) saturate(1.05)' }}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            disableRemotePlayback
+            disablePictureInPicture
+            controlsList="nodownload nofullscreen noremoteplayback"
+            aria-hidden="true"
+          >
+            <source src="/hero-bg-v7.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      {/* ── Foreground content layer ────────────────────────────── */}
       <motion.div
         initial="hidden"
         animate="visible"
         variants={containerVariants}
-        className="relative container mx-auto px-4 sm:px-6"
+        className="relative z-10 container mx-auto px-4 sm:px-6"
       >
-        {/* Location eyebrow — answers "is this for me?" in the first second */}
+        {/* Location eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -107,10 +147,6 @@ export default function Hero({ id }: { id?: string }) {
         <h1
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-secondary leading-[0.88] text-center text-balance tracking-tight md:tracking-[-0.03em] antialiased"
           style={{
-            // Optical-quality rendering for display-size type:
-            // - optimizeLegibility turns on kerning + ligatures
-            // - explicit kern + cv/ss features ask Inter for its
-            //   designed-not-defaults letterforms where available
             textRendering: 'optimizeLegibility',
             fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1, "ss01" 1',
             WebkitFontSmoothing: 'antialiased',
@@ -126,7 +162,7 @@ export default function Hero({ id }: { id?: string }) {
           <Word accent>Smart.</Word>
         </h1>
 
-        {/* CTA — fades in after the title finishes */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -147,64 +183,6 @@ export default function Hero({ id }: { id?: string }) {
           </Link>
         </motion.div>
       </motion.div>
-
-      {/* Hero video — large, contained block below the headline.
-          IMPORTANT: this is NOT wrapped in a framer-motion opacity
-          animation. Chrome's autoplay policy heuristically blocks
-          playback for elements that start at opacity:0, even if they
-          fade in immediately. Rendering the video at full visibility
-          from the first frame gives the browser the clearest "this is
-          a primary on-screen media element" signal it needs to
-          allow muted autoplay. */}
-      {/* Hero video — two layers make the car feel like it's painted
-          straight onto the page with no visible container:
-
-          1. mix-blend-multiply on the video: white pixels in the clip
-             become invisible against the white hero bg (white × white =
-             white). Only the darker car pixels show through.
-
-          2. Feathered CSS mask on the wrapper: a radial gradient that's
-             fully opaque in the centre and fades to transparent at the
-             edges. This dissolves the hard rectangular frame so there
-             are no corners or borders — the car just melts into the page.
-
-          3. A brightness lift pushes the video's slightly off-white
-             backdrop (#F6FAFF) up to true white so it vanishes cleanly
-             under the multiply blend. */}
-      <div className="mt-4 sm:mt-6 md:mt-2 w-full flex justify-center">
-        <div
-          className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl"
-          style={{
-            WebkitMaskImage:
-              'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
-            maskImage:
-              'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
-          }}
-        >
-          {/* The video element MUST NOT have `controls` and MUST have
-              `muted`, `autoPlay`, `playsInline`, and `loop` as HTML
-              attributes. The useVideoAutoplay hook also forces these
-              via JS as a safety net. `disableRemotePlayback` prevents
-              the Cast/AirPlay overlay; `disablePictureInPicture`
-              prevents the PiP button Chrome adds on hover. */}
-          <video
-            ref={videoRef}
-            className="w-full h-auto object-contain mix-blend-multiply"
-            style={{ filter: 'brightness(1.08) contrast(1.03) saturate(1.05)' }}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            disableRemotePlayback
-            disablePictureInPicture
-            controlsList="nodownload nofullscreen noremoteplayback"
-            aria-hidden="true"
-          >
-            <source src="/hero-bg-v7.mp4" type="video/mp4" />
-          </video>
-        </div>
-      </div>
     </section>
   );
 }
