@@ -101,10 +101,10 @@ export default function Hero({ id }: { id?: string }) {
           mix-blend-multiply handles the white background pixels.
           The video is NOT in a framer-motion opacity wrapper — Chrome
           blocks autoplay on elements that start at opacity:0. */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <video
           ref={videoRef}
-          className="w-[130%] sm:w-[115%] md:w-full md:max-w-xl lg:max-w-2xl h-auto object-contain mix-blend-multiply"
+          className="w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-auto object-contain mix-blend-multiply scale-[1.3] sm:scale-[1.15] md:scale-100"
           style={{ filter: 'brightness(1.08) contrast(1.04) saturate(1.08)' }}
           autoPlay
           muted
