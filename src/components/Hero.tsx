@@ -106,7 +106,7 @@ export default function Hero({ id }: { id?: string }) {
         </motion.p>
 
         <h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-secondary leading-[0.88] text-center text-balance tracking-tight md:tracking-[-0.03em] antialiased"
+          className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-black text-secondary leading-[0.88] text-center text-balance tracking-tight md:tracking-[-0.03em] antialiased"
           style={{
             textRendering: 'optimizeLegibility',
             fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1, "ss01" 1',
