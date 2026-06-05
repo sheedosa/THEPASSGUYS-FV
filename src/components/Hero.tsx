@@ -83,59 +83,9 @@ export default function Hero({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className="relative flex flex-col items-center justify-center min-h-[75svh] sm:min-h-[80svh] md:min-h-[85svh] pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden bg-white"
+      className="relative flex flex-col items-center pt-24 sm:pt-28 md:pt-32 pb-0 overflow-hidden bg-white"
     >
-      {/* Background video — no scale, no crop, no mask. The full car
-          (including wheels and shadow) is always visible. mix-blend-multiply
-          makes white pixels invisible against bg-white. brightness pushes
-          the video's near-white backdrop to pure white. The video is NOT
-          in a framer-motion opacity wrapper — Chrome blocks autoplay on
-          elements that start at opacity:0. */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="relative w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-          <video
-            ref={videoRef}
-            className="w-full h-auto object-contain mix-blend-multiply"
-            style={{ filter: 'brightness(1.08) contrast(1.04) saturate(1.08)' }}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            disableRemotePlayback
-            disablePictureInPicture
-            controlsList="nodownload nofullscreen noremoteplayback"
-            aria-hidden="true"
-          >
-            <source src="/hero-bg-v9.mp4" type="video/mp4" />
-          </video>
-          {/* Bottom fade — dissolves the dark ground shadow/reflection
-              into the white hero bg. The gradient is an overlay div ON TOP
-              of the video (not a mask on it) so autoplay isn't affected. */}
-          <div
-            className="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none"
-            style={{
-              background: 'linear-gradient(to top, white 0%, white 10%, transparent 100%)',
-            }}
-            aria-hidden="true"
-          />
-          {/* Side + top fades — thin white gradients dissolve the mild
-              grey edges (15-22 points off white) into the background. */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: [
-                'linear-gradient(to right, white 0%, transparent 8%)',
-                'linear-gradient(to left, white 0%, transparent 8%)',
-                'linear-gradient(to bottom, white 0%, transparent 5%)',
-              ].join(', '),
-            }}
-            aria-hidden="true"
-          />
-        </div>
-      </div>
-
-      {/* ── Foreground content layer ────────────────────────────── */}
+      {/* ── Text + CTA ─────────────────────────────────────────── */}
       <motion.div
         initial="hidden"
         animate="visible"
@@ -194,6 +144,48 @@ export default function Hero({ id }: { id?: string }) {
           </Link>
         </motion.div>
       </motion.div>
+
+      {/* ── Video below text + CTA ─────────────────────────────── */}
+      <div className="mt-6 sm:mt-8 w-full flex justify-center">
+        <div className="relative w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+          <video
+            ref={videoRef}
+            className="w-full h-auto object-contain mix-blend-multiply"
+            style={{ filter: 'brightness(1.08) contrast(1.04) saturate(1.08)' }}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            disableRemotePlayback
+            disablePictureInPicture
+            controlsList="nodownload nofullscreen noremoteplayback"
+            aria-hidden="true"
+          >
+            <source src="/hero-bg-v9.mp4" type="video/mp4" />
+          </video>
+          {/* Bottom fade — dissolves ground shadow into bg-white */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none"
+            style={{
+              background: 'linear-gradient(to top, white 0%, white 10%, transparent 100%)',
+            }}
+            aria-hidden="true"
+          />
+          {/* Side + top fades */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: [
+                'linear-gradient(to right, white 0%, transparent 8%)',
+                'linear-gradient(to left, white 0%, transparent 8%)',
+                'linear-gradient(to bottom, white 0%, transparent 5%)',
+              ].join(', '),
+            }}
+            aria-hidden="true"
+          />
+        </div>
+      </div>
     </section>
   );
 }
