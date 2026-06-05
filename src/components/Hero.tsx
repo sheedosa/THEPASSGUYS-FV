@@ -146,7 +146,7 @@ export default function Hero({ id }: { id?: string }) {
       </motion.div>
 
       {/* ── Video below text + CTA ─────────────────────────────── */}
-      <div className="mt-6 sm:mt-8 w-full flex justify-center">
+      <div className="mt-4 sm:mt-4 md:-mt-2 lg:-mt-4 w-full flex justify-center">
         <div className="relative w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl">
           <video
             ref={videoRef}
