@@ -106,7 +106,7 @@ export default function Hero({ id }: { id?: string }) {
           controlsList="nodownload nofullscreen noremoteplayback"
           aria-hidden="true"
         >
-          <source src="/hero-bg-v8.mp4" type="video/mp4" />
+          <source src="/hero-bg-v9.mp4" type="video/mp4" />
         </video>
       </div>
 
