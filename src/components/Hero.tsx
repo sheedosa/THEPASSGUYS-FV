@@ -106,32 +106,17 @@ export default function Hero({ id }: { id?: string }) {
              mask, linear edges don't create a visible oval boundary —
              they just silently dissolve each border independently,
              so the car floats with zero frame. */}
-      {/* Background video — absolutely fills the hero section.
-          Mobile: video fills full width (no max-w) so the car is
-          prominent on small screens. Centred vertically so it sits
-          behind the text naturally.
-          Desktop: capped at max-w-2xl so the car stays proportional.
-          Edge masks are softer on mobile (5%/3%) to avoid clipping
-          the car on narrow screens. */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{
-          WebkitMaskImage: [
-            'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
-            'linear-gradient(to bottom, transparent, black 3%, black 92%, transparent)',
-          ].join(', '),
-          WebkitMaskComposite: 'destination-in',
-          maskImage: [
-            'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
-            'linear-gradient(to bottom, transparent, black 3%, black 92%, transparent)',
-          ].join(', '),
-          maskComposite: 'intersect',
-        }}
-      >
+      {/* Background video — no mask, no frame. mix-blend-multiply
+          alone handles the transparency: every white/near-white pixel
+          in the video vanishes against bg-white. The car just exists
+          on the page with zero boundary. The brightness push ensures
+          even the slightly off-white video backdrop (#F6FAFF) goes
+          pure white so nothing shows. */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <video
           ref={videoRef}
-          className="w-[90%] sm:w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-auto object-contain mix-blend-multiply"
-          style={{ filter: 'brightness(1.10) contrast(1.03) saturate(1.06)' }}
+          className="w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-auto object-contain mix-blend-multiply"
+          style={{ filter: 'brightness(1.14) contrast(1.04) saturate(1.08)' }}
           autoPlay
           muted
           loop
