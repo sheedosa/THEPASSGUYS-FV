@@ -95,33 +95,48 @@ export default function Hero({ id }: { id?: string }) {
           The video is NOT wrapped in a framer-motion opacity animation
           — Chrome's autoplay policy blocks elements that start at
           opacity:0. Full visibility from frame one. */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div
-          className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl"
-          style={{
-            WebkitMaskImage:
-              'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
-            maskImage:
-              'radial-gradient(ellipse 70% 65% at 50% 50%, black 40%, transparent 100%)',
-          }}
+      {/* Background video — absolutely fills the hero section.
+          Three techniques erase any sense of a video "box":
+
+          1. mix-blend-multiply: white pixels = invisible on bg-white.
+          2. brightness(1.12): pushes the video's off-white (#F6FAFF)
+             to pure white so EVERY non-car pixel vanishes.
+          3. Linear edge masks on all 4 sides: each edge fades from
+             opaque to transparent over the outer ~15%. Unlike a radial
+             mask, linear edges don't create a visible oval boundary —
+             they just silently dissolve each border independently,
+             so the car floats with zero frame. */}
+      <div
+        className="absolute inset-0 flex items-end justify-center pointer-events-none"
+        style={{
+          WebkitMaskImage: [
+            'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
+            'linear-gradient(to bottom, transparent, black 8%, black 85%, transparent)',
+          ].join(', '),
+          WebkitMaskComposite: 'destination-in',
+          maskImage: [
+            'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
+            'linear-gradient(to bottom, transparent, black 8%, black 85%, transparent)',
+          ].join(', '),
+          maskComposite: 'intersect',
+        }}
+      >
+        <video
+          ref={videoRef}
+          className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl h-auto object-contain mix-blend-multiply"
+          style={{ filter: 'brightness(1.12) contrast(1.02) saturate(1.05)' }}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          disableRemotePlayback
+          disablePictureInPicture
+          controlsList="nodownload nofullscreen noremoteplayback"
+          aria-hidden="true"
         >
-          <video
-            ref={videoRef}
-            className="w-full h-auto object-contain mix-blend-multiply"
-            style={{ filter: 'brightness(1.08) contrast(1.03) saturate(1.05)' }}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            disableRemotePlayback
-            disablePictureInPicture
-            controlsList="nodownload nofullscreen noremoteplayback"
-            aria-hidden="true"
-          >
-            <source src="/hero-bg-v7.mp4" type="video/mp4" />
-          </video>
-        </div>
+          <source src="/hero-bg-v7.mp4" type="video/mp4" />
+        </video>
       </div>
 
       {/* ── Foreground content layer ────────────────────────────── */}
